@@ -385,6 +385,13 @@
             "expression" : "lit(9)"
           },
           "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"newline\")"
+          },
+          "description" : ""
         } ]
       },
       "componentInfo" : {
@@ -487,6 +494,15 @@
               "name" : "component_type_cd",
               "type" : "integer",
               "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],

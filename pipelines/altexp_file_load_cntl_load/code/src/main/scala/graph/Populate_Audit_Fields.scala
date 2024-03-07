@@ -24,7 +24,8 @@ object Populate_Audit_Fields {
       lit(Config.RUN_TS).as("file_load_start_ts"),
       lit(Config.DB_ALTERNATE_USER).as("user_id"),
       lit("S").as("file_load_type_cd"),
-      lit(9).as("component_type_cd")
+      lit(9).as("component_type_cd"),
+      col("newline")
     )
   }
 

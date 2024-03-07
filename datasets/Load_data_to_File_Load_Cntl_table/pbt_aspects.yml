@@ -65,3 +65,10 @@ schema:
       description: ''
       mappings: []
       tags: []
+  - name: newline
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
