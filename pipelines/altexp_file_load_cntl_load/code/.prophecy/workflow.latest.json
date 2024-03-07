@@ -321,50 +321,8 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Populate_Audit_Fields__in##job_id", "Populate_Audit_Fields__in##newline" ],
         "expressions" : [ {
-          "target" : "alt_run_id",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "col(\"job_id\").cast(DecimalType(10, 0))"
-          },
-          "description" : ""
-        }, {
-          "target" : "rec_crt_user_id",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "lit(Config.DB_ALTERNATE_USER)"
-          },
-          "description" : ""
-        }, {
-          "target" : "file_load_status_cd",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "lit(1)"
-          },
-          "description" : ""
-        }, {
-          "target" : "published_ind",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "lit(\"Y\")"
-          },
-          "description" : ""
-        }, {
-          "target" : "rec_crt_ts",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "lit(Config.RUN_TS)"
-          },
-          "description" : ""
-        }, {
-          "target" : "file_load_start_ts",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "lit(Config.RUN_TS)"
-          },
-          "description" : ""
-        }, {
           "target" : "user_id",
           "expression" : {
             "format" : "scala",
@@ -383,6 +341,48 @@
           "expression" : {
             "format" : "scala",
             "expression" : "lit(9)"
+          },
+          "description" : ""
+        }, {
+          "target" : "file_load_status_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(1)"
+          },
+          "description" : ""
+        }, {
+          "target" : "file_load_start_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.RUN_TS)"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.RUN_TS)"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_user_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.DB_ALTERNATE_USER)"
+          },
+          "description" : ""
+        }, {
+          "target" : "published_ind",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(\"Y\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"job_id\").cast(DecimalType(10, 0))"
           },
           "description" : ""
         }, {
@@ -419,60 +419,6 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
-              "name" : "alt_run_id",
-              "type" : "decimal(10,0)",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "rec_crt_user_id",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "file_load_status_cd",
-              "type" : "integer",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "published_ind",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "rec_crt_ts",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "file_load_start_ts",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "user_id",
               "type" : "string",
               "nullable" : false,
@@ -494,6 +440,60 @@
               "name" : "component_type_cd",
               "type" : "integer",
               "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "file_load_status_cd",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "file_load_start_ts",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "published_ind",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
