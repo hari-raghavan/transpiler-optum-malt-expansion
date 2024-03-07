@@ -1,0 +1,1240 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "id" : "altexp_gpi_rank_ratio",
+    "uri" : "pipelines/altexp_gpi_rank_ratio",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "DB_User",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RUN_TS",
+          "kind" : {
+            "type" : "string",
+            "value" : "2024-03-07 10:00:55"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_ALTERNATE_USER",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Url",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Password",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240307"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Driver",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "e2",
+    "source" : "Curr_Assign_Rank_and_Calculate_Ratio",
+    "sourcePort" : "Curr_Assign_Rank_and_Calculate_Ratio__out",
+    "target" : "GPI_RANK_RATIO_Load_DateTimeNormalize",
+    "targetPort" : "GPI_RANK_RATIO_Load_DateTimeNormalize__in"
+  }, {
+    "id" : "e3",
+    "source" : "GPI_RANK_RATIO_Load_DateTimeNormalize",
+    "sourcePort" : "GPI_RANK_RATIO_Load_DateTimeNormalize__out",
+    "target" : "GPI_RANK_RATIO_Load",
+    "targetPort" : "GPI_RANK_RATIO_Load__in"
+  }, {
+    "id" : "e0",
+    "source" : "Curr_Map_GPI14_under_GPI12_input_select_filter",
+    "sourcePort" : "Curr_Map_GPI14_under_GPI12_input_select_filter__out",
+    "target" : "Curr_Map_GPI14_under_GPI12",
+    "targetPort" : "Curr_Map_GPI14_under_GPI12__in"
+  }, {
+    "id" : "e4",
+    "source" : "Curr_Map_GPI14_under_GPI12",
+    "sourcePort" : "Curr_Map_GPI14_under_GPI12__out",
+    "target" : "Curr_Map_GPI14_under_GPI12_Reformat",
+    "targetPort" : "Curr_Map_GPI14_under_GPI12_Reformat__in"
+  }, {
+    "id" : "e5",
+    "source" : "Curr_Map_GPI14_under_GPI12_Reformat",
+    "sourcePort" : "Curr_Map_GPI14_under_GPI12_Reformat__out",
+    "target" : "Curr_Assign_Rank_and_Calculate_Ratio",
+    "targetPort" : "Curr_Assign_Rank_and_Calculate_Ratio__in"
+  }, {
+    "id" : "e6",
+    "source" : "Sort_GPI12s",
+    "sourcePort" : "Sort_GPI12s__out",
+    "target" : "Curr_Map_GPI14_under_GPI12_input_select_filter",
+    "targetPort" : "Curr_Map_GPI14_under_GPI12_input_select_filter__in"
+  }, {
+    "id" : "e1",
+    "source" : "Drug_Data_Set_Drug_Data_Set_DTL",
+    "sourcePort" : "Drug_Data_Set_Drug_Data_Set_DTL__out",
+    "target" : "Drug_Data_Set_Drug_Data_Set_DTL_sync",
+    "targetPort" : "Drug_Data_Set_Drug_Data_Set_DTL_sync__in"
+  }, {
+    "id" : "e7",
+    "source" : "Drug_Data_Set_Drug_Data_Set_DTL_sync",
+    "sourcePort" : "Drug_Data_Set_Drug_Data_Set_DTL_sync__out",
+    "target" : "Sort_GPI12s",
+    "targetPort" : "Sort_GPI12s__in"
+  } ],
+  "processes" : {
+    "GPI_RANK_RATIO_Load" : {
+      "id" : "GPI_RANK_RATIO_Load",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "GPI_RANK_RATIO_Load",
+        "slug" : "GPI_RANK_RATIO_Load",
+        "x" : 1620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "GPI_RANK_RATIO_Load__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ratio",
+              "type" : "decimal(5,3)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_ts",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "date",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/GPI_RANK_RATIO_Load"
+      }
+    },
+    "Drug_Data_Set_Drug_Data_Set_DTL" : {
+      "id" : "Drug_Data_Set_Drug_Data_Set_DTL",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Drug_Data_Set_Drug_Data_Set_DTL",
+        "slug" : "Drug_Data_Set_Drug_Data_Set_DTL",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Drug_Data_Set_Drug_Data_Set_DTL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Drug_Data_Set_Drug_Data_Set_DTL"
+      }
+    },
+    "Curr_Assign_Rank_and_Calculate_Ratio" : {
+      "id" : "Curr_Assign_Rank_and_Calculate_Ratio",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Curr_Assign_Rank_and_Calculate_Ratio",
+        "slug" : "Curr_Assign_Rank_and_Calculate_Ratio",
+        "x" : 1220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Curr_Assign_Rank_and_Calculate_Ratio__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Curr_Assign_Rank_and_Calculate_Ratio__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ratio",
+              "type" : "decimal(5,3)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(array_distinct(array_sort(col(\"gpi14\"))))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (element_at(col(\"gpi14\"), col(\"index\") + lit(1))).as(\"gpi14\"),\n      ((col(\"index\") + lit(1)).cast(StringType)).as(\"rank\"),\n      (when(col(\"no_of_rec\") === lit(1), lit(1))\n        .otherwise(lit(1) + (col(\"index\") * (lit(1) / (col(\"no_of_rec\") - lit(1)))))\n        .cast(DecimalType(5, 3)))\n        .as(\"ratio\")\n    ),\n    lengthRelatedGlobalExpressions = Map(\"no_of_rec\" -> size(array_distinct(array_sort(col(\"gpi14\")))),\n                                         \"gpi14\" -> array_distinct(array_sort(col(\"gpi14\")))\n    ),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select(\n    (col(\"gpi12\")).as(\"gpi12\"),\n    (col(\"gpi14\")).as(\"gpi14\"),\n    (col(\"rank\")).as(\"rank\"),\n    (col(\"ratio\")).as(\"ratio\"),\n    (lit(Config.RUN_TS)).as(\"rec_crt_ts\"),\n    (lit(Config.DB_ALTERNATE_USER)).as(\"rec_crt_user_id\"),\n    (lit(Config.RUN_TS)).as(\"rec_last_upd_ts\"),\n    (lit(Config.DB_ALTERNATE_USER)).as(\"rec_last_upd_user_id\"),\n    (col(\"run_eff_dt\")).as(\"run_eff_dt\")\n  )\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "GPI_RANK_RATIO_Load_DateTimeNormalize" : {
+      "id" : "GPI_RANK_RATIO_Load_DateTimeNormalize",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "GPI_RANK_RATIO_Load_DateTimeNormalize",
+        "slug" : "GPI_RANK_RATIO_Load_DateTimeNormalize",
+        "x" : 1420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "GPI_RANK_RATIO_Load_DateTimeNormalize__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ratio",
+              "type" : "decimal(5,3)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "GPI_RANK_RATIO_Load_DateTimeNormalize__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "rec_crt_ts",
+            "expression" : {
+              "format" : "scala",
+              "expression" : "to_timestamp(col(\"rec_crt_ts\"), \"yyyy-MM-dd HH:mm:ss\")"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "rec_last_upd_ts",
+            "expression" : {
+              "format" : "scala",
+              "expression" : "to_timestamp(col(\"rec_last_upd_ts\"), \"yyyy-MM-dd HH:mm:ss\")"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        }, {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "run_eff_dt",
+            "expression" : {
+              "format" : "scala",
+              "expression" : "to_date(col(\"run_eff_dt\"), \"yyyyMMdd\")"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SchemaTransform",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Curr_Map_GPI14_under_GPI12_Reformat" : {
+      "id" : "Curr_Map_GPI14_under_GPI12_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Curr_Map_GPI14_under_GPI12_Reformat",
+        "slug" : "Curr_Map_GPI14_under_GPI12_Reformat",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Curr_Map_GPI14_under_GPI12_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Curr_Map_GPI14_under_GPI12_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "gpi12",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"gpi12\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "gpi14",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"gpi14\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"run_eff_dt\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Curr_Map_GPI14_under_GPI12" : {
+      "id" : "Curr_Map_GPI14_under_GPI12",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Curr_Map_GPI14_under_GPI12",
+        "slug" : "Curr_Map_GPI14_under_GPI12",
+        "x" : 820,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Curr_Map_GPI14_under_GPI12__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Curr_Map_GPI14_under_GPI12__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "_row_id" : null,
+          "target" : "gpi14",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "collect_list(col(\"gpi14\"))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "max(col(\"run_eff_dt\"))"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "_row_id" : null,
+          "target" : "gpi12",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"gpi12\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Curr_Map_GPI14_under_GPI12_input_select_filter" : {
+      "id" : "Curr_Map_GPI14_under_GPI12_input_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Curr_Map_GPI14_under_GPI12_input_select_filter",
+        "slug" : "Curr_Map_GPI14_under_GPI12_input_select_filter",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Curr_Map_GPI14_under_GPI12_input_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Curr_Map_GPI14_under_GPI12_input_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "((!isnull(\n    to_timestamp(\n      first_defined(\n        adjustCenturyDateInCyyFormat(lpad(col(\"eff_dt\"), 7, \"0\").cast(StringType), lit(\"1900\"), lit(\"CyyMMdd\")),\n        lit(\"INVALID\")\n      ),\n      \"yyyyMMdd\"\n    )\n  )).and(\n      (!isnull(\n        to_timestamp(\n          first_defined(\n            adjustCenturyDateInCyyFormat(lpad(col(\"term_dt\"), 7, \"0\").cast(StringType), lit(\"1900\"), lit(\"CyyMMdd\")),\n            lit(\"INVALID\")\n          ),\n          \"yyyyMMdd\"\n        )\n      )).and(\n        first_defined(\n          adjustCenturyDateInCyyFormat(lpad(col(\"term_dt\"), 7, \"0\").cast(StringType), lit(\"1900\"), lit(\"CyyMMdd\")),\n          lit(\"INVALID\")\n        ) >= lit(Config.BUSINESS_DATE)\n      )\n    ))\n    .and(\n      isnull(\n        when(\n          col(\"inactive_dt\") === lit(\"0\"),\n          first_defined(\n            adjustCenturyDateInCyyFormat(lpad(col(\"term_dt\"), 7, \"0\").cast(StringType), lit(\"1900\"), lit(\"CyyMMdd\")),\n            lit(\"INVALID\")\n          )\n        ).otherwise(\n            first_defined(adjustCenturyDateInCyyFormat(lpad(col(\"inactive_dt\"), 7, \"0\").cast(StringType),\n                                                       lit(\"1900\"),\n                                                       lit(\"CyyMMdd\")\n                          ),\n                          lit(\"INVALID\")\n            )\n          )\n          .cast(BooleanType)\n      ).or(\n        !isnull(\n          to_timestamp(\n            when(\n              col(\"inactive_dt\") === lit(\"0\"),\n              first_defined(adjustCenturyDateInCyyFormat(lpad(col(\"term_dt\"), 7, \"0\").cast(StringType),\n                                                         lit(\"1900\"),\n                                                         lit(\"CyyMMdd\")\n                            ),\n                            lit(\"INVALID\")\n              )\n            ).otherwise(\n                first_defined(adjustCenturyDateInCyyFormat(lpad(col(\"inactive_dt\"), 7, \"0\").cast(StringType),\n                                                           lit(\"1900\"),\n                                                           lit(\"CyyMMdd\")\n                              ),\n                              lit(\"INVALID\")\n                )\n              )\n              .cast(BooleanType),\n            \"yyyyMMdd\"\n          )\n        )\n      )\n    )"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Drug_Data_Set_Drug_Data_Set_DTL_sync" : {
+      "id" : "Drug_Data_Set_Drug_Data_Set_DTL_sync",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Drug_Data_Set_Drug_Data_Set_DTL_sync",
+        "slug" : "Drug_Data_Set_Drug_Data_Set_DTL_sync",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Drug_Data_Set_Drug_Data_Set_DTL_sync__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Drug_Data_Set_Drug_Data_Set_DTL_sync__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val out = in.syncDataFrameColumnsWithSchema(columnNames =\n    List(\"gpi12\", \"gpi14\", \"eff_dt\", \"term_dt\", \"inactive_dt\", \"run_eff_dt\")\n  )\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Sort_GPI12s" : {
+      "id" : "Sort_GPI12s",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "Sort_GPI12s",
+        "slug" : "Sort_GPI12s",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Sort_GPI12s__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Sort_GPI12s__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"gpi12\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "to_date(col(\"run_eff_dt\"), \"yyyyMMdd\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}
