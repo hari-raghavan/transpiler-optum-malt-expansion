@@ -1,0 +1,1010 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "altexp_form_create_rule_prd_files",
+    "uri" : "pipelines/altexp_form_create_rule_prd_files",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "CAG_OVRRD_DATA_PATH",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_PRODUCTS_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "PRODUCTS_LOOKUP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e1",
+    "source" : "Generate_Record_for_Qualifier_and_their_Values",
+    "sourcePort" : "Generate_Record_for_Qualifier_and_their_Values__out",
+    "target" : "Sort_QualVal",
+    "targetPort" : "Sort_QualVal__in"
+  }, {
+    "id" : "e2",
+    "source" : "Form_CAG_dataset",
+    "sourcePort" : "Form_CAG_dataset__out",
+    "target" : "Generate_Record_for_Qualifier_and_their_Values",
+    "targetPort" : "Generate_Record_for_Qualifier_and_their_Values__in"
+  }, {
+    "id" : "e0",
+    "source" : "Sort_QualVal",
+    "sourcePort" : "Sort_QualVal__out",
+    "target" : "Create_Rule_Dataset_For_EQ_Operator",
+    "targetPort" : "Create_Rule_Dataset_For_EQ_Operator__in"
+  }, {
+    "id" : "e3",
+    "source" : "Create_Rule_Dataset_For_EQ_Operator",
+    "sourcePort" : "Create_Rule_Dataset_For_EQ_Operator__out",
+    "target" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
+    "targetPort" : "Create_Rule_Dataset_For_EQ_Operator_Reformat__in"
+  }, {
+    "id" : "e4",
+    "source" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
+    "sourcePort" : "Create_Rule_Dataset_For_EQ_Operator_Reformat__out",
+    "target" : "Form_Rule_Products",
+    "targetPort" : "Form_Rule_Products__in"
+  }, {
+    "id" : "e5",
+    "source" : "LKP_Product_Lookup",
+    "sourcePort" : "LKP_Product_Lookup__out",
+    "target" : "LKP_Product_Lookup_lookup",
+    "targetPort" : "LKP_Product_Lookup_lookup__in"
+  } ],
+  "processes" : {
+    "Create_Rule_Dataset_For_EQ_Operator_Reformat" : {
+      "id" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
+        "slug" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
+        "x" : 820,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_Rule_Dataset_For_EQ_Operator_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_Rule_Dataset_For_EQ_Operator_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "qualifier_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"qualifier_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "operator",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"operator\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "compare_value",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"compare_value\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"products\").cast(IntegerType)"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "LKP_Product_Lookup" : {
+      "id" : "LKP_Product_Lookup",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "LKP_Product_Lookup",
+        "slug" : "LKP_Product_Lookup",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "LKP_Product_Lookup__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/LKP_Product_Lookup"
+      }
+    },
+    "Form_CAG_dataset" : {
+      "id" : "Form_CAG_dataset",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Form_CAG_dataset",
+        "slug" : "Form_CAG_dataset",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Form_CAG_dataset__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Form_CAG_dataset"
+      }
+    },
+    "Sort_QualVal" : {
+      "id" : "Sort_QualVal",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "Sort_QualVal",
+        "slug" : "Sort_QualVal",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Sort_QualVal__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Sort_QualVal__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"qualifier_cd\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"compare_value\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Generate_Record_for_Qualifier_and_their_Values" : {
+      "id" : "Generate_Record_for_Qualifier_and_their_Values",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Generate_Record_for_Qualifier_and_their_Values",
+        "slug" : "Generate_Record_for_Qualifier_and_their_Values",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Generate_Record_for_Qualifier_and_their_Values__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_exp_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_reqd_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "specialty_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_group_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_step_number",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Generate_Record_for_Qualifier_and_their_Values__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalizeDF = in.normalize(\n    lengthExpression = Some(lit(6)),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (when(col(\"index\") === lit(0),             lit(\"TIER\"))\n        .when(col(\"index\") === lit(1),           lit(\"STATUS\"))\n        .when(col(\"index\") === lit(2),           lit(\"PA\"))\n        .when(col(\"index\") === lit(3),           lit(\"SPECIALTY\"))\n        .when(col(\"index\") === lit(4),           lit(\"ST\"))\n        .otherwise(when(col(\"index\") === lit(5), lit(\"ST_STEP_NUM\"))))\n        .as(\"qualifier_cd\"),\n      (when(col(\"index\") === lit(0),             col(\"formulary_tier\"))\n        .when(col(\"index\") === lit(1),           col(\"formulary_status\"))\n        .when(col(\"index\") === lit(2),           col(\"pa_reqd_ind\"))\n        .when(col(\"index\") === lit(3),           col(\"specialty_ind\"))\n        .when(col(\"index\") === lit(4),           col(\"step_therapy_ind\"))\n        .otherwise(when(col(\"index\") === lit(5), col(\"step_therapy_step_number\").cast(StringType))))\n        .as(\"compare_value\")\n    ),\n    lengthRelatedGlobalExpressions = Map(\"dl_bit\" -> lookup(\"LKP_Product_Lookup\", col(\"ndc11\")).getField(\"dl_bit\")),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalizeDF.select((col(\"dl_bit\").cast(IntegerType)).as(\"dl_bit\"),\n                                              (col(\"qualifier_cd\")).as(\"qualifier_cd\"),\n                                              (col(\"compare_value\")).as(\"compare_value\")\n  )\n\n  val normalize_out_DF = simpleSelect_in_DF.filter(\n    when(\n      (col(\"qualifier_cd\") === lit(\"ST_STEP_NUM\")).and(\n        (isnull(col(\"compare_value\"))\n          .or(col(\"compare_value\").cast(StringType) <= lit(0)))\n          .or(col(\"compare_value\").cast(StringType) > lit(20))\n      ),\n      lit(0)\n    ).otherwise(lit(1))\n  )\n\n  val out = normalize_out_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Create_Rule_Dataset_For_EQ_Operator" : {
+      "id" : "Create_Rule_Dataset_For_EQ_Operator",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Create_Rule_Dataset_For_EQ_Operator",
+        "slug" : "Create_Rule_Dataset_For_EQ_Operator",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_Rule_Dataset_For_EQ_Operator__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_Rule_Dataset_For_EQ_Operator__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "operator",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "max(lit(\"eq\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType))).cast(IntegerType)"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "groupBy",
+        "columnsSelector" : [ "Create_Rule_Dataset_For_EQ_Operator__in##qualifier_cd", "Create_Rule_Dataset_For_EQ_Operator__in##compare_value", "Create_Rule_Dataset_For_EQ_Operator__in##dl_bit" ],
+        "groupBy" : [ {
+          "target" : "qualifier_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"qualifier_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "compare_value",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"compare_value\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Form_Rule_Products" : {
+      "id" : "Form_Rule_Products",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Form_Rule_Products",
+        "slug" : "Form_Rule_Products",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Form_Rule_Products__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Form_Rule_Products"
+      }
+    },
+    "LKP_Product_Lookup_lookup" : {
+      "id" : "LKP_Product_Lookup_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LKP_Product_Lookup_lookup",
+        "slug" : "LKP_Product_Lookup_lookup",
+        "x" : 220,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_Product_Lookup_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "decimal(14,5)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "ndc11" ],
+        "valueColumns" : [ "dl_bit", "ndc11", "gpi14", "status_cd", "inactive_dt", "msc", "drug_name", "rx_otc", "desi", "roa_cd", "dosage_form_cd", "prod_strength", "repack_cd", "prod_short_desc", "gpi14_desc", "gpi8_desc", "newline" ],
+        "processName" : "LKP_Product_Lookup"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

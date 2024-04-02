@@ -1,0 +1,866 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "altexp_tsd_container_xwalk",
+    "uri" : "pipelines/altexp_form_tsd_xwalk",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "FORM_RULE_PRODUCTS",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TSD_EXTRACT",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "FORM_TSD_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TSD_NM",
+          "kind" : {
+            "type" : "string",
+            "value" : "A5_CTR_STANDARD_3T"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240401"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e1",
+    "source" : "Aggregate_products_for_a_TSD_Code",
+    "sourcePort" : "Aggregate_products_for_a_TSD_Code__out",
+    "target" : "Aggregate_products_for_a_TSD_Code_Reformat",
+    "targetPort" : "Aggregate_products_for_a_TSD_Code_Reformat__in"
+  }, {
+    "id" : "e2",
+    "source" : "Aggregate_products_for_a_TSD_Code_Reformat",
+    "sourcePort" : "Aggregate_products_for_a_TSD_Code_Reformat__out",
+    "target" : "TSD_Products",
+    "targetPort" : "TSD_Products__in"
+  }, {
+    "id" : "e0",
+    "source" : "IFILE_TSD_Extract",
+    "sourcePort" : "IFILE_TSD_Extract__out",
+    "target" : "Expand_TSD_Filter_select",
+    "targetPort" : "Expand_TSD_Filter_select__in"
+  }, {
+    "id" : "e5",
+    "source" : "Form_Rule_Products",
+    "sourcePort" : "Form_Rule_Products__out",
+    "target" : "Form_Rule_Products_lookup",
+    "targetPort" : "Form_Rule_Products_lookup__in"
+  }, {
+    "id" : "DfWETA4v_FBcyYa8A_beg",
+    "source" : "Expand_TSD_Filter_select",
+    "sourcePort" : "Expand_TSD_Filter_select__out",
+    "target" : "iTma_JOSqBhH-VmidKluH$$jLj1YWz5YGDKcwyxmTksa",
+    "targetPort" : "2NHC9OeBXCFrKJKfFZDik$$7e2N69jkAVPUQnnSQY6qy"
+  }, {
+    "id" : "5-g24FWL-VTZPxFfxKcVp$$o3EvNkcL4DfW1fTH2mSzp",
+    "source" : "iTma_JOSqBhH-VmidKluH$$jLj1YWz5YGDKcwyxmTksa",
+    "sourcePort" : "w5qskXUEaZHReCbOPHbp_$$Uca6IhyCCKk3q-dzYhzRE",
+    "target" : "Aggregate_products_for_a_TSD_Code",
+    "targetPort" : "Aggregate_products_for_a_TSD_Code__in"
+  } ],
+  "processes" : {
+    "iTma_JOSqBhH-VmidKluH$$jLj1YWz5YGDKcwyxmTksa" : {
+      "id" : "iTma_JOSqBhH-VmidKluH$$jLj1YWz5YGDKcwyxmTksa",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Expand_TSD_Reformat",
+        "slug" : "Expand_TSD_Reformat",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "2NHC9OeBXCFrKJKfFZDik$$7e2N69jkAVPUQnnSQY6qy",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "w5qskXUEaZHReCbOPHbp_$$Uca6IhyCCKk3q-dzYhzRE",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val processUDF = udf({\n    (input: Seq[Row]) =>\n      import _root_.io.prophecy.abinitio.ScalaFunctions._\n      import _root_.io.prophecy.libs.AbinitioDMLs._\n      val outputRows = scala.collection.mutable.ArrayBuffer[Row]()\n      val prod_t = 0\n      val prod_ref = 0\n\n      input.zipWithIndex.foreach {\n        case (in, idx) =>\n            prod_t = in.getAs[Int](\"prod_t\") & ~(prod_ref)\n            prod_ref = prod_ref | prod_t\n            outputRows.append(\n              Row(\n                in.getAs[BigDecimal](\"prod_t\"),\n                in.getAs[String](\"tsd_cd\"),\n                prod_t,\n                in.getAs[String](\"newline\")\n              )\n            )\n      }\n      outputRows\n    },\n    ArrayType(StructType(List(\n      StructField(\"tsd_id\", DecimalType(10,0), false),\n      StructField(\"tsd_cd\", StringType, false),\n      StructField(\"products\", IntegeryType, false),\n      StructField(\"newline\", StringType, false),\n    )\n    ))\n)\n\ndef prod_t() = coalesce(\n    when(\n      (col(\"formulary_tier\") =!= lit(\"*\")).and(col(\"formulary_status\") =!= lit(\"*\")),\n      lookup(\"Form_Rule_Products\", lit(\"TIER\"), col(\"formulary_tier\"))\n        .getField(\"products\")\n        .bitwiseAND(lookup(\"Form_Rule_Products\", lit(\"STATUS\"), col(\"formulary_status\")).getField(\"products\"))\n    ).when(\n        (col(\"formulary_tier\") =!= lit(\"*\")).and(col(\"formulary_status\") === lit(\"*\")),\n        lookup(\"Form_Rule_Products\", lit(\"TIER\"), col(\"formulary_tier\")).getField(\"products\")\n      )\n      .when(\n        (col(\"formulary_tier\") === lit(\"*\")).and(col(\"formulary_status\") =!= lit(\"*\")),\n        lookup(\"Form_Rule_Products\", lit(\"STATUS\"), col(\"formulary_status\")).getField(\"products\")\n      )\n      .otherwise(\n        lookup(\"Form_Rule_Products\", lit(\"PA\"), lit(\"Y\"))\n          .getField(\"products\")\n          .bitwiseOR(lookup(\"Form_Rule_Products\", lit(\"PA\"), lit(\"N\")).getField(\"products\"))\n      ),\n    lit(0)\n)\n\nval out = in.select(struct(prod_t().as(\"prod_t\"), col(\"tsd_id\"), col(\"tsd_cd\"), col(\"newline\")).as(\"tmp\"))\n      .groupBy(lit(1))\n      .agg(collect_list(col(\"tmp\")).as(\"input\"))\n      .select(explode(processUDF(col(\"input\"))).as(\"output\"))\n      .select(col(\"output.*\"))",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "Expand_TSD_Filter_select" : {
+      "id" : "Expand_TSD_Filter_select",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Expand_TSD_Filter_select",
+        "slug" : "Expand_TSD_Filter_select",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Expand_TSD_Filter_select__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Expand_TSD_Filter_select__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "(col(\"tsd_name\") === lit(Config.TSD_NM))\n    .and(( to_date(col(\"eff_dt\"), \"yyyyMMdd\") <= to_date(lit(Config.BUSINESS_DATE),\"yyyyMMdd\") ).and( to_date(col(\"term_dt\"), \"yyyyMMdd\") >= to_date(lit(Config.BUSINESS_DATE),\"yyyyMMdd\") ))"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Aggregate_products_for_a_TSD_Code_Reformat" : {
+      "id" : "Aggregate_products_for_a_TSD_Code_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Aggregate_products_for_a_TSD_Code_Reformat",
+        "slug" : "Aggregate_products_for_a_TSD_Code_Reformat",
+        "x" : 820,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Aggregate_products_for_a_TSD_Code_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Aggregate_products_for_a_TSD_Code_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "tsd_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tsd_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tsd_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tsd_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"products\").cast(IntegerType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Form_Rule_Products_lookup" : {
+      "id" : "Form_Rule_Products_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Form_Rule_Products_lookup",
+        "slug" : "Form_Rule_Products_lookup",
+        "x" : 220,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Form_Rule_Products_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "qualifier_cd", "compare_value" ],
+        "valueColumns" : [ "qualifier_cd", "operator", "compare_value", "products" ],
+        "processName" : "Form_Rule_Products"
+      }
+    },
+    "IFILE_TSD_Extract" : {
+      "id" : "IFILE_TSD_Extract",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFILE_TSD_Extract",
+        "slug" : "IFILE_TSD_Extract",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFILE_TSD_Extract__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFILE_TSD_Extract"
+      }
+    },
+    "Form_Rule_Products" : {
+      "id" : "Form_Rule_Products",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Form_Rule_Products",
+        "slug" : "Form_Rule_Products",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Form_Rule_Products__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Form_Rule_Products"
+      }
+    },
+    "TSD_Products" : {
+      "id" : "TSD_Products",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "TSD_Products",
+        "slug" : "TSD_Products",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TSD_Products__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TSD_Products"
+      }
+    },
+    "Aggregate_products_for_a_TSD_Code" : {
+      "id" : "Aggregate_products_for_a_TSD_Code",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Aggregate_products_for_a_TSD_Code",
+        "slug" : "Aggregate_products_for_a_TSD_Code",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Aggregate_products_for_a_TSD_Code__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Aggregate_products_for_a_TSD_Code__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "_row_id" : null,
+          "target" : "tsd_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "max(col(\"tsd_id\")).cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "expr(\"\"\"bit_or(cast(products as int))\"\"\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "max(coalesce(col(\"newline\"), lit(\"\\n\")))"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "_row_id" : null,
+          "target" : "tsd_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tsd_cd\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

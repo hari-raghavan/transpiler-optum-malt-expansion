@@ -1,0 +1,534 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "tal_assoc_xwalk",
+    "uri" : "pipelines/altexp_tad_xwalk",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "lazy val alt_selection_cd_udf = udf(\n    { (alt_selection_id: Array[String]) =>\n      var result: String = \"\"\n      if (alt_selection_id.nonEmpty){\n         result = if (alt_selection_id(0).length == 11) \"NDC\" else \"GPI\"\n          alt_selection_id.foreach { s =>\n            if (!result.contains(\"NDC\") && s.length == 11)\n              result = result + \"NDC\"\n            else (!result.contains(\"GPI\") && s.length == 14)\n            result = result + \"GPI\"\n          }\n      }\n      result\n    },\n    StringType\n  )",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "TAD_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAD_EXTRACT",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk",
+    "sourcePort" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__out",
+    "target" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat",
+    "targetPort" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat__in"
+  }, {
+    "id" : "e1",
+    "source" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat",
+    "sourcePort" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat__out",
+    "target" : "OFIL_TAD_Xwalk",
+    "targetPort" : "OFIL_TAD_Xwalk__in"
+  }, {
+    "id" : "e2",
+    "source" : "IFIL_TAD_Extract",
+    "sourcePort" : "IFIL_TAD_Extract__out",
+    "target" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk",
+    "targetPort" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in"
+  } ],
+  "processes" : {
+    "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat" : {
+      "id" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat",
+        "slug" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "target_gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_selection_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_selection_ids",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tad_alt_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "rank",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "qty_adjust_factor",
+                    "type" : "decimal(6,3)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "target_gpi14",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"target_gpi14\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_selection_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_selection_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_selection_ids",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_selection_ids\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tad_alt_dtls",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tad_alt_dtls\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "OFIL_TAD_Xwalk" : {
+      "id" : "OFIL_TAD_Xwalk",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFIL_TAD_Xwalk",
+        "slug" : "OFIL_TAD_Xwalk",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFIL_TAD_Xwalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "target_gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_selection_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_selection_ids",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tad_alt_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "rank",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "qty_adjust_factor",
+                    "type" : "decimal(6,3)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFIL_TAD_Xwalk"
+      }
+    },
+    "IFIL_TAD_Extract" : {
+      "id" : "IFIL_TAD_Extract",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFIL_TAD_Extract",
+        "slug" : "IFIL_TAD_Extract",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFIL_TAD_Extract__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFIL_TAD_Extract"
+      }
+    },
+    "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk" : {
+      "id" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk",
+        "slug" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tad_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_grouping_gpi12",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_selection_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qty_adjust_factor",
+              "type" : "decimal(6,3)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "alt_selection_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "alt_selection_cd_udf(collect_list(col(\"alt_selection_id\")))"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_selection_ids",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "collect_list(col(\"alt_selection_id\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tad_alt_dtls",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "collect_list(struct(col(\"rank\").as(\"rank\"), col(\"qty_adjust_factor\").as(\"qty_adjust_factor\")))"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(coalesce(col(\"newline\"), lit(\"\\n\")))"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in##target_gpi14", "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in##alt_selection_id", "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in##rank", "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in##qty_adjust_factor", "Populate_ALT_SELECTION_CD_and_Create_TAD_Xwalk__in##newline" ],
+        "groupBy" : [ {
+          "target" : "target_gpi14",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"target_gpi14\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

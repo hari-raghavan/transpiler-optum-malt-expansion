@@ -1,0 +1,72 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: alias_id
+    type: decimal(10,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: alias_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: alias_info
+    type:
+      type: array
+      elementType:
+        type: struct
+        fields:
+        - name: qual_priority
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: qual_id_value
+          type: string
+          nullable: false
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: search_txt
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: replace_txt
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: eff_dt
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: term_dt
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+      containsNull: false
+    nullable: false
+    metadata:
+      description: ''
+      mappings: []
+      tags: []

@@ -1,0 +1,623 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "id" : "alias_tets",
+    "uri" : "pipelines/altexp_alias_container_xwalk",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "ALIAS_NAME_VEC",
+          "kind" : {
+            "type" : "array",
+            "elementType" : {
+              "type" : "string",
+              "value" : null
+            },
+            "value" : [ " " ]
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "PRODUCTS_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : "/altexp_prdcts.RXCL3.NULL_BASE_LINE.dat"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240327"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ALIAS_XWALK_LKP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ALIAS_FILE_NAMES",
+          "kind" : {
+            "type" : "string",
+            "value" : "/altexp_alias_products.RXCL3.NULL_BASE_LINE."
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ALIAS_XWALK_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "Product_File",
+    "sourcePort" : "Product_File__out",
+    "target" : "Apply_alias_rules",
+    "targetPort" : "Apply_alias_rules__in"
+  }, {
+    "id" : "e1",
+    "source" : "Apply_alias_rules",
+    "sourcePort" : "Apply_alias_rules__out",
+    "target" : "Write_Aliased_product_files",
+    "targetPort" : "Write_Aliased_product_files__in"
+  }, {
+    "id" : "e2",
+    "source" : "Alias_Xwalk",
+    "sourcePort" : "Alias_Xwalk__out",
+    "target" : "Alias_Xwalk_lookup",
+    "targetPort" : "Alias_Xwalk_lookup__in"
+  } ],
+  "processes" : {
+    "Apply_alias_rules" : {
+      "id" : "Apply_alias_rules",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Apply_alias_rules",
+        "slug" : "Apply_alias_rules",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Apply_alias_rules__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "decimal(14,5)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Apply_alias_rules__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alias_set_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alias_label_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val temp54262_UDF = udf(\n    (_gpi14: String, _label_nm: String, _alias_info_vec_idx: Seq[Row], _ndc11: String) => {\n      var gpi14              = _gpi14\n      var label_nm           = _label_nm\n      var alias_info_vec_idx = _alias_info_vec_idx.toArray\n      var k                  = 0\n      var ndc11              = _ndc11\n\n      while (compareTo(k, alias_info_vec_idx.size) < 0) {\n        var alias = alias_info_vec_idx(convertToInt(k))\n        alias\n          .getAs[Row](\"alias_info\")\n          .zipWithIndex\n          .map {\n            case (_rule, ruleIndex) =>\n              var rule = _rule\n              if (_string_lrtrim(label_nm) == _string_lrtrim((rule.getAs[String](\"search_txt\")))) {\n                if (rule.getAs[String](\"qual_priority\").toInt == 1) {\n                  if (rule.getAs[String](\"qual_id_value\") == ndc11)\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 2) {\n                  if (rule.getAs[String](\"qual_id_value\") == substring_scala(ndc11, 1, 9))\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 3) {\n                  if (rule.getAs[String](\"qual_id_value\") == gpi14)\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 4) {\n                  if (rule.getAs[String](\"qual_id_value\") == substring_scala(gpi14, 1, 12))\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 5) {\n                  if (rule.getAs[String](\"qual_id_value\") == substring_scala(gpi14, 1, 10))\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 6) {\n                  if (rule.getAs[String](\"qual_id_value\") == substring_scala(gpi14, 1, 8))\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 7) {\n                  if (rule.getAs[String](\"qual_id_value\") == substring_scala(gpi14, 1, 6))\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 8) {\n                  if (rule.getAs[String](\"qual_id_value\") == substring_scala(gpi14, 1, 4))\n                    label_nm = rule.getAs[String](\"replace_txt\")\n                } else if (rule.getAs[String](\"qual_priority\").toInt == 99)\n                  label_nm = rule.getAs[String](\"replace_txt\")\n              }\n          }\n          .toArray\n        k = k + 1\n      }\n\n      label_nm\n    },\n    StringType\n  )\n  \n  \n  \n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(typedLit(Config.ALIAS_NAME_VEC))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (concat(lit(\"ALIAS_SET\"), (col(\"index\") + lit(1)).cast(StringType))).as(\"alias_set_name\"),\n      (temp54262_UDF(\n        col(\"gpi14\"),\n        string_substring(col(\"prod_short_desc\"), lit(1), lit(12)),\n        element_at(\n          filter(\n            transform(\n              typedLit(Config.ALIAS_NAME_VEC),\n              alias_nm_vec =>\n                filter(\n                  transform(\n                    alias_nm_vec,\n                    alias_nm =>\n                      struct(\n                        coalesce(lookup(\"Alias_Xwalk\",         alias_nm),\n                                 struct(lit(0).as(\"alias_id\"), lit(\"\").as(\"alias_name\"), array().as(\"alias_info\"))\n                        ).getField(\"alias_id\").as(\"alias_id\"),\n                        coalesce(lookup(\"Alias_Xwalk\",         alias_nm),\n                                 struct(lit(0).as(\"alias_id\"), lit(\"\").as(\"alias_name\"), array().as(\"alias_info\"))\n                        ).getField(\"alias_name\").as(\"alias_name\"),\n                        filter(\n                          transform(\n                            coalesce(lookup(\"Alias_Xwalk\",         alias_nm),\n                                     struct(lit(0).as(\"alias_id\"), lit(\"\").as(\"alias_name\"), array().as(\"alias_info\"))\n                            ).getField(\"alias_info\"),\n                            alias_rule =>\n                              when((to_date(lit(Config.BUSINESS_DATE)) >= to_date(alias_rule.getField(\"eff_dt\")))\n                                     .and(to_date(lit(Config.BUSINESS_DATE)) <= to_date(alias_rule.getField(\"term_dt\"))),\n                                   alias_rule\n                              )\n                          ),\n                          xx => !isnull(xx)\n                        ).as(\"alias_info\")\n                      )\n                  ),\n                  xx => !isnull(xx)\n                )\n            ),\n            xx => !isnull(xx)\n          ),\n          col(\"index\") + lit(1)\n        ),\n        col(\"ndc11\")\n      )).as(\"alias_label_nm\"),\n      col(\"ndc11\").as(\"ndc11\"),\n      (col(\"newline\").cast(StringType)).as(\"newline\")\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select(\n    (col(\"alias_set_name\")).as(\"alias_set_name\"),\n    (col(\"ndc11\")).as(\"ndc11\"),\n    (col(\"alias_label_nm\")).as(\"alias_label_nm\"),\n    (col(\"newline\").cast(StringType)).as(\"newline\")\n  )\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Write_Aliased_product_files" : {
+      "id" : "Write_Aliased_product_files",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Write_Aliased_product_files",
+        "slug" : "Write_Aliased_product_files",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Write_Aliased_product_files__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alias_set_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alias_label_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  val withFileDF = in.withColumn(\"fileName\", concat(lit(Config.ALIAS_FILE_NAMES), col(\"alias_set_name\"), lit(\".dat\")))\n  withFileDF.breakAndWriteDataFrameForOutputFile(List(\"alias_set_name\", \"ndc11\", \"alias_label_nm\", \"newline\"),\n                                                 \"fileName\",\n                                                 \"csv\",\n                                                 Some(\"\\\\\\\\x01\")\n  )\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Product_File" : {
+      "id" : "Product_File",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Product_File",
+        "slug" : "Product_File",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Product_File__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Product_File"
+      }
+    },
+    "Alias_Xwalk" : {
+      "id" : "Alias_Xwalk",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Alias_Xwalk",
+        "slug" : "Alias_Xwalk",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Alias_Xwalk__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Alias_Xwalk"
+      }
+    },
+    "Alias_Xwalk_lookup" : {
+      "id" : "Alias_Xwalk_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Alias_Xwalk_lookup",
+        "slug" : "Alias_Xwalk_lookup",
+        "x" : 220,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Alias_Xwalk_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alias_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alias_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alias_info",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qual_priority",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "qual_id_value",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "search_txt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "replace_txt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "alias_name" ],
+        "valueColumns" : [ "alias_id", "alias_name", "alias_info" ],
+        "processName" : "Alias_Xwalk"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

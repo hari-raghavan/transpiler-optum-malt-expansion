@@ -1,0 +1,728 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "altexp_rebate_elig_cd_xwalk",
+    "uri" : "pipelines/altexp_rebate_elig_cd_xwalk",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "REBATE_ELIG_EXTRACT",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "REBATE_ELIGIBLE_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "OUTPUT_PROF_ID",
+          "kind" : {
+            "type" : "string",
+            "value" : "14288"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "Rebate_Elig_cd_Extract",
+    "sourcePort" : "Rebate_Elig_cd_Extract__out",
+    "target" : "Rebate_Elig_Cd_Crosswalk_input_select_filter",
+    "targetPort" : "Rebate_Elig_Cd_Crosswalk_input_select_filter__in"
+  }, {
+    "id" : "e1",
+    "source" : "Rebate_Elig_Cd_Crosswalk_input_select_filter",
+    "sourcePort" : "Rebate_Elig_Cd_Crosswalk_input_select_filter__out",
+    "target" : "Rebate_Elig_Cd_Crosswalk",
+    "targetPort" : "Rebate_Elig_Cd_Crosswalk__in"
+  }, {
+    "id" : "e2",
+    "source" : "Rebate_Elig_Cd_Crosswalk",
+    "sourcePort" : "Rebate_Elig_Cd_Crosswalk__out",
+    "target" : "Rebate_Elig_Cd_Crosswalk_Reformat",
+    "targetPort" : "Rebate_Elig_Cd_Crosswalk_Reformat__in"
+  }, {
+    "id" : "e3",
+    "source" : "Rebate_Elig_Cd_Crosswalk_Reformat",
+    "sourcePort" : "Rebate_Elig_Cd_Crosswalk_Reformat__out",
+    "target" : "Normalize_Rebate_Eligible_Products",
+    "targetPort" : "Normalize_Rebate_Eligible_Products__in"
+  }, {
+    "id" : "e4",
+    "source" : "Normalize_Rebate_Eligible_Products",
+    "sourcePort" : "Normalize_Rebate_Eligible_Products__out",
+    "target" : "OFILE_Rebate_Eligible_Xwalk",
+    "targetPort" : "OFILE_Rebate_Eligible_Xwalk__in"
+  }, {
+    "id" : "e5",
+    "source" : "Expanded_UDL",
+    "sourcePort" : "Expanded_UDL__out",
+    "target" : "Expanded_UDL_lookup",
+    "targetPort" : "Expanded_UDL_lookup__in"
+  } ],
+  "processes" : {
+    "Rebate_Elig_Cd_Crosswalk_Reformat" : {
+      "id" : "Rebate_Elig_Cd_Crosswalk_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Rebate_Elig_Cd_Crosswalk_Reformat",
+        "slug" : "Rebate_Elig_Cd_Crosswalk_Reformat",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Rebate_Elig_Cd_Crosswalk_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dl_bit",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Rebate_Elig_Cd_Crosswalk_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "dl_bit",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"dl_bit\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rebate_elig_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rebate_elig_cd\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Expanded_UDL_lookup" : {
+      "id" : "Expanded_UDL_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Expanded_UDL_lookup",
+        "slug" : "Expanded_UDL_lookup",
+        "x" : 220,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Expanded_UDL_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "udl_nm" ],
+        "valueColumns" : [ "udl_id", "udl_nm", "udl_desc", "products", "eff_dt", "term_dt", "contents", "newline" ],
+        "processName" : "Expanded_UDL"
+      }
+    },
+    "OFILE_Rebate_Eligible_Xwalk" : {
+      "id" : "OFILE_Rebate_Eligible_Xwalk",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_Rebate_Eligible_Xwalk",
+        "slug" : "OFILE_Rebate_Eligible_Xwalk",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFILE_Rebate_Eligible_Xwalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_Rebate_Eligible_Xwalk"
+      }
+    },
+    "Rebate_Elig_Cd_Crosswalk_input_select_filter" : {
+      "id" : "Rebate_Elig_Cd_Crosswalk_input_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Rebate_Elig_Cd_Crosswalk_input_select_filter",
+        "slug" : "Rebate_Elig_Cd_Crosswalk_input_select_filter",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Rebate_Elig_Cd_Crosswalk_input_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_rebate_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Rebate_Elig_Cd_Crosswalk_input_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "col(\"output_profile_id\").cast(DecimalType(10, 0)) === lit(Config.OUTPUT_PROF_ID)"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Rebate_Elig_cd_Extract" : {
+      "id" : "Rebate_Elig_cd_Extract",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Rebate_Elig_cd_Extract",
+        "slug" : "Rebate_Elig_cd_Extract",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Rebate_Elig_cd_Extract__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Rebate_Elig_cd_Extract"
+      }
+    },
+    "Expanded_UDL" : {
+      "id" : "Expanded_UDL",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Expanded_UDL",
+        "slug" : "Expanded_UDL",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Expanded_UDL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Expanded_UDL"
+      }
+    },
+    "Normalize_Rebate_Eligible_Products" : {
+      "id" : "Normalize_Rebate_Eligible_Products",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Normalize_Rebate_Eligible_Products",
+        "slug" : "Normalize_Rebate_Eligible_Products",
+        "x" : 820,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Normalize_Rebate_Eligible_Products__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Normalize_Rebate_Eligible_Products__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"dl_bit\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List((element_at(col(\"dl_bit\"), col(\"index\") + lit(1)).cast(IntegerType)).as(\"dl_bit\")),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF =\n    normalize_out_DF.select((col(\"dl_bit\")).as(\"dl_bit\"), (col(\"rebate_elig_cd\")).as(\"rebate_elig_cd\"))\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Rebate_Elig_Cd_Crosswalk" : {
+      "id" : "Rebate_Elig_Cd_Crosswalk",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Rebate_Elig_Cd_Crosswalk",
+        "slug" : "Rebate_Elig_Cd_Crosswalk",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Rebate_Elig_Cd_Crosswalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_rebate_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Rebate_Elig_Cd_Crosswalk__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dl_bit",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "dl_bit",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "bv_indices(\n    expr(\n      \"bit_or(coalesce(Expanded_UDL(udl_name).products, 0))\"\n    )\n  )"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "Rebate_Elig_Cd_Crosswalk__in##rebate_elig_cd" ],
+        "groupBy" : [ {
+          "target" : "rebate_elig_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rebate_elig_cd\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

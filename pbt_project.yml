@@ -54,6 +54,202 @@ pipelines:
       - datasets/Load_data_to_File_Load_Cntl_table
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_alias_xwalk:
+    name: altexp_alias_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-03-27 12:50:39'
+    datasets:
+      inputs:
+      - datasets/Alias_Extract
+      outputs:
+      - datasets/Alias_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_step_grp_nm_xwalk:
+    name: altexp_step_grp_nm_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-03-27 12:50:42'
+    datasets:
+      inputs:
+      - datasets/IFIL_Formulary_Dataset
+      - datasets/IFIL_TAC_Rule_Xwalk
+      outputs:
+      - datasets/OFIL_Step_Group_Name_Xwalk
+      - datasets/OFIL_Step_Group_Number_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_alias_container_xwalk:
+    name: altexp_alias_container_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-03-28 06:46:36'
+    datasets:
+      inputs:
+      - datasets/Alias_Xwalk
+      - datasets/Product_File
+      outputs: []
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_output_profile_cag_mapping:
+    name: altexp_output_profile_cag_mapping
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-03-28 10:33:00'
+    datasets:
+      inputs:
+      - datasets/CAG_Override_Ref
+      - datasets/Formulary_Override_Ref
+      - datasets/Get_ALT_RUN_ID_jdbc
+      - datasets/Get_FILE_LOAD_CNTL_ID_jdbc
+      - datasets/Output_Profile_Extract
+      - datasets/TAC_Dtl
+      - datasets/TAL_Dtl
+      - datasets/TAR_Dtl
+      - datasets/TSD_Dtl
+      outputs:
+      - datasets/ALT_RUN_JOB_DETAILS_load_ready
+      - datasets/ALT_RUN_load_ready
+      - datasets/Master_Cag_Mapping_File
+      - datasets/UDL_ref_File
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_output_profile_cag_mapping_inet:
+    name: altexp_output_profile_cag_mapping_inet
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-01 08:44:47'
+    datasets:
+      inputs:
+      - datasets/CAG_Override_Ref
+      - datasets/Form_ref_file_lkp
+      - datasets/Formulary_Override_Ref
+      - datasets/Get_ALT_RUN_ID_jdbc
+      - datasets/Get_FILE_LOAD_CNTL_ID_jdbc
+      - datasets/Output_Profile_Extract
+      - datasets/TAC_Dtl
+      - datasets/TAL_Dtl
+      - datasets/TAR_Dtl
+      - datasets/TSD_Dtl
+      outputs:
+      - datasets/ALT_RUN_JOB_DETAILS_load_ready
+      - datasets/ALT_RUN_load_ready
+      - datasets/Master_Cag_Mapping_File
+      - datasets/UDL_ref_File
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_create_rule_prd_files:
+    name: altexp_create_rule_prd_files
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-02 06:25:38'
+    datasets:
+      inputs:
+      - datasets/CAG_dataset
+      outputs:
+      - datasets/Products
+      - datasets/Rule_Products
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_form_create_rule_prd_files:
+    name: altexp_form_create_rule_prd_files
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-02 06:25:40'
+    datasets:
+      inputs:
+      - datasets/Form_CAG_dataset
+      - datasets/LKP_Product_Lookup
+      outputs:
+      - datasets/Form_Rule_Products
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_udl_exp:
+    name: altexp_udl_exp
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-02 06:25:41'
+    datasets:
+      inputs:
+      - datasets/IFILE_Rule_CrossWalk
+      - datasets/LKP_Rule_Products
+      - datasets/LKP_UDL_Master_CrossWalk
+      outputs:
+      - datasets/OFILE_Current_snapshot_of_Baseline_CAG
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_form_tsd_xwalk:
+    name: altexp_form_tsd_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-02 06:25:42'
+    datasets:
+      inputs:
+      - datasets/Form_Rule_Products
+      - datasets/IFILE_TSD_Extract
+      outputs:
+      - datasets/TSD_Products
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tad_xwalk:
+    name: altexp_tad_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-02 06:55:59'
+    datasets:
+      inputs:
+      - datasets/IFIL_TAD_Extract
+      outputs:
+      - datasets/OFIL_TAD_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_rebate_elig_cd_xwalk:
+    name: altexp_rebate_elig_cd_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-02 08:11:21'
+    datasets:
+      inputs:
+      - datasets/Expanded_UDL
+      - datasets/Rebate_Elig_cd_Extract
+      outputs:
+      - datasets/OFILE_Rebate_Eligible_Xwalk
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -111,6 +307,538 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-03-07 04:26:12'
+  datasets/DbFileInput_62:
+    name: DbFileInput_62
+    description: ''
+    author: hari@prophecy.io
+    createdAt: '2024-03-19 13:20:57'
+    mode: batch
+    physicalDatasets: {}
+  datasets/Alias_Extract:
+    name: Alias_Extract
+    description: 'Dataset for Imported Pipeline:altexp_alias_xwalk componentName:
+      Alias_Extract'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:39'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:39'
+  datasets/Master_Cag_Mapping_File:
+    name: Master_Cag_Mapping_File
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: Master_Cag_Mapping_File'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:40'
+  datasets/UDL_ref_File:
+    name: UDL_ref_File
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: UDL_ref_File'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/TAR_Dtl:
+    name: TAR_Dtl
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: TAR_Dtl'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/Output_Profile_Extract:
+    name: Output_Profile_Extract
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: Output_Profile_Extract'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/Get_FILE_LOAD_CNTL_ID_jdbc:
+    name: Get_FILE_LOAD_CNTL_ID_jdbc
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: Get_FILE_LOAD_CNTL_ID_jdbc'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/CAG_Override_Ref:
+    name: CAG_Override_Ref
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: CAG_Override_Ref'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/ALT_RUN_load_ready:
+    name: ALT_RUN_load_ready
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: ALT_RUN_load_ready'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/TAL_Dtl:
+    name: TAL_Dtl
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: TAL_Dtl'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/ALT_RUN_JOB_DETAILS_load_ready:
+    name: ALT_RUN_JOB_DETAILS_load_ready
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: ALT_RUN_JOB_DETAILS_load_ready'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/TAC_Dtl:
+    name: TAC_Dtl
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: TAC_Dtl'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/Formulary_Override_Ref:
+    name: Formulary_Override_Ref
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: Formulary_Override_Ref'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/Get_ALT_RUN_ID_jdbc:
+    name: Get_ALT_RUN_ID_jdbc
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: Get_ALT_RUN_ID_jdbc'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/TSD_Dtl:
+    name: TSD_Dtl
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_cag_mapping
+      componentName: TSD_Dtl'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:41'
+  datasets/OFIL_Step_Group_Name_Xwalk:
+    name: OFIL_Step_Group_Name_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_step_grp_nm_xwalk componentName:
+      OFIL_Step_Group_Name_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:42'
+  datasets/IFIL_Formulary_Dataset:
+    name: IFIL_Formulary_Dataset
+    description: 'Dataset for Imported Pipeline:altexp_step_grp_nm_xwalk componentName:
+      IFIL_Formulary_Dataset'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:42'
+  datasets/OFIL_Step_Group_Number_Xwalk:
+    name: OFIL_Step_Group_Number_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_step_grp_nm_xwalk componentName:
+      OFIL_Step_Group_Number_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:42'
+  datasets/IFIL_TAC_Rule_Xwalk:
+    name: IFIL_TAC_Rule_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_step_grp_nm_xwalk componentName:
+      IFIL_TAC_Rule_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:42'
+  datasets/Product_File:
+    name: Product_File
+    description: 'Dataset for Imported Pipeline:altexp_alias_container_xwalk componentName:
+      Product_File'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:42'
+  datasets/Alias_Xwalk:
+    name: Alias_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_alias_container_xwalk componentName:
+      Alias_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-03-27 12:50:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-03-27 12:50:42'
+  datasets/Form_ref_file_lkp:
+    name: Form_ref_file_lkp
+    description: ''
+    author: hari@prophecy.io
+    createdAt: '2024-04-01 09:18:16'
+    mode: batch
+    physicalDatasets:
+      Workday:
+        fabricId: 1593
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-01 09:18:16'
+  datasets/CAG_dataset:
+    name: CAG_dataset
+    description: 'Dataset for Imported Pipeline:altexp_create_rule_prd_files componentName:
+      CAG_dataset'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:38'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:38'
+  datasets/Rule_Products:
+    name: Rule_Products
+    description: 'Dataset for Imported Pipeline:altexp_create_rule_prd_files componentName:
+      Rule_Products'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:38'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:38'
+  datasets/Products:
+    name: Products
+    description: 'Dataset for Imported Pipeline:altexp_create_rule_prd_files componentName:
+      Products'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:38'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:38'
+  datasets/OFIL_TAD_Xwalk:
+    name: OFIL_TAD_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_tad_xwalk componentName: OFIL_TAD_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:39'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:39'
+  datasets/IFIL_TAD_Extract:
+    name: IFIL_TAD_Extract
+    description: 'Dataset for Imported Pipeline:altexp_tad_xwalk componentName: IFIL_TAD_Extract'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:39'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:39'
+  datasets/LKP_Product_Lookup:
+    name: LKP_Product_Lookup
+    description: 'Dataset for Imported Pipeline:altexp_form_create_rule_prd_files
+      componentName: LKP_Product_Lookup'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:39'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:39'
+  datasets/Form_CAG_dataset:
+    name: Form_CAG_dataset
+    description: 'Dataset for Imported Pipeline:altexp_form_create_rule_prd_files
+      componentName: Form_CAG_dataset'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:39'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:39'
+  datasets/Form_Rule_Products:
+    name: Form_Rule_Products
+    description: 'Dataset for Imported Pipeline:altexp_form_tsd_xwalk componentName:
+      Form_Rule_Products'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:40'
+  datasets/OFILE_Current_snapshot_of_Baseline_CAG:
+    name: OFILE_Current_snapshot_of_Baseline_CAG
+    description: 'Dataset for Imported Pipeline:altexp_udl_exp componentName: OFILE_Current_snapshot_of_Baseline_CAG'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:40'
+  datasets/LKP_UDL_Master_CrossWalk:
+    name: LKP_UDL_Master_CrossWalk
+    description: 'Dataset for Imported Pipeline:altexp_udl_exp componentName: LKP_UDL_Master_CrossWalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:40'
+  datasets/LKP_Rule_Products:
+    name: LKP_Rule_Products
+    description: 'Dataset for Imported Pipeline:altexp_udl_exp componentName: LKP_Rule_Products'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:41'
+  datasets/IFILE_Rule_CrossWalk:
+    name: IFILE_Rule_CrossWalk
+    description: 'Dataset for Imported Pipeline:altexp_udl_exp componentName: IFILE_Rule_CrossWalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:41'
+  datasets/IFILE_TSD_Extract:
+    name: IFILE_TSD_Extract
+    description: 'Dataset for Imported Pipeline:altexp_form_tsd_xwalk componentName:
+      IFILE_TSD_Extract'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:41'
+  datasets/TSD_Products:
+    name: TSD_Products
+    description: 'Dataset for Imported Pipeline:altexp_form_tsd_xwalk componentName:
+      TSD_Products'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:41'
+  datasets/OFILE_Rebate_Eligible_Xwalk:
+    name: OFILE_Rebate_Eligible_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_rebate_elig_cd_xwalk componentName:
+      OFILE_Rebate_Eligible_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:42'
+  datasets/Rebate_Elig_cd_Extract:
+    name: Rebate_Elig_cd_Extract
+    description: 'Dataset for Imported Pipeline:altexp_rebate_elig_cd_xwalk componentName:
+      Rebate_Elig_cd_Extract'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:42'
+  datasets/Expanded_UDL:
+    name: Expanded_UDL
+    description: 'Dataset for Imported Pipeline:altexp_rebate_elig_cd_xwalk componentName:
+      Expanded_UDL'
+    author: hari@prophecy.io
+    createdAt: '2024-04-02 06:25:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-02 06:25:42'
 templates: {}
 jobs: {}
 gemContainer:

@@ -1,0 +1,2438 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "altexp_udl_mstr_xwalk",
+    "uri" : "pipelines/altexp_udl_exp",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "UDL_MSTR_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CARRIER",
+          "kind" : {
+            "type" : "string",
+            "value" : "NULL"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_PRODUCTS_LKP",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "UDL_EXPANSION_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240401"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e2",
+    "source" : "RLP_Aggregate_Products_at_UDL_level_Reformat",
+    "sourcePort" : "RLP_Aggregate_Products_at_UDL_level_Reformat__out",
+    "target" : "OFILE_Current_snapshot_of_Baseline_CAG",
+    "targetPort" : "OFILE_Current_snapshot_of_Baseline_CAG__in"
+  }, {
+    "id" : "e4",
+    "source" : "RLP_Aggregate_Products_at_rule_level_Reformat",
+    "sourcePort" : "RLP_Aggregate_Products_at_rule_level_Reformat__out",
+    "target" : "RLP_Aggregate_Products_at_rule_level_output_select_filter",
+    "targetPort" : "RLP_Aggregate_Products_at_rule_level_output_select_filter__in"
+  }, {
+    "id" : "e0",
+    "source" : "IFILE_Rule_CrossWalk",
+    "sourcePort" : "IFILE_Rule_CrossWalk__out",
+    "target" : "Get_Products_Filter_select",
+    "targetPort" : "Get_Products_Filter_select__in"
+  }, {
+    "id" : "e7",
+    "source" : "Get_Products_Filter_select",
+    "sourcePort" : "Get_Products_Filter_select__out",
+    "target" : "Get_Products_Reformat",
+    "targetPort" : "Get_Products_Reformat__in"
+  }, {
+    "id" : "e8",
+    "source" : "LKP_Rule_Products",
+    "sourcePort" : "LKP_Rule_Products__out",
+    "target" : "LKP_Rule_Products_lookup",
+    "targetPort" : "LKP_Rule_Products_lookup__in"
+  }, {
+    "id" : "e9",
+    "source" : "LKP_UDL_Master_CrossWalk",
+    "sourcePort" : "LKP_UDL_Master_CrossWalk__out",
+    "target" : "LKP_UDL_Master_CrossWalk_lookup",
+    "targetPort" : "LKP_UDL_Master_CrossWalk_lookup__in"
+  }, {
+    "id" : "qR334UG1ublVJOev1t7xL",
+    "source" : "Get_Products_Reformat",
+    "sourcePort" : "Get_Products_Reformat__out",
+    "target" : "_EXenuWMFL6FAQunxiwm5$$I2GborIx3XS3lnpDFzDmx",
+    "targetPort" : "tcHWKUzARLwTEcgDCxm0H$$xwVeBdhrZzyGHmGgf39W3"
+  }, {
+    "id" : "OKERMoFXmb_irfFMqs676",
+    "source" : "RLP_Aggregate_Products_at_rule_level_output_select_filter",
+    "sourcePort" : "RLP_Aggregate_Products_at_rule_level_output_select_filter__out",
+    "target" : "t1XwTT9TsCSTRL3FheE9S$$-MxF-YiMImsiO8Db-9DYW",
+    "targetPort" : "i-3MMbGyIB8-knXv1A9PO$$cZ8gRxG8WwgZchb1-KDLS"
+  }, {
+    "id" : "WVrzcaTv6EUkUGwYMF2mk$$mpIjrdokEJNZVGxttUApO",
+    "source" : "_EXenuWMFL6FAQunxiwm5$$I2GborIx3XS3lnpDFzDmx",
+    "sourcePort" : "nvz8rNRlV2oZ-bUirb_8l$$2oIwebLQIami3IuMJ4Slv",
+    "target" : "RLP_Aggregate_Products_at_rule_level_Reformat",
+    "targetPort" : "RLP_Aggregate_Products_at_rule_level_Reformat__in"
+  }, {
+    "id" : "xVOWzy2VjYdtjiy_ZSUlB$$FALCZz1B1IKFwusMt0v1X",
+    "source" : "t1XwTT9TsCSTRL3FheE9S$$-MxF-YiMImsiO8Db-9DYW",
+    "sourcePort" : "NtHWFlilxboYCOXAnFVM0$$v3ELwlLVzhO6y3DXb5THC",
+    "target" : "RLP_Aggregate_Products_at_UDL_level_Reformat",
+    "targetPort" : "RLP_Aggregate_Products_at_UDL_level_Reformat__in"
+  } ],
+  "processes" : {
+    "LKP_Rule_Products_lookup" : {
+      "id" : "LKP_Rule_Products_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LKP_Rule_Products_lookup",
+        "slug" : "LKP_Rule_Products_lookup",
+        "x" : 220,
+        "y" : 420,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_Rule_Products_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "qualifier_cd", "operator", "compare_value" ],
+        "valueColumns" : [ "qualifier_cd", "operator", "compare_value", "products" ],
+        "processName" : "LKP_Rule_Products"
+      }
+    },
+    "OFILE_Current_snapshot_of_Baseline_CAG" : {
+      "id" : "OFILE_Current_snapshot_of_Baseline_CAG",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_Current_snapshot_of_Baseline_CAG",
+        "slug" : "OFILE_Current_snapshot_of_Baseline_CAG",
+        "x" : 1620,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFILE_Current_snapshot_of_Baseline_CAG__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_Current_snapshot_of_Baseline_CAG"
+      }
+    },
+    "LKP_UDL_Master_CrossWalk_lookup" : {
+      "id" : "LKP_UDL_Master_CrossWalk_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LKP_UDL_Master_CrossWalk_lookup",
+        "slug" : "LKP_UDL_Master_CrossWalk_lookup",
+        "x" : 220,
+        "y" : 20,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_UDL_Master_CrossWalk_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qual_list",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_flg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "udl_id" ],
+        "valueColumns" : [ "udl_id", "udl_nm", "user_defined_list_desc", "qual_list", "override_flg", "eff_dt", "term_dt", "newline" ],
+        "processName" : "LKP_UDL_Master_CrossWalk"
+      }
+    },
+    "LKP_UDL_Master_CrossWalk" : {
+      "id" : "LKP_UDL_Master_CrossWalk",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "LKP_UDL_Master_CrossWalk",
+        "slug" : "LKP_UDL_Master_CrossWalk",
+        "x" : 20,
+        "y" : 20,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "LKP_UDL_Master_CrossWalk__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/LKP_UDL_Master_CrossWalk"
+      }
+    },
+    "LKP_Rule_Products" : {
+      "id" : "LKP_Rule_Products",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "LKP_Rule_Products",
+        "slug" : "LKP_Rule_Products",
+        "x" : 20,
+        "y" : 420,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "LKP_Rule_Products__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/LKP_Rule_Products"
+      }
+    },
+    "Get_Products_Filter_select" : {
+      "id" : "Get_Products_Filter_select",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Get_Products_Filter_select",
+        "slug" : "Get_Products_Filter_select",
+        "x" : 220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Get_Products_Filter_select__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Get_Products_Filter_select__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "when((lit(Config.CARRIER) === lit(\"NULL\"))\n         .or(lookup(\"LKP_UDL_Master_CrossWalk\", col(\"udl_id\")).getField(\"override_flg\").cast(BooleanType)),\n       lit(1).cast(BooleanType)\n  ).otherwise(lit(0).cast(BooleanType)).cast(BooleanType)"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "RLP_Aggregate_Products_at_rule_level_Reformat" : {
+      "id" : "RLP_Aggregate_Products_at_rule_level_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "RLP_Aggregate_Products_at_rule_level_Reformat",
+        "slug" : "RLP_Aggregate_Products_at_rule_level_Reformat",
+        "x" : 820,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RLP_Aggregate_Products_at_rule_level_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "RLP_Aggregate_Products_at_rule_level_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_rule_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_rule_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_nm\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rule_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_priority\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "inclusion_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"inclusion_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "qualifier_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"qualifier_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "operator",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"operator\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "compare_value",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"compare_value\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "conjunction_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"conjunction_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rule_expression_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_expression_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "IFILE_Rule_CrossWalk" : {
+      "id" : "IFILE_Rule_CrossWalk",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFILE_Rule_CrossWalk",
+        "slug" : "IFILE_Rule_CrossWalk",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFILE_Rule_CrossWalk__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFILE_Rule_CrossWalk"
+      }
+    },
+    "RLP_Aggregate_Products_at_UDL_level_Reformat" : {
+      "id" : "RLP_Aggregate_Products_at_UDL_level_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "RLP_Aggregate_Products_at_UDL_level_Reformat",
+        "slug" : "RLP_Aggregate_Products_at_UDL_level_Reformat",
+        "x" : 1420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RLP_Aggregate_Products_at_UDL_level_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "RLP_Aggregate_Products_at_UDL_level_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_nm\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"products\").cast(IntegerType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "contents",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"contents\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "_EXenuWMFL6FAQunxiwm5$$I2GborIx3XS3lnpDFzDmx" : {
+      "id" : "_EXenuWMFL6FAQunxiwm5$$I2GborIx3XS3lnpDFzDmx",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "RLP_Aggregate_Products_at_rule_level",
+        "slug" : "RLP_Aggregate_Products_at_rule_level",
+        "x" : 620,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "tcHWKUzARLwTEcgDCxm0H$$xwVeBdhrZzyGHmGgf39W3",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "nvz8rNRlV2oZ-bUirb_8l$$2oIwebLQIami3IuMJ4Slv",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val process_udf = udf(\n  (inputRows: Seq[Row]) => {\n    var no_ands = 1;\n    var products = 0;\n    var or_products = 0;\n    var udl_id = \"\"\n    var udl_rule_id = \"\"\n    var udl_nm = \"\"\n    var udl_desc = \"\"\n    var rule_priority = \"\"\n    var inclusion_cd = \"\"\n    var qualifier_cd = \"\"\n    var operator = \"\"\n    var compare_value = \"\"\n    var conjunction_cd = \"\"\n    var rule_expression_id = \"\"\n    var eff_dt = \"\"\n    var term_dt = \"\"\n    var newline = \"\"\n   \n    inputRows.zipWithIndex.foreach {\n      case (in, idx) => {\n        or_products = or_products | in.getAs[Int](\"products\")\n        if (in.getAs[String](\"conjunction_cd\") != \"0\") {\n            if (no_ands){\n               products = or_products\n               or_products = 0\n               no_ands = 0\n            } else {\n              products = products & or_products\n              or_products = 0\n            }\n        }\n      }\n      udl_id = in.getAs[String](\"udl_id\")\n      udl_rule_id = in.getAs[String](\"udl_rule_id\")\n      udl_nm = in.getAs[String](\"udl_nm\")\n      udl_desc = in.getAs[String](\"udl_desc\")\n      rule_priority = in.getAs[String](\"rule_priority\")\n      inclusion_cd = in.getAs[String](\"inclusion_cd\")\n      qualifier_cd = in.getAs[String](\"qualifier_cd\")\n      operator = in.getAs[String](\"operator\")\n      compare_value = in.getAs[String](\"compare_value\")\n      conjunction_cd = in.getAs[String](\"conjunction_cd\")\n      rule_expression_id = in.getAs[String](\"rule_expression_id\")\n      eff_dt = in.getAs[String](\"eff_dt\")\n      term_dt = in.getAs[String](\"term_dt\")\n      newline = in.getAs[String](\"newline\")\n    }\n    Row(\n      udl_id,\n      udl_rule_id,\n      udl_nm,\n      udl_desc,\n      rule_priority,\n      inclusion_cd,\n      qualifier_cd,\n      operator,\n      compare_value,\n      conjunction_cd,\n      rule_expression_id,\n      eff_dt,\n      term_dt,\n      newline,\n      product\n    )\n  },\n  StructType(List(\n    StructField(\"udl_id\", StringType, false),\n    StructField(\"udl_rule_id\", StringType, false),\n    StructField(\"udl_nm\", StringType, false),\n    StructField(\"udl_desc\", StringType, false),\n    StructField(\"rule_priority\", StringType, false),\n    StructField(\"inclusion_cd\", StringType, false),\n    StructField(\"qualifier_cd\", StringType, false),\n    StructField(\"operator\", StringType, false),\n    StructField(\"compare_value\", StringType, false),\n    StructField(\"conjunction_cd\", StringType, false),\n    StructField(\"rule_expression_id\", StringType, false),\n    StructField(\"eff_dt\", StringType, false),\n    StructField(\"term_dt\", StringType, false),\n    StructField(\"newline\", StringType, false),\n    StructField(\"product\", IntegerType, false)\n  ))\n\n)\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"udl_rule_id\")\n  .agg(\n    collect_list(\n      struct(origColumns: _*)\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "t1XwTT9TsCSTRL3FheE9S$$-MxF-YiMImsiO8Db-9DYW" : {
+      "id" : "t1XwTT9TsCSTRL3FheE9S$$-MxF-YiMImsiO8Db-9DYW",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "RLP_Aggregate_Products_at_UDL_level",
+        "slug" : "RLP_Aggregate_Products_at_UDL_level",
+        "x" : 1220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "i-3MMbGyIB8-knXv1A9PO$$cZ8gRxG8WwgZchb1-KDLS",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "NtHWFlilxboYCOXAnFVM0$$v3ELwlLVzhO6y3DXb5THC",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "integer",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val process_udf = udf(\n  (inputRows: Seq[Row]) => {\n\n    var include_products = 0\n    var exclude_products = 0\n    var new_products = 0\n    var udl_id = \"\"\n    var udl_nm = \"\"\n    var udl_desc = \"\"\n    var products = 0\n    var eff_dt = \"\"\n    var term_dt = \"\"\n    var contents = Array[Int]()\n    var newline = \"\"\n   \n    inputRows.zipWithIndex.foreach {\n      case (in, idx) => {\n        if (in.getAs[String](\"inclusion_cd\") == \"E\")\n          exclude_products = exclude_products | in.getAs[Int](\"products\")\n        else if (in.getAs[String](\"inclusion_cd\") == \"I\") {\n          new_products =  in.getAs[Int](\"products\") & ~(include_products | exclude_products)\n          include_products = include_products | new_products\n          contents = Array.concat(contents, Array(new_products))\n        }\n        udl_id = in.getAs[String](\"udl_id\")\n        udl_nm = in.getAs[String](\"udl_nm\")\n        udl_desc = in.getAs[String](\"udl_desc\")\n        products = in.getAs[String](\"products\")\n        eff_dt = in.getAs[String](\"eff_dt\")\n        term_dt = in.getAs[String](\"term_dt\")\n        newline = in.getAs[String](\"newline\")\n      }\n    }\n    Row(\n      udl_id,\n      udl_nm,\n      udl_desc,\n      product,\n      eff_dt,\n      term_dt,\n      contents,\n      newline,\n    )\n  },\n  StructType(List(\n    StructField(\"udl_id\", StringType, false),\n    StructField(\"udl_nm\", StringType, false),\n    StructField(\"udl_desc\", StringType, false),\n    StructField(\"product\", IntegerType, false),\n    StructField(\"eff_dt\", StringType, false),\n    StructField(\"term_dt\", StringType, false),\n    StructField(\"contents\", ArrayType(IntegerType), false),\n    StructField(\"newline\", StringType, false),\n  ))\n\n)\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"udl_id\")\n  .agg(\n    collect_list(\n      struct(origColumns: _*)\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "RLP_Aggregate_Products_at_rule_level_output_select_filter" : {
+      "id" : "RLP_Aggregate_Products_at_rule_level_output_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "RLP_Aggregate_Products_at_rule_level_output_select_filter",
+        "slug" : "RLP_Aggregate_Products_at_rule_level_output_select_filter",
+        "x" : 1020,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RLP_Aggregate_Products_at_rule_level_output_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "RLP_Aggregate_Products_at_rule_level_output_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "(to_date(col(\"eff_dt\"),\"yyyyMMdd\") <= to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\")).and( to_date(col(\"term_dt\"), \"yyyyMMdd\") >= to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\"))"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Get_Products_Reformat" : {
+      "id" : "Get_Products_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Get_Products_Reformat",
+        "slug" : "Get_Products_Reformat",
+        "x" : 420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Get_Products_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Get_Products_Reformat__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "columnsSelector" : [ "Get_Products_Reformat__in##udl_id", "Get_Products_Reformat__in##udl_rule_id", "Get_Products_Reformat__in##udl_nm", "Get_Products_Reformat__in##udl_desc", "Get_Products_Reformat__in##rule_priority", "Get_Products_Reformat__in##inclusion_cd", "Get_Products_Reformat__in##qualifier_cd", "Get_Products_Reformat__in##operator", "Get_Products_Reformat__in##compare_value", "Get_Products_Reformat__in##conjunction_cd", "Get_Products_Reformat__in##rule_expression_id", "Get_Products_Reformat__in##eff_dt", "Get_Products_Reformat__in##term_dt", "Get_Products_Reformat__in##newline" ],
+        "expressions" : [ {
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_rule_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_rule_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_nm\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rule_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_priority\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "inclusion_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"inclusion_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "qualifier_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"qualifier_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "operator",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"operator\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "compare_value",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"compare_value\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "conjunction_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"conjunction_cd\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rule_expression_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_expression_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(lookup(\"LKP_Rule_Products\", col(\"qualifier_cd\"), col(\"operator\"), col(\"compare_value\")).getField(\"products\"),\n           lit(0)\n  )"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

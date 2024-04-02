@@ -1,0 +1,11 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: file_load_cntl_id
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
