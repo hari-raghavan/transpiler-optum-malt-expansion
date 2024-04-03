@@ -23,10 +23,10 @@ record
 decimal("\\\\x01", 0, maximum_length=10) udl_id ;
 string("\\\\x01", 20) udl_nm ;
 string("\\\\x01", 60) udl_desc ;
-integer(4) products ;
+bit_vector_t products ;
 date("YYYYMMDD")('\\\\x01') eff_dt ;
 date("YYYYMMDD")('\\\\x01') term_dt ;
-integer[IntegerType] contents ;
+bit_vector_t[IntegerType] contents ;
 string(1) newline = "\n" ;
 end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
       var writer = in.write.format("io.prophecy.libs.FixedFileFormat")

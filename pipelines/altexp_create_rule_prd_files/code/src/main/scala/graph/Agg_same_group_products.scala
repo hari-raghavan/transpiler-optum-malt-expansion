@@ -17,7 +17,7 @@ object Agg_same_group_products {
     in.groupBy(col("compare_value"))
       .agg(max(col("qualifier_cd")).as("qualifier_cd"),
            max(col("operator")).as("operator"),
-           expr("bit_or(cast(products as int))").as("products")
+           bv_vector_or(collect_list(col("products"))).as("products")
       )
 
 }

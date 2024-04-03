@@ -35,7 +35,7 @@ object Get_Products_Reformat {
                       col("operator"),
                       col("compare_value")
                ).getField("products"),
-               lit(0)
+               lit(0).cast(BinaryType)
       ).as("products")
     )
 

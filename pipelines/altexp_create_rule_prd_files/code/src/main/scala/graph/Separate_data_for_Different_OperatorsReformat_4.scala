@@ -17,7 +17,7 @@ object Separate_data_for_Different_OperatorsReformat_4 {
     in.select(col("qualifier_cd"),
               col("operator"),
               lit("90").as("compare_value"),
-              col("products").cast(IntegerType).as("products")
+              col("products")
     )
 
 }

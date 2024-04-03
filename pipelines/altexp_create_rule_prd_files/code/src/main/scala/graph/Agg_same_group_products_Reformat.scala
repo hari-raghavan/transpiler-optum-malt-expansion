@@ -17,7 +17,7 @@ object Agg_same_group_products_Reformat {
     in.select(col("qualifier_cd"),
               col("operator"),
               col("compare_value"),
-              col("products").cast(IntegerType).as("products")
+              col("products")
     )
 
 }

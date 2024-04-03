@@ -103,8 +103,8 @@ object Apply_alias_rules {
                                          struct(lit(0).as("alias_id"), lit("").as("alias_name"), array().as("alias_info"))
                                 ).getField("alias_info"),
                                 alias_rule =>
-                                  when((to_date(lit(Config.BUSINESS_DATE)) >= to_date(alias_rule.getField("eff_dt")))
-                                         .and(to_date(lit(Config.BUSINESS_DATE)) <= to_date(alias_rule.getField("term_dt"))),
+                                  when((to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd") >= to_date(alias_rule.getField("eff_dt"), "yyyyMMdd"))
+                                         .and(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd") <= to_date(alias_rule.getField("term_dt"), "yyyyMMdd")),
                                        alias_rule
                                   )
                               ),

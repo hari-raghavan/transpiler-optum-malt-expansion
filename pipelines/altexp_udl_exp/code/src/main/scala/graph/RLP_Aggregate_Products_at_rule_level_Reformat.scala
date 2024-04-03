@@ -29,7 +29,8 @@ object RLP_Aggregate_Products_at_rule_level_Reformat {
       col("eff_dt"),
       col("term_dt"),
       coalesce(col("newline"), lit("""
-""")).as("newline")
+""")).as("newline"),
+      col("products")
     )
 
 }

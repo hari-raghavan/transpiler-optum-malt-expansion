@@ -18,7 +18,7 @@ object RLP_Aggregate_Products_at_UDL_level_Reformat {
       col("udl_id").cast(DecimalType(10, 0)).as("udl_id"),
       col("udl_nm"),
       col("udl_desc"),
-      col("products").cast(IntegerType).as("products"),
+      col("products"),
       col("eff_dt"),
       col("term_dt"),
       col("contents"),

@@ -18,31 +18,31 @@ object RLP_Aggregate_Products_at_UDL_level {
     val process_udf = udf(
       (inputRows: Seq[Row]) => {
     
-        var include_products = 0
-        var exclude_products = 0
-        var new_products = 0
+        var include_products = _bv_all_zeros()
+        var exclude_products = _bv_all_zeros()
+        var new_products = _bv_all_zeros()
         var udl_id = ""
         var udl_nm = ""
         var udl_desc = ""
-        var products = 0
+        var products = _bv_all_zeros()
         var eff_dt = ""
         var term_dt = ""
-        var contents = Array[Int]()
+        var contents = Array[Array[Byte]]()
         var newline = ""
        
         inputRows.zipWithIndex.foreach {
           case (in, idx) => {
             if (in.getAs[String]("inclusion_cd") == "E")
-              exclude_products = exclude_products | in.getAs[Int]("products")
+              exclude_products = _bv_or(exclude_products, in.getAs[Array[Byte]]("products"))
             else if (in.getAs[String]("inclusion_cd") == "I") {
-              new_products =  in.getAs[Int]("products") & ~(include_products | exclude_products)
-              include_products = include_products | new_products
+              new_products =  _bv_difference(in.getAs[Array[Byte]]("products"), include_products, exclude_products)
+              include_products = _bv_or(include_products, new_products)
               contents = Array.concat(contents, Array(new_products))
             }
             udl_id = in.getAs[String]("udl_id")
             udl_nm = in.getAs[String]("udl_nm")
             udl_desc = in.getAs[String]("udl_desc")
-            products = in.getAs[String]("products")
+            products = in.getAs[Array[Byte]]("products")
             eff_dt = in.getAs[String]("eff_dt")
             term_dt = in.getAs[String]("term_dt")
             newline = in.getAs[String]("newline")
@@ -52,7 +52,7 @@ object RLP_Aggregate_Products_at_UDL_level {
           udl_id,
           udl_nm,
           udl_desc,
-          product,
+          products,
           eff_dt,
           term_dt,
           contents,
@@ -66,7 +66,7 @@ object RLP_Aggregate_Products_at_UDL_level {
         StructField("product", IntegerType, false),
         StructField("eff_dt", StringType, false),
         StructField("term_dt", StringType, false),
-        StructField("contents", ArrayType(IntegerType), false),
+        StructField("contents", ArrayType(BinaryType), false),
         StructField("newline", StringType, false),
       ))
     

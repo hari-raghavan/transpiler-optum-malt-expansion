@@ -20,7 +20,6 @@ object Create_All_Dataset_Rule {
         max(lit(null)).cast(StringType).as("account"),
         max(lit(null)).cast(StringType).as("group"),
         bv_from_index_vector(collect_list(col("dl_bit").cast(IntegerType)))
-          .cast(IntegerType)
           .as("all_products")
       )
 

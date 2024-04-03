@@ -20,13 +20,13 @@ object Expand_TSD_Reformat {
           import _root_.io.prophecy.abinitio.ScalaFunctions._
           import _root_.io.prophecy.libs.AbinitioDMLs._
           val outputRows = scala.collection.mutable.ArrayBuffer[Row]()
-          val prod_t = 0
-          val prod_ref = 0
+          val prod_t = _bv_all_zeros()
+          val prod_ref = _bv_all_zeros()
     
           input.zipWithIndex.foreach {
             case (in, idx) =>
-                prod_t = in.getAs[Int]("prod_t") & ~(prod_ref)
-                prod_ref = prod_ref | prod_t
+                prod_t = _bv_difference(in.getAs[Array[Byte]]("prod_t"), prod_ref)
+                prod_ref = _bv_or(prod_ref, prod_t)
                 outputRows.append(
                   Row(
                     in.getAs[BigDecimal]("prod_t"),
@@ -41,7 +41,7 @@ object Expand_TSD_Reformat {
         ArrayType(StructType(List(
           StructField("tsd_id", DecimalType(10,0), false),
           StructField("tsd_cd", StringType, false),
-          StructField("products", IntegeryType, false),
+          StructField("products", BinaryType, false),
           StructField("newline", StringType, false),
         )
         ))
@@ -50,9 +50,9 @@ object Expand_TSD_Reformat {
     def prod_t() = coalesce(
         when(
           (col("formulary_tier") =!= lit("*")).and(col("formulary_status") =!= lit("*")),
-          lookup("Form_Rule_Products", lit("TIER"), col("formulary_tier"))
+          bv_and(lookup("Form_Rule_Products", lit("TIER"), col("formulary_tier"))
             .getField("products")
-            .bitwiseAND(lookup("Form_Rule_Products", lit("STATUS"), col("formulary_status")).getField("products"))
+            , lookup("Form_Rule_Products", lit("STATUS"), col("formulary_status")).getField("products"))
         ).when(
             (col("formulary_tier") =!= lit("*")).and(col("formulary_status") === lit("*")),
             lookup("Form_Rule_Products", lit("TIER"), col("formulary_tier")).getField("products")
@@ -62,9 +62,9 @@ object Expand_TSD_Reformat {
             lookup("Form_Rule_Products", lit("STATUS"), col("formulary_status")).getField("products")
           )
           .otherwise(
-            lookup("Form_Rule_Products", lit("PA"), lit("Y"))
+            bv_or(lookup("Form_Rule_Products", lit("PA"), lit("Y"))
               .getField("products")
-              .bitwiseOR(lookup("Form_Rule_Products", lit("PA"), lit("N")).getField("products"))
+              , lookup("Form_Rule_Products", lit("PA"), lit("N")).getField("products"))
           ),
         lit(0)
     )

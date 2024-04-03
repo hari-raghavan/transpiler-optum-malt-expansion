@@ -18,8 +18,8 @@ object RLP_Aggregate_Products_at_rule_level {
     val process_udf = udf(
       (inputRows: Seq[Row]) => {
         var no_ands = 1;
-        var products = 0;
-        var or_products = 0;
+        var products = _bv_all_zeros()
+        var or_products = _bv_all_zeros()
         var udl_id = ""
         var udl_rule_id = ""
         var udl_nm = ""
@@ -37,15 +37,15 @@ object RLP_Aggregate_Products_at_rule_level {
        
         inputRows.zipWithIndex.foreach {
           case (in, idx) => {
-            or_products = or_products | in.getAs[Int]("products")
+            or_products = _bv_or(or_products, in.getAs[Array[Byte]]("products"))
             if (in.getAs[String]("conjunction_cd") != "0") {
                 if (no_ands){
                    products = or_products
-                   or_products = 0
+                   or_products = _bv_all_zeros()
                    no_ands = 0
                 } else {
-                  products = products & or_products
-                  or_products = 0
+                  products = _bv_and(products, or_products)
+                  or_products = _bv_all_zeros()
                 }
             }
           }
@@ -97,7 +97,7 @@ object RLP_Aggregate_Products_at_rule_level {
         StructField("eff_dt", StringType, false),
         StructField("term_dt", StringType, false),
         StructField("newline", StringType, false),
-        StructField("product", IntegerType, false)
+        StructField("product", BinaryType, false)
       ))
     
     )

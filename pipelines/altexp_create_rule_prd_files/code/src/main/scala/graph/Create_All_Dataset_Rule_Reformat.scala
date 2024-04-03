@@ -14,10 +14,6 @@ import java.time._
 object Create_All_Dataset_Rule_Reformat {
 
   def apply(context: Context, in: DataFrame): DataFrame =
-    in.select(col("carrier"),
-              col("account"),
-              col("group"),
-              col("all_products").cast(IntegerType).as("all_products")
-    )
+    in.select(col("carrier"), col("account"), col("group"), col("all_products"))
 
 }

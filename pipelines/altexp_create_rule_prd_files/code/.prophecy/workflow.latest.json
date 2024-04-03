@@ -358,7 +358,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -378,7 +378,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##qualifier_cd", "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##operator", "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##compare_value", "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -404,7 +404,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -462,7 +462,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -530,7 +530,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -550,7 +550,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_0__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_0__in##operator", "Separate_data_for_Different_OperatorsReformat_0__in##compare_value", "Separate_data_for_Different_OperatorsReformat_0__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -576,7 +576,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -634,7 +634,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -654,7 +654,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_6__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_6__in##operator", "Separate_data_for_Different_OperatorsReformat_6__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -680,7 +680,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -738,7 +738,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -758,7 +758,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Agg_same_group_products_Reformat__in##qualifier_cd", "Agg_same_group_products_Reformat__in##operator", "Agg_same_group_products_Reformat__in##compare_value", "Agg_same_group_products_Reformat__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -784,7 +784,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -1179,7 +1179,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1223,7 +1223,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1267,7 +1267,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1311,7 +1311,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1355,7 +1355,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1431,7 +1431,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1451,7 +1451,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_1__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_1__in##operator", "Separate_data_for_Different_OperatorsReformat_1__in##compare_value", "Separate_data_for_Different_OperatorsReformat_1__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -1477,7 +1477,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -1535,7 +1535,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1555,7 +1555,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_5__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_5__in##operator", "Separate_data_for_Different_OperatorsReformat_5__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -1581,7 +1581,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -1639,7 +1639,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1659,7 +1659,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_4__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_4__in##operator", "Separate_data_for_Different_OperatorsReformat_4__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -1685,7 +1685,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -1905,7 +1905,7 @@
               }
             }, {
               "name" : "all_products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1918,7 +1918,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "allIns" : false,
@@ -1948,7 +1948,7 @@
           "target" : "all_products",
           "expression" : {
             "format" : "scala",
-            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType))).cast(IntegerType)"
+            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType)))"
           },
           "description" : ""
         } ],
@@ -2054,7 +2054,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2067,7 +2067,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "allIns" : false,
@@ -2083,7 +2083,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType))).cast(IntegerType)"
+            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType)))"
           },
           "description" : ""
         } ],
@@ -2160,7 +2160,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2180,7 +2180,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_2__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_2__in##operator", "Separate_data_for_Different_OperatorsReformat_2__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -2206,7 +2206,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -2264,7 +2264,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2406,7 +2406,7 @@
               }
             }, {
               "name" : "all_products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2450,7 +2450,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2463,11 +2463,52 @@
         } ],
         "outputs" : [ {
           "id" : "Create_Rule_Dataset_for_NE_Operator__out",
-          "slug" : "out"
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
         } ],
         "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
       },
       "properties" : {
         "conditions" : [ {
@@ -2479,7 +2520,6 @@
           "joinType" : "inner"
         } ],
         "expressions" : [ {
-          "_row_id" : null,
           "target" : "qualifier_cd",
           "expression" : {
             "format" : "scala",
@@ -2487,7 +2527,6 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "operator",
           "expression" : {
             "format" : "scala",
@@ -2495,7 +2534,6 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "compare_value",
           "expression" : {
             "format" : "scala",
@@ -2503,28 +2541,26 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"left.all_products\").bitwiseAND(bitwise_not(col(\"right.products\")))"
+            "expression" : "bv_difference(col(\"left.all_products\"), col(\"right.products\"))"
           },
           "description" : ""
         } ],
         "hints" : [ {
-          "id" : "in0",
-          "alias" : "in0",
+          "id" : "Create_Rule_Dataset_for_NE_Operator__left",
+          "alias" : "left",
           "hintType" : "none",
           "propagateColumns" : false
         }, {
-          "id" : "in1",
-          "alias" : "in1",
+          "id" : "Create_Rule_Dataset_for_NE_Operator__right",
+          "alias" : "right",
           "hintType" : "none",
           "propagateColumns" : false
         } ],
-        "activeTab" : "conditions",
-        "columnsSelector" : [ ],
-        "whereClause" : null,
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "Create_Rule_Dataset_for_NE_Operator__right##qualifier_cd", "Create_Rule_Dataset_for_NE_Operator__right##compare_value", "Create_Rule_Dataset_for_NE_Operator__left##all_products", "Create_Rule_Dataset_for_NE_Operator__right##products" ],
         "headAlias" : "left"
       },
       "componentInfo" : {
@@ -2580,7 +2616,7 @@
               }
             }, {
               "name" : "all_products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2600,7 +2636,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Create_All_Dataset_Rule_Reformat__in##carrier", "Create_All_Dataset_Rule_Reformat__in##account", "Create_All_Dataset_Rule_Reformat__in##group", "Create_All_Dataset_Rule_Reformat__in##all_products" ],
         "expressions" : [ {
           "target" : "carrier",
           "expression" : {
@@ -2626,7 +2662,7 @@
           "target" : "all_products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"all_products\").cast(IntegerType)"
+            "expression" : "col(\"all_products\")"
           },
           "description" : ""
         } ]
@@ -2919,7 +2955,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -2932,17 +2968,57 @@
         } ],
         "outputs" : [ {
           "id" : "Agg_same_group_products__out",
-          "slug" : "out"
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
         } ],
         "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
       },
       "properties" : {
         "allIns" : false,
         "doPivot" : false,
         "aggregate" : [ {
-          "_row_id" : null,
           "target" : "qualifier_cd",
           "expression" : {
             "format" : "scala",
@@ -2950,7 +3026,6 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "operator",
           "expression" : {
             "format" : "scala",
@@ -2958,21 +3033,18 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "expr(\"\"\"bit_or(cast(products as int))\"\"\")"
+            "expression" : "bv_vector_or(collect_list(col(\"products\")))"
           },
           "description" : ""
         } ],
         "allowSelection" : true,
-        "pivotColumn" : null,
         "pivotValues" : [ ],
         "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Agg_same_group_products__in##compare_value", "Agg_same_group_products__in##qualifier_cd", "Agg_same_group_products__in##operator", "Agg_same_group_products__in##products" ],
         "groupBy" : [ {
-          "_row_id" : null,
           "target" : "compare_value",
           "expression" : {
             "format" : "scala",
@@ -3614,7 +3686,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3634,7 +3706,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Separate_data_for_Different_OperatorsReformat_3__in##qualifier_cd", "Separate_data_for_Different_OperatorsReformat_3__in##operator", "Separate_data_for_Different_OperatorsReformat_3__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -3660,7 +3732,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -3718,7 +3790,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3762,7 +3834,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3806,7 +3878,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",

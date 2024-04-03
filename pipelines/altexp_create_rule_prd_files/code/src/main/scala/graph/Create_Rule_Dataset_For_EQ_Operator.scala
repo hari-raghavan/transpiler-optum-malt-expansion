@@ -17,7 +17,6 @@ object Create_Rule_Dataset_For_EQ_Operator {
     in.groupBy(col("qualifier_cd"), col("compare_value"))
       .agg(max(lit("eq")).as("operator"),
            bv_from_index_vector(collect_list(col("dl_bit").cast(IntegerType)))
-             .cast(IntegerType)
              .as("products")
       )
 

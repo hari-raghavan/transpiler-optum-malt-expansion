@@ -172,7 +172,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -192,7 +192,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##qualifier_cd", "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##operator", "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##compare_value", "Create_Rule_Dataset_For_EQ_Operator_Reformat__in##products" ],
         "expressions" : [ {
           "target" : "qualifier_cd",
           "expression" : {
@@ -218,7 +218,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         } ]
@@ -685,7 +685,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -698,7 +698,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "allIns" : false,
@@ -714,13 +714,13 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType))).cast(IntegerType)"
+            "expression" : "bv_from_index_vector(collect_list(col(\"dl_bit\").cast(IntegerType)))"
           },
           "description" : ""
         } ],
         "allowSelection" : true,
         "pivotValues" : [ ],
-        "activeTab" : "groupBy",
+        "activeTab" : "aggregate",
         "columnsSelector" : [ "Create_Rule_Dataset_For_EQ_Operator__in##qualifier_cd", "Create_Rule_Dataset_For_EQ_Operator__in##compare_value", "Create_Rule_Dataset_For_EQ_Operator__in##dl_bit" ],
         "groupBy" : [ {
           "target" : "qualifier_cd",
@@ -791,7 +791,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",

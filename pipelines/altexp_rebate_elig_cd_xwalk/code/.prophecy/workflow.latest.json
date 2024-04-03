@@ -248,7 +248,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -277,7 +277,7 @@
               "name" : "contents",
               "type" : {
                 "type" : "array",
-                "elementType" : "integer",
+                "elementType" : "binary",
                 "containsNull" : true
               },
               "nullable" : true,
@@ -686,7 +686,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "allIns" : false,
@@ -695,14 +695,14 @@
           "target" : "dl_bit",
           "expression" : {
             "format" : "scala",
-            "expression" : "bv_indices(\n    expr(\n      \"bit_or(coalesce(Expanded_UDL(udl_name).products, 0))\"\n    )\n  )"
+            "expression" : "bv_indices(\n    bv_vector_or(collect_list(coalesce(lookup(\"Expanded_UDL\", col(\"udl_name\")).getField(\"products\"), bv_all_zeros())))\n  )"
           },
           "description" : ""
         } ],
         "allowSelection" : true,
         "pivotValues" : [ ],
         "activeTab" : "aggregate",
-        "columnsSelector" : [ "Rebate_Elig_Cd_Crosswalk__in##rebate_elig_cd" ],
+        "columnsSelector" : [ "Rebate_Elig_Cd_Crosswalk__in##rebate_elig_cd", "Rebate_Elig_Cd_Crosswalk__in##udl_name" ],
         "groupBy" : [ {
           "target" : "rebate_elig_cd",
           "expression" : {

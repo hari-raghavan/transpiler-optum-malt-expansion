@@ -14,11 +14,10 @@ import java.time._
 object Aggregate_products_for_a_TSD_Code_Reformat {
 
   def apply(context: Context, in: DataFrame): DataFrame =
-    in.select(
-      col("tsd_id").cast(DecimalType(10, 0)).as("tsd_id"),
-      col("tsd_cd"),
-      col("products").cast(IntegerType).as("products"),
-      coalesce(col("newline"), lit("""
+    in.select(col("tsd_id").cast(DecimalType(10, 0)).as("tsd_id"),
+              col("tsd_cd"),
+              col("products"),
+              coalesce(col("newline"), lit("""
 """)).as("newline")
     )
 

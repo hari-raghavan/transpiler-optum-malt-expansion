@@ -17,7 +17,7 @@ object Aggregate_products_for_a_TSD_Code {
     in.groupBy(col("tsd_cd"))
       .agg(
         max(col("tsd_id")).cast(DecimalType(10, 0)).as("tsd_id"),
-        expr("bit_or(cast(products as int))").as("products"),
+        bv_vector_or(collect_list(col("products"))).as("products"),
         max(coalesce(col("newline"), lit("""
 """))).as("newline")
       )

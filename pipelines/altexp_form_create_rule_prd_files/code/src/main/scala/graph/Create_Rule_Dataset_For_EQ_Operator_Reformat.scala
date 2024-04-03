@@ -17,7 +17,7 @@ object Create_Rule_Dataset_For_EQ_Operator_Reformat {
     in.select(col("qualifier_cd"),
               col("operator"),
               col("compare_value"),
-              col("products").cast(IntegerType).as("products")
+              col("products")
     )
 
 }

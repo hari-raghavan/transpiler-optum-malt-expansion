@@ -16,8 +16,16 @@ object Rebate_Elig_Cd_Crosswalk {
   def apply(context: Context, in: DataFrame): DataFrame =
     in.groupBy(col("rebate_elig_cd"))
       .agg(
-        bv_indices(expr("bit_or(coalesce(Expanded_UDL(udl_name).products, 0))"))
-          .as("dl_bit")
+        bv_indices(
+          bv_vector_or(
+            collect_list(
+              coalesce(
+                lookup("Expanded_UDL", col("udl_name")).getField("products"),
+                bv_all_zeros()
+              )
+            )
+          )
+        ).as("dl_bit")
       )
 
 }

@@ -223,7 +223,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -294,7 +294,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -323,7 +323,7 @@
               "name" : "contents",
               "type" : {
                 "type" : "array",
-                "elementType" : "integer",
+                "elementType" : "binary",
                 "containsNull" : true
               },
               "nullable" : true,
@@ -966,7 +966,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -1085,6 +1085,13 @@
             "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
           },
           "description" : ""
+        }, {
+          "target" : "products",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"products\")"
+          },
+          "description" : ""
         } ]
       },
       "componentInfo" : {
@@ -1167,7 +1174,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1196,7 +1203,7 @@
               "name" : "contents",
               "type" : {
                 "type" : "array",
-                "elementType" : "integer",
+                "elementType" : "binary",
                 "containsNull" : true
               },
               "nullable" : true,
@@ -1227,7 +1234,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "RLP_Aggregate_Products_at_UDL_level_Reformat__in##udl_id", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##udl_nm", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##udl_desc", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##products", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##eff_dt", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##term_dt", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##contents", "RLP_Aggregate_Products_at_UDL_level_Reformat__in##newline" ],
         "expressions" : [ {
           "target" : "udl_id",
           "expression" : {
@@ -1253,7 +1260,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "col(\"products\").cast(IntegerType)"
+            "expression" : "col(\"products\")"
           },
           "description" : ""
         }, {
@@ -1438,7 +1445,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -1582,7 +1589,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -1598,7 +1605,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "val process_udf = udf(\n  (inputRows: Seq[Row]) => {\n    var no_ands = 1;\n    var products = 0;\n    var or_products = 0;\n    var udl_id = \"\"\n    var udl_rule_id = \"\"\n    var udl_nm = \"\"\n    var udl_desc = \"\"\n    var rule_priority = \"\"\n    var inclusion_cd = \"\"\n    var qualifier_cd = \"\"\n    var operator = \"\"\n    var compare_value = \"\"\n    var conjunction_cd = \"\"\n    var rule_expression_id = \"\"\n    var eff_dt = \"\"\n    var term_dt = \"\"\n    var newline = \"\"\n   \n    inputRows.zipWithIndex.foreach {\n      case (in, idx) => {\n        or_products = or_products | in.getAs[Int](\"products\")\n        if (in.getAs[String](\"conjunction_cd\") != \"0\") {\n            if (no_ands){\n               products = or_products\n               or_products = 0\n               no_ands = 0\n            } else {\n              products = products & or_products\n              or_products = 0\n            }\n        }\n      }\n      udl_id = in.getAs[String](\"udl_id\")\n      udl_rule_id = in.getAs[String](\"udl_rule_id\")\n      udl_nm = in.getAs[String](\"udl_nm\")\n      udl_desc = in.getAs[String](\"udl_desc\")\n      rule_priority = in.getAs[String](\"rule_priority\")\n      inclusion_cd = in.getAs[String](\"inclusion_cd\")\n      qualifier_cd = in.getAs[String](\"qualifier_cd\")\n      operator = in.getAs[String](\"operator\")\n      compare_value = in.getAs[String](\"compare_value\")\n      conjunction_cd = in.getAs[String](\"conjunction_cd\")\n      rule_expression_id = in.getAs[String](\"rule_expression_id\")\n      eff_dt = in.getAs[String](\"eff_dt\")\n      term_dt = in.getAs[String](\"term_dt\")\n      newline = in.getAs[String](\"newline\")\n    }\n    Row(\n      udl_id,\n      udl_rule_id,\n      udl_nm,\n      udl_desc,\n      rule_priority,\n      inclusion_cd,\n      qualifier_cd,\n      operator,\n      compare_value,\n      conjunction_cd,\n      rule_expression_id,\n      eff_dt,\n      term_dt,\n      newline,\n      product\n    )\n  },\n  StructType(List(\n    StructField(\"udl_id\", StringType, false),\n    StructField(\"udl_rule_id\", StringType, false),\n    StructField(\"udl_nm\", StringType, false),\n    StructField(\"udl_desc\", StringType, false),\n    StructField(\"rule_priority\", StringType, false),\n    StructField(\"inclusion_cd\", StringType, false),\n    StructField(\"qualifier_cd\", StringType, false),\n    StructField(\"operator\", StringType, false),\n    StructField(\"compare_value\", StringType, false),\n    StructField(\"conjunction_cd\", StringType, false),\n    StructField(\"rule_expression_id\", StringType, false),\n    StructField(\"eff_dt\", StringType, false),\n    StructField(\"term_dt\", StringType, false),\n    StructField(\"newline\", StringType, false),\n    StructField(\"product\", IntegerType, false)\n  ))\n\n)\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"udl_rule_id\")\n  .agg(\n    collect_list(\n      struct(origColumns: _*)\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))",
+        "script" : "val process_udf = udf(\n  (inputRows: Seq[Row]) => {\n    var no_ands = 1;\n    var products = _bv_all_zeros()\n    var or_products = _bv_all_zeros()\n    var udl_id = \"\"\n    var udl_rule_id = \"\"\n    var udl_nm = \"\"\n    var udl_desc = \"\"\n    var rule_priority = \"\"\n    var inclusion_cd = \"\"\n    var qualifier_cd = \"\"\n    var operator = \"\"\n    var compare_value = \"\"\n    var conjunction_cd = \"\"\n    var rule_expression_id = \"\"\n    var eff_dt = \"\"\n    var term_dt = \"\"\n    var newline = \"\"\n   \n    inputRows.zipWithIndex.foreach {\n      case (in, idx) => {\n        or_products = _bv_or(or_products, in.getAs[Array[Byte]](\"products\"))\n        if (in.getAs[String](\"conjunction_cd\") != \"0\") {\n            if (no_ands){\n               products = or_products\n               or_products = _bv_all_zeros()\n               no_ands = 0\n            } else {\n              products = _bv_and(products, or_products)\n              or_products = _bv_all_zeros()\n            }\n        }\n      }\n      udl_id = in.getAs[String](\"udl_id\")\n      udl_rule_id = in.getAs[String](\"udl_rule_id\")\n      udl_nm = in.getAs[String](\"udl_nm\")\n      udl_desc = in.getAs[String](\"udl_desc\")\n      rule_priority = in.getAs[String](\"rule_priority\")\n      inclusion_cd = in.getAs[String](\"inclusion_cd\")\n      qualifier_cd = in.getAs[String](\"qualifier_cd\")\n      operator = in.getAs[String](\"operator\")\n      compare_value = in.getAs[String](\"compare_value\")\n      conjunction_cd = in.getAs[String](\"conjunction_cd\")\n      rule_expression_id = in.getAs[String](\"rule_expression_id\")\n      eff_dt = in.getAs[String](\"eff_dt\")\n      term_dt = in.getAs[String](\"term_dt\")\n      newline = in.getAs[String](\"newline\")\n    }\n    Row(\n      udl_id,\n      udl_rule_id,\n      udl_nm,\n      udl_desc,\n      rule_priority,\n      inclusion_cd,\n      qualifier_cd,\n      operator,\n      compare_value,\n      conjunction_cd,\n      rule_expression_id,\n      eff_dt,\n      term_dt,\n      newline,\n      product\n    )\n  },\n  StructType(List(\n    StructField(\"udl_id\", StringType, false),\n    StructField(\"udl_rule_id\", StringType, false),\n    StructField(\"udl_nm\", StringType, false),\n    StructField(\"udl_desc\", StringType, false),\n    StructField(\"rule_priority\", StringType, false),\n    StructField(\"inclusion_cd\", StringType, false),\n    StructField(\"qualifier_cd\", StringType, false),\n    StructField(\"operator\", StringType, false),\n    StructField(\"compare_value\", StringType, false),\n    StructField(\"conjunction_cd\", StringType, false),\n    StructField(\"rule_expression_id\", StringType, false),\n    StructField(\"eff_dt\", StringType, false),\n    StructField(\"term_dt\", StringType, false),\n    StructField(\"newline\", StringType, false),\n    StructField(\"product\", BinaryType, false)\n  ))\n\n)\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"udl_rule_id\")\n  .agg(\n    collect_list(\n      struct(origColumns: _*)\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out0\n}"
       }
@@ -1748,6 +1755,15 @@
                 "mappings" : [ ],
                 "tags" : [ ]
               }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
             } ]
           },
           "isStreaming" : false
@@ -1786,7 +1802,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1815,7 +1831,7 @@
               "name" : "contents",
               "type" : {
                 "type" : "array",
-                "elementType" : "integer",
+                "elementType" : "binary",
                 "containsNull" : true
               },
               "nullable" : true,
@@ -1842,7 +1858,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "val process_udf = udf(\n  (inputRows: Seq[Row]) => {\n\n    var include_products = 0\n    var exclude_products = 0\n    var new_products = 0\n    var udl_id = \"\"\n    var udl_nm = \"\"\n    var udl_desc = \"\"\n    var products = 0\n    var eff_dt = \"\"\n    var term_dt = \"\"\n    var contents = Array[Int]()\n    var newline = \"\"\n   \n    inputRows.zipWithIndex.foreach {\n      case (in, idx) => {\n        if (in.getAs[String](\"inclusion_cd\") == \"E\")\n          exclude_products = exclude_products | in.getAs[Int](\"products\")\n        else if (in.getAs[String](\"inclusion_cd\") == \"I\") {\n          new_products =  in.getAs[Int](\"products\") & ~(include_products | exclude_products)\n          include_products = include_products | new_products\n          contents = Array.concat(contents, Array(new_products))\n        }\n        udl_id = in.getAs[String](\"udl_id\")\n        udl_nm = in.getAs[String](\"udl_nm\")\n        udl_desc = in.getAs[String](\"udl_desc\")\n        products = in.getAs[String](\"products\")\n        eff_dt = in.getAs[String](\"eff_dt\")\n        term_dt = in.getAs[String](\"term_dt\")\n        newline = in.getAs[String](\"newline\")\n      }\n    }\n    Row(\n      udl_id,\n      udl_nm,\n      udl_desc,\n      product,\n      eff_dt,\n      term_dt,\n      contents,\n      newline,\n    )\n  },\n  StructType(List(\n    StructField(\"udl_id\", StringType, false),\n    StructField(\"udl_nm\", StringType, false),\n    StructField(\"udl_desc\", StringType, false),\n    StructField(\"product\", IntegerType, false),\n    StructField(\"eff_dt\", StringType, false),\n    StructField(\"term_dt\", StringType, false),\n    StructField(\"contents\", ArrayType(IntegerType), false),\n    StructField(\"newline\", StringType, false),\n  ))\n\n)\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"udl_id\")\n  .agg(\n    collect_list(\n      struct(origColumns: _*)\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))",
+        "script" : "val process_udf = udf(\n  (inputRows: Seq[Row]) => {\n\n    var include_products = _bv_all_zeros()\n    var exclude_products = _bv_all_zeros()\n    var new_products = _bv_all_zeros()\n    var udl_id = \"\"\n    var udl_nm = \"\"\n    var udl_desc = \"\"\n    var products = _bv_all_zeros()\n    var eff_dt = \"\"\n    var term_dt = \"\"\n    var contents = Array[Array[Byte]]()\n    var newline = \"\"\n   \n    inputRows.zipWithIndex.foreach {\n      case (in, idx) => {\n        if (in.getAs[String](\"inclusion_cd\") == \"E\")\n          exclude_products = _bv_or(exclude_products, in.getAs[Array[Byte]](\"products\"))\n        else if (in.getAs[String](\"inclusion_cd\") == \"I\") {\n          new_products =  _bv_difference(in.getAs[Array[Byte]](\"products\"), include_products, exclude_products)\n          include_products = _bv_or(include_products, new_products)\n          contents = Array.concat(contents, Array(new_products))\n        }\n        udl_id = in.getAs[String](\"udl_id\")\n        udl_nm = in.getAs[String](\"udl_nm\")\n        udl_desc = in.getAs[String](\"udl_desc\")\n        products = in.getAs[Array[Byte]](\"products\")\n        eff_dt = in.getAs[String](\"eff_dt\")\n        term_dt = in.getAs[String](\"term_dt\")\n        newline = in.getAs[String](\"newline\")\n      }\n    }\n    Row(\n      udl_id,\n      udl_nm,\n      udl_desc,\n      products,\n      eff_dt,\n      term_dt,\n      contents,\n      newline,\n    )\n  },\n  StructType(List(\n    StructField(\"udl_id\", StringType, false),\n    StructField(\"udl_nm\", StringType, false),\n    StructField(\"udl_desc\", StringType, false),\n    StructField(\"product\", IntegerType, false),\n    StructField(\"eff_dt\", StringType, false),\n    StructField(\"term_dt\", StringType, false),\n    StructField(\"contents\", ArrayType(BinaryType), false),\n    StructField(\"newline\", StringType, false),\n  ))\n\n)\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"udl_id\")\n  .agg(\n    collect_list(\n      struct(origColumns: _*)\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out0\n}"
       }
@@ -1986,6 +2002,15 @@
             }, {
               "name" : "newline",
               "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -2298,7 +2323,7 @@
               }
             }, {
               "name" : "products",
-              "type" : "integer",
+              "type" : "binary",
               "nullable" : false,
               "metadata" : {
                 "description" : "",
@@ -2311,7 +2336,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "columnsSelector" : [ "Get_Products_Reformat__in##udl_id", "Get_Products_Reformat__in##udl_rule_id", "Get_Products_Reformat__in##udl_nm", "Get_Products_Reformat__in##udl_desc", "Get_Products_Reformat__in##rule_priority", "Get_Products_Reformat__in##inclusion_cd", "Get_Products_Reformat__in##qualifier_cd", "Get_Products_Reformat__in##operator", "Get_Products_Reformat__in##compare_value", "Get_Products_Reformat__in##conjunction_cd", "Get_Products_Reformat__in##rule_expression_id", "Get_Products_Reformat__in##eff_dt", "Get_Products_Reformat__in##term_dt", "Get_Products_Reformat__in##newline" ],
@@ -2417,7 +2442,7 @@
           "target" : "products",
           "expression" : {
             "format" : "scala",
-            "expression" : "coalesce(lookup(\"LKP_Rule_Products\", col(\"qualifier_cd\"), col(\"operator\"), col(\"compare_value\")).getField(\"products\"),\n           lit(0)\n  )"
+            "expression" : "coalesce(lookup(\"LKP_Rule_Products\", col(\"qualifier_cd\"), col(\"operator\"), col(\"compare_value\")).getField(\"products\"),\n           lit(0).cast(BinaryType)\n  )"
           },
           "description" : ""
         } ]

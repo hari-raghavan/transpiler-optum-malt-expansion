@@ -29,22 +29,16 @@ object Main {
       .config("spark.sql.legacy.allowUntypedScalaUDF", "true")
       .enableHiveSupport()
       .getOrCreate()
-      .newSession()
     val context = Context(spark, config)
     spark.conf.set("prophecy.metadata.pipeline.uri",
                    "pipelines/altexp_alias_container_xwalk"
     )
     registerUDFs(spark)
-    try MetricsCollector.start(spark,
-                               "pipelines/altexp_alias_container_xwalk",
-                               context.config
-    )
-    catch {
-      case _: Throwable =>
-        MetricsCollector.start(spark, "pipelines/altexp_alias_container_xwalk")
+    MetricsCollector.instrument(spark,
+                                "pipelines/altexp_alias_container_xwalk"
+    ) {
+      apply(context)
     }
-    apply(context)
-    MetricsCollector.end(spark)
   }
 
 }

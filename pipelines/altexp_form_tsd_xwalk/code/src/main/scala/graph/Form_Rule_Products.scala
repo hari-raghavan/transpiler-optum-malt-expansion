@@ -28,7 +28,7 @@ record
 string(integer(4)) qualifier_cd ;
 string(integer(4)) operator ;
 string(integer(4)) compare_value ;
-integer(4) products ;
+bit_vector_t products ;
 end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
             .map(s => Json.stringify(Json.toJson(s)))
             .getOrElse("")

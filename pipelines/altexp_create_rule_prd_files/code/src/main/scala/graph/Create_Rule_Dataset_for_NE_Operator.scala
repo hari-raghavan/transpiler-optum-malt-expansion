@@ -21,8 +21,7 @@ object Create_Rule_Dataset_for_NE_Operator {
         col("right.qualifier_cd").as("qualifier_cd"),
         lit("ne").as("operator"),
         col("right.compare_value").as("compare_value"),
-        col("left.all_products")
-          .bitwiseAND(bitwise_not(col("right.products")))
+        bv_difference(col("left.all_products"), col("right.products"))
           .as("products")
       )
 

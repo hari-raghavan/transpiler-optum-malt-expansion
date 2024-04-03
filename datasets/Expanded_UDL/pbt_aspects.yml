@@ -24,7 +24,7 @@ schema:
       mappings: []
       tags: []
   - name: products
-    type: integer
+    type: binary
     nullable: true
     metadata:
       description: ''
@@ -47,7 +47,7 @@ schema:
   - name: contents
     type:
       type: array
-      elementType: integer
+      elementType: binary
       containsNull: true
     nullable: true
     metadata:
