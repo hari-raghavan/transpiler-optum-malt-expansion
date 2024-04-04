@@ -1,0 +1,2691 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "CAG_override_test",
+    "uri" : "pipelines/altexp_cag_ovrrd_xwalk",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "EXTRACT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "AI_SERIAL_HOME",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CAG_OVRRD_REF_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "OUTPUT_FILE_PREFIX",
+          "kind" : {
+            "type" : "string",
+            "value" : "altexp_"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ENV_NM",
+          "kind" : {
+            "type" : "string",
+            "value" : "RXCL3-CTR"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240402"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "w22CeYamG60Qx4xFBd8yt",
+    "source" : "y_GEZXOZ6kROXYGEKS9_4$$TfK5qjMblWc9-CYKzzbGe",
+    "sourcePort" : "06RI01y4rGEu90CteUglQ$$A8TYWq8gZ0Pn2elbX0YRj",
+    "target" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+    "targetPort" : "Accumulate_Products_for_each_CAG_and_Prioritize__in"
+  }, {
+    "id" : "qDUBd44eg6mbOqFXP3kRe",
+    "source" : "Reference_File_Creation",
+    "sourcePort" : "Reference_File_Creation__out",
+    "target" : "vhainqfONKEYaf1eiT770$$jOw-cnKW6rQ_bOCNLT0qq",
+    "targetPort" : "-mhkSJkpxfFBf8nQIzuyL$$e8bp9ycU5_t9Eo-MrQMrZ"
+  }, {
+    "id" : "ABo99TqY4UqdyFX45GO1b",
+    "source" : "Sorting_on_Priority",
+    "sourcePort" : "Sorting_on_Priority__out",
+    "target" : "YYw8RCbN0C1qHfrpRiqCf$$h6pMY9aDmSeNBRRGeJs4t",
+    "targetPort" : "TxUrN_fXHGxYOzK1dyesP$$tf1lhISzOoHg7aGTQ4yKJ"
+  }, {
+    "id" : "WgDBZOrpcHPkXA3WMhJA1",
+    "source" : "YYw8RCbN0C1qHfrpRiqCf$$h6pMY9aDmSeNBRRGeJs4t",
+    "sourcePort" : "ucotIucvrnIgOknbV0M5A$$4cICfiEbDqFfR-OWa29ql",
+    "target" : "Reference_File_Creation",
+    "targetPort" : "Reference_File_Creation__in"
+  }, {
+    "id" : "ROJWF_aOu003NliGTM_un",
+    "source" : "YYw8RCbN0C1qHfrpRiqCf$$h6pMY9aDmSeNBRRGeJs4t",
+    "sourcePort" : "ucotIucvrnIgOknbV0M5A$$4cICfiEbDqFfR-OWa29ql",
+    "target" : "SO_NFQj5VCV7rxkdyCq1I$$Ajv6zXO0D0-EFxYJXxsyJ",
+    "targetPort" : "Dv8IQVQy1Iq23QRD3T7Rm$$7OQ2MHA32zmfl-Y3YsuAn"
+  }, {
+    "id" : "jBFHelb0S1AQmK-VC_G8M$$nRqm9geYGDMzksGpCQchI",
+    "source" : "SO_NFQj5VCV7rxkdyCq1I$$Ajv6zXO0D0-EFxYJXxsyJ",
+    "sourcePort" : "in_MaNkimkG_rHwdhvbWa$$UyccSk-CqFGw5vuEj050l",
+    "target" : "Write_Data_at_CAG_level",
+    "targetPort" : "Write_Data_at_CAG_level__in"
+  }, {
+    "id" : "O6v3NXY_TBIgg7t3ctIUu$$Azx6f7Ky6y-E4wO7-9XtL",
+    "source" : "JDZ9mVDPNgiP_UDXuQlrW$$6QgCbY7bcCxoXrJb1Jwdr",
+    "sourcePort" : "LmPGc34dlnWI7Jx2PrVgg$$i05S1gIYPmHxtQNkR6pC1",
+    "target" : "Sorting_on_Priority",
+    "targetPort" : "Sorting_on_Priority__in"
+  }, {
+    "id" : "DZa1DSUd1CYzWxaYJa0OQ",
+    "source" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+    "sourcePort" : "Accumulate_Products_for_each_CAG_and_Prioritize__out",
+    "target" : "JDZ9mVDPNgiP_UDXuQlrW$$6QgCbY7bcCxoXrJb1Jwdr",
+    "targetPort" : "u_Ep6c1pIk_A4YPc4nhax$$tzRH9J7GwW5ijzYjCQVmx"
+  } ],
+  "processes" : {
+    "vhainqfONKEYaf1eiT770$$jOw-cnKW6rQ_bOCNLT0qq" : {
+      "id" : "vhainqfONKEYaf1eiT770$$jOw-cnKW6rQ_bOCNLT0qq",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Reference_File_CAG",
+        "slug" : "Reference_File_CAG",
+        "x" : 1220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "-mhkSJkpxfFBf8nQIzuyL$$e8bp9ycU5_t9Eo-MrQMrZ",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "is_future_snap",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Reference_File_CAG"
+      }
+    },
+    "y_GEZXOZ6kROXYGEKS9_4$$TfK5qjMblWc9-CYKzzbGe" : {
+      "id" : "y_GEZXOZ6kROXYGEKS9_4$$TfK5qjMblWc9-CYKzzbGe",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFIL_Extract_Data_CAG",
+        "slug" : "IFIL_Extract_Data_CAG",
+        "x" : 20,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "06RI01y4rGEu90CteUglQ$$A8TYWq8gZ0Pn2elbX0YRj",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFIL_Extract_Data_CAG"
+      }
+    },
+    "SO_NFQj5VCV7rxkdyCq1I$$Ajv6zXO0D0-EFxYJXxsyJ" : {
+      "id" : "SO_NFQj5VCV7rxkdyCq1I$$Ajv6zXO0D0-EFxYJXxsyJ",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Normalize_CAG_Data",
+        "slug" : "Normalize_CAG_Data",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Dv8IQVQy1Iq23QRD3T7Rm$$7OQ2MHA32zmfl-Y3YsuAn",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "status_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "inactive_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "msc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "drug_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rx_otc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "desi",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "roa_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "dosage_form_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_strength",
+                    "type" : "decimal(14,5)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "repack_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_short_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi8_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "in_MaNkimkG_rHwdhvbWa$$UyccSk-CqFGw5vuEj050l",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"prdcts\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      col(\"carrier\"),\n      col(\"account\"),\n      col(\"group\"),\n      col(\"cag_priority\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"ndc11\")).as(\"ndc11\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"gpi14\")).as(\"gpi14\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"status_cd\")).as(\"status_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"inactive_dt\")).as(\"inactive_dt\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"eff_dt\")).as(\"eff_dt\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"term_dt\")).as(\"term_dt\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"msc\")).as(\"msc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"drug_name\")).as(\"drug_name\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"rx_otc\")).as(\"rx_otc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"desi\")).as(\"desi\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"roa_cd\")).as(\"roa_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"dosage_form_cd\")).as(\"dosage_form_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"prod_strength\")).as(\"prod_strength\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"prod_short_desc\")).as(\"prod_short_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"roa_cd\")).as(\"roa_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"gpi14_desc\")).as(\"gpi14_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"gpi8_desc\")).as(\"gpi8_desc\"),\n      col(\"run_eff_dt\"),\n      col(\"data_path\")\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select(\n    col(\"carrier\").as(\"carrier\"),\n    col(\"account\").as(\"account\"),\n    col(\"group\").as(\"group\"),\n    col(\"run_eff_dt\").as(\"run_eff_dt\"),\n    col(\"cag_priority\").as(\"cag_priority\"),\n    col(\"ndc11\").as(\"ndc11\"),\n    col(\"gpi14\").as(\"gpi14\"),\n    col(\"status_cd\").as(\"status_cd\"),\n    col(\"inactive_dt\").as(\"inactive_dt\"),\n    col(\"eff_dt\").as(\"eff_dt\"),\n    col(\"term_dt\").as(\"term_dt\"),\n    col(\"msc\").as(\"msc\"),\n    col(\"drug_name\").as(\"drug_name\"),\n    col(\"rx_otc\").as(\"rx_otc\"),\n    col(\"desi\").as(\"desi\"),\n    col(\"roa_cd\").as(\"roa_cd\"),\n    col(\"dosage_form_cd\").as(\"dosage_form_cd\"),\n    col(\"prod_strength\").as(\"prod_strength\"),\n    col(\"prod_short_desc\").as(\"prod_short_desc\"),\n    col(\"roa_cd\").as(\"roa_cd\"),\n    col(\"gpi14_desc\").as(\"gpi14_desc\"),\n    col(\"gpi8_desc\").as(\"gpi8_desc\"),\n    col(\"run_eff_dt\").as(\"run_eff_dt\"),\n    col(\"data_path\").as(\"data_path\")\n  )\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "Accumulate_Products_for_each_CAG_and_Prioritize" : {
+      "id" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+        "slug" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+        "x" : 220,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Accumulate_Products_for_each_CAG_and_Prioritize__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "rxclaim_env_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_data_set_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_data_set_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Accumulate_Products_for_each_CAG_and_Prioritize__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "max(lit(\"\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "cag_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(max(isnull(col(\"carrier\"))),            max(lit(1)))\n    .when(max(col(\"carrier\") === lit(\"*ALL\")), max(lit(2)))\n    .when(max(((!isnull(col(\"carrier\"))).and(col(\"account\") === lit(\"*ALL\"))).and(col(\"group\") === lit(\"*ALL\"))),\n          max(lit(3))\n    )\n    .when(max(((!isnull(col(\"carrier\"))).and(!isnull(col(\"account\")))).and(col(\"group\") === lit(\"*ALL\"))), max(lit(4)))\n    .otherwise(max(lit(5)))"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"run_eff_dt\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "collect_list(\n    struct(\n      col(\"ndc11\").as(\"ndc11\"),\n      col(\"gpi14\").as(\"gpi14\"),\n      col(\"status_cd\").as(\"status_cd\"),\n      col(\"inactive_dt\").as(\"inactive_dt\"),\n      col(\"eff_dt\").as(\"eff_dt\"),\n      col(\"term_dt\").as(\"term_dt\"),\n      col(\"msc\").as(\"msc\"),\n      col(\"drug_name\").as(\"drug_name\"),\n      col(\"rx_otc\").as(\"rx_otc\"),\n      col(\"desi\").as(\"desi\"),\n      col(\"roa_cd\").as(\"roa_cd\"),\n      col(\"dosage_form_cd\").as(\"dosage_form_cd\"),\n      col(\"prod_strength\").cast(DecimalType(14, 5)).as(\"prod_strength\"),\n      col(\"repack_cd\").as(\"repack_cd\"),\n      col(\"prod_short_desc\").as(\"prod_short_desc\"),\n      col(\"gpi14_desc\").as(\"gpi14_desc\"),\n      col(\"gpi8_desc\").as(\"gpi8_desc\")\n    )\n  )"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "Accumulate_Products_for_each_CAG_and_Prioritize__in##carrier", "Accumulate_Products_for_each_CAG_and_Prioritize__in##account", "Accumulate_Products_for_each_CAG_and_Prioritize__in##group", "Accumulate_Products_for_each_CAG_and_Prioritize__in##run_eff_dt", "Accumulate_Products_for_each_CAG_and_Prioritize__in##ndc11", "Accumulate_Products_for_each_CAG_and_Prioritize__in##gpi14", "Accumulate_Products_for_each_CAG_and_Prioritize__in##status_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##inactive_dt", "Accumulate_Products_for_each_CAG_and_Prioritize__in##eff_dt", "Accumulate_Products_for_each_CAG_and_Prioritize__in##term_dt", "Accumulate_Products_for_each_CAG_and_Prioritize__in##msc", "Accumulate_Products_for_each_CAG_and_Prioritize__in##drug_name", "Accumulate_Products_for_each_CAG_and_Prioritize__in##rx_otc", "Accumulate_Products_for_each_CAG_and_Prioritize__in##desi", "Accumulate_Products_for_each_CAG_and_Prioritize__in##roa_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##dosage_form_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##prod_strength", "Accumulate_Products_for_each_CAG_and_Prioritize__in##repack_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##prod_short_desc", "Accumulate_Products_for_each_CAG_and_Prioritize__in##gpi14_desc", "Accumulate_Products_for_each_CAG_and_Prioritize__in##gpi8_desc" ],
+        "groupBy" : [ {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"carrier\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"account\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"group\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Reference_File_Creation" : {
+      "id" : "Reference_File_Creation",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Reference_File_Creation",
+        "slug" : "Reference_File_Creation",
+        "x" : 1020,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Reference_File_Creation__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "status_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "inactive_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "msc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "drug_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rx_otc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "desi",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "roa_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "dosage_form_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_strength",
+                    "type" : "decimal(14,5)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "repack_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_short_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi8_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Reference_File_Creation__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "Reference_File_Creation__in##carrier", "Reference_File_Creation__in##account", "Reference_File_Creation__in##group", "Reference_File_Creation__in##run_eff_dt", "Reference_File_Creation__in##data_path" ],
+        "expressions" : [ {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"carrier\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"account\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"group\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "is_future_snap",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(!isnull(col(\"run_eff_dt\")), lit(1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"data_path\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(rpad(lit(\"\\n\"), 1, \" \"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "JDZ9mVDPNgiP_UDXuQlrW$$6QgCbY7bcCxoXrJb1Jwdr" : {
+      "id" : "JDZ9mVDPNgiP_UDXuQlrW$$6QgCbY7bcCxoXrJb1Jwdr",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Accumulate_Products_for_each_CAG_and_Prioritize_Reformat",
+        "slug" : "Accumulate_Products_for_each_CAG_and_Prioritize_Reformat",
+        "x" : 420,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "u_Ep6c1pIk_A4YPc4nhax$$tzRH9J7GwW5ijzYjCQVmx",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "status_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "inactive_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "msc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "drug_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rx_otc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "desi",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "roa_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "dosage_form_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_strength",
+                    "type" : "decimal(14,5)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "repack_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_short_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi8_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "LmPGc34dlnWI7Jx2PrVgg$$i05S1gIYPmHxtQNkR6pC1",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"carrier\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"account\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"group\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"run_eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "cag_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"cag_priority\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"prdcts\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"data_path\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "YYw8RCbN0C1qHfrpRiqCf$$h6pMY9aDmSeNBRRGeJs4t" : {
+      "id" : "YYw8RCbN0C1qHfrpRiqCf$$h6pMY9aDmSeNBRRGeJs4t",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Create_Product_Crosswalk_For_Different_Levels",
+        "slug" : "Create_Product_Crosswalk_For_Different_Levels",
+        "x" : 820,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TxUrN_fXHGxYOzK1dyesP$$tf1lhISzOoHg7aGTQ4yKJ",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "status_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "inactive_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "msc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "drug_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rx_otc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "desi",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "roa_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "dosage_form_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_strength",
+                    "type" : "decimal(14,5)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "repack_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_short_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi8_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "ucotIucvrnIgOknbV0M5A$$4cICfiEbDqFfR-OWa29ql",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "status_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "inactive_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "msc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "drug_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rx_otc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "desi",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "roa_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "dosage_form_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_strength",
+                    "type" : "decimal(14,5)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "repack_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_short_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi8_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\ndef op_fl_nn_condition() = when(\n    ((isnull(col(\"carrier\")).and(isnull(col(\"account\")))).and(isnull(col(\"group\")))).and(isnull(col(\"run_eff_dt\"))),\n    concat(\n      lit(Config.AI_SERIAL_HOME),\n      lit(\"/deliver/.\"),\n      lit(\"/\"),\n      lit(Config.OUTPUT_FILE_PREFIX),\n      lit(\"cag.C.\"),\n      lit(Config.ENV_NM),\n      lit(\".NULL_BASE_LINE.\"),\n      lit(Config.BUSINESS_DATE),\n      lit(\".dat\")\n    )\n  ).when(\n      ((isnull(col(\"carrier\")).and(isnull(col(\"account\")))).and(isnull(col(\"group\")))).and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".NULL_BASE_LINE.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (col(\"carrier\") === lit(\"*ALL\")).and(isnull(col(\"run_eff_dt\"))),\n      concat(lit(Config.AI_SERIAL_HOME),\n             lit(\"/deliver/.\"),\n             lit(\"/\"),\n             lit(Config.OUTPUT_FILE_PREFIX),\n             lit(\"cag.C.\"),\n             lit(Config.ENV_NM),\n             lit(\".ALL_ALL_ALL.\"),\n             lit(Config.BUSINESS_DATE),\n             lit(\".dat\")\n      )\n    )\n    .when(\n      (col(\"carrier\") === lit(\"*ALL\")).and(!isnull(col(\"run_eff_dt\"))),\n      concat(lit(Config.AI_SERIAL_HOME),\n             lit(\"/deliver/.\"),\n             lit(\"/\"),\n             lit(Config.OUTPUT_FILE_PREFIX),\n             lit(\"cag.F.\"),\n             lit(Config.ENV_NM),\n             lit(\".ALL_ALL_ALL.\"),\n             lit(Config.BUSINESS_DATE),\n             lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(col(\"account\") === lit(\"*ALL\")))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_ALL_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(col(\"account\") === lit(\"*ALL\")))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_ALL_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(!isnull(col(\"account\"))))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(!isnull(col(\"account\"))))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      isnull(col(\"run_eff_dt\")),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_\"),\n        col(\"group\"),\n        lit(\".\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .otherwise(\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"cag.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_\"),\n        col(\"group\"),\n        lit(\".\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n\nval process_udf = udf({ (input: Seq[Row]) =>\n  val outputRows = scala.collection.mutable.ArrayBuffer[Row]()\n\n  var baseline_prdcts = Array[Row]();\n  var tarall_prdcts = Array[Row]();\n  var c_prdcts = Array[Row]();\n  var ca_prdcts = Array[Row]();\n  var prdcts = Array[Row]();\n\n  input.sortBy(r => (r.getAs[String](\"run_eff_dt\"), r.getAs[Int](\"cag_priority\"))).foreach { in =>\n       val cag_priority = in.getAs[Int](\"cag_priority\")\n       if (cag_priority == 1) {\n          baseline_prdcts = in.getAs[Array[Row]](\"prdcts\")\n          prdcts = baseline_prdcts\n        } else if (cag_priority == 2) {\n          starall_prdcts = Array.concat(baseline_prdcts.filter { x =>\n                                          in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](0)).isEmpty\n                                        }.distinct,\n                                        in.getAs[Array[Row]](\"prdcts\")\n          )\n          prdcts = starall_prdcts\n        } else if (cag_priority == 3) {\n          prdcts =\n            if (compareTo(starall_prdcts.length, 0) > 0)\n              Array.concat(starall_prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](0)).isEmpty).distinct,\n                           in.getAs[Array[Row]](\"prdcts\")\n              )\n            else\n              Array.concat(baseline_prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](0)).isEmpty).distinct,\n                           in.getAs[Array[Row]](\"prdcts\")\n              )\n          c_prdcts = Array.concat(c_prdcts, Array.fill(1)(Row(carrier, in.getAs[Array[Row]](\"prdcts\"))))\n        } else if (cag_priority == 4) {\n          prdcts = if (compareTo(c_prdcts.length, 0) > 0) {\n            if (\n              (try {\n                (c_prdcts\n                  .filter(xx => xx.getAs[String](0) == in.getAs[String](\"carrier\"))\n                  .toArray)(0)\n                  .getAs[Array[Row]](\"prdcts\")\n              } catch {\n                case error: Throwable => null\n              }) != null\n            )\n              (c_prdcts\n                .filter(xx => xx.getAs[String](0) == in.getAs[String](\"carrier\"))\n                .toArray)\n                .array(convertToInt(0))\n                .getAs[Array[Row]](\"prdcts\")\n            else\n              Array[Row]()\n          } else\n            Array[Row]()\n          _products = Array.concat(\n            prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](0)).isEmpty).distinct,\n            prdcts\n          )\n          prdcts = if (compareTo(starall_prdcts.length, 0) > 0) {\n            Array.concat(\n              starall_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](0) == x.getAs[String](0)).isEmpty\n              }.distinct,\n              _products\n            )\n          } else {\n            Array.concat(\n              baseline_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](0) == x.getAs[String](0)).isEmpty\n              }.distinct,\n              _products\n            )\n          }\n          ca_prdcts = Array.concat(\n            ca_prdcts,\n            Array.fill(1)(\n              Row(\n                in.getAs[String](\"carrier\"),\n                in.getAs[String](\"account\"),\n                _products\n              )\n            )\n          )\n        } else if (cag_priority == 5) {\n          prdcts = if (compareTo(ca_prdcts.length, 0) > 0) {\n            if (\n              (try {\n                (ca_prdcts\n                  .filter { xx =>\n                    (xx.getAs[String](0) == in.getAs[String](\"carrier\")) && (xx.getAs[String](1) == in.getAs[String](\"account\"))\n                  }\n                  .toArray)(0)\n                  .getAs[Array[Row]](\"prdcts\")\n              } catch {\n                case error: Throwable => null\n              }) != null\n            )\n              (ca_prdcts\n                .filter { xx =>\n                  (xx.getAs[String](0) == in.getAs[String](\"carrier\")) && (xx.getAs[String](1) == in.getAs[String](\"account\"))\n                }\n                .toArray)(0)\n                .getAs[Array[Row]](\"prdcts\")\n            else\n              Array[Row]()\n          } else\n            Array[Row]()\n          if ((prdcts.length == 0) && (compareTo(c_prdcts.length, 0) > 0)) {\n            prdcts =\n              if (\n                (try {\n                  (c_prdcts\n                    .filter(xx => xx.getAs[String](0) == in.getAs[String](\"carrier\"))\n                    .toArray)(0)\n                    .getAs[Array[Row]](\"prdcts\")\n                } catch {\n                  case error: Throwable => null\n                }) != null\n              )\n                (c_prdcts\n                  .filter(xx => xx.getAs[String](0) == in.getAs[String](\"carrier\"))\n                  .toArray)(0)\n                  .getAs[Array[Row]](\"prdcts\")\n              else\n                Array[Row]()\n          }\n          _products = Array.concat(\n            prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](0)).isEmpty).distinct,\n            prdcts\n          )\n          prdcts = if (compareTo(starall_prdcts.length, 0) > 0) {\n            Array.concat(\n              starall_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](0) == x.getAs[String](0)).isEmpty\n              }.distinct,\n              _products\n            )\n          } else {\n            Array.concat(\n              baseline_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](0) == x.getAs[String](0)).isEmpty\n              }.distinct,\n              _products\n            )\n          }\n        }\n      outputRows.append(Row(\n        in.getAs[String](\"carrier\"),\n        in.getAs[String](\"account\"),\n        in.getAs[String](\"group\"),\n        in.getAs[String](\"run_eff_dt\"),\n        in.getAs[Int](\"cag_priority\"),\n        prdcts,\n        in.getAs[String](\"data_path\")\n      ))\n  }\n  outputRows\n}, \nArrayType(\n    StructType(\n      List(\n        StructField(\"carrier\", StringType, false),\n        StructField(\"account\", StringType, false),\n        StructField(\"group\", StringType, false),\n        StructField(\"run_eff_dt\", StringType, false),\n        StructField(\"cag_priority\", IntegerType, false),\n        StructField(\n          \"prdcts\",\n          ArrayType(\n            StructType(\n              List(\n                StructField(\"ndc11\",           StringType,         false),\n                StructField(\"gpi14\",           StringType,         false),\n                StructField(\"status_cd\",       StringType,         false),\n                StructField(\"eff_dt\",          StringType,         true),\n                StructField(\"term_dt\",         StringType,         true),\n                StructField(\"inactive_dt\",     StringType,         false),\n                StructField(\"msc\",             StringType,         false),\n                StructField(\"drug_name\",       StringType,         false),\n                StructField(\"rx_otc\",          StringType,         false),\n                StructField(\"desi\",            StringType,         false),\n                StructField(\"roa_cd\",          StringType,         false),\n                StructField(\"dosage_form_cd\",  StringType,         false),\n                StructField(\"prod_strength\",   DecimalType(14, 5), false),\n                StructField(\"repack_cd\",       StringType,         false),\n                StructField(\"prod_short_desc\", StringType,         false),\n                StructField(\"gpi14_desc\",      StringType,         false),\n                StructField(\"gpi8_desc\",       StringType,         false)\n              )\n            )\n          ),\n          false\n        ),\n        StructField(\"data_path\", StringType, false)\n      )\n    )\n  )\n)\n\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"run_eff_dt\")\n  .agg(\n    collect_list(\n      struct(\n        origColumns: _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n  .withColumn(\"data_path\", op_fl_nn_condition())",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "Write_Data_at_CAG_level" : {
+      "id" : "Write_Data_at_CAG_level",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Write_Data_at_CAG_level",
+        "slug" : "Write_Data_at_CAG_level",
+        "x" : 1220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Write_Data_at_CAG_level__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  val withFileDF = in.withColumn(\"fileName\", col(\"data_path\"))\n  withFileDF.breakAndWriteDataFrameForOutputFile(List(\"carrier\", \"account\", \"group\", \"ndc11\", \"gpi14\", \"status_cd\", \"eff_dt\", \"term_dt\", \"inactive_dt\", \"msc\", \"drug_name\", \"rx_otc\", \"desi\", \"roa_cd\", \"dosage_form_cd\", \"prod_strength\", \"repack_cd\", \"prod_short_desc\", \"gpi14_desc\", \"gpi8_desc\", \"run_eff_dt\", \"data_path\"), \"fileName\", \"csv\", Some(\"\\\\x01\"))\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): Unit = {",
+        "scriptMethodFooter" : "    \n}"
+      }
+    },
+    "Sorting_on_Priority" : {
+      "id" : "Sorting_on_Priority",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "Sorting_on_Priority",
+        "slug" : "Sorting_on_Priority",
+        "x" : 620,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Sorting_on_Priority__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "status_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "inactive_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "eff_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "term_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "msc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "drug_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rx_otc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "desi",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "roa_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "dosage_form_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_strength",
+                    "type" : "decimal(14,5)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "repack_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "prod_short_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi14_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "gpi8_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Sorting_on_Priority__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "Sorting_on_Priority__in##run_eff_dt", "Sorting_on_Priority__in##cag_priority" ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"run_eff_dt\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"cag_priority\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

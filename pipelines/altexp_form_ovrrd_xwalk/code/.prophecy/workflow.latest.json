@@ -1,0 +1,2386 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
+    "id" : "CAG_override_test",
+    "uri" : "pipelines/altexp_form_ovrrd_xwalk",
+    "pipelineSettingsInfo" : {
+      "hasApplication" : false
+    },
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "EXTRACT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "AI_SERIAL_HOME",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "FIRST_OF_NEXT_YEAR",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CAG_OVRRD_REF_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : "AI_SERIAL_HOME/deliver/./altexp_form_ovrrd_ref.dat"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "OUTPUT_FILE_PREFIX",
+          "kind" : {
+            "type" : "string",
+            "value" : "altexp_ "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ENV_NM",
+          "kind" : {
+            "type" : "string",
+            "value" : "RXCL3-CTR"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240401"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e2",
+    "source" : "Normalize_CAG_Data",
+    "sourcePort" : "Normalize_CAG_Data__out",
+    "target" : "Write_Data_at_CAG_level",
+    "targetPort" : "Write_Data_at_CAG_level__in"
+  }, {
+    "id" : "e1",
+    "source" : "IFIL_Extract_Data",
+    "sourcePort" : "IFIL_Extract_Data__out",
+    "target" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+    "targetPort" : "Accumulate_Products_for_each_CAG_and_Prioritize__in"
+  }, {
+    "id" : "e7",
+    "source" : "Reference_File_Creation",
+    "sourcePort" : "Reference_File_Creation__out",
+    "target" : "Reference_File",
+    "targetPort" : "Reference_File__in"
+  }, {
+    "id" : "kQTGoy7j6XKOSmUffmc7Q",
+    "source" : "Sorting_on_Priority",
+    "sourcePort" : "Sorting_on_Priority__out",
+    "target" : "4FXgKjqQWShSF554T5o-Q$$fpZzq4KcUUDTO84E32iZ8",
+    "targetPort" : "ctMDkqKw_RTI3WgnZ341t$$V0ku_ZCaH_FCRmJlEmVNj"
+  }, {
+    "id" : "zEKAQnlicuaoN33TWiyUP",
+    "source" : "4FXgKjqQWShSF554T5o-Q$$fpZzq4KcUUDTO84E32iZ8",
+    "sourcePort" : "gbgkScIUrNeFHdaSH7gvk$$-CUBzOnjosnR4AhB3dOwf",
+    "target" : "Normalize_CAG_Data",
+    "targetPort" : "Normalize_CAG_Data__in"
+  }, {
+    "id" : "Ggn2Pgoe3mUIORl6scVVo",
+    "source" : "4FXgKjqQWShSF554T5o-Q$$fpZzq4KcUUDTO84E32iZ8",
+    "sourcePort" : "gbgkScIUrNeFHdaSH7gvk$$-CUBzOnjosnR4AhB3dOwf",
+    "target" : "Reference_File_Creation",
+    "targetPort" : "Reference_File_Creation__in"
+  }, {
+    "id" : "grEDsR8tCAh0ZdP5dxeL8$$590GbVHrocrLUNyElFvti",
+    "source" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+    "sourcePort" : "Accumulate_Products_for_each_CAG_and_Prioritize__out",
+    "target" : "er6JBf_HVRcXkbzOzfM9B$$lfd-zNtBsTdWti4aLU_JI",
+    "targetPort" : "RXDT1b4mo9z72j0hLHdrR$$auPbjDwWxFxknVlemhjF_"
+  }, {
+    "id" : "breCpsOnUBnsJryokjliQ",
+    "source" : "er6JBf_HVRcXkbzOzfM9B$$lfd-zNtBsTdWti4aLU_JI",
+    "sourcePort" : "ljZuSmhX90RBhJjnDW1K8$$PQW59jCLMtzAwuOTJjCzq",
+    "target" : "Sorting_on_Priority",
+    "targetPort" : "Sorting_on_Priority__in"
+  } ],
+  "processes" : {
+    "Normalize_CAG_Data" : {
+      "id" : "Normalize_CAG_Data",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Normalize_CAG_Data",
+        "slug" : "Normalize_CAG_Data",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Normalize_CAG_Data__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "formulary_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_reqd_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "specialty_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_type_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_type_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_group_name",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_step_number",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "last_exp_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Normalize_CAG_Data__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"prdcts\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      col(\"formulary_name\").as(\"formulary_name\"),\n      col(\"carrier\").as(\"carrier\"),\n      col(\"account\").as(\"account\"),\n      col(\"group\").as(\"group\"),\n      col(\"customer_name\").as(\"customer_name\"),\n      col(\"run_eff_dt\").as(\"run_eff_dt\"),\n      col(\"data_path\").as(\"data_path\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_cd\")).as(\"formulary_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"ndc11\")).as(\"ndc11\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_tier\")).as(\"formulary_tier\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_status\")).as(\"formulary_status\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"pa_reqd_ind\")).as(\"pa_reqd_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"specialty_ind\")).as(\"specialty_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_ind\")).as(\"step_therapy_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_tier_desc\")).as(\"formulary_tier_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_status_desc\")).as(\"formulary_status_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"pa_type_cd\")).as(\"pa_type_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_type_cd\")).as(\"step_therapy_type_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_group_name\")).as(\"step_therapy_group_name\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_step_number\")).as(\"step_therapy_step_number\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"last_exp_dt\")).as(\"last_exp_dt\")\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select((col(\"run_eff_dt\")).as(\"run_eff_dt\"),\n                                                   (col(\"customer_name\")).as(\"customer_name\"),\n                                                   (col(\"data_path\")).as(\"data_path\")\n  )\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "IFIL_Extract_Data" : {
+      "id" : "IFIL_Extract_Data",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFIL_Extract_Data",
+        "slug" : "IFIL_Extract_Data",
+        "x" : 20,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFIL_Extract_Data__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFIL_Extract_Data"
+      }
+    },
+    "Reference_File" : {
+      "id" : "Reference_File",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Reference_File",
+        "slug" : "Reference_File",
+        "x" : 1220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Reference_File__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "is_future_snap",
+              "type" : "decimal(10,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Reference_File"
+      }
+    },
+    "er6JBf_HVRcXkbzOzfM9B$$lfd-zNtBsTdWti4aLU_JI" : {
+      "id" : "er6JBf_HVRcXkbzOzfM9B$$lfd-zNtBsTdWti4aLU_JI",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Accumulate_Products_for_each_CAG_and_Prioritize_Reformat",
+        "slug" : "Accumulate_Products_for_each_CAG_and_Prioritize_Reformat",
+        "x" : 420,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RXDT1b4mo9z72j0hLHdrR$$auPbjDwWxFxknVlemhjF_",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "formulary_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_reqd_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "specialty_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_type_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_type_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_group_name",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_step_number",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "last_exp_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "ljZuSmhX90RBhJjnDW1K8$$PQW59jCLMtzAwuOTJjCzq",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "formulary_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"formulary_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"carrier\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"account\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"group\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "customer_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"customer_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"run_eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "cag_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"cag_priority\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"prdcts\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"data_path\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Accumulate_Products_for_each_CAG_and_Prioritize" : {
+      "id" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+        "slug" : "Accumulate_Products_for_each_CAG_and_Prioritize",
+        "x" : 220,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Accumulate_Products_for_each_CAG_and_Prioritize__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_data_set_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rxclaim_env_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_exp_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_data_set_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_reqd_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "specialty_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_group_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_step_number",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Accumulate_Products_for_each_CAG_and_Prioritize__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "formulary_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"formulary_name\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "customer_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"customer_name\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"run_eff_dt\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "max(lit(\"\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "cag_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(max(isnull(col(\"carrier\"))),            max(lit(1)))\n    .when(max(col(\"carrier\") === lit(\"*ALL\")), max(lit(2)))\n    .when(max(((!isnull(col(\"carrier\"))).and(col(\"account\") === lit(\"*ALL\"))).and(col(\"group\") === lit(\"*ALL\"))),\n          max(lit(3))\n    )\n    .when(max(((!isnull(col(\"carrier\"))).and(!isnull(col(\"account\")))).and(col(\"group\") === lit(\"*ALL\"))), max(lit(4)))\n    .otherwise(max(lit(5)))"
+          },
+          "description" : ""
+        }, {
+          "target" : "prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "collect_list(\n    struct(\n      col(\"formulary_cd\").as(\"formulary_cd\"),\n      col(\"ndc11\").as(\"ndc11\"),\n      col(\"formulary_tier\").as(\"formulary_tier\"),\n      col(\"formulary_status\").as(\"formulary_status\"),\n      col(\"pa_reqd_ind\").as(\"pa_reqd_ind\"),\n      col(\"specialty_ind\").as(\"specialty_ind\"),\n      col(\"step_therapy_ind\").as(\"step_therapy_ind\"),\n      col(\"formulary_tier_desc\").as(\"formulary_tier_desc\"),\n      col(\"formulary_status_desc\").as(\"formulary_status_desc\"),\n      col(\"pa_type_cd\").as(\"pa_type_cd\"),\n      coalesce(col(\"step_therapy_type_cd\"),                      lit(\"\")).as(\"step_therapy_type_cd\"),\n      coalesce(col(\"step_therapy_group_name\"),                   lit(\"\")).as(\"step_therapy_group_name\"),\n      coalesce(col(\"step_therapy_step_number\").cast(StringType), lit(\"\")).as(\"step_therapy_step_number\"),\n      col(\"last_exp_dt\").as(\"last_exp_dt\")\n    )\n  )"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "Accumulate_Products_for_each_CAG_and_Prioritize__in##carrier", "Accumulate_Products_for_each_CAG_and_Prioritize__in##account", "Accumulate_Products_for_each_CAG_and_Prioritize__in##group", "Accumulate_Products_for_each_CAG_and_Prioritize__in##formulary_name", "Accumulate_Products_for_each_CAG_and_Prioritize__in##customer_name", "Accumulate_Products_for_each_CAG_and_Prioritize__in##run_eff_dt", "Accumulate_Products_for_each_CAG_and_Prioritize__in##formulary_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##ndc11", "Accumulate_Products_for_each_CAG_and_Prioritize__in##formulary_tier", "Accumulate_Products_for_each_CAG_and_Prioritize__in##formulary_status", "Accumulate_Products_for_each_CAG_and_Prioritize__in##pa_reqd_ind", "Accumulate_Products_for_each_CAG_and_Prioritize__in##specialty_ind", "Accumulate_Products_for_each_CAG_and_Prioritize__in##step_therapy_ind", "Accumulate_Products_for_each_CAG_and_Prioritize__in##formulary_tier_desc", "Accumulate_Products_for_each_CAG_and_Prioritize__in##formulary_status_desc", "Accumulate_Products_for_each_CAG_and_Prioritize__in##pa_type_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##step_therapy_type_cd", "Accumulate_Products_for_each_CAG_and_Prioritize__in##step_therapy_group_name", "Accumulate_Products_for_each_CAG_and_Prioritize__in##step_therapy_step_number", "Accumulate_Products_for_each_CAG_and_Prioritize__in##last_exp_dt" ],
+        "groupBy" : [ {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"carrier\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"account\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"group\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "4FXgKjqQWShSF554T5o-Q$$fpZzq4KcUUDTO84E32iZ8" : {
+      "id" : "4FXgKjqQWShSF554T5o-Q$$fpZzq4KcUUDTO84E32iZ8",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Create_Product_Crosswalk_For_Different_Levels",
+        "slug" : "Create_Product_Crosswalk_For_Different_Levels",
+        "x" : 820,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ctMDkqKw_RTI3WgnZ341t$$V0ku_ZCaH_FCRmJlEmVNj",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "formulary_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_reqd_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "specialty_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_type_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_type_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_group_name",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_step_number",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "last_exp_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "gbgkScIUrNeFHdaSH7gvk$$-CUBzOnjosnR4AhB3dOwf",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "formulary_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_reqd_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "specialty_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_type_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_type_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_group_name",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_step_number",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "last_exp_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\ndef op_fl_nn_condition() = when(\n    ((isnull(col(\"carrier\")).and(isnull(col(\"account\")))).and(isnull(col(\"group\")))).and(isnull(col(\"run_eff_dt\"))),\n    concat(\n      lit(Config.AI_SERIAL_HOME),\n      lit(\"/deliver/.\"),\n      lit(\"/\"),\n      lit(Config.OUTPUT_FILE_PREFIX),\n      lit(\"form.C.\"),\n      lit(Config.ENV_NM),\n      lit(\".\"),\n      col(\"customer_name\"),\n      lit(\".\"),\n      regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n      lit(\".NULL_BASE_LINE.\"),\n      lit(Config.BUSINESS_DATE),\n      lit(\".dat\")\n    )\n  ).when(\n      ((isnull(col(\"carrier\")).and(isnull(col(\"account\")))).and(isnull(col(\"group\")))).and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".NULL_BASE_LINE.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (col(\"carrier\") === lit(\"*ALL\")).and(isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".ALL_ALL_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (col(\"carrier\") === lit(\"*ALL\")).and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".ALL_ALL_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(col(\"account\") === lit(\"*ALL\")))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_ALL_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(col(\"account\") === lit(\"*ALL\")))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_ALL_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(!isnull(col(\"account\"))))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      (((!isnull(col(\"carrier\")))\n        .and(!isnull(col(\"account\"))))\n        .and(col(\"group\") === lit(\"*ALL\")))\n        .and(!isnull(col(\"run_eff_dt\"))),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_ALL.\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .when(\n      isnull(col(\"run_eff_dt\")),\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.C.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_\"),\n        col(\"group\"),\n        lit(\".\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n    .otherwise(\n      concat(\n        lit(Config.AI_SERIAL_HOME),\n        lit(\"/deliver/.\"),\n        lit(\"/\"),\n        lit(Config.OUTPUT_FILE_PREFIX),\n        lit(\"form.F.\"),\n        lit(Config.ENV_NM),\n        lit(\".\"),\n        col(\"customer_name\"),\n        lit(\".\"),\n        regexp_replace(col(\"formulary_name\"), lit(\" +\"), lit(\"-\")),\n        lit(\".\"),\n        col(\"carrier\"),\n        lit(\"_\"),\n        col(\"account\"),\n        lit(\"_\"),\n        col(\"group\"),\n        lit(\".\"),\n        lit(Config.BUSINESS_DATE),\n        lit(\".dat\")\n      )\n    )\n\nval process_udf = udf({ (input: Seq[Row]) =>\n  val outputRows = scala.collection.mutable.ArrayBuffer[Row]()\n\n  var baseline_prdcts = Array[Row]();\n  var tarall_prdcts = Array[Row]();\n  var c_prdcts = Array[Row]();\n  var ca_prdcts = Array[Row]();\n  var prdcts = Array[Row]();\n\n  input.sortBy(r => (r.getAs[String](\"formulary_name\"), r.getAs[Int](\"customer_name\"), r.getAs[String](\"run_eff_dt\"), r.getAs[Int](\"cag_priority\") )).foreach { in =>\n       val cag_priority = in.getAs[Int](\"cag_priority\")\n       if (cag_priority == 1) {\n          baseline_prdcts = in.getAs[Array[Row]](\"prdcts\")\n          prdcts = baseline_prdcts\n        } else if (cag_priority == 2) {\n          starall_prdcts = Array.concat(baseline_prdcts.filter { x =>\n                                          in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](1)).isEmpty\n                                        }.distinct,\n                                        in.getAs[Array[Row]](\"prdcts\")\n          )\n          prdcts = starall_prdcts\n        } else if (cag_priority == 3) {\n          prdcts =\n            if (compareTo(starall_prdcts.length, 0) > 0)\n              Array.concat(starall_prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](1)).isEmpty).distinct,\n                           in.getAs[Array[Row]](\"prdcts\")\n              )\n            else\n              Array.concat(baseline_prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](1)).isEmpty).distinct,\n                           in.getAs[Array[Row]](\"prdcts\")\n              )\n          c_prdcts = Array.concat(c_prdcts, Array.fill(1)(Row(carrier, in.getAs[Array[Row]](\"prdcts\"))))\n        } else if (cag_priority == 4) {\n          prdcts = if (compareTo(c_prdcts.length, 0) > 0) {\n            if (\n              (try {\n                (c_prdcts\n                  .filter(xx => xx.getAs[String](1) == in.getAs[String](\"carrier\"))\n                  .toArray)(0)\n                  .getAs[Array[Row]](\"prdcts\")\n              } catch {\n                case error: Throwable => null\n              }) != null\n            )\n              (c_prdcts\n                .filter(xx => xx.getAs[String](1) == in.getAs[String](\"carrier\"))\n                .toArray)\n                .array(convertToInt(0))\n                .getAs[Array[Row]](\"prdcts\")\n            else\n              Array[Row]()\n          } else\n            Array[Row]()\n          _products = Array.concat(\n            prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](1)).isEmpty).distinct,\n            prdcts\n          )\n          prdcts = if (compareTo(starall_prdcts.length, 0) > 0) {\n            Array.concat(\n              starall_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](1) == x.getAs[String](1)).isEmpty\n              }.distinct,\n              _products\n            )\n          } else {\n            Array.concat(\n              baseline_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](1) == x.getAs[String](1)).isEmpty\n              }.distinct,\n              _products\n            )\n          }\n          ca_prdcts = Array.concat(\n            ca_prdcts,\n            Array.fill(1)(\n              Row(\n                in.getAs[String](\"carrier\"),\n                in.getAs[String](\"account\"),\n                _products\n              )\n            )\n          )\n        } else if (cag_priority == 5) {\n          prdcts = if (compareTo(ca_prdcts.length, 0) > 0) {\n            if (\n              (try {\n                (ca_prdcts\n                  .filter { xx =>\n                    (xx.getAs[String](1) == in.getAs[String](\"carrier\")) && (xx.getAs[String](2) == in.getAs[String](\"account\"))\n                  }\n                  .toArray)(0)\n                  .getAs[Array[Row]](\"prdcts\")\n              } catch {\n                case error: Throwable => null\n              }) != null\n            )\n              (ca_prdcts\n                .filter { xx =>\n                  (xx.getAs[String](1) == in.getAs[String](\"carrier\")) && (xx.getAs[String](2) == in.getAs[String](\"account\"))\n                }\n                .toArray)(0)\n                .getAs[Array[Row]](\"prdcts\")\n            else\n              Array[Row]()\n          } else\n            Array[Row]()\n          if ((prdcts.length == 0) && (compareTo(c_prdcts.length, 0) > 0)) {\n            prdcts =\n              if (\n                (try {\n                  (c_prdcts\n                    .filter(xx => xx.getAs[String](1) == in.getAs[String](\"carrier\"))\n                    .toArray)(0)\n                    .getAs[Array[Row]](\"prdcts\")\n                } catch {\n                  case error: Throwable => null\n                }) != null\n              )\n                (c_prdcts\n                  .filter(xx => xx.getAs[String](1) == in.getAs[String](\"carrier\"))\n                  .toArray)(0)\n                  .getAs[Array[Row]](\"prdcts\")\n              else\n                Array[Row]()\n          }\n          _products = Array.concat(\n            prdcts.filter(x => in.getAs[Array[Row]](\"prdcts\").filter(y => y.getAs[String](\"ndc11\") == x.getAs[String](1)).isEmpty).distinct,\n            prdcts\n          )\n          prdcts = if (compareTo(starall_prdcts.length, 0) > 0) {\n            Array.concat(\n              starall_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](1) == x.getAs[String](1)).isEmpty\n              }.distinct,\n              _products\n            )\n          } else {\n            Array.concat(\n              baseline_prdcts.filter {\n                x =>\n                   _products.filter(y => y.getAs[String](1) == x.getAs[String](1)).isEmpty\n              }.distinct,\n              _products\n            )\n          }\n        }\n      outputRows.append(Row(\n        in.getAs[String](\"formulary_name\"),\n        in.getAs[String](\"carrier\"),\n        in.getAs[String](\"account\"),\n        in.getAs[String](\"group\"),\n        in.getAs[String](\"customer_name\"),\n        in.getAs[String](\"run_eff_dt\"),\n        in.getAs[Int](\"cag_priority\"),\n        prdcts,\n        in.getAs[String](\"data_path\")\n      ))\n  }\n  outputRows\n}, \nArrayType(\n    StructType(\n      StructField(\"formulary_name\", StringType, false),\n      StructField(\"carrier\", StringType, false),\n      StructField(\"account\", StringType, false),\n      StructField(\"group\", StringType, false),\n      StructField(\"customer_name\", StringType, false),\n      StructField(\"run_eff_dt\", StringType, false),\n      StructField(\"cag_priority\", IntegerType, false),\n      StructField(\n        \"prdcts\",\n        ArrayType(\n          StructType(\n            StructField(\"formulary_cd\", StringType, false),\n            StructField(\"ndc11\", StringType, false),\n            StructField(\"formulary_tier\", StringType, false),\n            StructField(\"formulary_status\", StringType, false),\n            StructField(\"pa_reqd_ind\", StringType, false),\n            StructField(\"specialty_ind\", StringType, false),\n            StructField(\"step_therapy_ind\", StringType, false),\n            StructField(\"formulary_tier_desc\", StringType, false),\n            StructField(\"formulary_status_desc\", StringType, false),\n            StructField(\"pa_type_cd\", StringType, false),\n            StructField(\"step_therapy_type_cd\", StringType, false),\n            StructField(\"step_therapy_group_name\", StringType, false),\n            StructField(\"step_therapy_step_number\", StringType, false),\n            StructField(\"last_exp_dt\", StringType, false)\n          ),\n          true\n        ),\n        true\n      ),\n      StructField(\"data_path\", StringType, false)\n    )\n  )\n)\n\n\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"formulary_name\", \"customer_name\", \"run_eff_dt\")\n  .agg(\n    collect_list(\n      struct(\n        origColumns: _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n  .withColumn(\"data_path\", op_fl_nn_condition())",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "Reference_File_Creation" : {
+      "id" : "Reference_File_Creation",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Reference_File_Creation",
+        "slug" : "Reference_File_Creation",
+        "x" : 1020,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Reference_File_Creation__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "formulary_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_reqd_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "specialty_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_type_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_type_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_group_name",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_step_number",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "last_exp_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Reference_File_Creation__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "formulary_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(null).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(null).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(null).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(null).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "customer_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(null).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "is_future_snap",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(\n    concat(lit(\"if(!is_null($\\\"run_eff_dt\\\") and $\\\"run_eff_dt\\\" === \"),\n           lit(Config.FIRST_OF_NEXT_YEAR),\n           lit(\" ) 1 else if ( !is_null($\\\"run_eff_dt\\\") ) 2\")\n    ).cast(DecimalType(1, 0)),\n    lit(0)\n  )"
+          },
+          "description" : ""
+        }, {
+          "target" : "data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"data_path\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(null).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(rpad(lit(\"\\n\"), 1, \" \"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Write_Data_at_CAG_level" : {
+      "id" : "Write_Data_at_CAG_level",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Write_Data_at_CAG_level",
+        "slug" : "Write_Data_at_CAG_level",
+        "x" : 1220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Write_Data_at_CAG_level__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  val withFileDF = in.withColumn(\"fileName\", col(\"data_path\"))\n  withFileDF.breakAndWriteDataFrameForOutputFile(List(\"\"), \"fileName\", \"csv\", Some(\"\\\\x01\"))\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Sorting_on_Priority" : {
+      "id" : "Sorting_on_Priority",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "Sorting_on_Priority",
+        "slug" : "Sorting_on_Priority",
+        "x" : 620,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Sorting_on_Priority__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_priority",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "formulary_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "ndc11",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_reqd_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "specialty_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_tier_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_status_desc",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "pa_type_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_type_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_group_name",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "step_therapy_step_number",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "last_exp_dt",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Sorting_on_Priority__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "Sorting_on_Priority__in##formulary_name", "Sorting_on_Priority__in##customer_name", "Sorting_on_Priority__in##run_eff_dt", "Sorting_on_Priority__in##cag_priority" ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"formulary_name\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"customer_name\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"run_eff_dt\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"cag_priority\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}
