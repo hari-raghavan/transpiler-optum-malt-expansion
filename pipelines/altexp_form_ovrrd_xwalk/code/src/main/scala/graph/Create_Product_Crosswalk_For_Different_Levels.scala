@@ -407,7 +407,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
           StructField(
             "prdcts",
             ArrayType(
-              StructType(
+              StructType(List(
                 StructField("formulary_cd", StringType, false),
                 StructField("ndc11", StringType, false),
                 StructField("formulary_tier", StringType, false),
@@ -422,7 +422,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
                 StructField("step_therapy_group_name", StringType, false),
                 StructField("step_therapy_step_number", StringType, false),
                 StructField("last_exp_dt", StringType, false)
-              ),
+              )),
               true
             ),
             true
