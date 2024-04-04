@@ -1146,7 +1146,7 @@ object Map_Cag_and_Formulary_Override_URLs {
     )
     
     val origColumns = in0.columns.map(col)
-    val groupedDF = in0
+    val out0 = in0
       .groupBy("carrier", "account", "group", "future_flg", "as_of_dt")
       .agg(
         collect_list(
