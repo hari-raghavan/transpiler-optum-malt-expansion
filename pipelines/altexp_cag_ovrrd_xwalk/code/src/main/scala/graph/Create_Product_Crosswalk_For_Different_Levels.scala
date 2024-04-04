@@ -197,6 +197,8 @@ object Create_Product_Crosswalk_For_Different_Levels {
       var c_prdcts = Array[Row]();
       var ca_prdcts = Array[Row]();
       var prdcts = Array[Row]();
+      var starall_prdcts = Array[Row]();
+      var _products = Array[Row]();
     
       input.sortBy(r => (r.getAs[String]("run_eff_dt"), r.getAs[Int]("cag_priority"))).foreach { in =>
            val cag_priority = in.getAs[Int]("cag_priority")
@@ -220,23 +222,23 @@ object Create_Product_Crosswalk_For_Different_Levels {
                   Array.concat(baseline_prdcts.filter(x => in.getAs[Array[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
                                in.getAs[Array[Row]]("prdcts")
                   )
-              c_prdcts = Array.concat(c_prdcts, Array.fill(1)(Row(carrier, in.getAs[Array[Row]]("prdcts"))))
+              c_prdcts = Array.concat(c_prdcts, Array.fill(1)(Row(in.getAs[String]("carrier"), in.getAs[Array[Row]]("prdcts"))))
             } else if (cag_priority == 4) {
               prdcts = if (compareTo(c_prdcts.length, 0) > 0) {
                 if (
                   (try {
                     (c_prdcts
                       .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
-                      .toArray)(0)
-                      .getAs[Array[Row]]("prdcts")
+                      .toArray).head
+                      .getAs[Array[Row]](1)
                   } catch {
                     case error: Throwable => null
                   }) != null
                 )
                   (c_prdcts
                     .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
-                    .toArray)(0)
-                    .getAs[Array[Row]]("prdcts")
+                    .toArray).head
+                    .getAs[Array[Row]](1)
                 else
                   Array[Row]()
               } else
@@ -280,8 +282,8 @@ object Create_Product_Crosswalk_For_Different_Levels {
                       .filter { xx =>
                         (xx.getAs[String](0) == in.getAs[String]("carrier")) && (xx.getAs[String](1) == in.getAs[String]("account"))
                       }
-                      .toArray)(0)
-                      .getAs[Array[Row]]("prdcts")
+                      .toArray).head
+                      .getAs[Array[Row]](2)
                   } catch {
                     case error: Throwable => null
                   }) != null
@@ -290,8 +292,8 @@ object Create_Product_Crosswalk_For_Different_Levels {
                     .filter { xx =>
                       (xx.getAs[String](0) == in.getAs[String]("carrier")) && (xx.getAs[String](1) == in.getAs[String]("account"))
                     }
-                    .toArray)(0)
-                    .getAs[Array[Row]]("prdcts")
+                    .toArray).head
+                    .getAs[Array[Row]](2)
                 else
                   Array[Row]()
               } else
@@ -302,16 +304,16 @@ object Create_Product_Crosswalk_For_Different_Levels {
                     (try {
                       (c_prdcts
                         .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
-                        .toArray)(0)
-                        .getAs[Array[Row]]("prdcts")
+                        .toArray).head
+                        .getAs[Array[Row]](1)
                     } catch {
                       case error: Throwable => null
                     }) != null
                   )
                     (c_prdcts
                       .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
-                      .toArray)(0)
-                      .getAs[Array[Row]]("prdcts")
+                      .toArray).head
+                      .getAs[Array[Row]](1)
                   else
                     Array[Row]()
               }

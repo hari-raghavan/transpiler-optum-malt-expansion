@@ -15,7 +15,7 @@ object Normalize_CAG_Data {
   def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
-      val normalize_out_DF = in.normalize(
+      val normalize_out_DF = in0.normalize(
         lengthExpression = Some(size(col("prdcts"))),
         finishedExpression = None,
         finishedCondition = None,
@@ -77,7 +77,7 @@ object Normalize_CAG_Data {
         col("data_path").as("data_path")
       )
     
-      val out = simpleSelect_in_DF
+      val out0 = simpleSelect_in_DF
     out0
   }
 
