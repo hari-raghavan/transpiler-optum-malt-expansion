@@ -396,7 +396,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
       outputRows
     }, 
     ArrayType(
-        StructType(
+        StructType(List(
           StructField("formulary_name", StringType, false),
           StructField("carrier", StringType, false),
           StructField("account", StringType, false),
@@ -428,7 +428,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
             true
           ),
           StructField("data_path", StringType, false)
-        )
+        ))
       )
     )
     
