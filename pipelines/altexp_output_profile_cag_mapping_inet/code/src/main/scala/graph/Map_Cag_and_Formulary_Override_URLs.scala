@@ -15,54 +15,55 @@ object Map_Cag_and_Formulary_Override_URLs {
   def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
     def frmlry_url() = {
       when(
         (coalesce(
           lookup("Formulary_Override_Ref",
-                 col("formulary_id"),
-                 lit(null),
-                 lit(null),
-                 lit(null),
-                 lit(null),
-                 col("future_flg")
+                  col("formulary_id"),
+                  lit(null),
+                  lit(null),
+                  lit(null),
+                  lit(null),
+                  col("future_flg")
           ).getField("data_path"),
           when(lit(Config.ENV_NM) === lit("RXBK1-PRD"),
-               lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg")).getField(
-                 "data_path"
-               )
+                lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg")).getField(
+                  "data_path"
+                )
           ).otherwise(lit(null)),
           lit("FORMULARY_NOT_FOUND")
         ) =!= lit("FORMULARY_NOT_FOUND")).and(col("future_flg") === lit(2)),
         when(
           coalesce(
             lookup("Formulary_Override_Ref",
-                   col("formulary_id"),
-                   lit(null),
-                   lit(null),
-                   lit(null),
-                   lit(null),
-                   col("future_flg")
+                    col("formulary_id"),
+                    lit(null),
+                    lit(null),
+                    lit(null),
+                    lit(null),
+                    col("future_flg")
             ).getField("run_eff_dt"),
             when(lit(Config.ENV_NM) === lit("RXBK1-PRD"),
-                 lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg")).getField(
-                   "run_eff_dt"
-                 )
+                  lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg")).getField(
+                    "run_eff_dt"
+                  )
             )
           ) > col("as_of_dt"),
           lit("NOT_A_VALID_AS_OF_DT")
         ).otherwise(
           coalesce(
             lookup("Formulary_Override_Ref",
-                   col("formulary_id"),
-                   lit(null),
-                   lit(null),
-                   lit(null),
-                   lit(null),
-                   col("future_flg")
+                    col("formulary_id"),
+                    lit(null),
+                    lit(null),
+                    lit(null),
+                    lit(null),
+                    col("future_flg")
             ).getField("data_path"),
             when(lit(Config.ENV_NM) === lit("RXBK1-PRD"),
-                 lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg"))
-                   .getField("data_path")
+                  lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg"))
+                    .getField("data_path")
             ).otherwise(lit(null)),
             lit("FORMULARY_NOT_FOUND")
           )
@@ -70,16 +71,16 @@ object Map_Cag_and_Formulary_Override_URLs {
       ).otherwise(
         coalesce(
           lookup("Formulary_Override_Ref",
-                 col("formulary_id"),
-                 lit(null),
-                 lit(null),
-                 lit(null),
-                 lit(null),
-                 col("future_flg")
+                  col("formulary_id"),
+                  lit(null),
+                  lit(null),
+                  lit(null),
+                  lit(null),
+                  col("future_flg")
           ).getField("data_path"),
           when(lit(Config.ENV_NM) === lit("RXBK1-PRD"),
-               lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg"))
-                 .getField("data_path")
+                lookup("form_ref_file_lkp", col("formulary_id"), lit(null), lit(null), lit(null), lit(null), col("future_flg"))
+                  .getField("data_path")
           ).otherwise(lit(null)),
           lit("FORMULARY_NOT_FOUND")
         )
@@ -137,7 +138,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ).getField("data_path"),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -149,7 +150,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -161,7 +162,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -173,7 +174,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -388,7 +389,7 @@ object Map_Cag_and_Formulary_Override_URLs {
       filter_output_profile_record(frmlry_url(), cag_url(), col("future_flg"), col("as_of_dt"))
     }
     
-    val processUDF = udf(
+    val process_udf = udf(
       (inputRows: Seq[Row], cag_url: String) => {
         var non_qual_output_profile_ids = Array[Row]()
         var qual_output_profile_ids = Array[String]()
@@ -403,6 +404,8 @@ object Map_Cag_and_Formulary_Override_URLs {
         var as_of_dt = ""
         var cag_override_data_path = ""
         var newline = ""
+        var len = 0
+        var idx = 0
         inputRows.zipWithIndex.foreach { case (in, jdx) =>
           var error_msg = in.getAs[String]("error_message")
           var formulary_pseudonym = in.getAs[String]("formulary_pseudonym")
@@ -717,12 +720,12 @@ object Map_Cag_and_Formulary_Override_URLs {
                 xx == in.getAs[String]("output_profile_id")
               )
               qual_output_profile_ids = (1 until convertToInt((idx - 1) + 1))
-                .map(xslice => element_at(qual_output_profile_ids, xslice))
+                .map(xslice => qual_output_profile_ids(xslice))
                 .toArray
                 .filter(yslice => !_isnull(yslice))
                 .toArray
               op_dtls = (1 until convertToInt((idx - 1) + 1))
-                .map(xslice => element_at(op_dtls, xslice))
+                .map(xslice => op_dtls(xslice))
                 .toArray
                 .filter(yslice => !_isnull(yslice))
                 .toArray
@@ -1047,7 +1050,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             Row(
               (x.get(0)).toString,
               (x.get(1)).toString,
-              convertToStringList(x.get(2)),
+              x.get(2),
               x.get(3),
               x.get(4),
               x.get(5),
@@ -1064,7 +1067,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             Row(
               (x.get(0)).toString,
               (x.get(1)).toString,
-              convertToStringList(x.get(2)),
+              x.get(2),
               x.get(3),
               x.get(4),
               x.get(5),

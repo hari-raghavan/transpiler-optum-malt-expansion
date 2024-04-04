@@ -15,6 +15,7 @@ object Map_Cag_and_Formulary_Override_URLs {
   def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
     def frmlry_url() = {
       coalesce(
         lookup(
@@ -117,7 +118,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ).getField("data_path"),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -129,7 +130,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -141,7 +142,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -153,7 +154,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             ),
             when(
               month(
-                date_format(to_date(Config.BUSINESS_DATE, "yyyyMMdd"), "yyyy-MM-dd")
+                date_format(to_date(lit(Config.BUSINESS_DATE), "yyyyMMdd"), "yyyy-MM-dd")
               ) === lit(12),
               lookup(
                 "CAG_Override_Ref",
@@ -332,7 +333,7 @@ object Map_Cag_and_Formulary_Override_URLs {
       )
     }
     
-    val processUDF = udf(
+    val process_udf = udf(
       (inputRows: Seq[Row], cag_url: String) => {
         var non_qual_output_profile_ids = Array[Row]()
         var qual_output_profile_ids = Array[String]()
@@ -347,6 +348,8 @@ object Map_Cag_and_Formulary_Override_URLs {
         var as_of_dt = ""
         var cag_override_data_path = ""
         var newline = ""
+        var idx = 0
+        var len = 0
         inputRows.zipWithIndex.foreach { case (in, jdx) =>
           var error_msg = in.getAs[String]("error_message")
           var formulary_pseudonym = in.getAs[String]("formulary_pseudonym")
@@ -661,12 +664,12 @@ object Map_Cag_and_Formulary_Override_URLs {
                 xx == in.getAs[String]("output_profile_id")
               )
               qual_output_profile_ids = (1 until convertToInt((idx - 1) + 1))
-                .map(xslice => element_at(qual_output_profile_ids, xslice))
+                .map(xslice => qual_output_profile_ids(xslice))
                 .toArray
                 .filter(yslice => !_isnull(yslice))
                 .toArray
               op_dtls = (1 until convertToInt((idx - 1) + 1))
-                .map(xslice => element_at(op_dtls, xslice))
+                .map(xslice => op_dtls(xslice))
                 .toArray
                 .filter(yslice => !_isnull(yslice))
                 .toArray
@@ -991,7 +994,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             Row(
               (x.get(0)).toString,
               (x.get(1)).toString,
-              convertToStringList(x.get(2)),
+              x.get(2),
               x.get(3),
               x.get(4),
               x.get(5),
@@ -1008,7 +1011,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             Row(
               (x.get(0)).toString,
               (x.get(1)).toString,
-              convertToStringList(x.get(2)),
+              x.get(2),
               x.get(3),
               x.get(4),
               x.get(5),

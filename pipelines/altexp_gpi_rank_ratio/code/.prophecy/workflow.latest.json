@@ -3,6 +3,9 @@
     "migrationVersions" : {
       "gemBuilderVersion" : "v1"
     },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
     "id" : "altexp_gpi_rank_ratio",
     "uri" : "pipelines/altexp_gpi_rank_ratio",
     "language" : "scala",
@@ -117,7 +120,7 @@
       "enabled" : false,
       "value" : 1000
     },
-    "configurationVersion" : "v1"
+    "configurationVersion" : "v2"
   },
   "connections" : [ {
     "id" : "e2",

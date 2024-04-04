@@ -30,22 +30,14 @@ object Main {
       .config("spark.sql.legacy.allowUntypedScalaUDF", "true")
       .enableHiveSupport()
       .getOrCreate()
-      .newSession()
     val context = Context(spark, config)
     spark.conf.set("prophecy.metadata.pipeline.uri",
                    "pipelines/altexp_file_load_cntl_load"
     )
     registerUDFs(spark)
-    try MetricsCollector.start(spark,
-                               "pipelines/altexp_file_load_cntl_load",
-                               context.config
-    )
-    catch {
-      case _: Throwable =>
-        MetricsCollector.start(spark, "pipelines/altexp_file_load_cntl_load")
+    MetricsCollector.instrument(spark, "pipelines/altexp_file_load_cntl_load") {
+      apply(context)
     }
-    apply(context)
-    MetricsCollector.end(spark)
   }
 
 }

@@ -79,7 +79,7 @@ object RLP_Aggregate_Products_at_rule_level {
           eff_dt,
           term_dt,
           newline,
-          product
+          products
         )
       },
       StructType(List(

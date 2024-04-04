@@ -3,6 +3,9 @@
     "migrationVersions" : {
       "gemBuilderVersion" : "v1"
     },
+    "codeGenConfiguration" : {
+      "editableConfig" : false
+    },
     "id" : "tal_assoc_xwalk",
     "uri" : "pipelines/altexp_file_load_cntl_update",
     "language" : "scala",
@@ -108,7 +111,7 @@
       "enabled" : false,
       "value" : 1000
     },
-    "configurationVersion" : "v1"
+    "configurationVersion" : "v2"
   },
   "connections" : [ ],
   "processes" : {

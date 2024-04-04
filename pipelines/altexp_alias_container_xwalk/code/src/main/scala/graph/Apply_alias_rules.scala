@@ -15,6 +15,7 @@ object Apply_alias_rules {
   def apply(context: Context, in: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
     val temp54262_UDF = udf(
         (_gpi14: String, _label_nm: String, _alias_info_vec_idx: Seq[Row], _ndc11: String) => {
           var gpi14              = _gpi14
@@ -26,7 +27,7 @@ object Apply_alias_rules {
           while (compareTo(k, alias_info_vec_idx.size) < 0) {
             var alias = alias_info_vec_idx(convertToInt(k))
             alias
-              .getAs[Row]("alias_info")
+              .getAs[Seq[Row]]("alias_info")
               .zipWithIndex
               .map {
                 case (_rule, ruleIndex) =>

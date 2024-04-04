@@ -50,6 +50,15 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false,
           "isReferenced" : false
+        }, {
+          "name" : "FORM_RULE_PRODUCTS",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         } ]
       },
       "oldCommon" : {
