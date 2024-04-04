@@ -72,6 +72,7 @@ object Normalize_CAG_Data {
         col("roa_cd").as("roa_cd"),
         col("gpi14_desc").as("gpi14_desc"),
         col("gpi8_desc").as("gpi8_desc"),
+        lit("\n").as("newline"),
         col("run_eff_dt").as("run_eff_dt"),
         col("data_path").as("data_path")
       )

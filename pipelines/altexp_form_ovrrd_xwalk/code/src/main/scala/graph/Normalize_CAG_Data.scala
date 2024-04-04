@@ -48,9 +48,29 @@ object Normalize_CAG_Data {
         tempWindowExpr = Map()
       )
     
-      val simpleSelect_in_DF = normalize_out_DF.select((col("run_eff_dt")).as("run_eff_dt"),
-                                                       (col("customer_name")).as("customer_name"),
-                                                       (col("data_path")).as("data_path")
+      val simpleSelect_in_DF = normalize_out_DF.select(
+        col("formulary_name"),
+        col("formulary_cd"),
+        col("carrier"),
+        col("account"),
+        col("group"),
+        col("last_exp_dt"),
+        col("ndc11"),
+        col("formulary_tier"),
+        col("formulary_status"),
+        col("pa_reqd_ind"),
+        col("specialty_ind"),
+        col("step_therapy_ind"),
+        col("formulary_tier_desc"),
+        col("formulary_status_desc"),
+        col("pa_type_cd"),
+        col("step_therapy_type_cd"),
+        col("step_therapy_group_name"),
+        col("step_therapy_step_number"),
+        lit("\n").as("newline"),
+        col("run_eff_dt"),
+        col("customer_name"),
+        col("data_path"),
       )
     
       val out = simpleSelect_in_DF

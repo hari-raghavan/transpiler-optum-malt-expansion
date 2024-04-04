@@ -16,7 +16,30 @@ object Write_Data_at_CAG_level {
     val spark = context.spark
     val Config = context.config
     val withFileDF = in.withColumn("fileName", col("data_path"))
-    withFileDF.breakAndWriteDataFrameForOutputFile(List(""), "fileName", "csv", Some("\\x01"))
+    withFileDF.breakAndWriteDataFrameForOutputFile(List(
+        "formulary_name",
+        "formulary_cd",
+        "carrier",
+        "account",
+        "group",
+        "last_exp_dt",
+        "ndc11",
+        "formulary_tier",
+        "formulary_status",
+        "pa_reqd_ind",
+        "specialty_ind",
+        "step_therapy_ind",
+        "formulary_tier_desc",
+        "formulary_status_desc",
+        "pa_type_cd",
+        "step_therapy_type_cd",
+        "step_therapy_group_name",
+        "step_therapy_step_number",
+        "newline",
+        "run_eff_dt",
+        "customer_name",
+        "data_path"
+    ), "fileName", "csv", Some("\\x01"))
   }
 
 }

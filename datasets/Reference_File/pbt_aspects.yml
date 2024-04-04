@@ -38,8 +38,8 @@ schema:
       mappings: []
       tags: []
   - name: is_future_snap
-    type: decimal(10,0)
-    nullable: false
+    type: integer
+    nullable: true
     metadata:
       description: ''
       mappings: []

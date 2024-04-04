@@ -418,6 +418,177 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_exp_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_reqd_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "specialty_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_group_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_step_number",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "run_eff_dt",
               "type" : "string",
               "nullable" : true,
@@ -453,7 +624,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"prdcts\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      col(\"formulary_name\").as(\"formulary_name\"),\n      col(\"carrier\").as(\"carrier\"),\n      col(\"account\").as(\"account\"),\n      col(\"group\").as(\"group\"),\n      col(\"customer_name\").as(\"customer_name\"),\n      col(\"run_eff_dt\").as(\"run_eff_dt\"),\n      col(\"data_path\").as(\"data_path\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_cd\")).as(\"formulary_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"ndc11\")).as(\"ndc11\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_tier\")).as(\"formulary_tier\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_status\")).as(\"formulary_status\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"pa_reqd_ind\")).as(\"pa_reqd_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"specialty_ind\")).as(\"specialty_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_ind\")).as(\"step_therapy_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_tier_desc\")).as(\"formulary_tier_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_status_desc\")).as(\"formulary_status_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"pa_type_cd\")).as(\"pa_type_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_type_cd\")).as(\"step_therapy_type_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_group_name\")).as(\"step_therapy_group_name\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_step_number\")).as(\"step_therapy_step_number\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"last_exp_dt\")).as(\"last_exp_dt\")\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select((col(\"run_eff_dt\")).as(\"run_eff_dt\"),\n                                                   (col(\"customer_name\")).as(\"customer_name\"),\n                                                   (col(\"data_path\")).as(\"data_path\")\n  )\n\n  val out = simpleSelect_in_DF\n",
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"prdcts\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      col(\"formulary_name\").as(\"formulary_name\"),\n      col(\"carrier\").as(\"carrier\"),\n      col(\"account\").as(\"account\"),\n      col(\"group\").as(\"group\"),\n      col(\"customer_name\").as(\"customer_name\"),\n      col(\"run_eff_dt\").as(\"run_eff_dt\"),\n      col(\"data_path\").as(\"data_path\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_cd\")).as(\"formulary_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"ndc11\")).as(\"ndc11\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_tier\")).as(\"formulary_tier\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_status\")).as(\"formulary_status\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"pa_reqd_ind\")).as(\"pa_reqd_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"specialty_ind\")).as(\"specialty_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_ind\")).as(\"step_therapy_ind\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_tier_desc\")).as(\"formulary_tier_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"formulary_status_desc\")).as(\"formulary_status_desc\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"pa_type_cd\")).as(\"pa_type_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_type_cd\")).as(\"step_therapy_type_cd\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_group_name\")).as(\"step_therapy_group_name\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"step_therapy_step_number\")).as(\"step_therapy_step_number\"),\n      (element_at(col(\"prdcts\"), col(\"index\") + lit(1)).getField(\"last_exp_dt\")).as(\"last_exp_dt\")\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select(\n    col(\"formulary_name\"),\n    col(\"formulary_cd\"),\n    col(\"carrier\"),\n    col(\"account\"),\n    col(\"group\"),\n    col(\"last_exp_dt\"),\n    col(\"ndc11\"),\n    col(\"formulary_tier\"),\n    col(\"formulary_status\"),\n    col(\"pa_reqd_ind\"),\n    col(\"specialty_ind\"),\n    col(\"step_therapy_ind\"),\n    col(\"formulary_tier_desc\"),\n    col(\"formulary_status_desc\"),\n    col(\"pa_type_cd\"),\n    col(\"step_therapy_type_cd\"),\n    col(\"step_therapy_group_name\"),\n    col(\"step_therapy_step_number\"),\n    lit(\"\\n\").as(\"newline\"),\n    col(\"run_eff_dt\"),\n    col(\"customer_name\"),\n    col(\"data_path\"),\n  )\n\n  val out = simpleSelect_in_DF\n",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out\n}"
       }
@@ -551,8 +722,8 @@
               }
             }, {
               "name" : "is_future_snap",
-              "type" : "decimal(10,0)",
-              "nullable" : false,
+              "type" : "integer",
+              "nullable" : true,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1965,47 +2136,47 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Reference_File_Creation__in##formulary_name", "Reference_File_Creation__in##carrier", "Reference_File_Creation__in##account", "Reference_File_Creation__in##group", "Reference_File_Creation__in##customer_name", "Reference_File_Creation__in##data_path", "Reference_File_Creation__in##run_eff_dt" ],
         "expressions" : [ {
           "target" : "formulary_name",
           "expression" : {
             "format" : "scala",
-            "expression" : "lit(null).cast(StringType)"
+            "expression" : "col(\"formulary_name\")"
           },
           "description" : ""
         }, {
           "target" : "carrier",
           "expression" : {
             "format" : "scala",
-            "expression" : "lit(null).cast(StringType)"
+            "expression" : "col(\"carrier\")"
           },
           "description" : ""
         }, {
           "target" : "account",
           "expression" : {
             "format" : "scala",
-            "expression" : "lit(null).cast(StringType)"
+            "expression" : "col(\"account\")"
           },
           "description" : ""
         }, {
           "target" : "group",
           "expression" : {
             "format" : "scala",
-            "expression" : "lit(null).cast(StringType)"
+            "expression" : "col(\"group\")"
           },
           "description" : ""
         }, {
           "target" : "customer_name",
           "expression" : {
             "format" : "scala",
-            "expression" : "lit(null).cast(StringType)"
+            "expression" : "col(\"customer_name\")"
           },
           "description" : ""
         }, {
           "target" : "is_future_snap",
           "expression" : {
             "format" : "scala",
-            "expression" : "coalesce(\n    concat(lit(\"if(!is_null($\\\"run_eff_dt\\\") and $\\\"run_eff_dt\\\" === \"),\n           lit(Config.FIRST_OF_NEXT_YEAR),\n           lit(\" ) 1 else if ( !is_null($\\\"run_eff_dt\\\") ) 2\")\n    ).cast(DecimalType(1, 0)),\n    lit(0)\n  )"
+            "expression" : "when(!isnull(col(\"run_eff_dt\")).and(col(\"run_eff_dt\") === lit(Config.FIRST_OF_NEXT_YEAR)), lit(1))\n    .when(!isnull(col(\"run_eff_dt\")),                                                        lit(2))"
           },
           "description" : ""
         }, {
@@ -2019,7 +2190,7 @@
           "target" : "run_eff_dt",
           "expression" : {
             "format" : "scala",
-            "expression" : "lit(null).cast(StringType)"
+            "expression" : "col(\"run_eff_dt\")"
           },
           "description" : ""
         }, {
@@ -2056,6 +2227,177 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "last_exp_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_reqd_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "specialty_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "pa_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_group_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "step_therapy_step_number",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "run_eff_dt",
               "type" : "string",
               "nullable" : true,
@@ -2092,9 +2434,9 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "  val withFileDF = in.withColumn(\"fileName\", col(\"data_path\"))\n  withFileDF.breakAndWriteDataFrameForOutputFile(List(\"\"), \"fileName\", \"csv\", Some(\"\\\\x01\"))\n\n",
-        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
-        "scriptMethodFooter" : "out"
+        "script" : "  val withFileDF = in.withColumn(\"fileName\", col(\"data_path\"))\n  withFileDF.breakAndWriteDataFrameForOutputFile(List(\n      \"formulary_name\",\n      \"formulary_cd\",\n      \"carrier\",\n      \"account\",\n      \"group\",\n      \"last_exp_dt\",\n      \"ndc11\",\n      \"formulary_tier\",\n      \"formulary_status\",\n      \"pa_reqd_ind\",\n      \"specialty_ind\",\n      \"step_therapy_ind\",\n      \"formulary_tier_desc\",\n      \"formulary_status_desc\",\n      \"pa_type_cd\",\n      \"step_therapy_type_cd\",\n      \"step_therapy_group_name\",\n      \"step_therapy_step_number\",\n      \"newline\",\n      \"run_eff_dt\",\n      \"customer_name\",\n      \"data_path\"\n  ), \"fileName\", \"csv\", Some(\"\\\\x01\"))\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): Unit = {",
+        "scriptMethodFooter" : "    \n}"
       }
     },
     "Sorting_on_Priority" : {
