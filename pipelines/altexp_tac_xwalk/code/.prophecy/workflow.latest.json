@@ -1,0 +1,1257 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "tal_assoc_xwalk",
+    "uri" : "pipelines/altexp_tac_xwalk",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "UDL_CAG_EXP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAC_RULE_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CARRIER",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TSD_EXP_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240401"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAC_EXP_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "UDL_BASE_EXP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "FORMULARY_RULE_PRDCT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "IFIL_TAC_Rule_Xwalk",
+    "sourcePort" : "IFIL_TAC_Rule_Xwalk__out",
+    "target" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter",
+    "targetPort" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter__in"
+  }, {
+    "id" : "e4",
+    "source" : "Expanded_UDL",
+    "sourcePort" : "Expanded_UDL__out",
+    "target" : "Expanded_UDL_lookup",
+    "targetPort" : "Expanded_UDL_lookup__in"
+  }, {
+    "id" : "e5",
+    "source" : "Formulary_Rule_Prdcts",
+    "sourcePort" : "Formulary_Rule_Prdcts__out",
+    "target" : "Formulary_Rule_Prdcts_lookup",
+    "targetPort" : "Formulary_Rule_Prdcts_lookup__in"
+  }, {
+    "id" : "e6",
+    "source" : "TSD",
+    "sourcePort" : "TSD__out",
+    "target" : "TSD_lookup",
+    "targetPort" : "TSD_lookup__in"
+  }, {
+    "id" : "FYIWtEW19O38hJEW3eSwu",
+    "source" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter",
+    "sourcePort" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter__out",
+    "target" : "qZZFq19rLHSfgCGpeUTW0$$JUWF--N1UM_RBkiiX3yuc",
+    "targetPort" : "7N3eihn0TfQj_bziXGrmB$$kgru2PrJMqep5v6_2aU7d"
+  }, {
+    "id" : "RSfnBN0A-kah3UcGkO-T-",
+    "source" : "qZZFq19rLHSfgCGpeUTW0$$JUWF--N1UM_RBkiiX3yuc",
+    "sourcePort" : "PAWtmniVu9dCjC3P8FObM$$l1XUVdY7OhayIGfAXeYv3",
+    "target" : "OFIL_TAC_Expansion_Xwalk",
+    "targetPort" : "OFIL_TAC_Expansion_Xwalk__in"
+  } ],
+  "processes" : {
+    "TSD_lookup" : {
+      "id" : "TSD_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "TSD_lookup",
+        "slug" : "TSD_lookup",
+        "x" : 220,
+        "y" : 620,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TSD_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tsd_cd" ],
+        "valueColumns" : [ "tsd_id", "tsd_cd", "products", "newline" ],
+        "processName" : "TSD"
+      }
+    },
+    "Expanded_UDL_lookup" : {
+      "id" : "Expanded_UDL_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Expanded_UDL_lookup",
+        "slug" : "Expanded_UDL_lookup",
+        "x" : 220,
+        "y" : 20,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Expanded_UDL_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "udl_nm" ],
+        "valueColumns" : [ "udl_id", "udl_nm", "udl_desc", "products", "eff_dt", "term_dt", "contents", "newline" ],
+        "processName" : "Expanded_UDL"
+      }
+    },
+    "Formulary_Rule_Prdcts_lookup" : {
+      "id" : "Formulary_Rule_Prdcts_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Formulary_Rule_Prdcts_lookup",
+        "slug" : "Formulary_Rule_Prdcts_lookup",
+        "x" : 220,
+        "y" : 420,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Formulary_Rule_Prdcts_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "qualifier_cd", "operator", "compare_value" ],
+        "valueColumns" : [ "qualifier_cd", "operator", "compare_value", "products" ],
+        "processName" : "Formulary_Rule_Prdcts"
+      }
+    },
+    "qZZFq19rLHSfgCGpeUTW0$$JUWF--N1UM_RBkiiX3yuc" : {
+      "id" : "qZZFq19rLHSfgCGpeUTW0$$JUWF--N1UM_RBkiiX3yuc",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Populate_TAC_Target_Alternatives_Crosswalk",
+        "slug" : "Populate_TAC_Target_Alternatives_Crosswalk",
+        "x" : 420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "7N3eihn0TfQj_bziXGrmB$$kgru2PrJMqep5v6_2aU7d",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "PAWtmniVu9dCjC3P8FObM$$l1XUVdY7OhayIGfAXeYv3",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "target_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "contents",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : {
+                        "type" : "struct",
+                        "fields" : [ {
+                          "name" : "target_prdcts",
+                          "type" : "binary",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "alt_prdcts",
+                          "type" : "binary",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "ST_flag",
+                          "type" : "decimal(1,0)",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "priority",
+                          "type" : "decimal(1,0)",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        } ]
+                      },
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "xtra_proc_flg",
+                    "type" : "decimal(1,0)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport java.math.BigDecimal\n\ndef lv_prdcts(rec: org.apache.spark.sql.Column) = {\n  when(rec.getField(\"qualifier_cd\") == lit(\"TSD\"),\n       coalesce(lookup(\"TSD\", rec.getField(\"compare_value\")).getField(\"products\"), bv_all_zeros())\n  ).when(\n    array_contains(array(lit(\"PA\"), lit(\"ST\"), lit(\"SPECIALTY\"), lit(\"ST_STEP_NUM\")), rec.getField(\"qualifier_cd\")),\n    coalesce(\n      lookup(\"Formulary_Rule_Prdcts\",\n             rec.getField(\"qualifier_cd\"),\n             rec.getField(\"operator\"),\n             rec.getField(\"compare_value\")\n      ).getField(\"products\"),\n      bv_all_zeros()\n    )\n  ).otherwise(\n    coalesce(lookup(\"Expanded_UDL\", rec.getField(\"qualifier_cd\")).getField(\"products\"), bv_all_zeros())\n  )\n}\n\ndef get_products(rule: Seq[Row], lv_prdcts_all: Seq[Array[Byte]]) = {\n  var inclusion_prdcts = _bv_all_zeros()\n  var exclusion_prdcts = _bv_all_zeros()\n  var lv_prdcts        = _bv_all_zeros()\n  var or_products      = _bv_all_zeros()\n  var no_ands          = 1\n  var is_hrm           = 0\n\n  rule.zipWithIndex.foreach {\n    case (rec, i) ⇒\n      var lv_prdcts = lv_prdcts_all.toArray(i)\n      if (\n        !(rec.getAs[String](0) == \"TSD\" || rec.getAs[String](0) == \"PA\"\n          || rec.getAs[String](0) == \"ST\" || rec\n            .getAs[String](0) == \"SPECIALTY\" || rec.getAs[String](0) == \"ST_STEP_NUM\")\n      ) {\n\n        if (rec.getAs[String](2) == \"N\") {\n          exclusion_prdcts = _bv_or(exclusion_prdcts, lv_prdcts);\n          is_hrm = 1;\n        }\n      }\n      if (is_hrm == 0) {\n        or_products = _bv_or(or_products, lv_prdcts)\n        if (rec.getAs[String](3) != \"0\") {\n          if (no_ands) {\n            inclusion_prdcts = or_products\n            no_ands = 0\n          } else {\n            inclusion_prdcts = _bv_and(inclusion_prdcts, or_products)\n          }\n          or_products = bv_all_zeros()\n        }\n      } else {\n        is_hrm = 0\n      }\n  }\n  _bv_difference(inclusion_prdcts, exclusion_prdcts)\n}\n\nval process_udf = udf(\n  { (inputRows: Seq[Row]) ⇒\n    var priority      = inputRows.head.getAs[String](2);\n    var target_prdcts = _bv_all_zeros()\n    var alt_prdcts    = _bv_all_zeros()\n    var contents      = Array[Row]()\n    var tac_contents  = Array[Row]()\n    var _ST_flag      = BigDecimal(0);\n\n    inputRows.foreach { row ⇒\n      var _target_prdcts = _bv_all_zeros()\n      var _alt_prdcts    = bv_all_zeros()\n      var index          = 0\n\n      if (priority != row.getAs[String](2)) {\n        if (_bv_count_one_bits(target_prdcts) > 0 && _bv_count_one_bits(alt_prdcts) > 0) {\n          if (length_of(contents) > 1) {\n            tac_contents = Array.concat(\n              tac_contents,\n              Array.fill(1)(\n                Row(\n                  target_prdcts,\n                  alt_prdcts,\n                  contents,\n                  BigDecimal(1)\n                )\n              )\n            )\n          } else {\n            tac_contents = Array.concat(\n              tac_contents,\n              Array.fill(1)(\n                Row(\n                  target_prdcts,\n                  alt_prdcts,\n                  contents,\n                  BigDecimal(0)\n                )\n              )\n            )\n          }\n        }\n        target_prdcts = _bv_all_zeros()\n        alt_prdcts = _bv_all_zeros()\n        contents = Array[Row]()\n        _ST_flag = BigDecimal(0)\n      }\n\n      _target_prdcts = get_products(row.getAs[Seq[Row]](5), row.getAs[Seq[Row]](8))\n      if (_bv_count_one_bits(_target_prdcts) > 0) {\n        if (row.getAs[Seq[Row]](5).toArray.indexWhere(r ⇒ r.getAs[String](0) == \"ST_STEP_NUM\") > -1) {\n          _ST_flag = BigDecimal(1)\n        }\n        _alt_rule_def = get_products(row.getAs[Seq[Row]](6), row.getAs[Seq[Row]](9))\n\n        if (_bv_count_one_bits(_alt_prdcts) > 0) {\n          target_prdcts = _bv_or(target_prdcts, _target_prdcts)\n          alt_prdcts = _bv_or(alt_prdcts,       _alt_prdcts)\n          contents = Array.concat(\n            contents,\n            Array.fill(1)(\n              Row(\n                _target_prdcts,\n                _alt_prdcts,\n                _ST_flag,\n                BigDecimal(row.getAs[String](2))\n              )\n            )\n          )\n        }\n        _ST_flag = BigDecimal(0);\n      }\n    }\n\n    if (_bv_count_one_bits(target_prdcts) > 0 && _bv_count_one_bits(alt_prdcts) > 0) {\n      if (length_of(contents) > 1) {\n        tac_contents = Array.concat(\n          tac_contents,\n          Array.fill(1)(\n            Row(\n              target_prdcts,\n              alt_prdcts,\n              contents,\n              BigDecimal(1)\n            )\n          )\n        )\n      } else {\n        tac_contents = Array.concat(\n          tac_contents,\n          Array.fill(1)(\n            Row(\n              target_prdcts,\n              alt_prdcts,\n              contents,\n              BigDecimal(0)\n            )\n          )\n        )\n      }\n    }\n\n    var tac_id   = inputRows.toArray.last.getAs[BigDecimal](0)\n    var tac_name = inputRows.toArray.last.getAs[String](1)\n    var eff_dt   = inputRows.toArray.last.getAs[String](3)\n    var term_dt  = inputRows.toArray.last.getAs[String](4)\n    var newline  = inputRows.toArray.last.getAs[String](7)\n\n    Row(\n      tac_id,\n      tac_name,\n      tac_contents,\n      eff_dt,\n      term_dt,\n      newline\n    )\n  },\n  ArrayType(\n    StructType(\n      StructField(\"tac_id\",   StringType, true),\n      StructField(\"tac_name\", StringType, true),\n      StructField(\n        \"tac_contents\",\n        ArrayType(\n          StructType(\n            StructField(\"target_prdcts\", BinaryType, true),\n            StructField(\"alt_prdcts\",    BinaryType, true),\n            StructField(\n              \"contents\",\n              ArrayType(\n                StructType(\n                  StructField(\"target_prdcts\", BinaryType,        true),\n                  StructField(\"alt_prdcts\",    BinaryType,        true),\n                  StructField(\"ST_flag\",       DecimalType(1, 0), true),\n                  StructField(\"priority\",      DecimalType(1, 0), true)\n                ),\n                true\n              ),\n              true\n            ),\n            StructField(\"xtra_proc_flg\", DecimalType(1, 0), true)\n          ),\n          true\n        ),\n        true\n      ),\n      StructField(\"eff_dt\",  StringType, true),\n      StructField(\"term_dt\", StringType, true),\n      StructField(\"newline\", StringType, true)\n    )\n  )\n)\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"tac_id\")\n  .agg(\n    collect_list(\n      struct(\n        (origColumns :+ lv_prdcts(col(\"target_rule_def\")) :+ lv_prdcts(col(\"alt_rule_def\"))): _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "OFIL_TAC_Expansion_Xwalk" : {
+      "id" : "OFIL_TAC_Expansion_Xwalk",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFIL_TAC_Expansion_Xwalk",
+        "slug" : "OFIL_TAC_Expansion_Xwalk",
+        "x" : 620,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFIL_TAC_Expansion_Xwalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "target_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "contents",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : {
+                        "type" : "struct",
+                        "fields" : [ {
+                          "name" : "target_prdcts",
+                          "type" : "binary",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "alt_prdcts",
+                          "type" : "binary",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "ST_flag",
+                          "type" : "decimal(1,0)",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "priority",
+                          "type" : "decimal(1,0)",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        } ]
+                      },
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "xtra_proc_flg",
+                    "type" : "decimal(1,0)",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFIL_TAC_Expansion_Xwalk"
+      }
+    },
+    "Expanded_UDL" : {
+      "id" : "Expanded_UDL",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Expanded_UDL",
+        "slug" : "Expanded_UDL",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Expanded_UDL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Expanded_UDL"
+      }
+    },
+    "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter" : {
+      "id" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter",
+        "slug" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter",
+        "x" : 220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "(col(\"eff_dt\") <= lit(Config.BUSINESS_DATE)).and(col(\"term_dt\") >= lit(Config.BUSINESS_DATE))"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "TSD" : {
+      "id" : "TSD",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TSD",
+        "slug" : "TSD",
+        "x" : 20,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TSD__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TSD"
+      }
+    },
+    "Formulary_Rule_Prdcts" : {
+      "id" : "Formulary_Rule_Prdcts",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Formulary_Rule_Prdcts",
+        "slug" : "Formulary_Rule_Prdcts",
+        "x" : 20,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Formulary_Rule_Prdcts__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Formulary_Rule_Prdcts"
+      }
+    },
+    "IFIL_TAC_Rule_Xwalk" : {
+      "id" : "IFIL_TAC_Rule_Xwalk",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFIL_TAC_Rule_Xwalk",
+        "slug" : "IFIL_TAC_Rule_Xwalk",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFIL_TAC_Rule_Xwalk__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFIL_TAC_Rule_Xwalk"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

@@ -26,7 +26,7 @@ string("\\\\x01", 60) udl_desc ;
 bit_vector_t products ;
 date("YYYYMMDD")('\\\\x01') eff_dt ;
 date("YYYYMMDD")('\\\\x01') term_dt ;
-bit_vector_t[IntegerType] contents ;
+bit_vector_t[int] contents ;
 string(1) newline = "\n" ;
 end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
       var writer = in.write.format("io.prophecy.libs.FixedFileFormat")

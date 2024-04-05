@@ -39,11 +39,11 @@ string("\\\\x01", 60) gpi8_desc ;
 string(1) newline = "\n" ;
 end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
       var writer = in.write.format("io.prophecy.libs.FixedFileFormat")
-      writer = writer.mode("overwrite")
+      writer = writer.mode("error")
       schema
         .map(s => Json.stringify(Json.toJson(s)))
         .foreach(schema => writer = writer.option("schema", schema))
-      writer.save(Config.PRODUCTS_FILE)
+      writer.save(Config.PRODUCT_FILE)
     } catch {
       case e: Error =>
         println(s"Error occurred while writing dataframe: $e")

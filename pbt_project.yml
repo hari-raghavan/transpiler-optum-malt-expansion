@@ -295,6 +295,43 @@ pipelines:
       - datasets/Reference_File
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_tac_xwalk:
+    name: altexp_tac_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-05 06:43:48'
+    datasets:
+      inputs:
+      - datasets/Expanded_UDL
+      - datasets/Formulary_Rule_Prdcts
+      - datasets/IFIL_TAC_Rule_Xwalk
+      - datasets/TSD
+      outputs:
+      - datasets/OFIL_TAC_Expansion_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_step_therapy_xwalk:
+    name: altexp_step_therapy_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-05 06:43:50'
+    datasets:
+      inputs:
+      - datasets/IFIL_Formulary_Dataset
+      - datasets/OFIL_TAC_Rule_Xwalk
+      - datasets/Products
+      - datasets/TAL_Container
+      outputs:
+      - datasets/Step_Therapy_DTL_File
+      - datasets/TAC_Container_Step_Therapy
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -571,7 +608,7 @@ datasets:
         createdAt: '2024-03-27 12:50:42'
   datasets/IFIL_Formulary_Dataset:
     name: IFIL_Formulary_Dataset
-    description: 'Dataset for Imported Pipeline:altexp_step_grp_nm_xwalk componentName:
+    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
       IFIL_Formulary_Dataset'
     author: hari@prophecy.io
     createdAt: '2024-03-27 12:50:42'
@@ -599,8 +636,7 @@ datasets:
         createdAt: '2024-03-27 12:50:42'
   datasets/IFIL_TAC_Rule_Xwalk:
     name: IFIL_TAC_Rule_Xwalk
-    description: 'Dataset for Imported Pipeline:altexp_step_grp_nm_xwalk componentName:
-      IFIL_TAC_Rule_Xwalk'
+    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: IFIL_TAC_Rule_Xwalk'
     author: hari@prophecy.io
     createdAt: '2024-03-27 12:50:42'
     mode: batch
@@ -682,7 +718,7 @@ datasets:
         createdAt: '2024-04-02 06:25:38'
   datasets/Products:
     name: Products
-    description: 'Dataset for Imported Pipeline:altexp_create_rule_prd_files componentName:
+    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
       Products'
     author: hari@prophecy.io
     createdAt: '2024-04-02 06:25:38'
@@ -872,8 +908,7 @@ datasets:
         createdAt: '2024-04-02 06:25:42'
   datasets/Expanded_UDL:
     name: Expanded_UDL
-    description: 'Dataset for Imported Pipeline:altexp_rebate_elig_cd_xwalk componentName:
-      Expanded_UDL'
+    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: Expanded_UDL'
     author: hari@prophecy.io
     createdAt: '2024-04-02 06:25:42'
     mode: batch
@@ -938,6 +973,101 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-04 10:24:50'
+  datasets/OFIL_TAC_Expansion_Xwalk:
+    name: OFIL_TAC_Expansion_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: OFIL_TAC_Expansion_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:48'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:48'
+  datasets/TSD:
+    name: TSD
+    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: TSD'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:48'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:48'
+  datasets/Formulary_Rule_Prdcts:
+    name: Formulary_Rule_Prdcts
+    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: Formulary_Rule_Prdcts'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:48'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:48'
+  datasets/Step_Therapy_DTL_File:
+    name: Step_Therapy_DTL_File
+    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
+      Step_Therapy_DTL_File'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:49'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:49'
+  datasets/TAC_Container_Step_Therapy:
+    name: TAC_Container_Step_Therapy
+    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
+      TAC_Container_Step_Therapy'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:49'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:49'
+  datasets/TAL_Container:
+    name: TAL_Container
+    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
+      TAL_Container'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:49'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:49'
+  datasets/OFIL_TAC_Rule_Xwalk:
+    name: OFIL_TAC_Rule_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
+      OFIL_TAC_Rule_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 06:43:50'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 06:43:50'
 templates: {}
 jobs: {}
 gemContainer:
@@ -959,7 +1089,13 @@ sqlSeeds: {}
 sqlSources: {}
 sqlUnreferencedSources: {}
 sqlPipeline: null
-dependencies: '[]'
+dependencies:
+- type: plibMaven
+  modifiedAt: '2024-04-05T07:09:46.893019Z'
+  name: plibMaven
+  version: 7.1.83
+  id: '108465682'
+  createdAt: '2024-04-05T07:09:46.891854Z'
 projectDependencies:
   '12651':
     projectUID: 12651
