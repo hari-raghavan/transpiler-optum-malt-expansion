@@ -332,6 +332,27 @@ pipelines:
       - datasets/TAC_Container_Step_Therapy
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_tar_xwalk:
+    name: altexp_tar_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-05 14:09:16'
+    datasets:
+      inputs:
+      - datasets/Expanded_UDL
+      - datasets/Formulary_Rule_Prdcts
+      - datasets/IFILE_TAR_Rule_Xwalk
+      - datasets/LKP_TAR_ROA_DF
+      - datasets/Rebate_UDL
+      - datasets/Rule_Prdcts
+      - datasets/TSD
+      outputs:
+      - datasets/OFILE_TAR_Expansion_Xwalk
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -908,7 +929,7 @@ datasets:
         createdAt: '2024-04-02 06:25:42'
   datasets/Expanded_UDL:
     name: Expanded_UDL
-    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: Expanded_UDL'
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: Expanded_UDL'
     author: hari@prophecy.io
     createdAt: '2024-04-02 06:25:42'
     mode: batch
@@ -988,7 +1009,7 @@ datasets:
         createdAt: '2024-04-05 06:43:48'
   datasets/TSD:
     name: TSD
-    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: TSD'
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: TSD'
     author: hari@prophecy.io
     createdAt: '2024-04-05 06:43:48'
     mode: batch
@@ -1001,7 +1022,7 @@ datasets:
         createdAt: '2024-04-05 06:43:48'
   datasets/Formulary_Rule_Prdcts:
     name: Formulary_Rule_Prdcts
-    description: 'Dataset for Imported Pipeline:altexp_tac_xwalk componentName: Formulary_Rule_Prdcts'
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: Formulary_Rule_Prdcts'
     author: hari@prophecy.io
     createdAt: '2024-04-05 06:43:48'
     mode: batch
@@ -1068,6 +1089,71 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-05 06:43:50'
+  datasets/Rule_Prdcts:
+    name: Rule_Prdcts
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: Rule_Prdcts'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 14:09:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 14:09:16'
+  datasets/Rebate_UDL:
+    name: Rebate_UDL
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: Rebate_UDL'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 14:09:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 14:09:16'
+  datasets/IFILE_TAR_Rule_Xwalk:
+    name: IFILE_TAR_Rule_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: IFILE_TAR_Rule_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 14:09:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 14:09:16'
+  datasets/LKP_TAR_ROA_DF:
+    name: LKP_TAR_ROA_DF
+    description: 'Dataset for Imported Pipeline:altexp_tar_xwalk componentName: LKP_TAR_ROA_DF'
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 14:09:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 14:09:16'
+  datasets/OFILE_TAR_Expansion_Xwalk:
+    name: OFILE_TAR_Expansion_Xwalk
+    description: ''
+    author: hari@prophecy.io
+    createdAt: '2024-04-05 14:21:26'
+    mode: batch
+    physicalDatasets:
+      Workday:
+        fabricId: 1593
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-05 14:21:26'
 templates: {}
 jobs: {}
 gemContainer:

@@ -193,39 +193,38 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
           newline
         )
       },
-      ArrayType(
-        StructType(
-          StructField("tac_id",   StringType, true),
-          StructField("tac_name", StringType, true),
-          StructField(
-            "tac_contents",
-            ArrayType(
-              StructType(
-                StructField("target_prdcts", BinaryType, true),
-                StructField("alt_prdcts",    BinaryType, true),
-                StructField(
-                  "contents",
-                  ArrayType(
-                    StructType(
-                      StructField("target_prdcts", BinaryType,        true),
-                      StructField("alt_prdcts",    BinaryType,        true),
-                      StructField("ST_flag",       DecimalType(1, 0), true),
-                      StructField("priority",      DecimalType(1, 0), true)
-                    ),
-                    true
+    
+      StructType(
+        StructField("tac_id",   DecimalType(10, 0), true),
+        StructField("tac_name", StringType, true),
+        StructField(
+          "tac_contents",
+          ArrayType(
+            StructType(
+              StructField("target_prdcts", BinaryType, true),
+              StructField("alt_prdcts",    BinaryType, true),
+              StructField(
+                "contents",
+                ArrayType(
+                  StructType(
+                    StructField("target_prdcts", BinaryType,        true),
+                    StructField("alt_prdcts",    BinaryType,        true),
+                    StructField("ST_flag",       DecimalType(1, 0), true),
+                    StructField("priority",      DecimalType(1, 0), true)
                   ),
                   true
                 ),
-                StructField("xtra_proc_flg", DecimalType(1, 0), true)
+                true
               ),
-              true
+              StructField("xtra_proc_flg", DecimalType(1, 0), true)
             ),
             true
           ),
-          StructField("eff_dt",  StringType, true),
-          StructField("term_dt", StringType, true),
-          StructField("newline", StringType, true)
-        )
+          true
+        ),
+        StructField("eff_dt",  StringType, true),
+        StructField("term_dt", StringType, true),
+        StructField("newline", StringType, true)
       )
     )
     

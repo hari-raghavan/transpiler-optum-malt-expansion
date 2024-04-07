@@ -1,0 +1,1721 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "tal_assoc_xwalk",
+    "uri" : "pipelines/altexp_tar_xwalk",
+    "pipelineSettingsInfo" : {
+      "hasApplication" : false
+    },
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "REBATE_ELIG_EXTRACT",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAR_RULE_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAR_ROA_DF_EXTRACT",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240401"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e5",
+    "source" : "Expanded_UDL",
+    "sourcePort" : "Expanded_UDL__out",
+    "target" : "Expanded_UDL_lookup",
+    "targetPort" : "Expanded_UDL_lookup__in"
+  }, {
+    "id" : "e6",
+    "source" : "Formulary_Rule_Prdcts",
+    "sourcePort" : "Formulary_Rule_Prdcts__out",
+    "target" : "Formulary_Rule_Prdcts_lookup",
+    "targetPort" : "Formulary_Rule_Prdcts_lookup__in"
+  }, {
+    "id" : "e7",
+    "source" : "LKP_TAR_ROA_DF",
+    "sourcePort" : "LKP_TAR_ROA_DF__out",
+    "target" : "LKP_TAR_ROA_DF_lookup",
+    "targetPort" : "LKP_TAR_ROA_DF_lookup__in"
+  }, {
+    "id" : "e8",
+    "source" : "Rebate_UDL",
+    "sourcePort" : "Rebate_UDL__out",
+    "target" : "Rebate_UDL_lookup",
+    "targetPort" : "Rebate_UDL_lookup__in"
+  }, {
+    "id" : "e9",
+    "source" : "Rule_Prdcts",
+    "sourcePort" : "Rule_Prdcts__out",
+    "target" : "Rule_Prdcts_lookup",
+    "targetPort" : "Rule_Prdcts_lookup__in"
+  }, {
+    "id" : "e10",
+    "source" : "TSD",
+    "sourcePort" : "TSD__out",
+    "target" : "TSD_lookup",
+    "targetPort" : "TSD_lookup__in"
+  }, {
+    "id" : "YRMm39WI0CEsKMCes3Pso",
+    "source" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter",
+    "sourcePort" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter__out",
+    "target" : "3uJBrQkXnlvrsFzOFrxs6$$s97pLm1bJZuHD9bWax1Ga",
+    "targetPort" : "X08O-KoKMvS_2KSytm21g$$tannSy1l9JZr_gHzvvWs9"
+  }, {
+    "id" : "hGPtGkrN4NUH1fVoNLu6f",
+    "source" : "IFILE_TAR_Rule_Xwalk",
+    "sourcePort" : "IFILE_TAR_Rule_Xwalk__out",
+    "target" : "mRb-wWcTDYEVqsUJ64EB1$$GqrEzwIorlULyUtupBLad",
+    "targetPort" : "Kvrc-lqKTNIOtqPbAJ9hC$$6PjoDy8rZM3T4wVENBK8l"
+  }, {
+    "id" : "82WQIjgl83mgEw-3ZAFBi",
+    "source" : "mRb-wWcTDYEVqsUJ64EB1$$GqrEzwIorlULyUtupBLad",
+    "sourcePort" : "ZK1C4DnCOgPygebQwhBNE$$y6oDSndtPzACdD5gTpMCr",
+    "target" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter",
+    "targetPort" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter__in"
+  } ],
+  "processes" : {
+    "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter" : {
+      "id" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Populate_TAR_Target_Alternate_Crosswalk",
+        "slug" : "Populate_TAR_Target_Alternate_Crosswalk",
+        "x" : 420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tar_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_roa_df_set_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sort_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "filter_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Populate_TAR_Target_Alternate_Crosswalk_input_select_filter__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tar_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "target_prdcts",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "binary",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alt_contents",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : {
+                        "type" : "struct",
+                        "fields" : [ {
+                          "name" : "alt_prdcts",
+                          "type" : {
+                            "type" : "array",
+                            "elementType" : "binary",
+                            "containsNull" : true
+                          },
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "alt_prdcts_all_prio",
+                          "type" : {
+                            "type" : "array",
+                            "elementType" : {
+                              "type" : "array",
+                              "elementType" : "binary",
+                              "containsNull" : true
+                            },
+                            "containsNull" : true
+                          },
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "common_prdcts",
+                          "type" : "binary",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        } ]
+                      },
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "common_alt_prdcts",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "common_target_prdcts",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "keep_all_targets",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport java.math.BigDecimal\n\ndef lv_prdcts(rec: org.apache.spark.sql.Column) = {\n  when(\n    rec.getField(\"qualifier_cd\") == lit(\"TSD\"),\n    coalesce(lookup(\"TSD\", rec.getField(\"compare_value\")).getField(\"products\"), bv_all_zeros())\n  ).when(\n    array_contains(array(lit(\"PA\"), lit(\"ST\"), lit(\"SPECIALTY\"), lit(\"ST_STEP_NUM\")), rec.getField(\"qualifier_cd\")),\n    coalesce(\n      lookup(\n        \"Formulary_Rule_Prdcts\",\n        rec.getField(\"qualifier_cd\"),\n        rec.getField(\"operator\"),\n        rec.getField(\"compare_value\")\n      ).getField(\"products\"),\n      bv_all_zeros()\n    )\n  ).otherwise(\n    coalesce(lookup(\"Expanded_UDL\", rec.getField(\"qualifier_cd\")).getField(\"products\"), bv_all_zeros())\n  )\n}\n\ndef get_products(rule: Seq[Row], lv_prdcts_all: Seq[Array[Byte]]) = {\n  var inclusion_prdcts = _bv_all_zeros()\n  var exclusion_prdcts = _bv_all_zeros()\n  var lv_prdcts        = _bv_all_zeros()\n  var or_products      = _bv_all_zeros()\n  var no_ands          = 1\n  var is_hrm           = 0\n\n  rule.zipWithIndex.foreach {\n    case (rec, i) ⇒\n      var lv_prdcts = lv_prdcts_all.toArray(i)\n      if (\n        !(rec.getAs[String](0) == \"TSD\" || rec.getAs[String](0) == \"PA\"\n          || rec.getAs[String](0) == \"ST\" || rec\n            .getAs[String](0) == \"SPECIALTY\" || rec.getAs[String](0) == \"ST_STEP_NUM\")\n      ) {\n\n        if (rec.getAs[String](2) == \"N\") {\n          exclusion_prdcts = _bv_or(exclusion_prdcts, lv_prdcts);\n          is_hrm = 1;\n        }\n      }\n      if (is_hrm == 0) {\n        or_products = _bv_or(or_products, lv_prdcts)\n        if (rec.getAs[String](3) != \"0\") {\n          if (no_ands) {\n            inclusion_prdcts = or_products\n            no_ands = 0\n          } else {\n            inclusion_prdcts = _bv_and(inclusion_prdcts, or_products)\n          }\n          or_products = bv_all_zeros()\n        }\n      } else {\n        is_hrm = 0\n      }\n  }\n  _bv_difference(inclusion_prdcts, exclusion_prdcts)\n}\n\ndef get_final_products(roa_cd: String, df_cd: String, roa_prdts: Array[Byte], df_prdts: Array[Byte]) = {\n\n  if (roa_cd != '*' && df_cd != '*') _bv_and(roa_prdts, df_prdts)\n  else if (roa_cd != '*' && df_cd == '*') roa_prdts\n  else if (roa_cd == '*' && df_cd != '*') df_prdts\n  else _bv_all_zeros()\n}\n\nval process_udf = udf(\n  { (inputRows: Seq[Row]) ⇒\n    var tar_content_vec   = Array[Row]()\n    var roa_df_prdts_vec  = Array[Row]()\n    var all_target_prdcts = _bv_all_zeros()\n    var all_alt_prdcts    = _bv_all_zeros()\n    var _keep_all_targets = 0;\n    var rebate_prdcts_t   = bv_all_zeros()\n\n    def get_roa_df_products(\n      in_compare_value: String,\n      qualifier_cd:     String,\n      rule_prdt_lkp:    Map[(String, String, String), Row]\n    ) = {\n      var prd_idx = roa_df_prdts_vec.indexWhere(_.getAs[String](0) == in_compare_value)\n      var prdcts  = bv_all_zeros()\n\n      if (prd_idx > -1)\n        prdcts = roa_df_prdts_vec[prd_idx].getAs[Array[Byte]](3)\n      else {\n        prdcts =\n          try {\n            val res = rule_prdt_lkp(qualifier_cd, \"eq\", in_compare_value).getAs[Seq[Byte]].toArray\n            if (res == null) {\n              _bv_all_zeros()\n            } else {\n              res(3)\n            }\n          } catch {\n            case e ⇒ _bv_all_zeros()\n          }\n        roa_df_prdts_vec = Array.concat(\n          roa_df_prdts_vec,\n          Array.fill(1)(\n            Row(\n              in_compare_value,\n              prdcts\n            )\n          )\n        )\n      }\n      prdcts\n    }\n\n    inputRows.foreach { row ⇒\n      var roa_prdcts          = bv_all_zeros()\n      var df_prdcts           = bv_all_zeros()\n      var alt_prdcts          = bv_all_zeros()\n      var alt_prdcts_all_prio = bv_all_zeros()\n      var alt_prdcts_p        = bv_all_zeros()\n      var rebate_prdcts       = bv_all_zeros()\n      var target_prdcts       = bv_all_zeros()\n      var alt_prdcts_vec      = Array[Array[Byte]]()\n      var alt_prdcts_vec1     = Array[Array[Byte]]()\n      var alt_prdcts_vec2     = Array[Array[Byte]]()\n      var _processed_prio     = Array[Array[Array[Byte]]]()\n      var lkp_tar_roa_df_vec  = Array[Row]()\n      var _processed_roa_df   = Array[String]()\n      var index               = -1\n      var is_empty            = 1\n      var reb_udl_cnt         = 0\n      var rebate_udl          = \"\"\n      var p_check             = -1\n\n      if (!_isnull(row.getAs[String](3))) {\n        var roa_df_tar_content = Row(Seq[Seq[Byte]](), Seq[Row]())\n        var prev_pri           = 0\n\n        lkp_tar_roa_df_vec =\n          row.getAs[Seq[Row]](14) // 14 - lookup_row(\"LKP : TAR ROA DF\", in.tar_roa_df_set_id) //TO FIX\n        lkp_tar_roa_df_vec.foreach { lv_tar_roa_df ⇒\n          var roa_df       = lv_tar_roa_df.getAs[String](2).toInt + lv_tar_roa_df.getAs[String](3).toInt\n          var roa_priority = 0\n          if (p_check == -1) {\n            prev_pri = lv_tar_roa_df.getAs[String](6).toInt\n            p_check = 0;\n          }\n          roa_priority = lv_tar_roa_df.getAs[String](6).toInt\n\n          if (_processed_roa_df.indexOf(roa_df) == -1) {\n            if (!_isnull(_processed_roa_df)) {\n              if (alt_prdcts_vec.nonEmpty && _bv_count_one_bits(target_prdcts) > 0) {\n                if (is_empty != 0) {\n                  alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))\n                  _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))\n                  alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))\n                  roa_df_tar_content = updateIndexInRow(\n                    roa_df_tar_content,\n                    0,\n                    Array.concat(roa_df_tar_content.getAs[Seq[Seq[Byte]]].toArray, Array.fill(1)(target_prdcts))\n                  ) // TO FIX\n                  roa_df_tar_content = updateIndexInRow(\n                    roa_df_tar_content,\n                    1,\n                    Array.concat(\n                      roa_df_tar_content.getAs[Seq[Row]],\n                      Array.fill(1)(\n                        Row(\n                          alt_prdcts_vec1,\n                          _processed_prio,\n                          _bv_vector_or(alt_prdcts_vec2)\n                        )\n                      )\n                    )\n                  ) // TO FIX\n                  prev_pri = roa_priority\n                } else {\n                  alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))\n                  _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))\n                  roa_df_tar_content = Array(\n                    Row(\n                      Array.fill(1)(target_prdcts),\n                      Array.fill(1)(\n                        Row(\n                          alt_prdcts_vec1,\n                          _processed_prio,\n                          _bv_vector_or(alt_prdcts_vec2)\n                        )\n                      )\n                    )\n                  )\n                  is_empty = 0\n                  prev_pri = roa_priority\n                }\n              }\n\n              target_prdcts = _bv_all_zeros()\n              alt_prdcts = _bv_all_zeros()\n              alt_prdcts_all_prio = _bv_all_zeros()\n              alt_prdcts_p = _bv_all_zeros()\n              alt_prdcts_vec = Array[Array[Byte]]()\n              alt_prdcts_vec1 = Array[Array[Byte]]()\n              alt_prdcts_vec2 = Array[Array[Byte]]()\n              _processed_prio = Array[Array[Array[Byte]]]()\n            }\n            _processed_roa_df = Array.concat(_processed_roa_df, Array.fill(1)(roa_df))\n            roa_prdcts =\n              if (lv_tar_roa_df.getAs[String](2) != '*')\n                get_roa_df_products(lv_tar_roa_df.getAs[String](2), \"ROA\", rule_prdt_lkp)\n              else _bv_all_zeros()\n            df_prdcts =\n              if (lv_tar_roa_df.getAs[String](3) != '*')\n                get_roa_df_products(lv_tar_roa_df.getAs[String](3), \"DOSAGE_FORM\", rule_prdt_lkp)\n              else _bv_all_zeros()\n            target_prdcts =\n              get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)\n            all_target_prdcts = _bv_or(all_target_prdcts,        target_prdcts);\n          }\n\n          if (_bv_count_one_bits(target_prdcts).and(roa_priority == prev_pri)) {\n            roa_prdcts =\n              if (lv_tar_roa_df.getAs[String](2) != '*')\n                get_roa_df_products(lv_tar_roa_df.getAs[String](2), \"ROA\", rule_prdt_lkp)\n              else _bv_all_zeros()\n            df_prdcts =\n              if (lv_tar_roa_df.getAs[String](3) != '*')\n                get_roa_df_products(lv_tar_roa_df.getAs[String](3), \"DOSAGE_FORM\", rule_prdt_lkp)\n              else _bv_all_zeros()\n            alt_prdcts =\n              get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)\n            alt_prdcts_p = _bv_or(alt_prdcts_p,                  alt_prdcts)\n            all_alt_prdcts = _bv_or(all_alt_prdcts,              alt_prdcts)\n            if (_bv_count_one_bits(alt_prdcts))\n              alt_prdcts_vec = Array.concat(alt_prdcts_vec, Array.fill(1)(alt_prdcts))\n            alt_prdcts_vec2 = Array.concat(alt_prdcts_vec2, Array.fill(1)(alt_prdcts))\n            prev_pri = roa_priority\n          }\n\n          if (_bv_count_one_bits(target_prdcts) && roa_priority != prev_pri) {\n            _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))\n            alt_prdcts_vec = Array[Array[Byte]]()\n            alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))\n            prev_pri = prev_pri + 1\n            alt_prdcts_p = _bv_all_zeros()\n            roa_prdcts =\n              if (lv_tar_roa_df.getAs[String](2) != '*')\n                get_roa_df_products(lv_tar_roa_df.getAs[String](2), \"ROA\", rule_prdt_lkp)\n              else _bv_all_zeros()\n            df_prdcts =\n              if (lv_tar_roa_df.getAs[String](3) != '*')\n                get_roa_df_products(lv_tar_roa_df.getAs[String](3), \"DOSAGE_FORM\", rule_prdt_lkp)\n              else _bv_all_zeros()\n            alt_prdcts =\n              get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)\n            alt_prdcts_p = _bv_or(alt_prdcts_p,                  alt_prdcts)\n            all_alt_prdcts = _bv_or(all_alt_prdcts,              alt_prdcts)\n            if (_bv_count_one_bits(alt_prdcts))\n              alt_prdcts_vec = Array.concat(alt_prdcts_vec, Array.fill(1)(alt_prdcts))\n            alt_prdcts_vec2 = Array.concat(alt_prdcts_vec2, Array.fill(1)(alt_prdcts))\n            prev_pri = roa_priority\n          }\n\n          if (_bv_count_one_bits(target_prdcts) && !_isnull(roa_df_tar_content)) {\n            _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))\n            alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))\n            roa_df_tar_content = updateIndexInRow(\n              roa_df_tar_content,\n              0,\n              Array.concat(roa_df_tar_content.getAs[Seq[Seq[Byte]]].toArray, Array.fill(1)(target_prdcts))\n            ) // TO FIX\n            roa_df_tar_content = updateIndexInRow(\n              roa_df_tar_content,\n              1,\n              Array.concat(\n                roa_df_tar_content.getAs[Seq[Row]],\n                Array.fill(1)(\n                  Row(\n                    alt_prdcts_vec1,\n                    _processed_prio,\n                    _bv_vector_or(alt_prdcts_vec2)\n                  )\n                )\n              )\n            )\n          } else {\n            roa_df_tar_content = Array(\n              Row(\n                Array.fill(1)(target_prdcts),\n                Array.fill(1)(\n                  Row(\n                    alt_prdcts_vec1,\n                    _processed_prio,\n                    _bv_vector_or(alt_prdcts_vec2)\n                  )\n                )\n              )\n            )\n          }\n          tar_content_vec = Array.concat(tar_content_vec, roa_df_tar_content)\n        }\n      } else {\n        if (row.getAs[Seq[Row]](11).head.getAs[String](0) == \"ALL\") {\n          _keep_all_targets = 1\n          all_target_prdcts = _bv_all_zeros()\n        } else {\n          alt_prdcts =\n            try {\n              val res = get_products(row.getAs[Seq[Row]](11), row.getAs[Seq[Row]](14))\n              if (res == null) {\n                _bv_all_zeros()\n              } else {\n                res\n              }\n            } catch {\n              case e ⇒ _bv_all_zeros()\n            }\n          all_target_prdcts = if (_keep_all_targets != 1) _bv_or(all_target_prdcts, target_prdcts) else _bv_all_zeros()\n        }\n\n        if (_isnull(row.getAs[String](8))) {\n          alt_prdcts = _bv_difference(alt_prdcts, rebate_prdcts_t)\n          rebate_prdcts_t = _bv_all_zeros()\n        }\n        if (row.getAs[String](7) == 'Y')\n          all_alt_prdcts = _bv_or(all_alt_prdcts, alt_prdcts)\n\n        if (bv_count_one_bits(_alt_prdcts)) {\n          if (!_isnull(row.getAs[String](8))) {\n            row.getAs[Seq[Row]](9999).toArray.foreach { //TO_FIX\n              rebate_udl_prdcts ⇒\n                rebate_prdcts = _bv_or(rebate_prdcts, rebate_udl_prdcts)\n            }\n            alt_prdcts = _bv_and(alt_prdcts, rebate_prdcts)\n            rebate_prdcts_t = rebate_prdcts\n          } else {\n\n            tar_content_vec = Array.concat(tar_content_vec,\n                                           Array.fill(1)(\n                                             Row(\n                                               Array.fill(1)(target_prdcts),\n                                               Array.fill(1)(\n                                                 Row(\n                                                   alt_prdcts,\n                                                   Array.fill(0)(Row()),\n                                                   _bv_all_zeros()\n                                                 )\n                                               )\n                                             )\n                                           )\n            )\n          }\n        }\n      }\n    }\n    var tar_id          = inputRows.toArray.last.getAs[String](0)\n    var tar_dtl_id      = inputRows.toArray.last.getAs[String](1)\n    var tar_name        = inputRows.toArray.last.getAs[String](2)\n    var tar_dtl_type_cd = inputRows.toArray.last.getAs[String](4)\n    var newline         = inputRows.toArray.last.getAs[String](13)\n    Row(\n      BigDecimal(tar_id),\n      BigDecimal(tar_dtl_id),\n      tar_name,\n      tar_dtl_type_cd,\n      tar_content_vec,\n      all_alt_prdcts,\n      all_target_prdcts,\n      BigDecimal(_keep_all_targets),\n      newline\n    )\n  },\n  StructType(\n    StructField(\"tar_id\",          DecimalType(10, 0), true),\n    StructField(\"tar_dtl_id\",      DecimalType(10, 0), true),\n    StructField(\"tar_name\",        StringType, true),\n    StructField(\"tar_dtl_type_cd\", StringType, true),\n    StructField(\n      \"contents\",\n      ArrayType(\n        StructType(\n          StructField(\"target_prdcts\", ArrayType(BinaryType, true), true),\n          StructField(\n            alt_contents,\n            ArrayType(\n              StructType(\n                StructField(\"alt_prdcts\",          ArrayType(BinaryType, true),                  true),\n                StructField(\"alt_prdcts_all_prio\", ArrayType(ArrayType(BinaryType, true), true), true),\n                StructField(\"common_prdcts\",       BinaryType,                                   true)\n              ),\n              true\n            ),\n            true\n          )\n        ),\n        true\n      ),\n      true\n    ),\n    StructField(\"common_alt_prdcts\",    BinaryType,        true),\n    StructField(\"common_target_prdcts\", BinaryType,        true),\n    StructField(\"keep_all_targets\",     DecimalType(1, 0), true),\n    StructField(\"newline\",              StringType,        true)\n  )\n)\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"tar_id\")\n  .agg(\n    collect_list(\n      struct(\n        (origColumns :+ lv_prdcts(col(\"target_rule_def\")) :+ lv_prdcts(col(\"alt_rule_def\"))): _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Rebate_UDL_lookup" : {
+      "id" : "Rebate_UDL_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Rebate_UDL_lookup",
+        "slug" : "Rebate_UDL_lookup",
+        "x" : 220,
+        "y" : 1220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Rebate_UDL_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_rebate_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "output_profile_id", "rebate_elig_cd" ],
+        "valueColumns" : [ "output_profile_rebate_dtl_id", "udl_name", "output_profile_id", "rebate_elig_cd", "newline" ],
+        "processName" : "Rebate_UDL"
+      }
+    },
+    "mRb-wWcTDYEVqsUJ64EB1$$GqrEzwIorlULyUtupBLad" : {
+      "id" : "mRb-wWcTDYEVqsUJ64EB1$$GqrEzwIorlULyUtupBLad",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Populate_TAR_Target_Alternatives_Crosswalk_input_select_filter",
+        "slug" : "Populate_TAR_Target_Alternatives_Crosswalk_input_select_filter",
+        "x" : 220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Kvrc-lqKTNIOtqPbAJ9hC$$6PjoDy8rZM3T4wVENBK8l",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tar_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_roa_df_set_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sort_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "filter_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "ZK1C4DnCOgPygebQwhBNE$$y6oDSndtPzACdD5gTpMCr",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "(col(\"eff_dt\") <= lit(Config.BUSINESS_DATE)).and(col(\"term_dt\") >= lit(Config.BUSINESS_DATE))"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "TSD_lookup" : {
+      "id" : "TSD_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "TSD_lookup",
+        "slug" : "TSD_lookup",
+        "x" : 220,
+        "y" : 20,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TSD_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tsd_cd" ],
+        "valueColumns" : [ "tsd_id", "tsd_cd", "products", "newline" ],
+        "processName" : "TSD"
+      }
+    },
+    "Expanded_UDL_lookup" : {
+      "id" : "Expanded_UDL_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Expanded_UDL_lookup",
+        "slug" : "Expanded_UDL_lookup",
+        "x" : 220,
+        "y" : 620,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Expanded_UDL_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "udl_nm" ],
+        "valueColumns" : [ "udl_id", "udl_nm", "udl_desc", "products", "eff_dt", "term_dt", "contents", "newline" ],
+        "processName" : "Expanded_UDL"
+      }
+    },
+    "Rule_Prdcts" : {
+      "id" : "Rule_Prdcts",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Rule_Prdcts",
+        "slug" : "Rule_Prdcts",
+        "x" : 20,
+        "y" : 1020,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Rule_Prdcts__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Rule_Prdcts"
+      }
+    },
+    "Formulary_Rule_Prdcts_lookup" : {
+      "id" : "Formulary_Rule_Prdcts_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Formulary_Rule_Prdcts_lookup",
+        "slug" : "Formulary_Rule_Prdcts_lookup",
+        "x" : 220,
+        "y" : 420,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Formulary_Rule_Prdcts_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "qualifier_cd", "operator", "compare_value" ],
+        "valueColumns" : [ "qualifier_cd", "operator", "compare_value", "products" ],
+        "processName" : "Formulary_Rule_Prdcts"
+      }
+    },
+    "3uJBrQkXnlvrsFzOFrxs6$$s97pLm1bJZuHD9bWax1Ga" : {
+      "id" : "3uJBrQkXnlvrsFzOFrxs6$$s97pLm1bJZuHD9bWax1Ga",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_TAR_Expansion_Xwalk",
+        "slug" : "OFILE_TAR_Expansion_Xwalk",
+        "x" : 620,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "X08O-KoKMvS_2KSytm21g$$tannSy1l9JZr_gHzvvWs9",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tar_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "target_prdcts",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "binary",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alt_contents",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : {
+                        "type" : "struct",
+                        "fields" : [ {
+                          "name" : "alt_prdcts",
+                          "type" : {
+                            "type" : "array",
+                            "elementType" : "binary",
+                            "containsNull" : true
+                          },
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "alt_prdcts_all_prio",
+                          "type" : {
+                            "type" : "array",
+                            "elementType" : {
+                              "type" : "array",
+                              "elementType" : "binary",
+                              "containsNull" : true
+                            },
+                            "containsNull" : true
+                          },
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        }, {
+                          "name" : "common_prdcts",
+                          "type" : "binary",
+                          "nullable" : true,
+                          "metadata" : {
+                            "description" : "",
+                            "mappings" : [ ],
+                            "tags" : [ ]
+                          }
+                        } ]
+                      },
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "common_alt_prdcts",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "common_target_prdcts",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "keep_all_targets",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_TAR_Expansion_Xwalk"
+      }
+    },
+    "Rebate_UDL" : {
+      "id" : "Rebate_UDL",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Rebate_UDL",
+        "slug" : "Rebate_UDL",
+        "x" : 20,
+        "y" : 1220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Rebate_UDL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Rebate_UDL"
+      }
+    },
+    "Expanded_UDL" : {
+      "id" : "Expanded_UDL",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Expanded_UDL",
+        "slug" : "Expanded_UDL",
+        "x" : 20,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Expanded_UDL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Expanded_UDL"
+      }
+    },
+    "IFILE_TAR_Rule_Xwalk" : {
+      "id" : "IFILE_TAR_Rule_Xwalk",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFILE_TAR_Rule_Xwalk",
+        "slug" : "IFILE_TAR_Rule_Xwalk",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFILE_TAR_Rule_Xwalk__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFILE_TAR_Rule_Xwalk"
+      }
+    },
+    "LKP_TAR_ROA_DF" : {
+      "id" : "LKP_TAR_ROA_DF",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "LKP_TAR_ROA_DF",
+        "slug" : "LKP_TAR_ROA_DF",
+        "x" : 20,
+        "y" : 820,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "LKP_TAR_ROA_DF__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/LKP_TAR_ROA_DF"
+      }
+    },
+    "Rule_Prdcts_lookup" : {
+      "id" : "Rule_Prdcts_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Rule_Prdcts_lookup",
+        "slug" : "Rule_Prdcts_lookup",
+        "x" : 220,
+        "y" : 1020,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Rule_Prdcts_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "qualifier_cd", "operator", "compare_value" ],
+        "valueColumns" : [ "qualifier_cd", "operator", "compare_value", "products" ],
+        "processName" : "Rule_Prdcts"
+      }
+    },
+    "LKP_TAR_ROA_DF_lookup" : {
+      "id" : "LKP_TAR_ROA_DF_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LKP_TAR_ROA_DF_lookup",
+        "slug" : "LKP_TAR_ROA_DF_lookup",
+        "x" : 220,
+        "y" : 820,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_TAR_ROA_DF_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tar_roa_df_set_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_roa_df_set_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tar_roa_df_set_id" ],
+        "valueColumns" : [ "tar_roa_df_set_dtl_id", "tar_roa_df_set_id", "target_roa_cd", "target_dosage_form_cd", "alt_roa_cd", "alt_dosage_form_cd", "priority", "newline" ],
+        "processName" : "LKP_TAR_ROA_DF"
+      }
+    },
+    "TSD" : {
+      "id" : "TSD",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TSD",
+        "slug" : "TSD",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TSD__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TSD"
+      }
+    },
+    "Formulary_Rule_Prdcts" : {
+      "id" : "Formulary_Rule_Prdcts",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Formulary_Rule_Prdcts",
+        "slug" : "Formulary_Rule_Prdcts",
+        "x" : 20,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Formulary_Rule_Prdcts__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Formulary_Rule_Prdcts"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}
