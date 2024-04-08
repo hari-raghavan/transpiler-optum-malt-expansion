@@ -372,6 +372,53 @@ pipelines:
       - datasets/Reference_File_CAG
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_xml_rules_parser:
+    name: altexp_xml_rules_parser
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-08 15:13:16'
+    datasets:
+      inputs:
+      - datasets/IFILE_UDL_rules
+      outputs:
+      - datasets/OFILE_Rule_CrossWalk
+      - datasets/OFILE_Rule_CrossWalk_Without_Rule_Priority
+      - datasets/OFILE_UDL_Master_CrossWalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tac_rules_parser:
+    name: altexp_tac_rules_parser
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-08 15:13:17'
+    datasets:
+      inputs:
+      - datasets/IFIL_TAC_rules
+      outputs:
+      - datasets/OFIL_TAC_Rule_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tac_tar_xml_rule_parser:
+    name: altexp_tac_tar_xml_rule_parser
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-08 15:13:20'
+    datasets:
+      inputs:
+      - datasets/IFILE
+      outputs:
+      - datasets/OFILE_Rule_Xwalk
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -1098,7 +1145,7 @@ datasets:
         createdAt: '2024-04-05 06:43:49'
   datasets/OFIL_TAC_Rule_Xwalk:
     name: OFIL_TAC_Rule_Xwalk
-    description: 'Dataset for Imported Pipeline:altexp_step_therapy_xwalk componentName:
+    description: 'Dataset for Imported Pipeline:altexp_tac_rules_parser componentName:
       OFIL_TAC_Rule_Xwalk'
     author: hari@prophecy.io
     createdAt: '2024-04-05 06:43:50'
@@ -1231,6 +1278,104 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-08 08:49:14'
+  datasets/OFILE_UDL_Master_CrossWalk:
+    name: OFILE_UDL_Master_CrossWalk
+    description: 'Dataset for Imported Pipeline:altexp_xml_rules_parser componentName:
+      OFILE_UDL_Master_CrossWalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:16'
+  datasets/OFILE_Rule_CrossWalk:
+    name: OFILE_Rule_CrossWalk
+    description: 'Dataset for Imported Pipeline:altexp_xml_rules_parser componentName:
+      OFILE_Rule_CrossWalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:16'
+  datasets/IFILE_UDL_rules:
+    name: IFILE_UDL_rules
+    description: 'Dataset for Imported Pipeline:altexp_xml_rules_parser componentName:
+      IFILE_UDL_rules'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:16'
+  datasets/OFILE_Rule_CrossWalk_Without_Rule_Priority:
+    name: OFILE_Rule_CrossWalk_Without_Rule_Priority
+    description: 'Dataset for Imported Pipeline:altexp_xml_rules_parser componentName:
+      OFILE_Rule_CrossWalk_Without_Rule_Priority'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:16'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:16'
+  datasets/IFIL_TAC_rules:
+    name: IFIL_TAC_rules
+    description: 'Dataset for Imported Pipeline:altexp_tac_rules_parser componentName:
+      IFIL_TAC_rules'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:17'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:17'
+  datasets/IFILE:
+    name: IFILE
+    description: 'Dataset for Imported Pipeline:altexp_tac_tar_xml_rule_parser componentName:
+      IFILE'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:19'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:19'
+  datasets/OFILE_Rule_Xwalk:
+    name: OFILE_Rule_Xwalk
+    description: 'Dataset for Imported Pipeline:altexp_tac_tar_xml_rule_parser componentName:
+      OFILE_Rule_Xwalk'
+    author: hari@prophecy.io
+    createdAt: '2024-04-08 15:13:19'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-08 15:13:19'
 templates: {}
 jobs: {}
 gemContainer:

@@ -271,7 +271,7 @@
             "type" : "struct",
             "fields" : [ {
               "name" : "tac_id",
-              "type" : "decimal(10,0)",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1867,7 +1867,7 @@
             "type" : "struct",
             "fields" : [ {
               "name" : "tac_id",
-              "type" : "decimal(10,0)",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3322,7 +3322,7 @@
             "type" : "struct",
             "fields" : [ {
               "name" : "tac_id",
-              "type" : "decimal(10,0)",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -3536,7 +3536,7 @@
             "type" : "struct",
             "fields" : [ {
               "name" : "tac_id",
-              "type" : "decimal(10,0)",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "",
