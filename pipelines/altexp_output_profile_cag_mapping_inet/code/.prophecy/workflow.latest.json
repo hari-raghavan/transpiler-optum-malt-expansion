@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "altexp_output_profile_cag_mapping",
     "uri" : "pipelines/altexp_output_profile_cag_mapping_inet",
@@ -5469,8 +5472,8 @@
       },
       "properties" : {
         "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some((size(col(\"qual_output_profile_ids\")) + size(col(\"non_qual_output_profile_ids\")))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (when(col(\"index\") < col(\"qual_len\"), element_at(col(\"qual_output_profile_ids\"), col(\"index\") + lit(1)))\n        .otherwise(\n          element_at(col(\"non_qual_output_profile_ids\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n            .getField(\"non_qual_op_id\")\n        )\n        .cast(StringType))\n        .as(\"output_profile_id\"),\n      (when(col(\"index\") < col(\"qual_len\"), element_at(col(\"op_dtls\"), col(\"index\") + lit(1)).getField(\"job_ids\"))\n        .otherwise(\n          element_at(col(\"non_qual_output_profile_ids\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n            .getField(\"job_ids\")\n        ))\n        .as(\"job_ids\"),\n      (when(col(\"index\") >= col(\"qual_len\"),\n            element_at(col(\"err_msgs\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n      ).otherwise(lit(\"\"))).as(\"err_msg\")\n    ),\n    lengthRelatedGlobalExpressions = Map(\"qual_len\" -> size(col(\"qual_output_profile_ids\"))),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select((col(\"output_profile_id\")).as(\"output_profile_id\"),\n                                                   (col(\"job_ids\")).as(\"job_ids\"),\n                                                   (col(\"err_msg\")).as(\"err_msg\"),\n                                                   (col(\"as_of_dt\")).as(\"as_of_dt\")\n  )\n\n  val out = simpleSelect_in_DF\n",
-        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
-        "scriptMethodFooter" : "out"
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
       }
     },
     "by5mtQMLZ1DT15LoBl5gM$$BxPAbsTA4hN7znrksjdsi" : {

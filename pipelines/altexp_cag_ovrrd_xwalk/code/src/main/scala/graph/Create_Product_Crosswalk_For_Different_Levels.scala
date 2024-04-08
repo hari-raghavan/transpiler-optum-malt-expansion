@@ -203,26 +203,26 @@ object Create_Product_Crosswalk_For_Different_Levels {
       input.sortBy(r => (r.getAs[String]("run_eff_dt"), r.getAs[Int]("cag_priority"))).foreach { in =>
            val cag_priority = in.getAs[Int]("cag_priority")
            if (cag_priority == 1) {
-              baseline_prdcts = in.getAs[Array[Row]]("prdcts")
+              baseline_prdcts = in.getAs[Seq[Row]]("prdcts").toArray
               prdcts = baseline_prdcts
             } else if (cag_priority == 2) {
               starall_prdcts = Array.concat(baseline_prdcts.filter { x =>
-                                              in.getAs[Array[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty
+                                              in.getAs[Seq[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty
                                             }.distinct,
-                                            in.getAs[Array[Row]]("prdcts")
+                                            in.getAs[Seq[Row]]("prdcts").toArray
               )
               prdcts = starall_prdcts
             } else if (cag_priority == 3) {
               prdcts =
                 if (compareTo(starall_prdcts.length, 0) > 0)
-                  Array.concat(starall_prdcts.filter(x => in.getAs[Array[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
-                               in.getAs[Array[Row]]("prdcts")
+                  Array.concat(starall_prdcts.filter(x => in.getAs[Seq[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
+                               in.getAs[Seq[Row]]("prdcts").toArray
                   )
                 else
-                  Array.concat(baseline_prdcts.filter(x => in.getAs[Array[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
-                               in.getAs[Array[Row]]("prdcts")
+                  Array.concat(baseline_prdcts.filter(x => in.getAs[Seq[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
+                               in.getAs[Seq[Row]]("prdcts").toArray
                   )
-              c_prdcts = Array.concat(c_prdcts, Array.fill(1)(Row(in.getAs[String]("carrier"), in.getAs[Array[Row]]("prdcts"))))
+              c_prdcts = Array.concat(c_prdcts, Array.fill(1)(Row(in.getAs[String]("carrier"), in.getAs[Seq[Row]]("prdcts").toArray)))
             } else if (cag_priority == 4) {
               prdcts = if (compareTo(c_prdcts.length, 0) > 0) {
                 if (
@@ -230,7 +230,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
                     (c_prdcts
                       .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
                       .toArray).head
-                      .getAs[Array[Row]](1)
+                      .getAs[Seq[Row]](1).toArray
                   } catch {
                     case error: Throwable => null
                   }) != null
@@ -238,14 +238,14 @@ object Create_Product_Crosswalk_For_Different_Levels {
                   (c_prdcts
                     .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
                     .toArray).head
-                    .getAs[Array[Row]](1)
+                    .getAs[Seq[Row]](1).toArray
                 else
                   Array[Row]()
               } else
                 Array[Row]()
               _products = Array.concat(
-                prdcts.filter(x => in.getAs[Array[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
-                in.getAs[Array[Row]]("prdcts")
+                prdcts.filter(x => in.getAs[Seq[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
+                in.getAs[Seq[Row]]("prdcts").toArray
               )
               prdcts = if (compareTo(starall_prdcts.length, 0) > 0) {
                 Array.concat(
@@ -283,7 +283,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
                         (xx.getAs[String](0) == in.getAs[String]("carrier")) && (xx.getAs[String](1) == in.getAs[String]("account"))
                       }
                       .toArray).head
-                      .getAs[Array[Row]](2)
+                      .getAs[Seq[Row]](2).toArray
                   } catch {
                     case error: Throwable => null
                   }) != null
@@ -293,7 +293,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
                       (xx.getAs[String](0) == in.getAs[String]("carrier")) && (xx.getAs[String](1) == in.getAs[String]("account"))
                     }
                     .toArray).head
-                    .getAs[Array[Row]](2)
+                    .getAs[Seq[Row]](2).toArray
                 else
                   Array[Row]()
               } else
@@ -305,7 +305,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
                       (c_prdcts
                         .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
                         .toArray).head
-                        .getAs[Array[Row]](1)
+                        .getAs[Seq[Row]](1).toArray
                     } catch {
                       case error: Throwable => null
                     }) != null
@@ -313,13 +313,13 @@ object Create_Product_Crosswalk_For_Different_Levels {
                     (c_prdcts
                       .filter(xx => xx.getAs[String](0) == in.getAs[String]("carrier"))
                       .toArray).head
-                      .getAs[Array[Row]](1)
+                      .getAs[Seq[Row]](1).toArray
                   else
                     Array[Row]()
               }
               _products = Array.concat(
-                prdcts.filter(x => in.getAs[Array[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
-                in.getAs[Array[Row]]("prdcts")
+                prdcts.filter(x => in.getAs[Seq[Row]]("prdcts").filter(y => y.getAs[String]("ndc11") == x.getAs[String](0)).isEmpty).distinct,
+                in.getAs[Seq[Row]]("prdcts").toArray
               )
               prdcts = if (compareTo(starall_prdcts.length, 0) > 0) {
                 Array.concat(
@@ -349,7 +349,7 @@ object Create_Product_Crosswalk_For_Different_Levels {
             in.getAs[String]("data_path")
           ))
       }
-      outputRows
+      outputRows.toArray
     }, 
     ArrayType(
         StructType(

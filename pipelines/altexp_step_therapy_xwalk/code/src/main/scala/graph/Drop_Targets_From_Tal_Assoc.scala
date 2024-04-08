@@ -18,6 +18,9 @@ object Drop_Targets_From_Tal_Assoc {
     import _root_.io.prophecy.abinitio.ScalaFunctions._
     import scala.collection.mutable.ArrayBuffer
     
+    def _to_array_of_arrays(arr: Seq[Seq[Byte]]) = {
+      arr.map(_.toArray).toArray
+    }
     val process_udf = udf(
       { (input: Seq[Row]) ⇒
         var st_tar_prdcts = Array[Byte]()
@@ -27,15 +30,18 @@ object Drop_Targets_From_Tal_Assoc {
           var target_prdcts = ArrayBuffer[Array[Byte]]()
           var result        = row
           if (row.getAs[String](1) == "N/A - follows ST TAC")
-            st_tar_prdcts = _bv_or(st_tar_prdcts, _bv_vector_or(row.getAs[Array[Array[Byte]]](7)))
+            st_tar_prdcts = _bv_or(st_tar_prdcts, _bv_vector_or( 
+              _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](7))
+            ))
           else {
-            row.getAs[Array[Array[Byte]]](7).foreach { in_tar_prd ⇒
+            _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](7)).foreach { in_tar_prd ⇒
               target_prdcts.append(_bv_difference(in_tar_prd, st_tar_prdcts))
             }
           }
           result = updateIndexInRow(result,
                                     7,
-                                    if (row.getAs[String](1) == "N/A - follows ST TAC") row.getAs[Array[Array[Byte]]](7)
+                                    if (row.getAs[String](1) == "N/A - follows ST TAC") 
+                                      _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](7))
                                     else target_prdcts
           )
           results.append(result)

@@ -15,7 +15,7 @@ object Get_ALT_RUN_ID_jdbcdb_predicate_pushdown {
   def apply(context: Context, right: DataFrame, left: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
-    lazy val out = right.collectDataFrameColumnsToApplyFilter(List(""), left)
+    lazy val out = right.collectDataFrameColumnsToApplyFilter(List("nextval"), left)
     out
   }
 

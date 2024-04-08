@@ -19,15 +19,17 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
     import java.math.BigDecimal
     
     def lv_prdcts(rec: org.apache.spark.sql.Column) = {
-      when(rec.getField("qualifier_cd") == lit("TSD"),
-           coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
+      when(
+        rec.getField("qualifier_cd") == lit("TSD"),
+        coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
       ).when(
         array_contains(array(lit("PA"), lit("ST"), lit("SPECIALTY"), lit("ST_STEP_NUM")), rec.getField("qualifier_cd")),
         coalesce(
-          lookup("Formulary_Rule_Prdcts",
-                 rec.getField("qualifier_cd"),
-                 rec.getField("operator"),
-                 rec.getField("compare_value")
+          lookup(
+            "Formulary_Rule_Prdcts",
+            rec.getField("qualifier_cd"),
+            rec.getField("operator"),
+            rec.getField("compare_value")
           ).getField("products"),
           bv_all_zeros()
         )
@@ -67,7 +69,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
               } else {
                 inclusion_prdcts = _bv_and(inclusion_prdcts, or_products)
               }
-              or_products = bv_all_zeros()
+              or_products = _bv_all_zeros()
             }
           } else {
             is_hrm = 0
@@ -87,7 +89,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
     
         inputRows.foreach { row ⇒
           var _target_prdcts = _bv_all_zeros()
-          var _alt_prdcts    = bv_all_zeros()
+          var _alt_prdcts    = _bv_all_zeros()
           var index          = 0
     
           if (priority != row.getAs[String](2)) {

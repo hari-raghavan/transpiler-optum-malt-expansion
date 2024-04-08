@@ -33,16 +33,16 @@ object RLP_Aggregate_Products_at_UDL_level {
         inputRows.zipWithIndex.foreach {
           case (in, idx) => {
             if (in.getAs[String]("inclusion_cd") == "E")
-              exclude_products = _bv_or(exclude_products, in.getAs[Array[Byte]]("products"))
+              exclude_products = _bv_or(exclude_products, in.getAs[Seq[Byte]]("products").toArray)
             else if (in.getAs[String]("inclusion_cd") == "I") {
-              new_products =  _bv_difference(in.getAs[Array[Byte]]("products"), include_products, exclude_products)
+              new_products =  _bv_difference(in.getAs[Seq[Byte]]("products").toArray, include_products, exclude_products)
               include_products = _bv_or(include_products, new_products)
-              contents = Array.concat(contents, Array(new_products))
+              contents = Array.concat(contents, Array.fill(1)(new_products))
             }
             udl_id = in.getAs[String]("udl_id")
             udl_nm = in.getAs[String]("udl_nm")
             udl_desc = in.getAs[String]("udl_desc")
-            products = in.getAs[Array[Byte]]("products")
+            products = in.getAs[Seq[Byte]]("products").toArray
             eff_dt = in.getAs[String]("eff_dt")
             term_dt = in.getAs[String]("term_dt")
             newline = in.getAs[String]("newline")

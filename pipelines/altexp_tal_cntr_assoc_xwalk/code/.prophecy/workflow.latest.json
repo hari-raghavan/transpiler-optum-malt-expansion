@@ -1,0 +1,5651 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "altexp_tal_cntr_assoc_xwalk",
+    "uri" : "pipelines/altexp_tal_cntr_assoc_xwalk",
+    "pipelineSettingsInfo" : {
+      "hasApplication" : false
+    },
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "UDL_CAG_EXP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CAG_TAL_CONTAINER_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "UDL_BASELINE_EXP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CARRIER",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_PRODUCTS_LKP",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAL_ASSOC_DTL",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : "20240404"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAL_DTL",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "SHARED_QUAL_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAL_NAME",
+          "kind" : {
+            "type" : "string",
+            "value" : "ORX_STANDARD"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e1",
+    "source" : "Filter_Exclusion_Association",
+    "sourcePort" : "Filter_Exclusion_Association__out1",
+    "target" : "Create_LKP_for_override_qualifiers_input_select_filter",
+    "targetPort" : "Create_LKP_for_override_qualifiers_input_select_filter__in"
+  }, {
+    "id" : "e4",
+    "source" : "Select_Valid_Associations",
+    "sourcePort" : "Select_Valid_Associations__out",
+    "target" : "SWG",
+    "targetPort" : "SWG__in"
+  }, {
+    "id" : "e9",
+    "source" : "Process_TAL_Association_Rows_Reformat",
+    "sourcePort" : "Process_TAL_Association_Rows_Reformat__out",
+    "target" : "Process_TAL_Association_Rows_output_select_filter",
+    "targetPort" : "Process_TAL_Association_Rows_output_select_filter__in"
+  }, {
+    "id" : "e2",
+    "source" : "Create_LKP_for_override_qualifiers_input_select_filter",
+    "sourcePort" : "Create_LKP_for_override_qualifiers_input_select_filter__out",
+    "target" : "Create_LKP_for_override_qualifiers",
+    "targetPort" : "Create_LKP_for_override_qualifiers__in"
+  }, {
+    "id" : "e12",
+    "source" : "Create_LKP_for_override_qualifiers_Reformat",
+    "sourcePort" : "Create_LKP_for_override_qualifiers_Reformat__out",
+    "target" : "LKP_Shared_Qualifier_Products_lookup",
+    "targetPort" : "LKP_Shared_Qualifier_Products_lookup__in"
+  }, {
+    "id" : "e11",
+    "source" : "Create_LKP_for_override_qualifiers",
+    "sourcePort" : "Create_LKP_for_override_qualifiers__out",
+    "target" : "Create_LKP_for_override_qualifiers_Reformat",
+    "targetPort" : "Create_LKP_for_override_qualifiers_Reformat__in"
+  }, {
+    "id" : "e13",
+    "source" : "Create_LKP_for_override_qualifiers_Reformat",
+    "sourcePort" : "Create_LKP_for_override_qualifiers_Reformat__out",
+    "target" : "LKP_Shared_Qualifier_Products",
+    "targetPort" : "LKP_Shared_Qualifier_Products__in"
+  }, {
+    "id" : "e5",
+    "source" : "CONC",
+    "sourcePort" : "CONC__out",
+    "target" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+    "targetPort" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__in"
+  }, {
+    "id" : "e17",
+    "source" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
+    "sourcePort" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out1",
+    "target" : "Select_TALs_w_o_Nested_TALReformat_1",
+    "targetPort" : "Select_TALs_w_o_Nested_TALReformat_1__in"
+  }, {
+    "id" : "e18",
+    "source" : "Select_TALs_w_o_Nested_TALReformat_0",
+    "sourcePort" : "Select_TALs_w_o_Nested_TALReformat_0__out",
+    "target" : "MERGE_UnionAll",
+    "targetPort" : "MERGE_UnionAll__in3"
+  }, {
+    "id" : "e19",
+    "source" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
+    "sourcePort" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out0",
+    "target" : "Select_TALs_w_o_Nested_TALReformat_0",
+    "targetPort" : "Select_TALs_w_o_Nested_TALReformat_0__in"
+  }, {
+    "id" : "e7",
+    "source" : "TAL_Container_Dtls",
+    "sourcePort" : "TAL_Container_Dtls__out",
+    "target" : "Select_TALs_w_o_Nested_TAL_Filter_select",
+    "targetPort" : "Select_TALs_w_o_Nested_TAL_Filter_select__in"
+  }, {
+    "id" : "e20",
+    "source" : "Select_TALs_w_o_Nested_TAL_Filter_select",
+    "sourcePort" : "Select_TALs_w_o_Nested_TAL_Filter_select__out",
+    "target" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
+    "targetPort" : "Select_TALs_w_o_Nested_TAL_RowDistributor__in"
+  }, {
+    "id" : "e10",
+    "source" : "Process_TAL_Association_Rows_output_select_filter",
+    "sourcePort" : "Process_TAL_Association_Rows_output_select_filter__out",
+    "target" : "Filter_Exclusion_Association",
+    "targetPort" : "Filter_Exclusion_Association__in"
+  }, {
+    "id" : "e22",
+    "source" : "Filter_Exclusion_Association",
+    "sourcePort" : "Filter_Exclusion_Association__out1",
+    "target" : "CONC",
+    "targetPort" : "CONC__in3"
+  }, {
+    "id" : "e21",
+    "source" : "Filter_Exclusion_Association",
+    "sourcePort" : "Filter_Exclusion_Association__out0",
+    "target" : "CONC",
+    "targetPort" : "CONC__in4"
+  }, {
+    "id" : "e23",
+    "source" : "Expanded_UDL",
+    "sourcePort" : "Expanded_UDL__out",
+    "target" : "Expanded_UDL_lookup",
+    "targetPort" : "Expanded_UDL_lookup__in"
+  }, {
+    "id" : "e24",
+    "source" : "LKP_Rule_Products",
+    "sourcePort" : "LKP_Rule_Products__out",
+    "target" : "LKP_Rule_Products_lookup",
+    "targetPort" : "LKP_Rule_Products_lookup__in"
+  }, {
+    "id" : "e0",
+    "source" : "MERGE_UnionAll",
+    "sourcePort" : "MERGE_UnionAll__out",
+    "target" : "MERGE",
+    "targetPort" : "MERGE__in"
+  }, {
+    "id" : "e26",
+    "source" : "MERGE",
+    "sourcePort" : "MERGE__out",
+    "target" : "Select_Valid_Associations",
+    "targetPort" : "Select_Valid_Associations__left"
+  }, {
+    "id" : "e25",
+    "source" : "TAL_Assoc_Dtl",
+    "sourcePort" : "TAL_Assoc_Dtl__out",
+    "target" : "Select_Valid_Associations",
+    "targetPort" : "Select_Valid_Associations__right"
+  }, {
+    "id" : "ni3t1ScY24OEcvjvcwJeP",
+    "source" : "Select_TALs_w_o_Nested_TALReformat_1",
+    "sourcePort" : "Select_TALs_w_o_Nested_TALReformat_1__out",
+    "target" : "khcTMge33bNyncVCAtajG$$dHU44_i1Y_6WdK1LTdBQW",
+    "targetPort" : "WeIqSLdRo2rTpAfhlU1-0$$9TcgiYDLqjnIuZuXfXlq_"
+  }, {
+    "id" : "83x6YptjJpRbi_d8IKvTi$$zSZPlxUJ7WIV2_q4GYzCa",
+    "source" : "khcTMge33bNyncVCAtajG$$dHU44_i1Y_6WdK1LTdBQW",
+    "sourcePort" : "_P4PjU8CTVdYZjM8DUQPK$$Ayxej2g-39HEn_poHCJ6U",
+    "target" : "MERGE_UnionAll",
+    "targetPort" : "MERGE_UnionAll__in2"
+  }, {
+    "id" : "rw8qlVAWcU4EwppwD7uUz",
+    "source" : "SWG",
+    "sourcePort" : "SWG__out",
+    "target" : "R4RGQOsO_QIX-RuOXUbDN$$BtW3wbzJ1cWOHqeYZeM6e",
+    "targetPort" : "_aTsz9dTioIC4pDVEneZE$$I82IhUWdT7OFIA9qGsefj"
+  }, {
+    "id" : "ZhQqeLEYqKZFNnNgy1lpZ$$Vd09I3opEquzUM41J9uk8",
+    "source" : "R4RGQOsO_QIX-RuOXUbDN$$BtW3wbzJ1cWOHqeYZeM6e",
+    "sourcePort" : "_aVBLzVSlM6SWeK2ApS73$$pyPvc9rG7F2y7cTO1BmPu",
+    "target" : "Process_TAL_Association_Rows_Reformat",
+    "targetPort" : "Process_TAL_Association_Rows_Reformat__in"
+  }, {
+    "id" : "uwsyli_sbkiDdbySOSSkS",
+    "source" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+    "sourcePort" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__out",
+    "target" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
+    "targetPort" : "wOpRm6NvU65jVYwnMkt5T$$jKl852afWnT-F6Mobkg63"
+  }, {
+    "id" : "Nqiu2iDo9kGp1I3Y4e6La$$tVf0DGyFM521Jce3cikYR",
+    "source" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
+    "sourcePort" : "M96S0uG8kOCk-YWig9jqA$$zS0-RdYJDWtMlg3hEWKQA",
+    "target" : "TAL_Container_w_Assoc_in_BV_Products",
+    "targetPort" : "TAL_Container_w_Assoc_in_BV_Products__in"
+  } ],
+  "processes" : {
+    "TAL_Assoc_Dtl" : {
+      "id" : "TAL_Assoc_Dtl",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TAL_Assoc_Dtl",
+        "slug" : "TAL_Assoc_Dtl",
+        "x" : 1220,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TAL_Assoc_Dtl__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAL_Assoc_Dtl"
+      }
+    },
+    "R4RGQOsO_QIX-RuOXUbDN$$BtW3wbzJ1cWOHqeYZeM6e" : {
+      "id" : "R4RGQOsO_QIX-RuOXUbDN$$BtW3wbzJ1cWOHqeYZeM6e",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Process_TAL_Association_Rows",
+        "slug" : "Process_TAL_Association_Rows",
+        "x" : 1820,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "_aTsz9dTioIC4pDVEneZE$$I82IhUWdT7OFIA9qGsefj",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_reqd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "_aVBLzVSlM6SWeK2ApS73$$pyPvc9rG7F2y7cTO1BmPu",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport java.math.BigDecimal\n\nval process_udf = udf(\n  { (inputRows: Seq[Row]) ⇒\n    var target_prdcts              = Array[Array[Byte]]()\n    var alt_prdcts                 = Array[Byte]()\n    var target_udl_name            = Array[String]()\n    var alternate_udl_name         = Array[String]()\n    var alt_constituent_prdcts_vec = Array[Row]()\n    var constituent_grp_vec        = Array[String]()\n\n    val inputRowsSorted = inputRows.toArray.sortBy(\n      r => (r.getAs[String](\"tal_assoc_name\"), \n      r.getAs[String](\"alt_rank\"), \n      r.getAs[String](\"priority\"), \n      r.getAs[String](\"constituent_group\"), \n      r.getAs[String](\"constituent_rank\"))\n    )\n    inputRowsSorted.foreach { row ⇒\n      var trgt_prdcts_lkp = _bv_all_zeros()\n      var alt_prdcts_lkp  = _bv_all_zeros()\n\n      if (!_isnull(row.getAs[String](6)) && !target_udl_name.contains(row.getAs[String](6))) {\n        trgt_prdcts_lkp = if (row.getAs[Seq[Byte]](17) != null) {\n          row.getAs[Seq[Byte]](17).toArray\n        } else {\n          _bv_all_zeros()\n        }\n        if (target_prdcts.nonEmpty && _bv_count_one_bits(trgt_prdcts_lkp) > 0) {\n          trgt_prdcts_lkp = _bv_difference(trgt_prdcts_lkp, _bv_vector_or(target_prdcts))\n        }\n\n        target_udl_name = Array.concat(target_udl_name, Array.fill(1)(row.getAs[String](6)))\n        if (bv_count_one_bits(trgt_prdcts_lkp)) {\n          target_prdcts = Array.concat(target_prdcts, Array.fill(1)(trgt_prdcts_lkp))\n        }\n      }\n\n      if (!_isnull(row.getAs[String](7)) && !alternate_udl_name.contains(row.getAs[String](7))) {\n        alt_prdcts_lkp = if (row.getAs[Seq[Byte]](18) != null) {\n          row.getAs[Seq[Byte]](18).toArray\n        } else {\n          _bv_all_zeros()\n        }\n        if (alt_constituent_prdcts_vec.nonEmpty && _bv_count_one_bits(alt_prdcts_lkp) > 0) {\n          alt_prdcts_lkp = _bv_difference(alt_prdcts_lkp, alt_prdcts)\n          alt_prdcts = _bv_or(alt_prdcts,                 alt_prdcts_lkp)\n        }\n\n        alternate_udl_name = Array.concat(alternate_udl_name, Array.fill(1)(row.getAs[String](7)))\n\n        if (!_isnull(row.getAs[String](10))) {\n          if (row.getAs[String](10) == \"Y\" && !constituent_grp_vec.contains(row.getAs[String](10))) {\n            constituent_grp_vec = Array.concat(constituent_grp_vec, row.getAs[String](10))\n          }\n          if (_bv_count_one_bits(alt_prdcts_lkp)) {\n            alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                                      Row(\n                                                        alt_prdcts_lkp,\n                                                        row.getAs[String](10),\n                                                        row.getAs[String](11),\n                                                        row.getAs[String](7)\n                                                      )\n            )\n          }\n        } else {\n          if (_bv_count_one_bits(alt_prdcts_lkp)) {\n            alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                                      Row(\n                                                        alt_prdcts_lkp,\n                                                        null,\n                                                        null,\n                                                        row.getAs[String](7)\n                                                      )\n            )\n          }\n        }\n      }\n    }\n\n    var lastRow = inputRows.toArray.last\n\n    if (lastRow.getAs[String](5).toInt == 3) {\n      target_prdcts =\n        if (target_prdcts.isEmpty && alt_constituent_prdcts_vec.nonEmpty) Array(_bv_all_zeros()) else target_prdcts\n      alt_constituent_prdcts_vec =\n        if (target_prdcts.nonEmpty && alt_constituent_prdcts_vec.isEmpty) Array(Row(_bv_all_zeros(), \"\", \"\", \"\", \"\"))\n        else alt_constituent_prdcts_vec\n    }\n\n    Row(\n      lastRow.getAs[BigDecimal](0),\n      lastRow.getAs[String](1),\n      lastRow.getAs[String](3),\n      lastRow.getAs[String](6),\n      lastRow.getAs[String](4),\n      lastRow.getAs[String](15),\n      lastRow.getAs[String](5),\n      target_prdcts,\n      alt_constituent_prdcts_vec,\n      lastRow.getAs[String](12),\n      lastRow.getAs[String](13),\n      lastRow.getAs[String](14),\n      constituent_grp_vec,\n      lastRow.getAs[String](16)\n    )\n  },\n  StructType(\n    StructField(\"tal_id\",            DecimalType(10, 0),          true),\n    StructField(\"tal_name\",          StringType,                  true),\n    StructField(\"tal_assoc_name\",    StringType,                  true),\n    StructField(\"tar_udl_nm\",        StringType,                  true),\n    StructField(\"tal_desc\",          StringType,                  true),\n    StructField(\"priority\",          StringType,                  true),\n    StructField(\"tal_assoc_type_cd\", StringType,                  true),\n    StructField(\"target_prdcts\",     ArrayType(BinaryType, true), true),\n    StructField(\n      \"alt_constituent_prdcts\",\n      ArrayType(\n        StructType(\n          StructField(\"alt_prdcts\",        BinaryType, true),\n          StructField(\"constituent_group\", StringType, true),\n          StructField(\"constituent_reqd\",  StringType, true),\n          StructField(\"udl_nm\",            StringType, true)\n        ),\n        true\n      ),\n      true\n    ),\n    StructField(\"shared_qual\",         StringType,                  true),\n    StructField(\"override_tac_name\",   StringType,                  true),\n    StructField(\"override_tar_name\",   StringType,                  true),\n    StructField(\"constituent_grp_vec\", ArrayType(StringType, true), true),\n    StructField(\"newline\",             StringType,                  true)\n  )\n)\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"tal_assoc_id\")\n  .agg(\n    collect_list(\n      struct(\n        (origColumns :+ lookup(\"Expanded_UDL\", col(\"target_udl_name\"))\n          .getField(\"products\") :+ lookup(\"Expanded_UDL\", col(\"alt_udl_name\")).getField(\"products\")): _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1" : {
+      "id" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2",
+        "slug" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2",
+        "x" : 3080,
+        "y" : 140,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "wOpRm6NvU65jVYwnMkt5T$$jKl852afWnT-F6Mobkg63",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "M96S0uG8kOCk-YWig9jqA$$zS0-RdYJDWtMlg3hEWKQA",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport scala.util.control._\n\ndef _to_array_of_arrays(arr: Seq[Seq[Byte]]) =\n    arr.map(_.toArray).toArray\n\nval process_udf = udf({ (input: Seq[Row]) =>\n    val outputRows = scala.collection.mutable.ArrayBuffer[Row]()\n\n    var excl_target_prdcts = Array[Byte]()\n    var excl_alt_prdcts = Array[Byte]()\n    var target_prdcts = Array[Array[Byte]]()\n    var shared_qual_prdcts = Array[Array[Byte]]()\n    var alt_constituent_prdcts_vec = Array[Row]()\n    var lv_constituent_grp_vec = Array[String]()\n    input.foreach { in =>\n        var lv_target_prdcts = Array[Byte]()\n        var lv_alt_prdcts = Array[Byte]()\n        target_prdcts = Array[Array[Byte]]()\n        alt_constituent_prdcts_vec = Array[Row]()\n        lv_constituent_grp_vec = Array[String]()\n\n        if (in.getAs[String](6).toInt == 3) {\n            excl_target_prdcts = _bv_or(excl_target_prdcts, _bv_vector_or(_to_array_of_arrays(in.getAs[Seq[Seq[Byte]]](7))))\n            excl_alt_prdcts = _bv_or(excl_alt_prdcts, _bv_vector_or(\n                in.getAs[Seq[Row]](8).map ( alt_consti_prdcts =>\n                    alt_consti_prdcts.getAs[Seq[Byte]](0).toArray\n                )\n            ))\n        } else {\n            if (in.getAs[String](9) == \"N/A\") {\n                var shared_qual_target_prdcts = Array[Byte]()\n                var shared_qual_alt_prdcts = Array[Byte]()\n                var lv_target_prdcts_vec = Array[Array[Byte]]()\n                shared_qual_target_prdcts = _bv_difference(in.getAs[Seq[Byte]](7).head, excl_target_prdcts)\n                shared_qual_alt_prdcts = if (in.getAs[Seq[Row]](8).nonEmpty) {\n                    _bv_difference(in.getAs[Seq[Row]](8).head.getAs[Seq[Byte]](0).toArray, excl_alt_prdcts)\n                } else {\n                    _bv_all_zeros()\n                }\n                if ( _bv_count_one_bits(shared_qual_alt_prdcts) )  {\n                    shared_qual_prdcts = _to_array_of_arrays(in.getAs[Seq[Seq[Byte]]](14))\n                    val loop = new Breaks;\n                    loop.breakable {\n                        shared_qual_prdcts.foreach { shared_prdcts =>\n                             if(_bv_count_one_bits(shared_qual_target_prdcts) && _bv_count_one_bits(shared_qual_alt_prdcts) ) {\n                                lv_target_prdcts = _bv_and(shared_qual_target_prdcts, shared_prdcts)\n                                if( _bv_count_one_bits(lv_target_prdcts) ) {\n                                    shared_qual_target_prdcts = _bv_difference(shared_qual_target_prdcts, lv_target_prdcts)\n                                    lv_alt_prdcts             = _bv_and(shared_qual_alt_prdcts, shared_prdcts)\n                                    if ( _bv_count_one_bits(lv_alt_prdcts) ) {\n                                        target_prdcts = Array.concat(target_prdcts, lv_target_prdcts)\n                                        alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                            Row(lv_alt_prdcts, in.getAs[Seq[Row]](8).head.getAs[String](3), \"\", \"\")\n                                        )\n                                        shared_qual_alt_prdcts = _bv_difference(shared_qual_alt_prdcts, lv_alt_prdcts)\n                                    } else {\n                                        lv_target_prdcts_vec = Array.concat(lv_target_prdcts_vec, lv_target_prdcts)\n                                    }\n                                }\n                             } else {\n                                loop.break\n                             }\n                        }\n                    }\n                }\n                if ( _bv_count_one_bits(shared_qual_target_prdcts) ) {\n                    lv_target_prdcts_vec = Array.concat(lv_target_prdcts_vec, shared_qual_target_prdcts)\n                }\n                target_prdcts = Array.concat(target_prdcts, lv_target_prdcts_vec)\n            } else {\n                in.getAs[Seq[Byte]](7).foreach { target_prds =>\n                    lv_target_prdcts = _bv_difference(target_prds, excl_target_prdcts)\n                    if(bv_count_one_bits(lv_target_prdcts)) {\n                        target_prdcts = Array.concat(target_prdcts, lv_target_prdcts)\n                    }\n                }\n                \n                in.getAs[Seq[Row]](8).foreach { alt_constituent_prdct =>\n                    lv_alt_prdcts = _bv_difference(alt_constituent_prdct.getAs[Seq[Byte]](0).toArray, excl_alt_prdcts)\n                    if (_bv_count_one_bits(lv_alt_prdcts)) {\n                        if (!_isnull(alt_constituent_prdct.getAs[String](1)) \n                            && !lv_constituent_grp_vec.contains((alt_constituent_prdct.getAs[String](1)))\n                            && alt_constituent_prdct.getAs[String](2) == \"Y\") {\n\n                            lv_constituent_grp_vec = Array.concat(lv_constituent_grp_vec, alt_constituent_prdct.getAs[String](1))  \n                        }\n                        alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                         Row(\n                            lv_alt_prdcts,\n                            alt_constituent_prdct.getAs[String](1),\n                            alt_constituent_prdct.getAs[String](2),\n                            alt_constituent_prdct.getAs[String](3)\n                         )\n                        )\n                    }\n                }\n\n                if (in.getAs[Seq[String]].toSet.diff(lv_constituent_grp_vec.toSet).nonEmpty) {\n                    alt_constituent_prdcts_vec = alt_constituent_prdcts_vec.filter(xx => xx.getAs[String](1) == null)\n                    lv_constituent_grp_vec = Array[String]()\n                }\n            }\n        }\n        outputRows.append(\n            Row(\n                in.getAs[BigDecimal](0),\n                in.getAs[String](1),\n                in.getAs[String](2),\n                in.getAs[String](3),\n                in.getAs[String](4),\n                in.getAs[String](5),\n                in.getAs[String](6),\n                target_prdcts,\n                alt_constituent_prdcts_vec,\n                in.getAs[String](9),\n                in.getAs[String](10),\n                in.getAs[String](11),\n                lv_constituent_grp_vec,\n                in.getAs[String](13),\n            )\n        )\n    }\n    outputRows.toArray\n},\nArrayType(\n    StructType(\n  StructField(\"tal_id\",            DecimalType(10, 0),          true),\n  StructField(\"tal_name\",          StringType,                  true),\n  StructField(\"tal_assoc_name\",    StringType,                  true),\n  StructField(\"tar_udl_nm\",        StringType,                  true),\n  StructField(\"tal_desc\",          StringType,                  true),\n  StructField(\"priority\",          StringType,                  true),\n  StructField(\"tal_assoc_type_cd\", StringType,                  true),\n  StructField(\"target_prdcts\",     ArrayType(BinaryType, true), true),\n  StructField(\n    \"alt_constituent_prdcts\",\n    ArrayType(\n      StructType(\n        StructField(\"alt_prdcts\",        BinaryType, true),\n        StructField(\"constituent_group\", StringType, true),\n        StructField(\"constituent_reqd\",  StringType, true),\n        StructField(\"udl_nm\",            StringType, true)\n      ),\n      true\n    ),\n    true\n  ),\n  StructField(\"shared_qual\",         StringType,                  true),\n  StructField(\"override_tac_name\",   StringType,                  true),\n  StructField(\"override_tar_name\",   StringType,                  true),\n  StructField(\"constituent_grp_vec\", ArrayType(StringType, true), true),\n  StructField(\"newline\",             StringType,                  false)\n)\n))\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n    .groupBy(\"run_eff_dt\")\n    .agg(\n    collect_list(\n        struct(\n            (origColumns :+ lookup(\"LKP_Shared_Qualifier_Products\", col(\"shared_qual\")).getField(\"shared_qual_prdcts\") ) : _*\n        )\n    ).alias(\"inputRows\")\n    )\n    .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n    .select(col(\"output.*\"))",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
+    "CONC" : {
+      "id" : "CONC",
+      "component" : "SetOperation",
+      "metadata" : {
+        "label" : "CONC",
+        "slug" : "CONC",
+        "x" : 2680,
+        "y" : 140,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "CONC__in3",
+          "slug" : "in3",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "CONC__in4",
+          "slug" : "in4",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "CONC__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "operationType" : "unionAll",
+        "allowMissingColumns" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SetOperation",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "LKP_Shared_Qualifier_Products" : {
+      "id" : "LKP_Shared_Qualifier_Products",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "LKP_Shared_Qualifier_Products",
+        "slug" : "LKP_Shared_Qualifier_Products",
+        "x" : 3280,
+        "y" : 540,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_Shared_Qualifier_Products__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/LKP_Shared_Qualifier_Products"
+      }
+    },
+    "LKP_Rule_Products_lookup" : {
+      "id" : "LKP_Rule_Products_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LKP_Rule_Products_lookup",
+        "slug" : "LKP_Rule_Products_lookup",
+        "x" : 220,
+        "y" : 420,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_Rule_Products_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "qualifier_cd" ],
+        "valueColumns" : [ "qualifier_cd", "operator", "compare_value", "products" ],
+        "processName" : "LKP_Rule_Products"
+      }
+    },
+    "Select_TALs_w_o_Nested_TAL_Filter_select" : {
+      "id" : "Select_TALs_w_o_Nested_TAL_Filter_select",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Select_TALs_w_o_Nested_TAL_Filter_select",
+        "slug" : "Select_TALs_w_o_Nested_TAL_Filter_select",
+        "x" : 220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TAL_Filter_select__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TAL_Filter_select__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "(col(\"tal_name\") === lit(Config.TAL_NAME))\n    .and((to_date(col(\"eff_dt\"), \"yyyyMMdd\") <= to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\")).and(to_date(col(\"term_dt\"), \"yyyyMMdd\") >= to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\")))"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Select_TALs_w_o_Nested_TAL_RowDistributor" : {
+      "id" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
+      "component" : "RowDistributor",
+      "metadata" : {
+        "label" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
+        "slug" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
+        "x" : 420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TAL_RowDistributor__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out0",
+          "slug" : "out0"
+        }, {
+          "id" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out1",
+          "slug" : "out1"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "outports" : [ {
+          "path" : "out0",
+          "id" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out0",
+          "model" : {
+            "format" : "scala",
+            "expression" : "!isnull(col(\"tal_assoc_name\"))"
+          }
+        }, {
+          "path" : "out1",
+          "id" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out1",
+          "model" : {
+            "format" : "scala",
+            "expression" : "isnull(col(\"tal_assoc_name\"))"
+          }
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/RowDistributor",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Expanded_UDL_lookup" : {
+      "id" : "Expanded_UDL_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Expanded_UDL_lookup",
+        "slug" : "Expanded_UDL_lookup",
+        "x" : 220,
+        "y" : 20,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Expanded_UDL_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "udl_nm" ],
+        "valueColumns" : [ "udl_id", "udl_nm", "udl_desc", "products", "eff_dt", "term_dt", "contents", "newline" ],
+        "processName" : "Expanded_UDL"
+      }
+    },
+    "LKP_Rule_Products" : {
+      "id" : "LKP_Rule_Products",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "LKP_Rule_Products",
+        "slug" : "LKP_Rule_Products",
+        "x" : 20,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "LKP_Rule_Products__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/LKP_Rule_Products"
+      }
+    },
+    "SWG" : {
+      "id" : "SWG",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "SWG",
+        "slug" : "SWG",
+        "x" : 1620,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "SWG__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_reqd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "SWG__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_name\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_rank\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"priority\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"constituent_group\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"constituent_rank\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "MERGE_UnionAll" : {
+      "id" : "MERGE_UnionAll",
+      "component" : "SetOperation",
+      "metadata" : {
+        "label" : "MERGE_UnionAll",
+        "slug" : "MERGE_UnionAll",
+        "x" : 1020,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "MERGE_UnionAll__in3",
+          "slug" : "in3",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "MERGE_UnionAll__in2",
+          "slug" : "in2",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "MERGE_UnionAll__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "operationType" : "unionAll",
+        "allowMissingColumns" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SetOperation",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Process_TAL_Association_Rows_output_select_filter" : {
+      "id" : "Process_TAL_Association_Rows_output_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Process_TAL_Association_Rows_output_select_filter",
+        "slug" : "Process_TAL_Association_Rows_output_select_filter",
+        "x" : 2220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Process_TAL_Association_Rows_output_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Process_TAL_Association_Rows_output_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "Process_TAL_Association_Rows_output_select_filter__in##tal_assoc_type_cd", "Process_TAL_Association_Rows_output_select_filter__in##target_prdcts", "Process_TAL_Association_Rows_output_select_filter__in##alt_constituent_prdcts" ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "when(\n    (array_contains(array(lit(1), lit(2)), col(\"tal_assoc_type_cd\").cast(IntegerType))\n      .and(!size(col(\"target_prdcts\")).cast(BooleanType)))\n      .or((!size(col(\"target_prdcts\")).cast(BooleanType)).and(!size(col(\"alt_constituent_prdcts\")).cast(BooleanType))),\n    lit(0).cast(BooleanType)\n  ).otherwise(lit(1).cast(BooleanType))"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Select_TALs_w_o_Nested_TALReformat_0" : {
+      "id" : "Select_TALs_w_o_Nested_TALReformat_0",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Select_TALs_w_o_Nested_TALReformat_0",
+        "slug" : "Select_TALs_w_o_Nested_TALReformat_0",
+        "x" : 820,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TALReformat_0__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TALReformat_0__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "tal_dtl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_dtl_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_dtl_type_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_dtl_type_cd\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "nested_tal_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"nested_tal_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_assoc_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"priority\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Expanded_UDL" : {
+      "id" : "Expanded_UDL",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Expanded_UDL",
+        "slug" : "Expanded_UDL",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Expanded_UDL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Expanded_UDL"
+      }
+    },
+    "TAL_Container_w_Assoc_in_BV_Products" : {
+      "id" : "TAL_Container_w_Assoc_in_BV_Products",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "TAL_Container_w_Assoc_in_BV_Products",
+        "slug" : "TAL_Container_w_Assoc_in_BV_Products",
+        "x" : 3280,
+        "y" : 140,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TAL_Container_w_Assoc_in_BV_Products__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAL_Container_w_Assoc_in_BV_Products"
+      }
+    },
+    "Filter_Exclusion_Association" : {
+      "id" : "Filter_Exclusion_Association",
+      "component" : "RowDistributor",
+      "metadata" : {
+        "label" : "Filter_Exclusion_Association",
+        "slug" : "Filter_Exclusion_Association",
+        "x" : 2420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Filter_Exclusion_Association__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Filter_Exclusion_Association__out0",
+          "slug" : "out0"
+        }, {
+          "id" : "Filter_Exclusion_Association__out1",
+          "slug" : "out1"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "outports" : [ {
+          "path" : "out0",
+          "id" : "Filter_Exclusion_Association__out0",
+          "model" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_type_cd\").cast(StringType) === lit(3)"
+          }
+        }, {
+          "path" : "out1",
+          "id" : "Filter_Exclusion_Association__out1",
+          "model" : {
+            "format" : "scala",
+            "expression" : "!(col(\"tal_assoc_type_cd\").cast(StringType) === lit(3))"
+          }
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/RowDistributor",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Process_TAL_Association_Rows_Reformat" : {
+      "id" : "Process_TAL_Association_Rows_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Process_TAL_Association_Rows_Reformat",
+        "slug" : "Process_TAL_Association_Rows_Reformat",
+        "x" : 2020,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Process_TAL_Association_Rows_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Process_TAL_Association_Rows_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "tal_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_assoc_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tar_udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tar_udl_nm\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"priority\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_assoc_type_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_type_cd\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "target_prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"target_prdcts\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_constituent_prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_constituent_prdcts\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "shared_qual",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"shared_qual\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "override_tac_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"override_tac_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "override_tar_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"override_tar_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "constituent_grp_vec",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"constituent_grp_vec\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "MERGE" : {
+      "id" : "MERGE",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "MERGE",
+        "slug" : "MERGE",
+        "x" : 1220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "MERGE__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "MERGE__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"priority\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "TAL_Container_Dtls" : {
+      "id" : "TAL_Container_Dtls",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TAL_Container_Dtls",
+        "slug" : "TAL_Container_Dtls",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TAL_Container_Dtls__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAL_Container_Dtls"
+      }
+    },
+    "Create_LKP_for_override_qualifiers_input_select_filter" : {
+      "id" : "Create_LKP_for_override_qualifiers_input_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Create_LKP_for_override_qualifiers_input_select_filter",
+        "slug" : "Create_LKP_for_override_qualifiers_input_select_filter",
+        "x" : 2680,
+        "y" : 440,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_LKP_for_override_qualifiers_input_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_LKP_for_override_qualifiers_input_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "col(\"shared_qual\") =!= lit(\"N/A\")"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association" : {
+      "id" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+        "slug" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+        "x" : 2880,
+        "y" : 140,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Select_TALs_w_o_Nested_TALReformat_1" : {
+      "id" : "Select_TALs_w_o_Nested_TALReformat_1",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Select_TALs_w_o_Nested_TALReformat_1",
+        "slug" : "Select_TALs_w_o_Nested_TALReformat_1",
+        "x" : 620,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TALReformat_1__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Select_TALs_w_o_Nested_TALReformat_1__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "tal_dtl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_dtl_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_dtl_type_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_dtl_type_cd\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "nested_tal_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"nested_tal_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_assoc_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"priority\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "khcTMge33bNyncVCAtajG$$dHU44_i1Y_6WdK1LTdBQW" : {
+      "id" : "khcTMge33bNyncVCAtajG$$dHU44_i1Y_6WdK1LTdBQW",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Get_the_association_details_for_nested_TAL",
+        "slug" : "Get_the_association_details_for_nested_TAL",
+        "x" : 820,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "WeIqSLdRo2rTpAfhlU1-0$$9TcgiYDLqjnIuZuXfXlq_",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "_P4PjU8CTVdYZjM8DUQPK$$Ayxej2g-39HEn_poHCJ6U",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import scala.collection.mutable.ArrayBuffer\nimport java.math.BigDecimal\n\ndef process_udf(row: Row) = {\n  val results = ArrayBuffer[Row]()\n  var _l1_factor = BigDecimal(5)\n  var _l1_denominator = BigDecimal(100)\n  var _l1_assocition_cnt = BigDecimal(2000)\n  var _l2_factor = BigDecimal(1000)\n  var tal_dtl_final = Array[Row]()\n  var i = 0\n  var j = 0\n  var nested_tal_l1_dtl = row.getAs[Seq[Row]](11).toArray\n  while (compareTo(i, nested_tal_l1_dtl.length) < 0) {\n    if (!_isnull(nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_assoc_name\"))) {\n          val nested_tal_l1_dtl_i = Row(\n            BigDecimal(nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_dtl_id\")),\n            BigDecimal(nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_id\")),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_name\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_desc\"),\n            (nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_dtl_type_cd\")),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"nested_tal_name\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_assoc_name\"),\n            (BigDecimal(row.getAs[String](\"priority\")) + (BigDecimal(\n              nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"priority\")\n            ) / (_l1_denominator * (_l1_factor / _l1_assocition_cnt)))).toString,\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"eff_dt\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"term_dt\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"newline\")\n          )\n          tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l1_dtl_i))\n    } else {\n      j = 0\n      val nested_tal_l1_dtl_arr = nested_tal_l1_dtl.getAs[Seq[Row]](i).toArray\n      while (\n        compareTo(j,\n              nested_tal_l1_dtl_arr.length    \n        ) < 0\n      ) {\n        var nested_tal_l2_dtl = nested_tal_l1_dtl_arr(convertToInt(j))\n        nested_tal_l2_dtl = updateIndexInRow(\n          nested_tal_l2_dtl,\n          7,\n          ((BigDecimal(row.getAs[String](\"priority\")) + (BigDecimal(\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"priority\")\n          ) / (_l1_denominator * BigDecimal(_l1_factor / _l1_assocition_cnt)))) + (BigDecimal(\n            nested_tal_l2_dtl.getAs[String](\"priority\")\n          ) / (_l2_factor * BigDecimal(_l2_factor)))).toString\n        )\n        tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l2_dtl))\n        j = j + 1\n      }\n    }\n    i = i + 1\n  }\n\n  tal_dtl_final.zipWithIndex.foreach {\n    case (r, idx) ⇒\n      results.append(\n        row.getAs[String](0),\n        row.getAs[String](1),\n        row.getAs[String](2),\n        row.getAs[String](3),\n        row.getAs[String](4),\n        tal_dtl_final(idx).getAs[String](2),\n        if (row.getAs[String](6) == null)  tal_dtl_final(idx).getAs[String](6) else row.getAs[String](6),\n        if (row.getAs[String](7) == null)  tal_dtl_final(idx).getAs[String](7) else row.getAs[String](7),\n        row.getAs[String](8),\n        row.getAs[String](9),\n        row.getAs[String](10),\n      )\n  }\n  result.toArray\n}\n\ndef nested_tal_l1_dtl() = {\n  lookup_row(\"TAL_Container_Dtls\", col(\"nested_tal_name\"))\n}\n\ndef nested_tal_l2_dtl() = {\n   transform(\n      nested_tal_l1_dtl(),\n      xx =>\n        lookup_row(\"TAL_Container_Dtls\", xx.getField(\"nested_tal_name\"))\n   )\n}\n\nval df = in\n  .withColumn(\n    \"nested_tal_l1_dtl\",\n    nested_tal_l1_dtl(),\n  ).withColumn(\n    \"nested_tal_l2_dtl\",\n    nested_tal_l2_dtl()\n  )\n\nval schema = StructType(\n              List(\n                StructField(\"tal_dtl_id\",      DecimalType(10, 0),  false),\n                StructField(\"tal_id\",          DecimalType(10, 0),  false),\n                StructField(\"tal_name\",        StringType,         false),\n                StructField(\"tal_desc\",        StringType,         false),\n                StructField(\"tal_dtl_type_cd\", StringType,         false),\n                StructField(\"nested_tal_name\", StringType,         true),\n                StructField(\"tal_assoc_name\",  StringType,         true),\n                StructField(\"priority\",        StringType,         false),\n                StructField(\"eff_dt\",          StringType,         false),\n                StructField(\"term_dt\",         StringType,         false),\n                StructField(\"newline\",         StringType,         true)\n              )\n            )\n\nval out = in.rdd.flatMap(process_udf).toDF(schema)\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Create_LKP_for_override_qualifiers" : {
+      "id" : "Create_LKP_for_override_qualifiers",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Create_LKP_for_override_qualifiers",
+        "slug" : "Create_LKP_for_override_qualifiers",
+        "x" : 2880,
+        "y" : 440,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_LKP_for_override_qualifiers__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_LKP_for_override_qualifiers__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "shared_qual_prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(\n    transform(\n        lookup_row(\"LKP_Rule_Products\", col(\"shared_qual\")),\n        xx => xx.getField(\"products\")\n    )\n)"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "target" : "shared_qual",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"shared_qual\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "LKP_Shared_Qualifier_Products_lookup" : {
+      "id" : "LKP_Shared_Qualifier_Products_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "LKP_Shared_Qualifier_Products_lookup",
+        "slug" : "LKP_Shared_Qualifier_Products_lookup",
+        "x" : 3280,
+        "y" : 340,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "LKP_Shared_Qualifier_Products_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "shared_qual" ],
+        "valueColumns" : [ "shared_qual", "shared_qual_prdcts" ],
+        "processName" : "LKP_Shared_Qualifier_Products"
+      }
+    },
+    "Select_Valid_Associations" : {
+      "id" : "Select_Valid_Associations",
+      "component" : "Join",
+      "metadata" : {
+        "label" : "Select_Valid_Associations",
+        "slug" : "Select_Valid_Associations",
+        "x" : 1420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Select_Valid_Associations__left",
+          "slug" : "left",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Select_Valid_Associations__right",
+          "slug" : "right",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_assoc_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_udl_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_reqd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Select_Valid_Associations__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "conditions" : [ {
+          "alias" : "right",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "(col(\"left.tal_assoc_name\") === col(\"right.tal_assoc_name\"))"
+          },
+          "joinType" : "inner"
+        } ],
+        "expressions" : [ {
+          "_row_id" : null,
+          "target" : "tal_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.tal_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "tal_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.tal_name\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "tal_assoc_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.tal_assoc_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "tal_assoc_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.tal_assoc_name\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "tal_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.tal_desc\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "tal_assoc_type_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.tal_assoc_type_cd\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "target_udl_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.target_udl_name\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "alt_udl_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.alt_udl_name\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "alt_rank",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.alt_rank\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "constituent_rank",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.constituent_rank\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "constituent_group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.constituent_group\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "constituent_reqd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.constituent_reqd\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "shared_qual",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.shared_qual\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "override_tac_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.override_tac_name\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "override_tar_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.override_tar_name\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.priority\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"right.newline\").cast(StringType), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ],
+        "hints" : [ {
+          "id" : "in0",
+          "alias" : "in0",
+          "hintType" : "none",
+          "propagateColumns" : false
+        }, {
+          "id" : "in1",
+          "alias" : "in1",
+          "hintType" : "none",
+          "propagateColumns" : false
+        } ],
+        "activeTab" : "conditions",
+        "columnsSelector" : [ ],
+        "whereClause" : null,
+        "headAlias" : "left"
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Join",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Create_LKP_for_override_qualifiers_Reformat" : {
+      "id" : "Create_LKP_for_override_qualifiers_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Create_LKP_for_override_qualifiers_Reformat",
+        "slug" : "Create_LKP_for_override_qualifiers_Reformat",
+        "x" : 3080,
+        "y" : 440,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_LKP_for_override_qualifiers_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_LKP_for_override_qualifiers_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "shared_qual",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"shared_qual\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "shared_qual_prdcts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"shared_qual_prdcts\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "tal_assoc_xwalk",
     "uri" : "pipelines/altexp_tad_xwalk",

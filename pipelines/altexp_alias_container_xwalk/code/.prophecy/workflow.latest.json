@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "alias_tets",
     "uri" : "pipelines/altexp_alias_container_xwalk",

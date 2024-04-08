@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "altexp_form_create_rule_prd_files",
     "uri" : "pipelines/altexp_form_create_rule_prd_files",

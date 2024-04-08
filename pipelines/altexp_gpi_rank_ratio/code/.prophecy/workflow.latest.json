@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "altexp_gpi_rank_ratio",
     "uri" : "pipelines/altexp_gpi_rank_ratio",
@@ -1122,8 +1125,8 @@
       },
       "properties" : {
         "script" : "\n  val out = in.syncDataFrameColumnsWithSchema(columnNames =\n    List(\"gpi12\", \"gpi14\", \"eff_dt\", \"term_dt\", \"inactive_dt\", \"run_eff_dt\")\n  )\n\n",
-        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
-        "scriptMethodFooter" : "out"
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
       }
     },
     "Sort_GPI12s" : {

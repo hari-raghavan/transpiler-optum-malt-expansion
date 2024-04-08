@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "altexp_output_profile_cag_mapping",
     "uri" : "pipelines/altexp_output_profile_cag_mapping",
@@ -983,9 +986,9 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "  lazy val out = right.collectDataFrameColumnsToApplyFilter(List(\"\"), left)\n\n",
-        "scriptMethodHeader" : "def apply(spark: SparkSession, left: DataFrame, right: DataFrame) : Script = {",
-        "scriptMethodFooter" : "out"
+        "script" : "  lazy val out = right.collectDataFrameColumnsToApplyFilter(List(\"nextval\"), left)\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, right: DataFrame, left: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
       }
     },
     "TSD_Dtl_lookup" : {
@@ -4322,7 +4325,6 @@
           "joinType" : "left_outer"
         } ],
         "expressions" : [ {
-          "_row_id" : null,
           "target" : "alt_run_id",
           "expression" : {
             "format" : "scala",
@@ -4330,7 +4332,6 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "job_run_id",
           "expression" : {
             "format" : "scala",
@@ -4338,15 +4339,13 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "rec_crt_ts",
           "expression" : {
             "format" : "scala",
-            "expression" : "date_format(to_timestamp(substring(datetime_add(datetime_from_unixtime(file_information(lit(Config.OUTPUT_PROFILE_FILE)).getField(\"created\")).cast(StringType), lit(0).cast(LongType), lit(-6).cast(LongType), lit(0).cast(LongType), lit(0).cast(LongType)), 1, 14), \"yyyyMMddHHmmss\"), \"yyyy-MM-dd HH:mm:ss\")"
+            "expression" : "date_format(\n    to_timestamp(\n      substring(\n        datetime_add(\n          datetime_from_unixtime(file_information(lit(Config.OUTPUT_PROFILE_FILE)).getField(\"created\"))\n            .cast(StringType),\n          lit(0).cast(LongType),\n          lit(-6).cast(LongType),\n          lit(0).cast(LongType),\n          lit(0).cast(LongType)\n        ),\n        1,\n        14\n      ),\n      \"yyyyMMddHHmmss\"\n    ),\n    \"yyyy-MM-dd HH:mm:ss\"\n  )"
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "rec_crt_user_id",
           "expression" : {
             "format" : "scala",
@@ -4354,7 +4353,6 @@
           },
           "description" : ""
         }, {
-          "_row_id" : null,
           "target" : "newline",
           "expression" : {
             "format" : "scala",
@@ -4363,19 +4361,18 @@
           "description" : ""
         } ],
         "hints" : [ {
-          "id" : "in0",
-          "alias" : "in0",
+          "id" : "Get_FILE_LOAD_CNTL_ID__left",
+          "alias" : "left",
           "hintType" : "none",
           "propagateColumns" : false
         }, {
-          "id" : "in1",
-          "alias" : "in1",
+          "id" : "Get_FILE_LOAD_CNTL_ID__right",
+          "alias" : "right",
           "hintType" : "none",
           "propagateColumns" : false
         } ],
-        "activeTab" : "conditions",
-        "columnsSelector" : [ ],
-        "whereClause" : null,
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "Get_FILE_LOAD_CNTL_ID__left##job_id", "Get_FILE_LOAD_CNTL_ID__right##job_id", "Get_FILE_LOAD_CNTL_ID__left##alt_run_id", "Get_FILE_LOAD_CNTL_ID__right##file_load_cntl_id" ],
         "headAlias" : "left"
       },
       "componentInfo" : {
@@ -5311,8 +5308,8 @@
       },
       "properties" : {
         "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some((size(col(\"qual_output_profile_ids\")) + size(col(\"non_qual_output_profile_ids\")))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (when(col(\"index\") < col(\"qual_len\"), element_at(col(\"qual_output_profile_ids\"), col(\"index\") + lit(1)))\n        .otherwise(\n          element_at(col(\"non_qual_output_profile_ids\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n            .getField(\"non_qual_op_id\")\n        )\n        .cast(StringType))\n        .as(\"output_profile_id\"),\n      (when(col(\"index\") < col(\"qual_len\"), element_at(col(\"op_dtls\"), col(\"index\") + lit(1)).getField(\"job_ids\"))\n        .otherwise(\n          element_at(col(\"non_qual_output_profile_ids\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n            .getField(\"job_ids\")\n        ))\n        .as(\"job_ids\"),\n      (when(col(\"index\") >= col(\"qual_len\"),\n            element_at(col(\"err_msgs\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n      ).otherwise(lit(\"\"))).as(\"err_msg\")\n    ),\n    lengthRelatedGlobalExpressions = Map(\"qual_len\" -> size(col(\"qual_output_profile_ids\"))),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select((col(\"output_profile_id\")).as(\"output_profile_id\"),\n                                                   (col(\"job_ids\")).as(\"job_ids\"),\n                                                   (col(\"err_msg\")).as(\"err_msg\"),\n                                                   (col(\"as_of_dt\")).as(\"as_of_dt\")\n  )\n\n  val out = simpleSelect_in_DF\n",
-        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
-        "scriptMethodFooter" : "out"
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
       }
     },
     "Get_ALT_RUN_ID_jdbc" : {

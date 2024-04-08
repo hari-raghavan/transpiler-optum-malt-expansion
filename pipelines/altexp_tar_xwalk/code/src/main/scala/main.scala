@@ -36,8 +36,14 @@ object Main {
         context,
         df_Populate_TAR_Target_Alternatives_Crosswalk_input_select_filter
       )
-    OFILE_TAR_Expansion_Xwalk(context,
-                              df_Populate_TAR_Target_Alternate_Crosswalk
+    val df_Populate_TAR_Target_Alternatives_Crosswalk_output_select_filter =
+      Populate_TAR_Target_Alternatives_Crosswalk_output_select_filter(
+        context,
+        df_Populate_TAR_Target_Alternate_Crosswalk
+      )
+    OFILE_TAR_Expansion_Xwalk(
+      context,
+      df_Populate_TAR_Target_Alternatives_Crosswalk_output_select_filter
     )
   }
 

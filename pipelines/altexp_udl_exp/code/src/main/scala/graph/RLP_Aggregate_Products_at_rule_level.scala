@@ -37,7 +37,7 @@ object RLP_Aggregate_Products_at_rule_level {
        
         inputRows.zipWithIndex.foreach {
           case (in, idx) => {
-            or_products = _bv_or(or_products, in.getAs[Array[Byte]]("products"))
+            or_products = _bv_or(or_products, in.getAs[Seq[Byte]]("products")).toArray
             if (in.getAs[String]("conjunction_cd") != "0") {
                 if (no_ands){
                    products = or_products

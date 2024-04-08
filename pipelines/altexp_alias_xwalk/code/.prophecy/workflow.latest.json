@@ -4,7 +4,10 @@
       "gemBuilderVersion" : "v1"
     },
     "codeGenConfiguration" : {
-      "editableConfig" : false
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
     },
     "id" : "alias_test",
     "uri" : "pipelines/altexp_alias_xwalk",
@@ -644,7 +647,7 @@
         "slug" : "Alias_Xwalk",
         "x" : 800,
         "y" : 20,
-        "phase" : 0,
+        "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false

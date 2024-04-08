@@ -96,7 +96,7 @@ object Map_T_A_pairs_as_per_ST_Group_NM_NFST {
             null,
             null,
             Array[String](),
-            row.getAs[String]("13")
+            row.getAs[String](13)
           )
       }
       result.toArray

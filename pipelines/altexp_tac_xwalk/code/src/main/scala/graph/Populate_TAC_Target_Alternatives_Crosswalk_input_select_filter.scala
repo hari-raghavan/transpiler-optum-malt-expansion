@@ -16,8 +16,14 @@ object Populate_TAC_Target_Alternatives_Crosswalk_input_select_filter {
   def apply(context: Context, in: DataFrame): DataFrame = {
     val Config = context.config
     in.filter(
-      (col("eff_dt") <= lit(Config.BUSINESS_DATE))
-        .and(col("term_dt") >= lit(Config.BUSINESS_DATE))
+      (to_date(col("eff_dt"), "yyyyMMdd") <= to_date(lit(Config.BUSINESS_DATE),
+                                                     "yyyyMMdd"
+      )).and(
+        to_date(col("term_dt"), "yyyyMMdd") >= to_date(
+          lit(Config.BUSINESS_DATE),
+          "yyyyMMdd"
+        )
+      )
     )
   }
 

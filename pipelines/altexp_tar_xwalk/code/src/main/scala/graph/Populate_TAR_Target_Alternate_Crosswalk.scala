@@ -69,7 +69,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
               } else {
                 inclusion_prdcts = _bv_and(inclusion_prdcts, or_products)
               }
-              or_products = bv_all_zeros()
+              or_products = _bv_all_zeros()
             }
           } else {
             is_hrm = 0
@@ -86,6 +86,10 @@ object Populate_TAR_Target_Alternate_Crosswalk {
       else _bv_all_zeros()
     }
     
+    def _to_array_of_arrays(target_prdcts: Seq[Seq[Byte]]) = {
+      target_prdcts.map(_.toArray).toArray
+    }
+    
     val process_udf = udf(
       { (inputRows: Seq[Row]) ⇒
         var tar_content_vec   = Array[Row]()
@@ -93,23 +97,23 @@ object Populate_TAR_Target_Alternate_Crosswalk {
         var all_target_prdcts = _bv_all_zeros()
         var all_alt_prdcts    = _bv_all_zeros()
         var _keep_all_targets = 0;
-        var rebate_prdcts_t   = bv_all_zeros()
+        var rebate_prdcts_t   = _bv_all_zeros()
     
         def get_roa_df_products(
           in_compare_value: String,
-          qualifier_cd:     String,
-          rule_prdt_lkp:    Map[(String, String, String), Row]
+          rule_prdt_lkp:    Array[Byte]
         ) = {
           var prd_idx = roa_df_prdts_vec.indexWhere(_.getAs[String](0) == in_compare_value)
-          var prdcts  = bv_all_zeros()
+          var prdcts  = _bv_all_zeros()
     
-          if (prd_idx > -1)
-            prdcts = roa_df_prdts_vec[prd_idx].getAs[Array[Byte]](3)
-          else {
+          if (prd_idx > -1) {
+            prdcts = roa_df_prdts_vec[prd_idx].getAs[Seq[Byte]].toArray
+            prdcts = res(3)
+         } else {
             prdcts =
               try {
-                val res = rule_prdt_lkp(qualifier_cd, "eq", in_compare_value).getAs[Seq[Byte]].toArray
-                if (res == null) {
+                val res = rule_prdt_lkp
+                if (res == null || res.nonEmpty) {
                   _bv_all_zeros()
                 } else {
                   res(3)
@@ -131,13 +135,13 @@ object Populate_TAR_Target_Alternate_Crosswalk {
         }
     
         inputRows.foreach { row ⇒
-          var roa_prdcts          = bv_all_zeros()
-          var df_prdcts           = bv_all_zeros()
-          var alt_prdcts          = bv_all_zeros()
-          var alt_prdcts_all_prio = bv_all_zeros()
-          var alt_prdcts_p        = bv_all_zeros()
-          var rebate_prdcts       = bv_all_zeros()
-          var target_prdcts       = bv_all_zeros()
+          var roa_prdcts          = _bv_all_zeros()
+          var df_prdcts           = _bv_all_zeros()
+          var alt_prdcts          = _bv_all_zeros()
+          var alt_prdcts_all_prio = _bv_all_zeros()
+          var alt_prdcts_p        = _bv_all_zeros()
+          var rebate_prdcts       = _bv_all_zeros()
+          var target_prdcts       = _bv_all_zeros()
           var alt_prdcts_vec      = Array[Array[Byte]]()
           var alt_prdcts_vec1     = Array[Array[Byte]]()
           var alt_prdcts_vec2     = Array[Array[Byte]]()
@@ -150,13 +154,17 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           var rebate_udl          = ""
           var p_check             = -1
     
+          val _roa_prdcts1 = _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](18))
+          val _df_prdcts1 =  _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](19))
+          val _roa_prdcts2 =  _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](20))
+          val _df_prdcts2 = _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](21))
           if (!_isnull(row.getAs[String](3))) {
             var roa_df_tar_content = Row(Seq[Seq[Byte]](), Seq[Row]())
             var prev_pri           = 0
     
             lkp_tar_roa_df_vec =
-              row.getAs[Seq[Row]](14) // 14 - lookup_row("LKP : TAR ROA DF", in.tar_roa_df_set_id) //TO FIX
-            lkp_tar_roa_df_vec.foreach { lv_tar_roa_df ⇒
+              row.getAs[Seq[Row]](16).toArray
+            lkp_tar_roa_df_vec.zipWithIndex.foreach { case (lv_tar_roa_df, idx) ⇒
               var roa_df       = lv_tar_roa_df.getAs[String](2).toInt + lv_tar_roa_df.getAs[String](3).toInt
               var roa_priority = 0
               if (p_check == -1) {
@@ -175,13 +183,13 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                       roa_df_tar_content = updateIndexInRow(
                         roa_df_tar_content,
                         0,
-                        Array.concat(roa_df_tar_content.getAs[Seq[Seq[Byte]]].toArray, Array.fill(1)(target_prdcts))
-                      ) // TO FIX
+                        Array.concat(_to_array_of_arrays(roa_df_tar_content.getAs[Seq[Seq[Byte]]](0)), Array.fill(1)(target_prdcts))
+                      )
                       roa_df_tar_content = updateIndexInRow(
                         roa_df_tar_content,
                         1,
                         Array.concat(
-                          roa_df_tar_content.getAs[Seq[Row]],
+                          roa_df_tar_content.getAs[Seq[Row]](1),
                           Array.fill(1)(
                             Row(
                               alt_prdcts_vec1,
@@ -190,7 +198,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                             )
                           )
                         )
-                      ) // TO FIX
+                      )
                       prev_pri = roa_priority
                     } else {
                       alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
@@ -224,11 +232,11 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 _processed_roa_df = Array.concat(_processed_roa_df, Array.fill(1)(roa_df))
                 roa_prdcts =
                   if (lv_tar_roa_df.getAs[String](2) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), "ROA", rule_prdt_lkp)
+                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), _roa_prdcts1(idx))
                   else _bv_all_zeros()
                 df_prdcts =
                   if (lv_tar_roa_df.getAs[String](3) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), "DOSAGE_FORM", rule_prdt_lkp)
+                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), _df_prdcts(idx))
                   else _bv_all_zeros()
                 target_prdcts =
                   get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)
@@ -238,11 +246,11 @@ object Populate_TAR_Target_Alternate_Crosswalk {
               if (_bv_count_one_bits(target_prdcts).and(roa_priority == prev_pri)) {
                 roa_prdcts =
                   if (lv_tar_roa_df.getAs[String](2) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), "ROA", rule_prdt_lkp)
+                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), _roa_prdcts2(idx))
                   else _bv_all_zeros()
                 df_prdcts =
                   if (lv_tar_roa_df.getAs[String](3) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), "DOSAGE_FORM", rule_prdt_lkp)
+                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), _df_prdcts2(idx))
                   else _bv_all_zeros()
                 alt_prdcts =
                   get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)
@@ -262,11 +270,11 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 alt_prdcts_p = _bv_all_zeros()
                 roa_prdcts =
                   if (lv_tar_roa_df.getAs[String](2) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), "ROA", rule_prdt_lkp)
+                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), _roa_prdcts2(idx))
                   else _bv_all_zeros()
                 df_prdcts =
                   if (lv_tar_roa_df.getAs[String](3) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), "DOSAGE_FORM", rule_prdt_lkp)
+                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), "DOSAGE_FORM", _df_prdcts(idx))
                   else _bv_all_zeros()
                 alt_prdcts =
                   get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)
@@ -284,13 +292,13 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 roa_df_tar_content = updateIndexInRow(
                   roa_df_tar_content,
                   0,
-                  Array.concat(roa_df_tar_content.getAs[Seq[Seq[Byte]]].toArray, Array.fill(1)(target_prdcts))
-                ) // TO FIX
+                  Array.concat(_to_array_of_arrays(roa_df_tar_content.getAs[Seq[Seq[Byte]]](0)), Array.fill(1)(target_prdcts))
+                )
                 roa_df_tar_content = updateIndexInRow(
                   roa_df_tar_content,
                   1,
                   Array.concat(
-                    roa_df_tar_content.getAs[Seq[Row]],
+                    roa_df_tar_content.getAs[Seq[Row]](1),
                     Array.fill(1)(
                       Row(
                         alt_prdcts_vec1,
@@ -323,8 +331,8 @@ object Populate_TAR_Target_Alternate_Crosswalk {
             } else {
               alt_prdcts =
                 try {
-                  val res = get_products(row.getAs[Seq[Row]](11), row.getAs[Seq[Row]](14))
-                  if (res == null) {
+                  val res = get_products(row.getAs[Seq[Row]](11), row.getAs[Seq[Row]](15))
+                  if (res == null || res.nonEmpty) {
                     _bv_all_zeros()
                   } else {
                     res
@@ -344,7 +352,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
     
             if (bv_count_one_bits(_alt_prdcts)) {
               if (!_isnull(row.getAs[String](8))) {
-                row.getAs[Seq[Row]](9999).toArray.foreach { //TO_FIX
+                row.getAs[Seq[Row]](17).toArray.foreach {
                   rebate_udl_prdcts ⇒
                     rebate_prdcts = _bv_or(rebate_prdcts, rebate_udl_prdcts)
                 }
@@ -421,13 +429,30 @@ object Populate_TAR_Target_Alternate_Crosswalk {
       )
     )
     
+    def rule_prdcts_lkp(in_compare_value: String, qualifier_cd: String) = {
+      transform(
+        lookup_row("LKP_TAR_ROA_DF", col("tar_roa_df_set_id")),
+        lv_tar_roa_df =>         
+          lookup("Rule_Prdcts", lit(qualifier_cd), lit("eq"), lv_tar_roa_df.getField(in_compare_value))
+      )
+    }
+    
     val origColumns = in0.columns.map(col)
     val out0 = in0
       .groupBy("tar_id")
       .agg(
         collect_list(
           struct(
-            (origColumns :+ lv_prdcts(col("target_rule_def")) :+ lv_prdcts(col("alt_rule_def"))): _*
+            (origColumns 
+            :+ lv_prdcts(col("target_rule_def")).alias("target_rule_def_val") // 14
+            :+ lv_prdcts(col("alt_rule_def")).alias("alt_rule_def_val") // 15
+            :+ lookup_row("LKP_TAR_ROA_DF", col("tar_roa_df_set_id")).alias("lkp_tar_roa_df_vec") // 16
+            :+ lookup_row("Rebate UDL", col("udl_name")).alias("rebate_udl_vec") // 17
+            :+ rule_prdcts_lkp("target_roa_cd", "ROA") // 18
+            :+ rule_prdcts_lkp("target_dosage_form_cd", "DOSAGE_FORM") // 19
+            :+ rule_prdcts_lkp("alt_roa_cd", "ROA") // 20 
+            :+ rule_prdcts_lkp("alt_dosage_form_cd", "DOSAGE_FORM") // 21
+            ): _*
           )
         ).alias("inputRows")
       )
