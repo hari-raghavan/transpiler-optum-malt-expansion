@@ -20,7 +20,7 @@
       "udfs" : [ ],
       "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
       "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
-      "initialCode" : "",
+      "initialCode" : "def get_rule_def(xml: org.apache.spark.sql.Column) = {\n    concat(\n      flatten(\n        transform(\n          xml.getField(\"Rule\").getField(\"Rule\"),\n          (rule, i) =>\n            transform(\n              rule.getField(\"Qual\"),\n              (qual, j) =>\n                struct(\n                  qual.getField(\"type0\").as(\"qualifier_cd\"),\n                  qual.getField(\"op\").as(\"operator\"),\n                  qual.getField(\"Qual\").as(\"compare_value\"),\n                  when(lit(j) < size(rule.getField(\"OR\")), lit(\"0\"))\n                    .otherwise(lit(\"\"))\n                    .as(\"conjunction_cd\"),\n                  (lit(i) + lit(50)).as(\n                    \"rule_expression_id\"\n                  )\n                )\n            )\n        )\n      ),\n      transform(\n        xml.getField(\"Rule\").getField(\"Qual\"),\n        (qual, i) =>\n          struct(\n            qual.getField(\"type0\").as(\"qualifier_cd\"),\n            qual.getField(\"op\").as(\"operator\"),\n            qual.getField(\"Qual\").as(\"compare_value\"),\n            lit(\"\").as(\"conjunction_cd\"),\n            (monotonically_increasing_id() + lit(50)).cast(IntegerType).as(\"rule_expression_id\")\n          )\n      )\n    )\n  }",
       "isAbInitioTranspilerImport" : true
     },
     "configuration" : {
@@ -659,174 +659,11 @@
         } ],
         "outputs" : [ {
           "id" : "Group_Rules_for_Target_Alternative__out",
-          "slug" : "out",
-          "schema" : {
-            "type" : "struct",
-            "fields" : [ {
-              "name" : "tac_id",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "tac_name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "priority",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "eff_dt",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "term_dt",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "target_rule_def",
-              "type" : {
-                "type" : "array",
-                "elementType" : {
-                  "type" : "struct",
-                  "fields" : [ {
-                    "name" : "qualifier_cd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "operator",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "compare_value",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "conjunction_cd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  } ]
-                },
-                "containsNull" : true
-              },
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "alt_rule_def",
-              "type" : {
-                "type" : "array",
-                "elementType" : {
-                  "type" : "struct",
-                  "fields" : [ {
-                    "name" : "qualifier_cd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "operator",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "compare_value",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "conjunction_cd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  } ]
-                },
-                "containsNull" : true
-              },
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "newline",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            } ]
-          },
-          "isStreaming" : false
+          "slug" : "out"
         } ],
         "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "conditions" : [ {
@@ -2329,7 +2166,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2337,7 +2183,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -2381,7 +2227,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2389,7 +2244,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -2400,7 +2255,7 @@
             }, {
               "name" : "newline",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],

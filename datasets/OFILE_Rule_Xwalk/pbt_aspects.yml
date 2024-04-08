@@ -66,12 +66,19 @@ schema:
             tags: []
         - name: conjunction_cd
           type: string
-          nullable: true
+          nullable: false
           metadata:
             description: ''
             mappings: []
             tags: []
-      containsNull: true
+        - name: rule_expression_id
+          type: integer
+          nullable: false
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+      containsNull: false
     nullable: true
     metadata:
       description: ''
@@ -106,12 +113,19 @@ schema:
             tags: []
         - name: conjunction_cd
           type: string
-          nullable: true
+          nullable: false
           metadata:
             description: ''
             mappings: []
             tags: []
-      containsNull: true
+        - name: rule_expression_id
+          type: integer
+          nullable: false
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+      containsNull: false
     nullable: true
     metadata:
       description: ''
@@ -119,7 +133,7 @@ schema:
       tags: []
   - name: newline
     type: string
-    nullable: true
+    nullable: false
     metadata:
       description: ''
       mappings: []

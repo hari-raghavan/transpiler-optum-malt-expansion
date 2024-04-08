@@ -20,7 +20,7 @@
       "udfs" : [ ],
       "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
       "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
-      "initialCode" : "",
+      "initialCode" : "def get_rule_def(xml: org.apache.spark.sql.Column) = {\n    concat(\n      flatten(\n        transform(\n          xml.getField(\"Rule\").getField(\"Rule\"),\n          (rule, i) =>\n            transform(\n              rule.getField(\"Qual\"),\n              (qual, j) =>\n                struct(\n                  qual.getField(\"type0\").as(\"qualifier_cd\"),\n                  qual.getField(\"op\").as(\"operator\"),\n                  qual.getField(\"Qual\").as(\"compare_value\"),\n                  when(lit(j) < size(rule.getField(\"OR\")), lit(\"0\"))\n                    .otherwise(lit(\"\"))\n                    .as(\"conjunction_cd\"),\n                  (lit(i) + lit(50)).as(\n                    \"rule_expression_id\"\n                  )\n                )\n            )\n        )\n      ),\n      transform(\n        xml.getField(\"Rule\").getField(\"Qual\"),\n        (qual, i) =>\n          struct(\n            qual.getField(\"type0\").as(\"qualifier_cd\"),\n            qual.getField(\"op\").as(\"operator\"),\n            qual.getField(\"Qual\").as(\"compare_value\"),\n            lit(\"\").as(\"conjunction_cd\"),\n            (monotonically_increasing_id() + lit(50)).cast(IntegerType).as(\"rule_expression_id\")\n          )\n      )\n    )\n  }\n\n\n  def rule_rank(list: org.apache.spark.sql.Column) = {\n    array_min(transform(\n      list,\n      qual_cd =>\n        coalesce(element_at(\n          filter(\n            array(lit(\"DESI_CD\"), lit(\"DOSAGE_FORM\"), lit(\"MSC\"), lit(\"ROA\"), lit(\"RXOTC\")),\n            xx =>\n              xx === qual_cd\n        ), 1),\n        lit(0)\n      )\n    ))\n  }\n\n  def qual_list(rule: org.apache.spark.sql.Column) = {\n    transform(\n      rule,\n      r => r.getField(\"qualifier_cd\")\n    )\n  }\n\n  def rule_qual_priority(rule: org.apache.spark.sql.Column) = {\n     rule_rank(\n      array_distinct(\n          array_sort( \n              qual_list(rule)\n          )\n      )\n    )\n  }",
       "isAbInitioTranspilerImport" : true
     },
     "configuration" : {
@@ -535,7 +535,7 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -543,8 +543,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "string",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -552,7 +552,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -1172,7 +1172,7 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -1180,8 +1180,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "string",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -1189,7 +1189,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -2359,158 +2359,11 @@
         } ],
         "outputs" : [ {
           "id" : "Group_the_Rules_and_assign_priority__out",
-          "slug" : "out",
-          "schema" : {
-            "type" : "struct",
-            "fields" : [ {
-              "name" : "udl_id",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "udl_rule_id",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "udl_nm",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "udl_desc",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "rule_priority",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "inclusion_cd",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "rule_def",
-              "type" : {
-                "type" : "array",
-                "elementType" : {
-                  "type" : "struct",
-                  "fields" : [ {
-                    "name" : "qualifier_cd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "operator",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "compare_value",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "conjunction_cd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "rule_expression_id",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  } ]
-                },
-                "containsNull" : true
-              },
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "eff_dt",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "term_dt",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "newline",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            } ]
-          },
-          "isStreaming" : false
+          "slug" : "out"
         } ],
         "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : true
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
       },
       "properties" : {
         "columnsSelector" : [ "Group_the_Rules_and_assign_priority__in##user_defined_list_id", "Group_the_Rules_and_assign_priority__in##user_defined_list_rule_id", "Group_the_Rules_and_assign_priority__in##user_defined_list_name", "Group_the_Rules_and_assign_priority__in##user_defined_list_desc", "Group_the_Rules_and_assign_priority__in##xml", "Group_the_Rules_and_assign_priority__in##incl_cd", "Group_the_Rules_and_assign_priority__in##eff_dt", "Group_the_Rules_and_assign_priority__in##term_dt", "Group_the_Rules_and_assign_priority__in##newline" ],

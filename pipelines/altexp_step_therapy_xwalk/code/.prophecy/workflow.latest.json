@@ -20,7 +20,7 @@
       "udfs" : [ ],
       "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
       "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
-      "initialCode" : "",
+      "initialCode" : "def get_rule_def(xml: org.apache.spark.sql.Column) = {\n    concat(\n      transform(\n        xml.getField(\"Rule\").getField(\"Rule\"),\n        (rule, i) =>\n          flatten(\n            transform(\n              rule.getField(\"Qual\"),\n              (qual, j) =>\n                struct(\n                  qual.getField(\"type0\").as(\"qualifier_cd\"),\n                  qual.getField(\"op\").as(\"operator\"),\n                  qual.getField(\"Qual\").as(\"compare_value\"),\n                  when(lit(j) < size(rule.getField(\"OR\")), lit(\"0\"))\n                    .otherwise(lit(\"\"))\n                    .as(\"conjunction_cd\"),\n                  (monotonically_increasing_id() + lit(50)).as(\n                    \"rule_expression_id\"\n                  )\n                )\n            )\n          )\n      ),\n      transform(\n        xml.getField(\"Rule\").getField(\"Qual\"),\n        (qual, i) =>\n          struct(\n            qual.getField(\"type0\").as(\"qualifier_cd\"),\n            qual.getField(\"op\").as(\"compare_value\"),\n            qual.getField(\"Qual\").as(\"compare_value\"),\n            lit(\"\").as(\"conjunction_cd\"),\n            (monotonically_increasing_id() + lit(50)).as(\"rule_expression_id\")\n          )\n      )\n    )\n  }",
       "isAbInitioTranspilerImport" : true
     },
     "configuration" : {
@@ -350,7 +350,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -358,7 +367,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -402,7 +411,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -410,7 +428,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -421,7 +439,7 @@
             }, {
               "name" : "newline",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -1946,7 +1964,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -1954,7 +1981,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -1998,7 +2025,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2006,7 +2042,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -2017,7 +2053,7 @@
             }, {
               "name" : "newline",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -2513,7 +2549,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2521,7 +2566,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -2565,7 +2610,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2573,7 +2627,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -3401,7 +3455,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3409,7 +3472,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -3453,7 +3516,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3461,7 +3533,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -3472,7 +3544,7 @@
             }, {
               "name" : "newline",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -3615,7 +3687,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3623,7 +3704,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -3667,7 +3748,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3675,7 +3765,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -3686,7 +3776,7 @@
             }, {
               "name" : "newline",
               "type" : "string",
-              "nullable" : true,
+              "nullable" : false,
               "metadata" : {
                 "description" : "",
                 "mappings" : [ ],
@@ -3816,7 +3906,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3824,7 +3923,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
@@ -3868,7 +3967,16 @@
                   }, {
                     "name" : "conjunction_cd",
                     "type" : "string",
-                    "nullable" : true,
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3876,7 +3984,7 @@
                     }
                   } ]
                 },
-                "containsNull" : true
+                "containsNull" : false
               },
               "nullable" : true,
               "metadata" : {
