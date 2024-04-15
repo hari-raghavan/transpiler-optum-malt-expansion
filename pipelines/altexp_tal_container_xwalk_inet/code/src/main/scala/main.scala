@@ -51,7 +51,10 @@ object Main {
     ) = Association_Processing.apply(
       Association_Processing.config
         .Context(context.spark, context.config.Association_Processing),
-      df_IFIL_CAG_TAL_Container
+      df_IFIL_CAG_TAL_Container,
+      df_LKP_Prod,
+      df_Expanded_UDL_wt_rl_priority,
+      df_LKP_Rule_Products
     )
     Target_Load_Ready(context,        df_Association_Processing_out1)
     Clinical_indn_Load_Ready(context, df_Association_Processing_out3)

@@ -12,11 +12,20 @@ import org.apache.spark.sql.expressions._
 import java.time._
 package object Association_Processing {
 
-  def apply(context: Context, in: DataFrame): Subgraph4 = {
+  def apply(
+    context: Context,
+    in:      DataFrame,
+    in1:     DataFrame,
+    in2:     DataFrame,
+    in3:     DataFrame
+  ): Subgraph4 = {
     val df_Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat =
       Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat(
         context,
-        in
+        in,
+        in1,
+        in2,
+        in3
       )
     val (df_Rank_Alts_RowDistributor_out0, df_Rank_Alts_RowDistributor_out1) =
       Rank_Alts_RowDistributor(
