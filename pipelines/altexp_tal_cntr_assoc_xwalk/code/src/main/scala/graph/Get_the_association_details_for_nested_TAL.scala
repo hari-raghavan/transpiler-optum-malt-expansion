@@ -48,7 +48,7 @@ object Get_the_association_details_for_nested_TAL {
               tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l1_dtl_i))
         } else {
           j = 0
-          val nested_tal_l1_dtl_arr = nested_tal_l1_dtl.getAs[Seq[Row]](i).toArray
+          val nested_tal_l1_dtl_arr = nested_tal_l1_dtl(i).getAs[Seq[Row]](0).toArray
           while (
             compareTo(j,
                   nested_tal_l1_dtl_arr.length    
@@ -60,7 +60,7 @@ object Get_the_association_details_for_nested_TAL {
               7,
               ((BigDecimal(row.getAs[String]("priority")) + (BigDecimal(
                 nested_tal_l1_dtl(convertToInt(i)).getAs[String]("priority")
-              ) / (_l1_denominator * BigDecimal(_l1_factor / _l1_assocition_cnt)))) + (BigDecimal(
+              ) / (_l1_denominator * (_l1_factor / _l1_assocition_cnt)))) + (BigDecimal(
                 nested_tal_l2_dtl.getAs[String]("priority")
               ) / (_l2_factor * _l2_factor))).toString
             )
@@ -74,6 +74,7 @@ object Get_the_association_details_for_nested_TAL {
       tal_dtl_final.zipWithIndex.foreach {
         case (r, idx) ⇒
           results.append(
+            Row(
             row.getAs[java.math.BigDecimal](0),
             row.getAs[java.math.BigDecimal](1),
             row.getAs[String](2),
@@ -85,9 +86,9 @@ object Get_the_association_details_for_nested_TAL {
             row.getAs[String](8),
             row.getAs[String](9),
             row.getAs[String](10),
-          )
+          ))
       }
-      result.toArray
+      results.toArray
     }, ArrayType(StructType(
         List(
           StructField("tal_dtl_id",      DecimalType(10, 0),  false),

@@ -99,14 +99,9 @@ object Main {
         context,
         df_CONC
       )
-    val df_Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 =
-      Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2(
-        context,
-        df_Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association
-      )
     TAL_Container_w_Assoc_in_BV_Products(
       context,
-      df_Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2
+      df_Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association
     )
   }
 

@@ -48,7 +48,7 @@ object Process_TAL_Association_Rows {
             }
     
             target_udl_name = Array.concat(target_udl_name, Array.fill(1)(row.getAs[String]("target_udl_name")))
-            if (bv_count_one_bits(trgt_prdcts_lkp)) {
+            if (_bv_count_one_bits(trgt_prdcts_lkp) > 0) {
               target_prdcts = Array.concat(target_prdcts, Array.fill(1)(trgt_prdcts_lkp))
             }
           }
@@ -68,27 +68,27 @@ object Process_TAL_Association_Rows {
     
             if (!_isnull(row.getAs[String]("constituent_group"))) {
               if (row.getAs[String]("constituent_reqd") == "Y" && !constituent_grp_vec.contains(row.getAs[String]("constituent_group"))) {
-                constituent_grp_vec = Array.concat(constituent_grp_vec, row.getAs[String]("constituent_group"))
+                constituent_grp_vec = Array.concat(constituent_grp_vec, Array.fill(1)(row.getAs[String]("constituent_group")))
               }
-              if (_bv_count_one_bits(alt_prdcts_lkp)) {
+              if (_bv_count_one_bits(alt_prdcts_lkp) > 0) {
                 alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,
-                                                          Row(
+                                                          Array.fill(1)(Row(
                                                             alt_prdcts_lkp,
                                                             row.getAs[String]("constituent_group"),
                                                             row.getAs[String]("constituent_reqd"),
                                                             row.getAs[String]("alt_udl_name")
-                                                          )
+                                                          ))
                 )
               }
             } else {
-              if (_bv_count_one_bits(alt_prdcts_lkp)) {
+              if (_bv_count_one_bits(alt_prdcts_lkp) > 0) {
                 alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,
-                                                          Row(
+                                                          Array.fill(1)(Row(
                                                             alt_prdcts_lkp,
                                                             null,
                                                             null,
                                                             row.getAs[String]("alt_udl_name")
-                                                          )
+                                                          ))
                 )
               }
             }

@@ -198,12 +198,6 @@
     "target" : "LKP_Shared_Qualifier_Products",
     "targetPort" : "LKP_Shared_Qualifier_Products__in"
   }, {
-    "id" : "e5",
-    "source" : "CONC",
-    "sourcePort" : "CONC__out",
-    "target" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
-    "targetPort" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__in"
-  }, {
     "id" : "e17",
     "source" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
     "sourcePort" : "Select_TALs_w_o_Nested_TAL_RowDistributor__out1",
@@ -306,17 +300,17 @@
     "target" : "Process_TAL_Association_Rows_Reformat",
     "targetPort" : "Process_TAL_Association_Rows_Reformat__in"
   }, {
-    "id" : "uwsyli_sbkiDdbySOSSkS",
-    "source" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
-    "sourcePort" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__out",
-    "target" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
-    "targetPort" : "wOpRm6NvU65jVYwnMkt5T$$jKl852afWnT-F6Mobkg63"
-  }, {
     "id" : "Nqiu2iDo9kGp1I3Y4e6La$$tVf0DGyFM521Jce3cikYR",
     "source" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
     "sourcePort" : "M96S0uG8kOCk-YWig9jqA$$zS0-RdYJDWtMlg3hEWKQA",
     "target" : "TAL_Container_w_Assoc_in_BV_Products",
     "targetPort" : "TAL_Container_w_Assoc_in_BV_Products__in"
+  }, {
+    "id" : "mteiaGZrnC_kZRJh2eK9Q",
+    "source" : "CONC",
+    "sourcePort" : "CONC__out",
+    "target" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
+    "targetPort" : "wOpRm6NvU65jVYwnMkt5T$$jKl852afWnT-F6Mobkg63"
   } ],
   "processes" : {
     "TAL_Assoc_Dtl" : {
@@ -326,7 +320,7 @@
         "label" : "TAL_Assoc_Dtl",
         "slug" : "TAL_Assoc_Dtl",
         "x" : 1220,
-        "y" : 420,
+        "y" : 300,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -353,7 +347,7 @@
         "label" : "Process_TAL_Association_Rows",
         "slug" : "Process_TAL_Association_Rows",
         "x" : 1820,
-        "y" : 220,
+        "y" : 200,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -713,7 +707,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\n\nval process_udf = udf(\n  { (inputRows: Seq[Row]) ⇒\n    var target_prdcts              = Array[Array[Byte]]()\n    var alt_prdcts                 = Array[Byte]()\n    var target_udl_name            = Array[String]()\n    var alternate_udl_name         = Array[String]()\n    var alt_constituent_prdcts_vec = Array[Row]()\n    var constituent_grp_vec        = Array[String]()\n\n    val inputRowsSorted = inputRows.toArray.sortBy(\n      r => (r.getAs[String](\"tal_assoc_name\"), \n      r.getAs[String](\"alt_rank\"), \n      r.getAs[String](\"priority\"), \n      r.getAs[String](\"constituent_group\"), \n      r.getAs[String](\"constituent_rank\"))\n    )\n    inputRowsSorted.foreach { row ⇒\n      var trgt_prdcts_lkp = _bv_all_zeros()\n      var alt_prdcts_lkp  = _bv_all_zeros()\n\n      if (!_isnull(row.getAs[String](\"target_udl_name\")) && !target_udl_name.contains(row.getAs[String](\"target_udl_name\"))) {\n        trgt_prdcts_lkp = if (row.getAs[Array[Byte]](17) != null) {\n          row.getAs[Array[Byte]](17).toArray\n        } else {\n          _bv_all_zeros()\n        }\n        if (target_prdcts.nonEmpty && _bv_count_one_bits(trgt_prdcts_lkp) > 0) {\n          trgt_prdcts_lkp = _bv_difference(trgt_prdcts_lkp, _bv_vector_or(target_prdcts))\n        }\n\n        target_udl_name = Array.concat(target_udl_name, Array.fill(1)(row.getAs[String](\"target_udl_name\")))\n        if (bv_count_one_bits(trgt_prdcts_lkp)) {\n          target_prdcts = Array.concat(target_prdcts, Array.fill(1)(trgt_prdcts_lkp))\n        }\n      }\n\n      if (!_isnull(row.getAs[String](\"alt_udl_name\")) && !alternate_udl_name.contains(row.getAs[String](\"alt_udl_name\"))) {\n        alt_prdcts_lkp = if (row.getAs[Array[Byte]](18) != null) {\n          row.getAs[Array[Byte]](18).toArray\n        } else {\n          _bv_all_zeros()\n        }\n        if (alt_constituent_prdcts_vec.nonEmpty && _bv_count_one_bits(alt_prdcts_lkp) > 0) {\n          alt_prdcts_lkp = _bv_difference(alt_prdcts_lkp, alt_prdcts)\n          alt_prdcts = _bv_or(alt_prdcts,                 alt_prdcts_lkp)\n        }\n\n        alternate_udl_name = Array.concat(alternate_udl_name, Array.fill(1)(row.getAs[String](\"alt_udl_name\")))\n\n        if (!_isnull(row.getAs[String](\"constituent_group\"))) {\n          if (row.getAs[String](\"constituent_reqd\") == \"Y\" && !constituent_grp_vec.contains(row.getAs[String](\"constituent_group\"))) {\n            constituent_grp_vec = Array.concat(constituent_grp_vec, row.getAs[String](\"constituent_group\"))\n          }\n          if (_bv_count_one_bits(alt_prdcts_lkp)) {\n            alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                                      Row(\n                                                        alt_prdcts_lkp,\n                                                        row.getAs[String](\"constituent_group\"),\n                                                        row.getAs[String](\"constituent_reqd\"),\n                                                        row.getAs[String](\"alt_udl_name\")\n                                                      )\n            )\n          }\n        } else {\n          if (_bv_count_one_bits(alt_prdcts_lkp)) {\n            alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                                      Row(\n                                                        alt_prdcts_lkp,\n                                                        null,\n                                                        null,\n                                                        row.getAs[String](\"alt_udl_name\")\n                                                      )\n            )\n          }\n        }\n      }\n    }\n\n    var lastRow = inputRows.toArray.last\n\n    if (lastRow.getAs[String](\"tal_assoc_type_cd\").toInt == 3) {\n      target_prdcts =\n        if (target_prdcts.isEmpty && alt_constituent_prdcts_vec.nonEmpty) Array(_bv_all_zeros()) else target_prdcts\n      alt_constituent_prdcts_vec =\n        if (target_prdcts.nonEmpty && alt_constituent_prdcts_vec.isEmpty) Array(Row(_bv_all_zeros(), \"\", \"\", \"\", \"\"))\n        else alt_constituent_prdcts_vec\n    }\n\n    Row(\n      lastRow.getAs[java.math.BigDecimal](0),\n      lastRow.getAs[String](1),\n      lastRow.getAs[String](3),\n      lastRow.getAs[String](6),\n      lastRow.getAs[String](4),\n      lastRow.getAs[String](15),\n      lastRow.getAs[String](5),\n      target_prdcts,\n      alt_constituent_prdcts_vec,\n      lastRow.getAs[String](12),\n      lastRow.getAs[String](13),\n      lastRow.getAs[String](14),\n      constituent_grp_vec,\n      lastRow.getAs[String](16)\n    )\n  },\n  StructType(List(\n    StructField(\"tal_id\",            DecimalType(10, 0),          true),\n    StructField(\"tal_name\",          StringType,                  true),\n    StructField(\"tal_assoc_name\",    StringType,                  true),\n    StructField(\"tar_udl_nm\",        StringType,                  true),\n    StructField(\"tal_desc\",          StringType,                  true),\n    StructField(\"priority\",          StringType,                  true),\n    StructField(\"tal_assoc_type_cd\", StringType,                  true),\n    StructField(\"target_prdcts\",     ArrayType(BinaryType, true), true),\n    StructField(\n      \"alt_constituent_prdcts\",\n      ArrayType(\n        StructType(List(\n          StructField(\"alt_prdcts\",        BinaryType, true),\n          StructField(\"constituent_group\", StringType, true),\n          StructField(\"constituent_reqd\",  StringType, true),\n          StructField(\"udl_nm\",            StringType, true)\n        )),\n        true\n      ),\n      true\n    ),\n    StructField(\"shared_qual\",         StringType,                  true),\n    StructField(\"override_tac_name\",   StringType,                  true),\n    StructField(\"override_tar_name\",   StringType,                  true),\n    StructField(\"constituent_grp_vec\", ArrayType(StringType, true), true),\n    StructField(\"newline\",             StringType,                  true)\n  ))\n)\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"tal_assoc_id\")\n  .agg(\n    collect_list(\n      struct(\n        (origColumns :+ lookup(\"Expanded_UDL\", col(\"target_udl_name\"))\n          .getField(\"products\") :+ lookup(\"Expanded_UDL\", col(\"alt_udl_name\")).getField(\"products\")): _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n",
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\n\nval process_udf = udf(\n  { (inputRows: Seq[Row]) ⇒\n    var target_prdcts              = Array[Array[Byte]]()\n    var alt_prdcts                 = Array[Byte]()\n    var target_udl_name            = Array[String]()\n    var alternate_udl_name         = Array[String]()\n    var alt_constituent_prdcts_vec = Array[Row]()\n    var constituent_grp_vec        = Array[String]()\n\n    val inputRowsSorted = inputRows.toArray.sortBy(\n      r => (r.getAs[String](\"tal_assoc_name\"), \n      r.getAs[String](\"alt_rank\"), \n      r.getAs[String](\"priority\"), \n      r.getAs[String](\"constituent_group\"), \n      r.getAs[String](\"constituent_rank\"))\n    )\n    inputRowsSorted.foreach { row ⇒\n      var trgt_prdcts_lkp = _bv_all_zeros()\n      var alt_prdcts_lkp  = _bv_all_zeros()\n\n      if (!_isnull(row.getAs[String](\"target_udl_name\")) && !target_udl_name.contains(row.getAs[String](\"target_udl_name\"))) {\n        trgt_prdcts_lkp = if (row.getAs[Array[Byte]](17) != null) {\n          row.getAs[Array[Byte]](17).toArray\n        } else {\n          _bv_all_zeros()\n        }\n        if (target_prdcts.nonEmpty && _bv_count_one_bits(trgt_prdcts_lkp) > 0) {\n          trgt_prdcts_lkp = _bv_difference(trgt_prdcts_lkp, _bv_vector_or(target_prdcts))\n        }\n\n        target_udl_name = Array.concat(target_udl_name, Array.fill(1)(row.getAs[String](\"target_udl_name\")))\n        if (_bv_count_one_bits(trgt_prdcts_lkp) > 0) {\n          target_prdcts = Array.concat(target_prdcts, Array.fill(1)(trgt_prdcts_lkp))\n        }\n      }\n\n      if (!_isnull(row.getAs[String](\"alt_udl_name\")) && !alternate_udl_name.contains(row.getAs[String](\"alt_udl_name\"))) {\n        alt_prdcts_lkp = if (row.getAs[Array[Byte]](18) != null) {\n          row.getAs[Array[Byte]](18).toArray\n        } else {\n          _bv_all_zeros()\n        }\n        if (alt_constituent_prdcts_vec.nonEmpty && _bv_count_one_bits(alt_prdcts_lkp) > 0) {\n          alt_prdcts_lkp = _bv_difference(alt_prdcts_lkp, alt_prdcts)\n          alt_prdcts = _bv_or(alt_prdcts,                 alt_prdcts_lkp)\n        }\n\n        alternate_udl_name = Array.concat(alternate_udl_name, Array.fill(1)(row.getAs[String](\"alt_udl_name\")))\n\n        if (!_isnull(row.getAs[String](\"constituent_group\"))) {\n          if (row.getAs[String](\"constituent_reqd\") == \"Y\" && !constituent_grp_vec.contains(row.getAs[String](\"constituent_group\"))) {\n            constituent_grp_vec = Array.concat(constituent_grp_vec, Array.fill(1)(row.getAs[String](\"constituent_group\")))\n          }\n          if (_bv_count_one_bits(alt_prdcts_lkp) > 0) {\n            alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                                      Array.fill(1)(Row(\n                                                        alt_prdcts_lkp,\n                                                        row.getAs[String](\"constituent_group\"),\n                                                        row.getAs[String](\"constituent_reqd\"),\n                                                        row.getAs[String](\"alt_udl_name\")\n                                                      ))\n            )\n          }\n        } else {\n          if (_bv_count_one_bits(alt_prdcts_lkp) > 0) {\n            alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                                      Array.fill(1)(Row(\n                                                        alt_prdcts_lkp,\n                                                        null,\n                                                        null,\n                                                        row.getAs[String](\"alt_udl_name\")\n                                                      ))\n            )\n          }\n        }\n      }\n    }\n\n    var lastRow = inputRows.toArray.last\n\n    if (lastRow.getAs[String](\"tal_assoc_type_cd\").toInt == 3) {\n      target_prdcts =\n        if (target_prdcts.isEmpty && alt_constituent_prdcts_vec.nonEmpty) Array(_bv_all_zeros()) else target_prdcts\n      alt_constituent_prdcts_vec =\n        if (target_prdcts.nonEmpty && alt_constituent_prdcts_vec.isEmpty) Array(Row(_bv_all_zeros(), \"\", \"\", \"\", \"\"))\n        else alt_constituent_prdcts_vec\n    }\n\n    Row(\n      lastRow.getAs[java.math.BigDecimal](0),\n      lastRow.getAs[String](1),\n      lastRow.getAs[String](3),\n      lastRow.getAs[String](6),\n      lastRow.getAs[String](4),\n      lastRow.getAs[String](15),\n      lastRow.getAs[String](5),\n      target_prdcts,\n      alt_constituent_prdcts_vec,\n      lastRow.getAs[String](12),\n      lastRow.getAs[String](13),\n      lastRow.getAs[String](14),\n      constituent_grp_vec,\n      lastRow.getAs[String](16)\n    )\n  },\n  StructType(List(\n    StructField(\"tal_id\",            DecimalType(10, 0),          true),\n    StructField(\"tal_name\",          StringType,                  true),\n    StructField(\"tal_assoc_name\",    StringType,                  true),\n    StructField(\"tar_udl_nm\",        StringType,                  true),\n    StructField(\"tal_desc\",          StringType,                  true),\n    StructField(\"priority\",          StringType,                  true),\n    StructField(\"tal_assoc_type_cd\", StringType,                  true),\n    StructField(\"target_prdcts\",     ArrayType(BinaryType, true), true),\n    StructField(\n      \"alt_constituent_prdcts\",\n      ArrayType(\n        StructType(List(\n          StructField(\"alt_prdcts\",        BinaryType, true),\n          StructField(\"constituent_group\", StringType, true),\n          StructField(\"constituent_reqd\",  StringType, true),\n          StructField(\"udl_nm\",            StringType, true)\n        )),\n        true\n      ),\n      true\n    ),\n    StructField(\"shared_qual\",         StringType,                  true),\n    StructField(\"override_tac_name\",   StringType,                  true),\n    StructField(\"override_tar_name\",   StringType,                  true),\n    StructField(\"constituent_grp_vec\", ArrayType(StringType, true), true),\n    StructField(\"newline\",             StringType,                  true)\n  ))\n)\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n  .groupBy(\"tal_assoc_id\")\n  .agg(\n    collect_list(\n      struct(\n        (origColumns :+ lookup(\"Expanded_UDL\", col(\"target_udl_name\"))\n          .getField(\"products\") :+ lookup(\"Expanded_UDL\", col(\"alt_udl_name\")).getField(\"products\")): _*\n      )\n    ).alias(\"inputRows\")\n  )\n  .select((process_udf(col(\"inputRows\"))).alias(\"output\"))\n  .select(col(\"output.*\"))\n",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out0\n}"
       }
@@ -722,9 +716,9 @@
       "id" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
       "component" : "Script",
       "metadata" : {
-        "label" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2",
-        "slug" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2",
-        "x" : 3080,
+        "label" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+        "slug" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
+        "x" : 2880,
         "y" : 140,
         "phase" : 4,
         "cache" : false,
@@ -1109,7 +1103,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport scala.util.control._\n\nval process_udf = udf({ (input: Seq[Row]) =>\n    val outputRows = scala.collection.mutable.ArrayBuffer[Row]()\n\n    var excl_target_prdcts = Array[Byte]()\n    var excl_alt_prdcts = Array[Byte]()\n    var target_prdcts = Array[Array[Byte]]()\n    var shared_qual_prdcts = Array[Array[Byte]]()\n    var alt_constituent_prdcts_vec = Array[Row]()\n    var lv_constituent_grp_vec = Array[String]()\n    input.foreach { in =>\n        var lv_target_prdcts = _bv_all_zeros()\n        var lv_alt_prdcts = _bv_all_zeros()\n        target_prdcts = Array[Array[Byte]]()\n        alt_constituent_prdcts_vec = Array[Row]()\n        lv_constituent_grp_vec = Array[String]()\n\n        if (in.getAs[String](\"tal_assoc_type_cd\").toInt == 3) {\n            excl_target_prdcts = _bv_or(excl_target_prdcts, _bv_vector_or(in.getSeq[Array[Byte]](7).toArray))\n            excl_alt_prdcts = _bv_or(excl_alt_prdcts, _bv_vector_or(\n                in.getAs[Seq[Row]](\"alt_constituent_prdcts\").map ( alt_consti_prdcts =>\n                    alt_consti_prdcts.getAs[Array[Byte]](\"alt_prdcts\")\n                )\n            ))\n        } else {\n            if (in.getAs[String](\"shared_qual\") == \"N/A\") {\n                var shared_qual_target_prdcts = _bv_all_zeros()\n                var shared_qual_alt_prdcts = _bv_all_zeros()\n                var lv_target_prdcts_vec = Array[Array[Byte]]()\n                shared_qual_target_prdcts = _bv_difference(in.getSeq[Array[Byte]](7).head, excl_target_prdcts)\n                shared_qual_alt_prdcts = if (in.getAs[Seq[Row]](\"alt_constituent_prdcts\").nonEmpty) {\n                    _bv_difference(in.getAs[Seq[Row]](\"alt_constituent_prdcts\").head.getAs[Array[Byte]](\"alt_prdcts\"), excl_alt_prdcts)\n                } else {\n                    _bv_all_zeros()\n                }\n                if ( _bv_count_one_bits(shared_qual_alt_prdcts) )  {\n                    shared_qual_prdcts = in.getSeq[Array[Byte]](14).toArray\n                    val loop = new Breaks;\n                    loop.breakable {\n                        shared_qual_prdcts.foreach { shared_prdcts =>\n                             if( _bv_count_one_bits(shared_qual_target_prdcts) && _bv_count_one_bits(shared_qual_alt_prdcts) ) {\n                                lv_target_prdcts = _bv_and(shared_qual_target_prdcts, shared_prdcts)\n                                if( _bv_count_one_bits(lv_target_prdcts) ) {\n                                    shared_qual_target_prdcts = _bv_difference(shared_qual_target_prdcts, lv_target_prdcts)\n                                    lv_alt_prdcts             = _bv_and(shared_qual_alt_prdcts, shared_prdcts)\n                                    if ( _bv_count_one_bits(lv_alt_prdcts) ) {\n                                        target_prdcts = Array.concat(target_prdcts, lv_target_prdcts)\n                                        alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                            Row(lv_alt_prdcts, in.getAs[Seq[Row]](\"alt_constituent_prdcts\").head.getAs[String](\"udl_nm\"), \"\", \"\")\n                                        )\n                                        shared_qual_alt_prdcts = _bv_difference(shared_qual_alt_prdcts, lv_alt_prdcts)\n                                    } else {\n                                        lv_target_prdcts_vec = Array.concat(lv_target_prdcts_vec, lv_target_prdcts)\n                                    }\n                                }\n                             } else {\n                                loop.break\n                             }\n                        }\n                    }\n                }\n                if ( _bv_count_one_bits(shared_qual_target_prdcts) ) {\n                    lv_target_prdcts_vec = Array.concat(lv_target_prdcts_vec, shared_qual_target_prdcts)\n                }\n                target_prdcts = Array.concat(target_prdcts, lv_target_prdcts_vec)\n            } else {\n                in.getSeq[Array[Byte]](7).foreach { target_prds =>\n                    lv_target_prdcts = _bv_difference(target_prds, excl_target_prdcts)\n                    if ( bv_count_one_bits(lv_target_prdcts) ) {\n                        target_prdcts = Array.concat(target_prdcts, lv_target_prdcts)\n                    }\n                }\n                \n                in.getAs[Seq[Row]](\"alt_constituent_prdcts\").foreach { alt_constituent_prdct =>\n                    lv_alt_prdcts = _bv_difference(alt_constituent_prdct.getAs[Array[Byte]](\"alt_prdcts\"), excl_alt_prdcts)\n                    if ( _bv_count_one_bits(lv_alt_prdcts) > 0 ) {\n                        if ( !_isnull(alt_constituent_prdct.getAs[String](\"constituent_group\") ) \n                            && !lv_constituent_grp_vec.contains((alt_constituent_prdct.getAs[String](\"constituent_group\")))\n                            && alt_constituent_prdct.getAs[String](\"constituent_reqd\") == \"Y\") {\n\n                            lv_constituent_grp_vec = Array.concat(lv_constituent_grp_vec, alt_constituent_prdct.getAs[String](\"constituent_group\"))  \n                        }\n                        alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                         Row(\n                            lv_alt_prdcts,\n                            alt_constituent_prdct.getAs[String](\"constituent_group\"),\n                            alt_constituent_prdct.getAs[String](\"constituent_reqd\"),\n                            alt_constituent_prdct.getAs[String](\"udl_nm\")\n                         )\n                        )\n                    }\n                }\n\n                if (in.getAs[Seq[String]].toSet.diff(lv_constituent_grp_vec.toSet).nonEmpty) {\n                    alt_constituent_prdcts_vec = alt_constituent_prdcts_vec.filter(xx => xx.getAs[String](1) == null)\n                    lv_constituent_grp_vec = Array[String]()\n                }\n            }\n        }\n        outputRows.append(\n            Row(\n                in.getAs[java.math.BigDecimal](0),\n                in.getAs[String](1),\n                in.getAs[String](2),\n                in.getAs[String](3),\n                in.getAs[String](4),\n                in.getAs[String](5),\n                in.getAs[String](6),\n                target_prdcts,\n                alt_constituent_prdcts_vec,\n                in.getAs[String](9),\n                in.getAs[String](10),\n                in.getAs[String](11),\n                lv_constituent_grp_vec,\n                in.getAs[String](13),\n            )\n        )\n    }\n    outputRows.toArray\n},\nArrayType(\n    StructType(List(\n  StructField(\"tal_id\",            DecimalType(10, 0),          true),\n  StructField(\"tal_name\",          StringType,                  true),\n  StructField(\"tal_assoc_name\",    StringType,                  true),\n  StructField(\"tar_udl_nm\",        StringType,                  true),\n  StructField(\"tal_desc\",          StringType,                  true),\n  StructField(\"priority\",          StringType,                  true),\n  StructField(\"tal_assoc_type_cd\", StringType,                  true),\n  StructField(\"target_prdcts\",     ArrayType(BinaryType, true), true),\n  StructField(\n    \"alt_constituent_prdcts\",\n    ArrayType(\n      StructType(List(\n        StructField(\"alt_prdcts\",        BinaryType, true),\n        StructField(\"constituent_group\", StringType, true),\n        StructField(\"constituent_reqd\",  StringType, true),\n        StructField(\"udl_nm\",            StringType, true)\n      )),\n      true\n    ),\n    true\n  ),\n  StructField(\"shared_qual\",         StringType,                  true),\n  StructField(\"override_tac_name\",   StringType,                  true),\n  StructField(\"override_tar_name\",   StringType,                  true),\n  StructField(\"constituent_grp_vec\", ArrayType(StringType, true), true),\n  StructField(\"newline\",             StringType,                  false)\n))\n))\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n    .groupBy(\"run_eff_dt\")\n    .agg(\n    collect_list(\n        struct(\n            (origColumns :+ lookup(\"LKP_Shared_Qualifier_Products\", col(\"shared_qual\")).getField(\"shared_qual_prdcts\") ) : _*\n        )\n    ).alias(\"inputRows\")\n    )\n    .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n    .select(col(\"output.*\"))",
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport scala.util.control._\n\nval process_udf = udf({ (input: Seq[Row]) =>\n    val outputRows = scala.collection.mutable.ArrayBuffer[Row]()\n\n    var excl_target_prdcts = Array[Byte]()\n    var excl_alt_prdcts = Array[Byte]()\n    var target_prdcts = Array[Array[Byte]]()\n    var shared_qual_prdcts = Array[Array[Byte]]()\n    var alt_constituent_prdcts_vec = Array[Row]()\n    var lv_constituent_grp_vec = Array[String]()\n    input.foreach { in =>\n        var lv_target_prdcts = _bv_all_zeros()\n        var lv_alt_prdcts = _bv_all_zeros()\n        target_prdcts = Array[Array[Byte]]()\n        alt_constituent_prdcts_vec = Array[Row]()\n        lv_constituent_grp_vec = Array[String]()\n\n        if (in.getAs[String](\"tal_assoc_type_cd\").toInt == 3) {\n            excl_target_prdcts = _bv_or(excl_target_prdcts, _bv_vector_or(in.getSeq[Array[Byte]](7).toArray))\n            excl_alt_prdcts = _bv_or(excl_alt_prdcts, _bv_vector_or(\n                in.getAs[Seq[Row]](\"alt_constituent_prdcts\").toArray.map ( alt_consti_prdcts =>\n                    alt_consti_prdcts.getAs[Array[Byte]](\"alt_prdcts\")\n                )\n            ))\n        } else {\n            if (in.getAs[String](\"shared_qual\") == \"N/A\") {\n                var shared_qual_target_prdcts = _bv_all_zeros()\n                var shared_qual_alt_prdcts = _bv_all_zeros()\n                var lv_target_prdcts_vec = Array[Array[Byte]]()\n                shared_qual_target_prdcts = _bv_difference(in.getSeq[Array[Byte]](7).head, excl_target_prdcts)\n                shared_qual_alt_prdcts = if (in.getAs[Seq[Row]](\"alt_constituent_prdcts\").nonEmpty) {\n                    _bv_difference(in.getAs[Seq[Row]](\"alt_constituent_prdcts\").head.getAs[Array[Byte]](\"alt_prdcts\"), excl_alt_prdcts)\n                } else {\n                    _bv_all_zeros()\n                }\n                if ( _bv_count_one_bits(shared_qual_alt_prdcts) > 0 )  {\n                    shared_qual_prdcts = in.getSeq[Array[Byte]](14).toArray\n                    val loop = new Breaks;\n                    loop.breakable {\n                        shared_qual_prdcts.foreach { shared_prdcts =>\n                             if( _bv_count_one_bits(shared_qual_target_prdcts) > 0 && _bv_count_one_bits(shared_qual_alt_prdcts) > 0) {\n                                lv_target_prdcts = _bv_and(shared_qual_target_prdcts, shared_prdcts)\n                                if( _bv_count_one_bits(lv_target_prdcts) > 0 ) {\n                                    shared_qual_target_prdcts = _bv_difference(shared_qual_target_prdcts, lv_target_prdcts)\n                                    lv_alt_prdcts             = _bv_and(shared_qual_alt_prdcts, shared_prdcts)\n                                    if ( _bv_count_one_bits(lv_alt_prdcts) > 0) {\n                                        target_prdcts = Array.concat(target_prdcts, Array.fill(1)(lv_target_prdcts))\n                                        alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                                            Array.fill(1)(Row(lv_alt_prdcts, in.getAs[Seq[Row]](\"alt_constituent_prdcts\").head.getAs[String](\"udl_nm\"), \"\", \"\"))\n                                        )\n                                        shared_qual_alt_prdcts = _bv_difference(shared_qual_alt_prdcts, lv_alt_prdcts)\n                                    } else {\n                                        lv_target_prdcts_vec = Array.concat(lv_target_prdcts_vec, Array.fill(1)(lv_target_prdcts))\n                                    }\n                                }\n                             } else {\n                                loop.break\n                             }\n                        }\n                    }\n                }\n                if ( _bv_count_one_bits(shared_qual_target_prdcts) > 0) {\n                    lv_target_prdcts_vec = Array.concat(lv_target_prdcts_vec, Array.fill(1)(shared_qual_target_prdcts))\n                }\n                target_prdcts = Array.concat(target_prdcts, lv_target_prdcts_vec)\n            } else {\n                in.getSeq[Array[Byte]](7).foreach { target_prds =>\n                    lv_target_prdcts = _bv_difference(target_prds, excl_target_prdcts)\n                    if ( _bv_count_one_bits(lv_target_prdcts) > 0 ) {\n                        target_prdcts = Array.concat(target_prdcts, Array.fill(1)(lv_target_prdcts))\n                    }\n                }\n                \n                in.getAs[Seq[Row]](\"alt_constituent_prdcts\").foreach { alt_constituent_prdct =>\n                    lv_alt_prdcts = _bv_difference(alt_constituent_prdct.getAs[Array[Byte]](\"alt_prdcts\"), excl_alt_prdcts)\n                    if ( _bv_count_one_bits(lv_alt_prdcts) > 0 ) {\n                        if ( !_isnull(alt_constituent_prdct.getAs[String](\"constituent_group\") ) \n                            && !lv_constituent_grp_vec.contains((alt_constituent_prdct.getAs[String](\"constituent_group\")))\n                            && alt_constituent_prdct.getAs[String](\"constituent_reqd\") == \"Y\") {\n\n                            lv_constituent_grp_vec = Array.concat(lv_constituent_grp_vec, \n                                                                Array.fill(1)(alt_constituent_prdct.getAs[String](\"constituent_group\")))  \n                        }\n                        alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,\n                         Array.fill(1)(Row(\n                            lv_alt_prdcts,\n                            alt_constituent_prdct.getAs[String](\"constituent_group\"),\n                            alt_constituent_prdct.getAs[String](\"constituent_reqd\"),\n                            alt_constituent_prdct.getAs[String](\"udl_nm\")\n                         ))\n                        )\n                    }\n                }\n\n                if (in.getAs[Seq[String]](\"constituent_grp_vec\").toSet.diff(lv_constituent_grp_vec.toSet).nonEmpty) {\n                    alt_constituent_prdcts_vec = alt_constituent_prdcts_vec.filter(xx => xx.getAs[String](1) == null)\n                    lv_constituent_grp_vec = Array[String]()\n                }\n            }\n        }\n        outputRows.append(\n            Row(\n                in.getAs[java.math.BigDecimal](0),\n                in.getAs[String](1),\n                in.getAs[String](2),\n                in.getAs[String](3),\n                in.getAs[String](4),\n                in.getAs[String](5),\n                in.getAs[String](6),\n                target_prdcts,\n                alt_constituent_prdcts_vec,\n                in.getAs[String](9),\n                in.getAs[String](10),\n                in.getAs[String](11),\n                lv_constituent_grp_vec,\n                in.getAs[String](13),\n            )\n        )\n    }\n    outputRows.toArray\n},\nArrayType(\n    StructType(List(\n  StructField(\"tal_id\",            DecimalType(10, 0),          true),\n  StructField(\"tal_name\",          StringType,                  true),\n  StructField(\"tal_assoc_name\",    StringType,                  true),\n  StructField(\"tar_udl_nm\",        StringType,                  true),\n  StructField(\"tal_desc\",          StringType,                  true),\n  StructField(\"priority\",          StringType,                  true),\n  StructField(\"tal_assoc_type_cd\", StringType,                  true),\n  StructField(\"target_prdcts\",     ArrayType(BinaryType, true), true),\n  StructField(\n    \"alt_constituent_prdcts\",\n    ArrayType(\n      StructType(List(\n        StructField(\"alt_prdcts\",        BinaryType, true),\n        StructField(\"constituent_group\", StringType, true),\n        StructField(\"constituent_reqd\",  StringType, true),\n        StructField(\"udl_nm\",            StringType, true)\n      )),\n      true\n    ),\n    true\n  ),\n  StructField(\"shared_qual\",         StringType,                  true),\n  StructField(\"override_tac_name\",   StringType,                  true),\n  StructField(\"override_tar_name\",   StringType,                  true),\n  StructField(\"constituent_grp_vec\", ArrayType(StringType, true), true),\n  StructField(\"newline\",             StringType,                  false)\n))\n))\n\nval origColumns = in0.columns.map(col)\nval out0 = in0\n    .groupBy(\"run_eff_dt\")\n    .agg(\n    collect_list(\n        struct(\n            (origColumns :+ lookup(\"LKP_Shared_Qualifier_Products\", col(\"shared_qual\")).getField(\"shared_qual_prdcts\") ) : _*\n        )\n    ).alias(\"inputRows\")\n    )\n    .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n    .select(col(\"output.*\"))",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out0\n}"
       }
@@ -1523,7 +1517,7 @@
         "label" : "LKP_Shared_Qualifier_Products",
         "slug" : "LKP_Shared_Qualifier_Products",
         "x" : 3280,
-        "y" : 540,
+        "y" : 340,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1577,7 +1571,7 @@
         "label" : "LKP_Rule_Products_lookup",
         "slug" : "LKP_Rule_Products_lookup",
         "x" : 220,
-        "y" : 420,
+        "y" : 500,
         "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
@@ -1648,7 +1642,7 @@
         "label" : "Select_TALs_w_o_Nested_TAL_Filter_select",
         "slug" : "Select_TALs_w_o_Nested_TAL_Filter_select",
         "x" : 220,
-        "y" : 220,
+        "y" : 100,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1790,7 +1784,7 @@
         "label" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
         "slug" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
         "x" : 420,
-        "y" : 220,
+        "y" : 100,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1945,7 +1939,7 @@
         "label" : "Expanded_UDL_lookup",
         "slug" : "Expanded_UDL_lookup",
         "x" : 220,
-        "y" : 20,
+        "y" : 300,
         "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
@@ -2056,7 +2050,7 @@
         "label" : "LKP_Rule_Products",
         "slug" : "LKP_Rule_Products",
         "x" : 20,
-        "y" : 420,
+        "y" : 500,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2083,7 +2077,7 @@
         "label" : "SWG",
         "slug" : "SWG",
         "x" : 1620,
-        "y" : 220,
+        "y" : 200,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2306,7 +2300,7 @@
         "label" : "MERGE_UnionAll",
         "slug" : "MERGE_UnionAll",
         "x" : 1020,
-        "y" : 220,
+        "y" : 100,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2552,7 +2546,7 @@
         "label" : "Process_TAL_Association_Rows_output_select_filter",
         "slug" : "Process_TAL_Association_Rows_output_select_filter",
         "x" : 2220,
-        "y" : 220,
+        "y" : 200,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2772,7 +2766,7 @@
         "label" : "Select_TALs_w_o_Nested_TALReformat_0",
         "slug" : "Select_TALs_w_o_Nested_TALReformat_0",
         "x" : 820,
-        "y" : 120,
+        "y" : 20,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2988,7 +2982,7 @@
         "label" : "Expanded_UDL",
         "slug" : "Expanded_UDL",
         "x" : 20,
-        "y" : 20,
+        "y" : 300,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3014,7 +3008,7 @@
       "metadata" : {
         "label" : "TAL_Container_w_Assoc_in_BV_Products",
         "slug" : "TAL_Container_w_Assoc_in_BV_Products",
-        "x" : 3280,
+        "x" : 3080,
         "y" : 140,
         "phase" : 3,
         "cache" : false,
@@ -3224,7 +3218,7 @@
         "label" : "Filter_Exclusion_Association",
         "slug" : "Filter_Exclusion_Association",
         "x" : 2420,
-        "y" : 220,
+        "y" : 200,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3457,7 +3451,7 @@
         "label" : "Process_TAL_Association_Rows_Reformat",
         "slug" : "Process_TAL_Association_Rows_Reformat",
         "x" : 2020,
-        "y" : 220,
+        "y" : 200,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3772,7 +3766,7 @@
         "label" : "MERGE",
         "slug" : "MERGE",
         "x" : 1220,
-        "y" : 220,
+        "y" : 100,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3917,7 +3911,7 @@
         "label" : "TAL_Container_Dtls",
         "slug" : "TAL_Container_Dtls",
         "x" : 20,
-        "y" : 220,
+        "y" : 100,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3944,7 +3938,7 @@
         "label" : "Create_LKP_for_override_qualifiers_input_select_filter",
         "slug" : "Create_LKP_for_override_qualifiers_input_select_filter",
         "x" : 2680,
-        "y" : 440,
+        "y" : 340,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4157,223 +4151,6 @@
         "projectName" : "ProphecySparkBasicsScala"
       }
     },
-    "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association" : {
-      "id" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
-      "component" : "Reformat",
-      "metadata" : {
-        "label" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
-        "slug" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association",
-        "x" : 2880,
-        "y" : 140,
-        "phase" : 4,
-        "cache" : false,
-        "detailedStats" : false,
-        "isImported" : false
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__in",
-          "slug" : "in",
-          "schema" : {
-            "type" : "struct",
-            "fields" : [ {
-              "name" : "tal_id",
-              "type" : "decimal(10,0)",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "tal_name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "tal_assoc_name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "tar_udl_nm",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "tal_desc",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "priority",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "tal_assoc_type_cd",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "target_prdcts",
-              "type" : {
-                "type" : "array",
-                "elementType" : "binary",
-                "containsNull" : true
-              },
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "alt_constituent_prdcts",
-              "type" : {
-                "type" : "array",
-                "elementType" : {
-                  "type" : "struct",
-                  "fields" : [ {
-                    "name" : "alt_prdcts",
-                    "type" : "binary",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "constituent_group",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "constituent_reqd",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  }, {
-                    "name" : "udl_nm",
-                    "type" : "string",
-                    "nullable" : true,
-                    "metadata" : {
-                      "description" : "",
-                      "mappings" : [ ],
-                      "tags" : [ ]
-                    }
-                  } ]
-                },
-                "containsNull" : true
-              },
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "shared_qual",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "override_tac_name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "override_tar_name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "constituent_grp_vec",
-              "type" : {
-                "type" : "array",
-                "elementType" : "string",
-                "containsNull" : true
-              },
-              "nullable" : true,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
-              "name" : "newline",
-              "type" : "string",
-              "nullable" : false,
-              "metadata" : {
-                "description" : "",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            } ]
-          },
-          "isStreaming" : false
-        } ],
-        "outputs" : [ {
-          "id" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association__out",
-          "slug" : "out"
-        } ],
-        "selectedInputFields" : [ ],
-        "isCustomOutputSchema" : false,
-        "autoUpdateOnRun" : false
-      },
-      "properties" : {
-        "columnsSelector" : [ ],
-        "expressions" : [ ]
-      },
-      "componentInfo" : {
-        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
-        "projectName" : "ProphecySparkBasicsScala"
-      }
-    },
     "Select_TALs_w_o_Nested_TALReformat_1" : {
       "id" : "Select_TALs_w_o_Nested_TALReformat_1",
       "component" : "Reformat",
@@ -4381,7 +4158,7 @@
         "label" : "Select_TALs_w_o_Nested_TALReformat_1",
         "slug" : "Select_TALs_w_o_Nested_TALReformat_1",
         "x" : 620,
-        "y" : 320,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4597,7 +4374,7 @@
         "label" : "Get_the_association_details_for_nested_TAL",
         "slug" : "Get_the_association_details_for_nested_TAL",
         "x" : 820,
-        "y" : 320,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4825,7 +4602,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport scala.collection.mutable.ArrayBuffer\n\nval process_udf = udf({ (row: Row) =>\n  val results = ArrayBuffer[Row]()\n  var _l1_factor = BigDecimal(5)\n  var _l1_denominator = BigDecimal(100)\n  var _l1_assocition_cnt = BigDecimal(2000)\n  var _l2_factor = BigDecimal(1000)\n  var tal_dtl_final = Array[Row]()\n  var i = 0\n  var j = 0\n  var nested_tal_l1_dtl = row.getAs[Seq[Row]](11).toArray\n  while (compareTo(i, nested_tal_l1_dtl.length) < 0) {\n    if (!_isnull(nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_assoc_name\"))) {\n          val nested_tal_l1_dtl_i = Row(\n            nested_tal_l1_dtl(convertToInt(i)).getAs[java.math.BigDecimal](\"tal_dtl_id\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[java.math.BigDecimal](\"tal_id\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_name\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_desc\"),\n            (nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_dtl_type_cd\")),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"nested_tal_name\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_assoc_name\"),\n            (BigDecimal(row.getAs[String](\"priority\")) + (BigDecimal(\n              nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"priority\")\n            ) / (_l1_denominator * (_l1_factor / _l1_assocition_cnt)))).toString,\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"eff_dt\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"term_dt\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"newline\")\n          )\n          tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l1_dtl_i))\n    } else {\n      j = 0\n      val nested_tal_l1_dtl_arr = nested_tal_l1_dtl.getAs[Seq[Row]](i).toArray\n      while (\n        compareTo(j,\n              nested_tal_l1_dtl_arr.length    \n        ) < 0\n      ) {\n        var nested_tal_l2_dtl = nested_tal_l1_dtl_arr(convertToInt(j))\n        nested_tal_l2_dtl = updateIndexInRow(\n          nested_tal_l2_dtl,\n          7,\n          ((BigDecimal(row.getAs[String](\"priority\")) + (BigDecimal(\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"priority\")\n          ) / (_l1_denominator * BigDecimal(_l1_factor / _l1_assocition_cnt)))) + (BigDecimal(\n            nested_tal_l2_dtl.getAs[String](\"priority\")\n          ) / (_l2_factor * _l2_factor))).toString\n        )\n        tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l2_dtl))\n        j = j + 1\n      }\n    }\n    i = i + 1\n  }\n\n  tal_dtl_final.zipWithIndex.foreach {\n    case (r, idx) ⇒\n      results.append(\n        row.getAs[java.math.BigDecimal](0),\n        row.getAs[java.math.BigDecimal](1),\n        row.getAs[String](2),\n        row.getAs[String](3),\n        row.getAs[String](4),\n        tal_dtl_final(idx).getAs[String](2),\n        if (tal_dtl_final(idx).getAs[String](6) != null)  tal_dtl_final(idx).getAs[String](6) else row.getAs[String](6),\n        if (tal_dtl_final(idx).getAs[String](7) != null)  tal_dtl_final(idx).getAs[String](7) else row.getAs[String](7),\n        row.getAs[String](8),\n        row.getAs[String](9),\n        row.getAs[String](10),\n      )\n  }\n  result.toArray\n}, ArrayType(StructType(\n    List(\n      StructField(\"tal_dtl_id\",      DecimalType(10, 0),  false),\n      StructField(\"tal_id\",          DecimalType(10, 0),  false),\n      StructField(\"tal_name\",        StringType,         false),\n      StructField(\"tal_desc\",        StringType,         false),\n      StructField(\"tal_dtl_type_cd\", StringType,         false),\n      StructField(\"nested_tal_name\", StringType,         true),\n      StructField(\"tal_assoc_name\",  StringType,         true),\n      StructField(\"priority\",        StringType,         false),\n      StructField(\"eff_dt\",          StringType,         false),\n      StructField(\"term_dt\",         StringType,         false),\n      StructField(\"newline\",         StringType,         true)\n    )\n)))\n\ndef nested_tal_l1_dtl() = {\n  lookup_row(\"TAL_Container_Dtls\", col(\"nested_tal_name\"))\n}\n\ndef nested_tal_l2_dtl() = {\n   transform(\n      nested_tal_l1_dtl(),\n      xx =>\n        lookup_row(\"TAL_Container_Dtls\", xx.getField(\"nested_tal_name\"))\n   )\n}\n\nval df = in\n  .withColumn(\n    \"nested_tal_l1_dtl\",\n    nested_tal_l1_dtl(),\n  ).withColumn(\n    \"nested_tal_l2_dtl\",\n    nested_tal_l2_dtl()\n  )\n  \n  val origColumns = df.columns.map(col)\n  val out = df\n    .select(struct(origColumns: _*).as(\"inputRows\"))\n    .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n    .select(col(\"output.*\"))\n",
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport scala.collection.mutable.ArrayBuffer\n\nval process_udf = udf({ (row: Row) =>\n  val results = ArrayBuffer[Row]()\n  var _l1_factor = BigDecimal(5)\n  var _l1_denominator = BigDecimal(100)\n  var _l1_assocition_cnt = BigDecimal(2000)\n  var _l2_factor = BigDecimal(1000)\n  var tal_dtl_final = Array[Row]()\n  var i = 0\n  var j = 0\n  var nested_tal_l1_dtl = row.getAs[Seq[Row]](11).toArray\n  while (compareTo(i, nested_tal_l1_dtl.length) < 0) {\n    if (!_isnull(nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_assoc_name\"))) {\n          val nested_tal_l1_dtl_i = Row(\n            nested_tal_l1_dtl(convertToInt(i)).getAs[java.math.BigDecimal](\"tal_dtl_id\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[java.math.BigDecimal](\"tal_id\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_name\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_desc\"),\n            (nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_dtl_type_cd\")),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"nested_tal_name\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"tal_assoc_name\"),\n            (BigDecimal(row.getAs[String](\"priority\")) + (BigDecimal(\n              nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"priority\")\n            ) / (_l1_denominator * (_l1_factor / _l1_assocition_cnt)))).toString,\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"eff_dt\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"term_dt\"),\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"newline\")\n          )\n          tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l1_dtl_i))\n    } else {\n      j = 0\n      val nested_tal_l1_dtl_arr = nested_tal_l1_dtl(i).getAs[Seq[Row]](0).toArray\n      while (\n        compareTo(j,\n              nested_tal_l1_dtl_arr.length    \n        ) < 0\n      ) {\n        var nested_tal_l2_dtl = nested_tal_l1_dtl_arr(convertToInt(j))\n        nested_tal_l2_dtl = updateIndexInRow(\n          nested_tal_l2_dtl,\n          7,\n          ((BigDecimal(row.getAs[String](\"priority\")) + (BigDecimal(\n            nested_tal_l1_dtl(convertToInt(i)).getAs[String](\"priority\")\n          ) / (_l1_denominator * (_l1_factor / _l1_assocition_cnt)))) + (BigDecimal(\n            nested_tal_l2_dtl.getAs[String](\"priority\")\n          ) / (_l2_factor * _l2_factor))).toString\n        )\n        tal_dtl_final = Array.concat(tal_dtl_final, Array.fill(1)(nested_tal_l2_dtl))\n        j = j + 1\n      }\n    }\n    i = i + 1\n  }\n\n  tal_dtl_final.zipWithIndex.foreach {\n    case (r, idx) ⇒\n      results.append(\n        Row(\n        row.getAs[java.math.BigDecimal](0),\n        row.getAs[java.math.BigDecimal](1),\n        row.getAs[String](2),\n        row.getAs[String](3),\n        row.getAs[String](4),\n        tal_dtl_final(idx).getAs[String](2),\n        if (tal_dtl_final(idx).getAs[String](6) != null)  tal_dtl_final(idx).getAs[String](6) else row.getAs[String](6),\n        if (tal_dtl_final(idx).getAs[String](7) != null)  tal_dtl_final(idx).getAs[String](7) else row.getAs[String](7),\n        row.getAs[String](8),\n        row.getAs[String](9),\n        row.getAs[String](10),\n      ))\n  }\n  results.toArray\n}, ArrayType(StructType(\n    List(\n      StructField(\"tal_dtl_id\",      DecimalType(10, 0),  false),\n      StructField(\"tal_id\",          DecimalType(10, 0),  false),\n      StructField(\"tal_name\",        StringType,         false),\n      StructField(\"tal_desc\",        StringType,         false),\n      StructField(\"tal_dtl_type_cd\", StringType,         false),\n      StructField(\"nested_tal_name\", StringType,         true),\n      StructField(\"tal_assoc_name\",  StringType,         true),\n      StructField(\"priority\",        StringType,         false),\n      StructField(\"eff_dt\",          StringType,         false),\n      StructField(\"term_dt\",         StringType,         false),\n      StructField(\"newline\",         StringType,         true)\n    )\n)))\n\ndef nested_tal_l1_dtl() = {\n  lookup_row(\"TAL_Container_Dtls\", col(\"nested_tal_name\"))\n}\n\ndef nested_tal_l2_dtl() = {\n   transform(\n      nested_tal_l1_dtl(),\n      xx =>\n        lookup_row(\"TAL_Container_Dtls\", xx.getField(\"nested_tal_name\"))\n   )\n}\n\nval df = in\n  .withColumn(\n    \"nested_tal_l1_dtl\",\n    nested_tal_l1_dtl(),\n  ).withColumn(\n    \"nested_tal_l2_dtl\",\n    nested_tal_l2_dtl()\n  )\n  \n  val origColumns = df.columns.map(col)\n  val out = df\n    .select(struct(origColumns: _*).as(\"inputRows\"))\n    .select(explode(process_udf(col(\"inputRows\"))).alias(\"output\"))\n    .select(col(\"output.*\"))\n",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out\n}"
       }
@@ -4837,7 +4614,7 @@
         "label" : "Create_LKP_for_override_qualifiers",
         "slug" : "Create_LKP_for_override_qualifiers",
         "x" : 2880,
-        "y" : 440,
+        "y" : 340,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -5074,7 +4851,7 @@
         "label" : "LKP_Shared_Qualifier_Products_lookup",
         "slug" : "LKP_Shared_Qualifier_Products_lookup",
         "x" : 3280,
-        "y" : 340,
+        "y" : 540,
         "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
@@ -5131,7 +4908,7 @@
         "label" : "Select_Valid_Associations",
         "slug" : "Select_Valid_Associations",
         "x" : 1420,
-        "y" : 220,
+        "y" : 200,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -5571,7 +5348,7 @@
         "label" : "Create_LKP_for_override_qualifiers_Reformat",
         "slug" : "Create_LKP_for_override_qualifiers_Reformat",
         "x" : 3080,
-        "y" : 440,
+        "y" : 340,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
