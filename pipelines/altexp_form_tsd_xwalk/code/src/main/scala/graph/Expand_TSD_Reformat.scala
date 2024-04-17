@@ -29,7 +29,7 @@ object Expand_TSD_Reformat {
                 prod_ref = _bv_or(prod_ref, prod_t)
                 outputRows.append(
                   Row(
-                    in.getAs[BigDecimal]("prod_t"),
+                    in.getAs[java.math.BigDecimal]("prod_t"),
                     in.getAs[String]("tsd_cd"),
                     prod_t,
                     in.getAs[String]("newline")
