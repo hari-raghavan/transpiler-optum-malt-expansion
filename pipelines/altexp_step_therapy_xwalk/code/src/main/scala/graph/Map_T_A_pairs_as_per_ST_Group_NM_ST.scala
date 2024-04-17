@@ -15,12 +15,14 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
   def apply(context: Context, in: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
+    import scala.collection.mutable.ArrayBuffer
+    
     val inputFilter_in_DF = in.filter(
       (element_at(col("target_rule_def"), lit(1)).getField("qualifier_cd") === lit("ST_STEP_NUM"))
         .and(col("tac_name") === lit(Config.TAC_NM))
     )
     
-    import scala.collection.mutable.ArrayBuffer
     def process_udf(row: Row) = {
       val target_prdcts           = row.getAs[Seq[Row]]("target_prdcts")
       val st_therapy_dtl_data_lkp = row.getAs[Seq[Row]]("st_therapy_dtl_data_lkp")
@@ -84,7 +86,7 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
       final_target_prdcts.zipWithIndex.foreach {
         case (r, idx) ⇒
           results.append(
-            convertToBigDecimal(0),
+            java.math.BigDecimal(0),
             "N/A - follows ST TAC",
             "N/A - follows ST TAC",
             null,
@@ -130,7 +132,7 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
       )
     
     val schema = StructType(
-      StructField("tal_id",            StringType, true),
+      StructField("tal_id",            DecimalType(10, 0), true),
       StructField("tal_name",          StringType, true),
       StructField("tal_assoc_name",    StringType, true),
       StructField("tar_udl_nm",        StringType, true),

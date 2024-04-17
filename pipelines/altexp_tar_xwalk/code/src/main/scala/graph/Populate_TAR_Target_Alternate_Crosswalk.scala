@@ -18,27 +18,30 @@ object Populate_TAR_Target_Alternate_Crosswalk {
     import _root_.io.prophecy.abinitio.ScalaFunctions._
     import java.math.BigDecimal
     
-    def lv_prdcts(rec: org.apache.spark.sql.Column) = {
-      when(
-        rec.getField("qualifier_cd") == lit("TSD"),
-        coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
-      ).when(
-        array_contains(array(lit("PA"), lit("ST"), lit("SPECIALTY"), lit("ST_STEP_NUM")), rec.getField("qualifier_cd")),
-        coalesce(
-          lookup(
-            "Formulary_Rule_Prdcts",
-            rec.getField("qualifier_cd"),
-            rec.getField("operator"),
-            rec.getField("compare_value")
-          ).getField("products"),
-          bv_all_zeros()
-        )
-      ).otherwise(
-        coalesce(lookup("Expanded_UDL", rec.getField("qualifier_cd")).getField("products"), bv_all_zeros())
+    def lv_prdcts(rule: org.apache.spark.sql.Column) = {
+      transform(rule,
+          rec =>
+          when(
+            rec.getField("qualifier_cd") == lit("TSD"),
+            coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
+          ).when(
+            array_contains(array(lit("PA"), lit("ST"), lit("SPECIALTY"), lit("ST_STEP_NUM")), rec.getField("qualifier_cd")),
+            coalesce(
+              lookup(
+                "Formulary_Rule_Prdcts",
+                rec.getField("qualifier_cd"),
+                rec.getField("operator"),
+                rec.getField("compare_value")
+              ).getField("products"),
+              bv_all_zeros()
+            )
+          ).otherwise(
+            coalesce(lookup("Expanded_UDL", rec.getField("qualifier_cd")).getField("products"), bv_all_zeros())
+          )
       )
     }
     
-    def get_products(rule: Seq[Row], lv_prdcts_all: Seq[Array[Byte]]) = {
+    def get_products(rule: Seq[Row], lv_prdcts_all: Array[Array[Byte]]) = {
       var inclusion_prdcts = _bv_all_zeros()
       var exclusion_prdcts = _bv_all_zeros()
       var lv_prdcts        = _bv_all_zeros()
@@ -48,7 +51,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
     
       rule.zipWithIndex.foreach {
         case (rec, i) ⇒
-          var lv_prdcts = lv_prdcts_all.toArray(i)
+          var lv_prdcts = lv_prdcts_all(i)
           if (
             !(rec.getAs[String](0) == "TSD" || rec.getAs[String](0) == "PA"
  rec.getAs[String](0) == "ST" || rec
@@ -331,7 +334,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
             } else {
               alt_prdcts =
                 try {
-                  val res = get_products(row.getAs[Seq[Row]](11), row.getAs[Seq[Row]](15))
+                  val res = get_products(row.getAs[Seq[Row]](11), row.getSeq[Array[Byte]](15).toArray)
                   if (res == null || res.nonEmpty) {
                     _bv_all_zeros()
                   } else {

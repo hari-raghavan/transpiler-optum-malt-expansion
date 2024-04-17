@@ -16,29 +16,31 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
     val spark = context.spark
     val Config = context.config
     import _root_.io.prophecy.abinitio.ScalaFunctions._
-    import java.math.BigDecimal
     
-    def lv_prdcts(rec: org.apache.spark.sql.Column) = {
-      when(
-        rec.getField("qualifier_cd") == lit("TSD"),
-        coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
-      ).when(
-        array_contains(array(lit("PA"), lit("ST"), lit("SPECIALTY"), lit("ST_STEP_NUM")), rec.getField("qualifier_cd")),
-        coalesce(
-          lookup(
-            "Formulary_Rule_Prdcts",
-            rec.getField("qualifier_cd"),
-            rec.getField("operator"),
-            rec.getField("compare_value")
-          ).getField("products"),
-          bv_all_zeros()
-        )
-      ).otherwise(
-        coalesce(lookup("Expanded_UDL", rec.getField("qualifier_cd")).getField("products"), bv_all_zeros())
+    def lv_prdcts(rule: org.apache.spark.sql.Column) = {
+      transform(rule,
+          rec =>
+          when(
+            rec.getField("qualifier_cd") == lit("TSD"),
+            coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
+          ).when(
+            array_contains(array(lit("PA"), lit("ST"), lit("SPECIALTY"), lit("ST_STEP_NUM")), rec.getField("qualifier_cd")),
+            coalesce(
+              lookup(
+                "Formulary_Rule_Prdcts",
+                rec.getField("qualifier_cd"),
+                rec.getField("operator"),
+                rec.getField("compare_value")
+              ).getField("products"),
+              bv_all_zeros()
+            )
+          ).otherwise(
+            coalesce(lookup("Expanded_UDL", rec.getField("qualifier_cd")).getField("products"), bv_all_zeros())
+          )
       )
     }
     
-    def get_products(rule: Seq[Row], lv_prdcts_all: Seq[Array[Byte]]) = {
+    def get_products(rule: Seq[Row], lv_prdcts_all: Array[Array[Byte]]) = {
       var inclusion_prdcts = _bv_all_zeros()
       var exclusion_prdcts = _bv_all_zeros()
       var lv_prdcts        = _bv_all_zeros()
@@ -48,7 +50,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
     
       rule.zipWithIndex.foreach {
         case (rec, i) ⇒
-          var lv_prdcts = lv_prdcts_all.toArray(i)
+          var lv_prdcts = lv_prdcts_all(i)
           if (
             !(rec.getAs[String](0) == "TSD" || rec.getAs[String](0) == "PA"
  rec.getAs[String](0) == "ST" || rec
@@ -85,7 +87,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
         var alt_prdcts    = _bv_all_zeros()
         var contents      = Array[Row]()
         var tac_contents  = Array[Row]()
-        var _ST_flag      = BigDecimal(0);
+        var _ST_flag      = java.math.BigDecimal(0);
     
         inputRows.foreach { row ⇒
           var _target_prdcts = _bv_all_zeros()
@@ -102,7 +104,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
                       target_prdcts,
                       alt_prdcts,
                       contents,
-                      BigDecimal(1)
+                      java.math.BigDecimal(1)
                     )
                   )
                 )
@@ -114,7 +116,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
                       target_prdcts,
                       alt_prdcts,
                       contents,
-                      BigDecimal(0)
+                      java.math.BigDecimal(0)
                     )
                   )
                 )
@@ -123,15 +125,15 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
             target_prdcts = _bv_all_zeros()
             alt_prdcts = _bv_all_zeros()
             contents = Array[Row]()
-            _ST_flag = BigDecimal(0)
+            _ST_flag = java.math.BigDecimal(0)
           }
     
-          _target_prdcts = get_products(row.getAs[Seq[Row]](5), row.getAs[Seq[Row]](8))
+          _target_prdcts = get_products(row.getAs[Seq[Row]](5), row.getSeq[Array[Byte]](8).toArray)
           if (_bv_count_one_bits(_target_prdcts) > 0) {
             if (row.getAs[Seq[Row]](5).toArray.indexWhere(r ⇒ r.getAs[String](0) == "ST_STEP_NUM") > -1) {
-              _ST_flag = BigDecimal(1)
+              _ST_flag = java.math.BigDecimal(1)
             }
-            _alt_rule_def = get_products(row.getAs[Seq[Row]](6), row.getAs[Seq[Row]](9))
+            _alt_rule_def = get_products(row.getAs[Seq[Row]](6), row.getSeq[Array[Byte]](9).toArray)
     
             if (_bv_count_one_bits(_alt_prdcts) > 0) {
               target_prdcts = _bv_or(target_prdcts, _target_prdcts)
@@ -143,12 +145,12 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
                     _target_prdcts,
                     _alt_prdcts,
                     _ST_flag,
-                    BigDecimal(row.getAs[String](2))
+                    java.math.BigDecimal(row.getAs[String](2))
                   )
                 )
               )
             }
-            _ST_flag = BigDecimal(0);
+            _ST_flag = java.math.BigDecimal(0);
           }
         }
     
@@ -161,7 +163,7 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
                   target_prdcts,
                   alt_prdcts,
                   contents,
-                  BigDecimal(1)
+                  java.math.BigDecimal(1)
                 )
               )
             )
@@ -173,14 +175,14 @@ object Populate_TAC_Target_Alternatives_Crosswalk {
                   target_prdcts,
                   alt_prdcts,
                   contents,
-                  BigDecimal(0)
+                  java.math.BigDecimal(0)
                 )
               )
             )
           }
         }
     
-        var tac_id   = inputRows.toArray.last.getAs[BigDecimal](0)
+        var tac_id   = inputRows.toArray.last.getAs[java.math.BigDecimal](0)
         var tac_name = inputRows.toArray.last.getAs[String](1)
         var eff_dt   = inputRows.toArray.last.getAs[String](3)
         var term_dt  = inputRows.toArray.last.getAs[String](4)
