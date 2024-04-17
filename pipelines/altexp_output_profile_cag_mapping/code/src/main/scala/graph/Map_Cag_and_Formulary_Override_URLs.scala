@@ -380,26 +380,26 @@ object Map_Cag_and_Formulary_Override_URLs {
             ) {
               if (
                 !op_dtls(convertToInt(index))
-                  .getAs[Seq[String]]("formulary_names")
+                  .getAs[Array[String]](5)
                   .toArray
                   .contains(in.getAs[String]("formulary_name"))
               )
                 op_dtls(index) = Row(
                   op_dtls(convertToInt(index)).getAs[String](0),
                   op_dtls(convertToInt(index)).getAs[String](1),
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](2).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](3).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](4).toArray,
                   Array.concat(
-                    op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,
+                    op_dtls(convertToInt(index)).getAs[Array[String]](5).toArray,
                     Array.fill(1)(in.getAs[String]("formulary_name"))
                   ),
                   Array.concat(
-                    op_dtls(convertToInt(index)).getAs[Seq[String]](6).toArray,
+                    op_dtls(convertToInt(index)).getAs[Array[String]](6).toArray,
                     Array.fill(1)(frmlry_url)
                   ),
                   Array.concat(
-                    op_dtls(convertToInt(index)).getAs[Seq[String]](7).toArray,
+                    op_dtls(convertToInt(index)).getAs[Array[String]](7).toArray,
                     Array.fill(1)(formulary_pseudonym)
                   ),
                   op_dtls(convertToInt(index)).getAs[String](8),
@@ -410,7 +410,7 @@ object Map_Cag_and_Formulary_Override_URLs {
                 )
               if (
                 !op_dtls(convertToInt(index))
-                  .getAs[Seq[String]](2)
+                  .getAs[Array[String]](2)
                   .toArray
                   .contains(in.getAs[String]("job_id"))
               )
@@ -418,14 +418,14 @@ object Map_Cag_and_Formulary_Override_URLs {
                   op_dtls(convertToInt(index)).getAs[String](0),
                   op_dtls(convertToInt(index)).getAs[String](1),
                   Array.concat(
-                    op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,
+                    op_dtls(convertToInt(index)).getAs[Array[String]](2).toArray,
                     Array.fill(1)(in.getAs[String]("job_id"))
                   ),
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](6).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](7).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](3).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](4).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](5).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](6).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](7).toArray,
                   op_dtls(convertToInt(index)).getAs[String](8),
                   op_dtls(convertToInt(index)).getAs[String](9),
                   op_dtls(convertToInt(index)).getAs[String](10),
@@ -436,22 +436,22 @@ object Map_Cag_and_Formulary_Override_URLs {
                 (!_isnull(in.getAs[String]("alias_name"))) && (!op_dtls(
                   convertToInt(index)
                 )
-                  .getAs[Seq[String]]("alias_names")
+                  .getAs[Array[String]](3)
                   .toArray
                   .contains(in.getAs[String]("alias_name")))
               )
                 op_dtls(index) = Row(
                   op_dtls(convertToInt(index)).getAs[String](0),
                   op_dtls(convertToInt(index)).getAs[String](1),
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](2).toArray,
                   Array.concat(
-                    op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,
+                    op_dtls(convertToInt(index)).getAs[Array[String]](3).toArray,
                     Array.fill(1)(in.getAs[String]("alias_name"))
                   ),
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](6).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](7).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](4).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](5).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](6).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](7).toArray,
                   op_dtls(convertToInt(index)).getAs[String](8),
                   op_dtls(convertToInt(index)).getAs[String](9),
                   op_dtls(convertToInt(index)).getAs[String](10),
@@ -462,22 +462,22 @@ object Map_Cag_and_Formulary_Override_URLs {
                 (!_isnull(in.getAs[String]("job_name"))) && (!op_dtls(
                   convertToInt(index)
                 )
-                  .getAs[Seq[String]]("job_names")
+                  .getAs[Array[String]](4)
                   .toArray
                   .contains(in.getAs[String]("job_name")))
               )
                 op_dtls(index) = Row(
                   op_dtls(convertToInt(index)).getAs[String](0),
                   op_dtls(convertToInt(index)).getAs[String](1),
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](2).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](3).toArray,
                   Array.concat(
-                    op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray,
+                    op_dtls(convertToInt(index)).getAs[Array[String]](4).toArray,
                     Array.fill(1)(in.getAs[String]("job_name"))
                   ),
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](6).toArray,
-                  op_dtls(convertToInt(index)).getAs[Seq[String]](7).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](5).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](6).toArray,
+                  op_dtls(convertToInt(index)).getAs[Array[String]](7).toArray,
                   op_dtls(convertToInt(index)).getAs[String](8),
                   op_dtls(convertToInt(index)).getAs[String](9),
                   op_dtls(convertToInt(index)).getAs[String](10),
@@ -526,7 +526,7 @@ object Map_Cag_and_Formulary_Override_URLs {
                 len = non_qual_output_profile_ids.length - 1
                 if (
                   !non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]]("job_ids")
+                    .getAs[Array[String]](2)
                     .toArray
                     .contains(in.getAs[String]("job_id"))
                 )
@@ -536,26 +536,26 @@ object Map_Cag_and_Formulary_Override_URLs {
                     non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(len))
-                        .getAs[Seq[String]](2)
+                        .getAs[Array[String]](2)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("job_id"))
                     ),
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](3)
+                      .getAs[Array[String]](3)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](4)
+                      .getAs[Array[String]](4)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](5)
+                      .getAs[Array[String]](5)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](6)
+                      .getAs[Array[String]](6)
                       .toArray
                   )
                 if (
                   !non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]](5)
+                    .getAs[Array[String]](5)
                     .toArray
                     .contains(
                       if (
@@ -574,27 +574,27 @@ object Map_Cag_and_Formulary_Override_URLs {
                       .getAs[String](0)),
                     non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](2)
+                      .getAs[Array[String]](2)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](3)
+                      .getAs[Array[String]](3)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](4)
+                      .getAs[Array[String]](4)
                       .toArray,
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(len))
-                        .getAs[Seq[String]](5)
+                        .getAs[Array[String]](5)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("alias_name"))
                     ),
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](6)
+                      .getAs[Array[String]](6)
                       .toArray
                   )
                 if (
                   !non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]]("formulary_names")
+                    .getAs[Array[String]](3)
                     .toArray
                     .contains(in.getAs[String]("formulary_name"))
                 )
@@ -603,30 +603,30 @@ object Map_Cag_and_Formulary_Override_URLs {
                       .getAs[String](0)),
                     non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](2)
+                      .getAs[Array[String]](2)
                       .toArray,
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(len))
-                        .getAs[Seq[String]](3)
+                        .getAs[Array[String]](3)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("formulary_name"))
                     ),
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(len))
-                        .getAs[Seq[String]](4)
+                        .getAs[Array[String]](4)
                         .toArray,
                       Array.fill(1)(formulary_pseudonym)
                     ),
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](5)
+                      .getAs[Array[String]](5)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](6)
+                      .getAs[Array[String]](6)
                       .toArray
                   )
                 if (
                   !non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]]("job_names")
+                    .getAs[Array[String]](6)
                     .toArray
                     .contains(in.getAs[String]("job_name"))
                 )
@@ -635,20 +635,20 @@ object Map_Cag_and_Formulary_Override_URLs {
                       .getAs[String](0)),
                     non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](2)
+                      .getAs[Array[String]](2)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](3)
+                      .getAs[Array[String]](3)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](4)
+                      .getAs[Array[String]](4)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(len))
-                      .getAs[Seq[String]](5)
+                      .getAs[Array[String]](5)
                       .toArray,
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(len))
-                        .getAs[Seq[String]](6)
+                        .getAs[Array[String]](6)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("job_name"))
                     )
@@ -698,7 +698,7 @@ object Map_Cag_and_Formulary_Override_URLs {
                   Array(err_msgs(convertToInt(len)), ".", error_msg).mkString("")
                 if (
                   !non_qual_output_profile_ids(convertToInt(idx))
-                    .getAs[Seq[String]](2)
+                    .getAs[Array[String]](2)
                     .toArray
                     .contains(in.getAs[String]("job_id"))
                 )
@@ -708,26 +708,26 @@ object Map_Cag_and_Formulary_Override_URLs {
                     non_qual_output_profile_ids(convertToInt(idx)).getAs[String](1),
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(idx))
-                        .getAs[Seq[String]](2)
+                        .getAs[Array[String]](2)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("job_id"))
                     ),
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](3)
+                      .getAs[Array[String]](3)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](4)
+                      .getAs[Array[String]](4)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](5)
+                      .getAs[Array[String]](5)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](6)
+                      .getAs[Array[String]](6)
                       .toArray
                   )
                 if (
                   !non_qual_output_profile_ids(convertToInt(idx))
-                    .getAs[Seq[String]](5)
+                    .getAs[Array[String]](5)
                     .toArray
                     .contains(
                       if (
@@ -746,27 +746,27 @@ object Map_Cag_and_Formulary_Override_URLs {
                       .getAs[String](0)),
                     non_qual_output_profile_ids(convertToInt(idx)).getAs[String](1),
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](2)
+                      .getAs[Array[String]](2)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](3)
+                      .getAs[Array[String]](3)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](4)
+                      .getAs[Array[String]](4)
                       .toArray,
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(idx))
-                        .getAs[Seq[String]](5)
+                        .getAs[Array[String]](5)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("alias_name"))
                     ),
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](6)
+                      .getAs[Array[String]](6)
                       .toArray
                   )
                 if (
                   !non_qual_output_profile_ids(convertToInt(idx))
-                    .getAs[Seq[String]]("formulary_names")
+                    .getAs[Array[String]](3)
                     .toArray
                     .contains(in.getAs[String]("formulary_name"))
                 )
@@ -775,30 +775,30 @@ object Map_Cag_and_Formulary_Override_URLs {
                       .getAs[String](0)),
                     non_qual_output_profile_ids(convertToInt(idx)).getAs[String](1),
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](2)
+                      .getAs[Array[String]](2)
                       .toArray,
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(idx))
-                        .getAs[Seq[String]](3)
+                        .getAs[Array[String]](3)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("formulary_name"))
                     ),
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(idx))
-                        .getAs[Seq[String]](4)
+                        .getAs[Array[String]](4)
                         .toArray,
                       Array.fill(1)(formulary_pseudonym)
                     ),
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](5)
+                      .getAs[Array[String]](5)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](6)
+                      .getAs[Array[String]](6)
                       .toArray
                   )
                 if (
                   !non_qual_output_profile_ids(convertToInt(idx))
-                    .getAs[Seq[String]]("job_names")
+                    .getAs[Array[String]](6)
                     .toArray
                     .contains(in.getAs[String]("job_name"))
                 )
@@ -807,20 +807,20 @@ object Map_Cag_and_Formulary_Override_URLs {
                       .getAs[String](0)),
                     non_qual_output_profile_ids(convertToInt(idx)).getAs[String](1),
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](2)
+                      .getAs[Array[String]](2)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](3)
+                      .getAs[Array[String]](3)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](4)
+                      .getAs[Array[String]](4)
                       .toArray,
                     non_qual_output_profile_ids(convertToInt(idx))
-                      .getAs[Seq[String]](5)
+                      .getAs[Array[String]](5)
                       .toArray,
                     Array.concat(
                       non_qual_output_profile_ids(convertToInt(idx))
-                        .getAs[Seq[String]](3)
+                        .getAs[Array[String]](6)
                         .toArray,
                       Array.fill(1)(in.getAs[String]("job_name"))
                     )
@@ -857,7 +857,7 @@ object Map_Cag_and_Formulary_Override_URLs {
             len = non_qual_output_profile_ids.length - 1
             if (
               !non_qual_output_profile_ids(convertToInt(len))
-                .getAs[Seq[String]]("job_ids")
+                .getAs[Array[String]](2)
                 .toArray
                 .contains(in.getAs[String]("job_id"))
             )
@@ -866,26 +866,26 @@ object Map_Cag_and_Formulary_Override_URLs {
                 non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                 Array.concat(
                   non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]](2)
+                    .getAs[Array[String]](2)
                     .toArray,
                   Array.fill(1)(in.getAs[String]("job_id"))
                 ),
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](3)
+                  .getAs[Array[String]](3)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](4)
+                  .getAs[Array[String]](4)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](5)
+                  .getAs[Array[String]](5)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](6)
+                  .getAs[Array[String]](6)
                   .toArray
               )
             if (
               !non_qual_output_profile_ids(convertToInt(len))
-                .getAs[String]("alias_names")
+                .getAs[Array[String]](5)
                 .contains(
                   if (
                     (try in.getAs[String]("alias_name")
@@ -902,27 +902,27 @@ object Map_Cag_and_Formulary_Override_URLs {
                 (non_qual_output_profile_ids(convertToInt(len)).getAs[String](0)),
                 non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](2)
+                  .getAs[Array[String]](2)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](3)
+                  .getAs[Array[String]](3)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](4)
+                  .getAs[Array[String]](4)
                   .toArray,
                 Array.concat(
                   non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]](5)
+                    .getAs[Array[String]](5)
                     .toArray,
                   Array.fill(1)(in.getAs[String]("alias_name"))
                 ),
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](6)
+                  .getAs[Array[String]](6)
                   .toArray
               )
             if (
               !non_qual_output_profile_ids(convertToInt(len))
-                .getAs[Seq[String]](3)
+                .getAs[Array[String]](3)
                 .toArray
                 .contains(in.getAs[String]("formulary_name"))
             )
@@ -930,30 +930,30 @@ object Map_Cag_and_Formulary_Override_URLs {
                 (non_qual_output_profile_ids(convertToInt(len)).getAs[String](0)),
                 non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](2)
+                  .getAs[Array[String]](2)
                   .toArray,
                 Array.concat(
                   non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]](3)
+                    .getAs[Array[String]](3)
                     .toArray,
                   Array.fill(1)(in.getAs[String]("formulary_name"))
                 ),
                 Array.concat(
                   non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]](4)
+                    .getAs[Array[String]](4)
                     .toArray,
                   Array.fill(1)(formulary_pseudonym)
                 ),
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](5)
+                  .getAs[Array[String]](5)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](6)
+                  .getAs[Array[String]](6)
                   .toArray
               )
             if (
               !non_qual_output_profile_ids(convertToInt(len))
-                .getAs[Seq[String]]("job_names")
+                .getAs[Array[String]](6)
                 .toArray
                 .contains(in.getAs[String]("job_name"))
             )
@@ -961,20 +961,20 @@ object Map_Cag_and_Formulary_Override_URLs {
                 (non_qual_output_profile_ids(convertToInt(len)).getAs[String](0)),
                 non_qual_output_profile_ids(convertToInt(len)).getAs[String](1),
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](2)
+                  .getAs[Array[String]](2)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](3)
+                  .getAs[Array[String]](3)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](4)
+                  .getAs[Array[String]](4)
                   .toArray,
                 non_qual_output_profile_ids(convertToInt(len))
-                  .getAs[Seq[String]](5)
+                  .getAs[Array[String]](5)
                   .toArray,
                 Array.concat(
                   non_qual_output_profile_ids(convertToInt(len))
-                    .getAs[Seq[String]](6)
+                    .getAs[Array[String]](6)
                     .toArray,
                   Array.fill(1)(in.getAs[String]("job_name"))
                 )
@@ -1038,25 +1038,25 @@ object Map_Cag_and_Formulary_Override_URLs {
                 List(
                   StructField("qual_output_profile_name", StringType, false), // 0
                   StructField("rxclaim_env_name", StringType, false), // 1
-                  StructField("job_ids", ArrayType(StringType), false), // 1
-                  StructField("alias_names", ArrayType(StringType), false), // 2
-                  StructField("job_names", ArrayType(StringType), false), // 3
-                  StructField("formulary_names", ArrayType(StringType), false), // 4
+                  StructField("job_ids", ArrayType(StringType), false), // 2
+                  StructField("alias_names", ArrayType(StringType), false), // 3
+                  StructField("job_names", ArrayType(StringType), false), // 4
+                  StructField("formulary_names", ArrayType(StringType), false), // 5
                   StructField(
                     "form_override_data_paths",
                     ArrayType(StringType),
                     false
-                  ), // 5
+                  ), // 6
                   StructField(
                     "formulary_pseudonyms",
                     ArrayType(StringType),
                     false
-                  ), // 6
-                  StructField("tal_name", StringType, false), // 7
-                  StructField("tac_name", StringType, false), // 8
-                  StructField("tar_name", StringType, false), // 9
-                  StructField("tsd_name", StringType, false), // 10
-                  StructField("st_tac_ind", StringType, false) // 11
+                  ), // 7
+                  StructField("tal_name", StringType, false), // 8
+                  StructField("tac_name", StringType, false), // 9
+                  StructField("tar_name", StringType, false), // 10
+                  StructField("tsd_name", StringType, false), // 11
+                  StructField("st_tac_ind", StringType, false) // 12
                 )
               )
             ),
