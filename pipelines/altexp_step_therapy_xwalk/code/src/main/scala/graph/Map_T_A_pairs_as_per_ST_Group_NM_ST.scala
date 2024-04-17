@@ -86,7 +86,7 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
       final_target_prdcts.zipWithIndex.foreach {
         case (r, idx) ⇒
           results.append(
-            java.math.BigDecimal(0),
+            new java.math.BigDecimal(0),
             "N/A - follows ST TAC",
             "N/A - follows ST TAC",
             null,

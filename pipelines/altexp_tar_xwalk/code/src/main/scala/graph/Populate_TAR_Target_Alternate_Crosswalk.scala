@@ -20,9 +20,9 @@ object Populate_TAR_Target_Alternate_Crosswalk {
     
     def lv_prdcts(rule: org.apache.spark.sql.Column) = {
       transform(rule,
-          rec =>
+        rec =>
           when(
-            rec.getField("qualifier_cd") == lit("TSD"),
+            rec.getField("qualifier_cd") === lit("TSD"),
             coalesce(lookup("TSD", rec.getField("compare_value")).getField("products"), bv_all_zeros())
           ).when(
             array_contains(array(lit("PA"), lit("ST"), lit("SPECIALTY"), lit("ST_STEP_NUM")), rec.getField("qualifier_cd")),
@@ -44,18 +44,17 @@ object Populate_TAR_Target_Alternate_Crosswalk {
     def get_products(rule: Seq[Row], lv_prdcts_all: Array[Array[Byte]]) = {
       var inclusion_prdcts = _bv_all_zeros()
       var exclusion_prdcts = _bv_all_zeros()
-      var lv_prdcts        = _bv_all_zeros()
-      var or_products      = _bv_all_zeros()
-      var no_ands          = 1
-      var is_hrm           = 0
+      var lv_prdcts = _bv_all_zeros()
+      var or_products = _bv_all_zeros()
+      var no_ands = 1
+      var is_hrm = 0
     
       rule.zipWithIndex.foreach {
         case (rec, i) ⇒
           var lv_prdcts = lv_prdcts_all(i)
           if (
             !(rec.getAs[String](0) == "TSD" || rec.getAs[String](0) == "PA"
- rec.getAs[String](0) == "ST" || rec
-                .getAs[String](0) == "SPECIALTY" || rec.getAs[String](0) == "ST_STEP_NUM")
+ rec.getAs[String](0) == "ST" || rec.getAs[String](0) == "SPECIALTY" || rec.getAs[String](0) == "ST_STEP_NUM")
           ) {
     
             if (rec.getAs[String](2) == "N") {
@@ -66,7 +65,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           if (is_hrm == 0) {
             or_products = _bv_or(or_products, lv_prdcts)
             if (rec.getAs[String](3) != "0") {
-              if (no_ands) {
+              if (no_ands > 0) {
                 inclusion_prdcts = or_products
                 no_ands = 0
               } else {
@@ -398,7 +397,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           newline
         )
       },
-      StructType(
+      StructType(List(
         StructField("tar_id",          DecimalType(10, 0), true),
         StructField("tar_dtl_id",      DecimalType(10, 0), true),
         StructField("tar_name",        StringType, true),
@@ -406,21 +405,21 @@ object Populate_TAR_Target_Alternate_Crosswalk {
         StructField(
           "contents",
           ArrayType(
-            StructType(
+            StructType(List(
               StructField("target_prdcts", ArrayType(BinaryType, true), true),
               StructField(
                 alt_contents,
                 ArrayType(
-                  StructType(
+                  StructType(List(
                     StructField("alt_prdcts",          ArrayType(BinaryType, true),                  true),
                     StructField("alt_prdcts_all_prio", ArrayType(ArrayType(BinaryType, true), true), true),
                     StructField("common_prdcts",       BinaryType,                                   true)
-                  ),
+                  )),
                   true
                 ),
                 true
               )
-            ),
+            )),
             true
           ),
           true
@@ -429,7 +428,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
         StructField("common_target_prdcts", BinaryType,        true),
         StructField("keep_all_targets",     DecimalType(1, 0), true),
         StructField("newline",              StringType,        true)
-      )
+      ))
     )
     
     def rule_prdcts_lkp(in_compare_value: String, qualifier_cd: String) = {
