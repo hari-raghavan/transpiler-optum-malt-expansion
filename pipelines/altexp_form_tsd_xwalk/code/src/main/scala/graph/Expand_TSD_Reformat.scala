@@ -20,8 +20,8 @@ object Expand_TSD_Reformat {
           import _root_.io.prophecy.abinitio.ScalaFunctions._
           import _root_.io.prophecy.libs.AbinitioDMLs._
           val outputRows = scala.collection.mutable.ArrayBuffer[Row]()
-          val prod_t = _bv_all_zeros()
-          val prod_ref = _bv_all_zeros()
+          var prod_t = _bv_all_zeros()
+          var prod_ref = _bv_all_zeros()
     
           input.zipWithIndex.foreach {
             case (in, idx) =>
@@ -69,7 +69,7 @@ object Expand_TSD_Reformat {
         lit(0)
     )
     
-    val out = in.select(struct(prod_t().as("prod_t"), col("tsd_id"), col("tsd_cd"), col("newline")).as("tmp"))
+    val out0 = in0.select(struct(prod_t().as("prod_t"), col("tsd_id"), col("tsd_cd"), col("newline")).as("tmp"))
           .groupBy(lit(1))
           .agg(collect_list(col("tmp")).as("input"))
           .select(explode(processUDF(col("input"))).as("output"))
