@@ -15,9 +15,11 @@ object RLP_Aggregate_Products_at_rule_level {
   def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
+    
     val process_udf = udf(
       (inputRows: Seq[Row]) => {
-        var no_ands = 1;
+        var no_ands = 1
         var products = _bv_all_zeros()
         var or_products = _bv_all_zeros()
         var udl_id = ""
@@ -37,9 +39,9 @@ object RLP_Aggregate_Products_at_rule_level {
        
         inputRows.zipWithIndex.foreach {
           case (in, idx) => {
-            or_products = _bv_or(or_products, in.getAs[Seq[Byte]]("products")).toArray
+            or_products = _bv_or(or_products, in.getAs[Array[Byte]]("products")).toArray
             if (in.getAs[String]("conjunction_cd") != "0") {
-                if (no_ands){
+                if (no_ands > 0){
                    products = or_products
                    or_products = _bv_all_zeros()
                    no_ands = 0
