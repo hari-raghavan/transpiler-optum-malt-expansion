@@ -16,7 +16,6 @@ object Process_TAL_Association_Rows {
     val spark = context.spark
     val Config = context.config
     import _root_.io.prophecy.abinitio.ScalaFunctions._
-    import java.math.BigDecimal
     
     val process_udf = udf(
       { (inputRows: Seq[Row]) ⇒
@@ -38,9 +37,9 @@ object Process_TAL_Association_Rows {
           var trgt_prdcts_lkp = _bv_all_zeros()
           var alt_prdcts_lkp  = _bv_all_zeros()
     
-          if (!_isnull(row.getAs[String](6)) && !target_udl_name.contains(row.getAs[String](6))) {
-            trgt_prdcts_lkp = if (row.getAs[Seq[Byte]](17) != null) {
-              row.getAs[Seq[Byte]](17).toArray
+          if (!_isnull(row.getAs[String]("target_udl_name")) && !target_udl_name.contains(row.getAs[String]("target_udl_name"))) {
+            trgt_prdcts_lkp = if (row.getAs[Array[Byte]](17) != null) {
+              row.getAs[Array[Byte]](17).toArray
             } else {
               _bv_all_zeros()
             }
@@ -48,15 +47,15 @@ object Process_TAL_Association_Rows {
               trgt_prdcts_lkp = _bv_difference(trgt_prdcts_lkp, _bv_vector_or(target_prdcts))
             }
     
-            target_udl_name = Array.concat(target_udl_name, Array.fill(1)(row.getAs[String](6)))
+            target_udl_name = Array.concat(target_udl_name, Array.fill(1)(row.getAs[String]("target_udl_name")))
             if (bv_count_one_bits(trgt_prdcts_lkp)) {
               target_prdcts = Array.concat(target_prdcts, Array.fill(1)(trgt_prdcts_lkp))
             }
           }
     
-          if (!_isnull(row.getAs[String](7)) && !alternate_udl_name.contains(row.getAs[String](7))) {
-            alt_prdcts_lkp = if (row.getAs[Seq[Byte]](18) != null) {
-              row.getAs[Seq[Byte]](18).toArray
+          if (!_isnull(row.getAs[String]("alt_udl_name")) && !alternate_udl_name.contains(row.getAs[String]("alt_udl_name"))) {
+            alt_prdcts_lkp = if (row.getAs[Array[Byte]](18) != null) {
+              row.getAs[Array[Byte]](18).toArray
             } else {
               _bv_all_zeros()
             }
@@ -65,19 +64,19 @@ object Process_TAL_Association_Rows {
               alt_prdcts = _bv_or(alt_prdcts,                 alt_prdcts_lkp)
             }
     
-            alternate_udl_name = Array.concat(alternate_udl_name, Array.fill(1)(row.getAs[String](7)))
+            alternate_udl_name = Array.concat(alternate_udl_name, Array.fill(1)(row.getAs[String]("alt_udl_name")))
     
-            if (!_isnull(row.getAs[String](10))) {
-              if (row.getAs[String](10) == "Y" && !constituent_grp_vec.contains(row.getAs[String](10))) {
-                constituent_grp_vec = Array.concat(constituent_grp_vec, row.getAs[String](10))
+            if (!_isnull(row.getAs[String]("constituent_group"))) {
+              if (row.getAs[String]("constituent_reqd") == "Y" && !constituent_grp_vec.contains(row.getAs[String]("constituent_group"))) {
+                constituent_grp_vec = Array.concat(constituent_grp_vec, row.getAs[String]("constituent_group"))
               }
               if (_bv_count_one_bits(alt_prdcts_lkp)) {
                 alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,
                                                           Row(
                                                             alt_prdcts_lkp,
-                                                            row.getAs[String](10),
-                                                            row.getAs[String](11),
-                                                            row.getAs[String](7)
+                                                            row.getAs[String]("constituent_group"),
+                                                            row.getAs[String]("constituent_reqd"),
+                                                            row.getAs[String]("alt_udl_name")
                                                           )
                 )
               }
@@ -88,7 +87,7 @@ object Process_TAL_Association_Rows {
                                                             alt_prdcts_lkp,
                                                             null,
                                                             null,
-                                                            row.getAs[String](7)
+                                                            row.getAs[String]("alt_udl_name")
                                                           )
                 )
               }
@@ -98,7 +97,7 @@ object Process_TAL_Association_Rows {
     
         var lastRow = inputRows.toArray.last
     
-        if (lastRow.getAs[String](5).toInt == 3) {
+        if (lastRow.getAs[String]("tal_assoc_type_cd").toInt == 3) {
           target_prdcts =
             if (target_prdcts.isEmpty && alt_constituent_prdcts_vec.nonEmpty) Array(_bv_all_zeros()) else target_prdcts
           alt_constituent_prdcts_vec =
@@ -107,7 +106,7 @@ object Process_TAL_Association_Rows {
         }
     
         Row(
-          lastRow.getAs[BigDecimal](0),
+          lastRow.getAs[java.math.BigDecimal](0),
           lastRow.getAs[String](1),
           lastRow.getAs[String](3),
           lastRow.getAs[String](6),
@@ -123,7 +122,7 @@ object Process_TAL_Association_Rows {
           lastRow.getAs[String](16)
         )
       },
-      StructType(
+      StructType(List(
         StructField("tal_id",            DecimalType(10, 0),          true),
         StructField("tal_name",          StringType,                  true),
         StructField("tal_assoc_name",    StringType,                  true),
@@ -135,12 +134,12 @@ object Process_TAL_Association_Rows {
         StructField(
           "alt_constituent_prdcts",
           ArrayType(
-            StructType(
+            StructType(List(
               StructField("alt_prdcts",        BinaryType, true),
               StructField("constituent_group", StringType, true),
               StructField("constituent_reqd",  StringType, true),
               StructField("udl_nm",            StringType, true)
-            ),
+            )),
             true
           ),
           true
@@ -150,7 +149,7 @@ object Process_TAL_Association_Rows {
         StructField("override_tar_name",   StringType,                  true),
         StructField("constituent_grp_vec", ArrayType(StringType, true), true),
         StructField("newline",             StringType,                  true)
-      )
+      ))
     )
     
     val origColumns = in0.columns.map(col)

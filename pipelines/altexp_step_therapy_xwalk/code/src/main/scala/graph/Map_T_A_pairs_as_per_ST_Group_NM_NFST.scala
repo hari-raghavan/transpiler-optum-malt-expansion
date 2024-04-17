@@ -164,7 +164,6 @@ object Map_T_A_pairs_as_per_ST_Group_NM_NFST {
       .select(explode(process_udf(col("inputRows"))).alias("output"))
       .select(col("output.*"))
     out
-    out
   }
 
 }

@@ -18,9 +18,6 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
     import _root_.io.prophecy.abinitio.ScalaFunctions._
     import scala.util.control._
     
-    def _to_array_of_arrays(arr: Seq[Seq[Byte]]) =
-        arr.map(_.toArray).toArray
-    
     val process_udf = udf({ (input: Seq[Row]) =>
         val outputRows = scala.collection.mutable.ArrayBuffer[Row]()
     
@@ -31,36 +28,36 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
         var alt_constituent_prdcts_vec = Array[Row]()
         var lv_constituent_grp_vec = Array[String]()
         input.foreach { in =>
-            var lv_target_prdcts = Array[Byte]()
-            var lv_alt_prdcts = Array[Byte]()
+            var lv_target_prdcts = _bv_all_zeros()
+            var lv_alt_prdcts = _bv_all_zeros()
             target_prdcts = Array[Array[Byte]]()
             alt_constituent_prdcts_vec = Array[Row]()
             lv_constituent_grp_vec = Array[String]()
     
-            if (in.getAs[String](6).toInt == 3) {
-                excl_target_prdcts = _bv_or(excl_target_prdcts, _bv_vector_or(_to_array_of_arrays(in.getAs[Seq[Seq[Byte]]](7))))
+            if (in.getAs[String]("tal_assoc_type_cd").toInt == 3) {
+                excl_target_prdcts = _bv_or(excl_target_prdcts, _bv_vector_or(in.getSeq[Array[Byte]](7).toArray))
                 excl_alt_prdcts = _bv_or(excl_alt_prdcts, _bv_vector_or(
-                    in.getAs[Seq[Row]](8).map ( alt_consti_prdcts =>
-                        alt_consti_prdcts.getAs[Seq[Byte]](0).toArray
+                    in.getAs[Seq[Row]]("alt_constituent_prdcts").map ( alt_consti_prdcts =>
+                        alt_consti_prdcts.getAs[Array[Byte]]("alt_prdcts")
                     )
                 ))
             } else {
-                if (in.getAs[String](9) == "N/A") {
-                    var shared_qual_target_prdcts = Array[Byte]()
-                    var shared_qual_alt_prdcts = Array[Byte]()
+                if (in.getAs[String]("shared_qual") == "N/A") {
+                    var shared_qual_target_prdcts = _bv_all_zeros()
+                    var shared_qual_alt_prdcts = _bv_all_zeros()
                     var lv_target_prdcts_vec = Array[Array[Byte]]()
-                    shared_qual_target_prdcts = _bv_difference(in.getAs[Seq[Byte]](7).head, excl_target_prdcts)
-                    shared_qual_alt_prdcts = if (in.getAs[Seq[Row]](8).nonEmpty) {
-                        _bv_difference(in.getAs[Seq[Row]](8).head.getAs[Seq[Byte]](0).toArray, excl_alt_prdcts)
+                    shared_qual_target_prdcts = _bv_difference(in.getSeq[Array[Byte]](7).head, excl_target_prdcts)
+                    shared_qual_alt_prdcts = if (in.getAs[Seq[Row]]("alt_constituent_prdcts").nonEmpty) {
+                        _bv_difference(in.getAs[Seq[Row]]("alt_constituent_prdcts").head.getAs[Array[Byte]]("alt_prdcts"), excl_alt_prdcts)
                     } else {
                         _bv_all_zeros()
                     }
                     if ( _bv_count_one_bits(shared_qual_alt_prdcts) )  {
-                        shared_qual_prdcts = _to_array_of_arrays(in.getAs[Seq[Seq[Byte]]](14))
+                        shared_qual_prdcts = in.getSeq[Array[Byte]](14).toArray
                         val loop = new Breaks;
                         loop.breakable {
                             shared_qual_prdcts.foreach { shared_prdcts =>
-                                 if(_bv_count_one_bits(shared_qual_target_prdcts) && _bv_count_one_bits(shared_qual_alt_prdcts) ) {
+                                 if( _bv_count_one_bits(shared_qual_target_prdcts) && _bv_count_one_bits(shared_qual_alt_prdcts) ) {
                                     lv_target_prdcts = _bv_and(shared_qual_target_prdcts, shared_prdcts)
                                     if( _bv_count_one_bits(lv_target_prdcts) ) {
                                         shared_qual_target_prdcts = _bv_difference(shared_qual_target_prdcts, lv_target_prdcts)
@@ -68,7 +65,7 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
                                         if ( _bv_count_one_bits(lv_alt_prdcts) ) {
                                             target_prdcts = Array.concat(target_prdcts, lv_target_prdcts)
                                             alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,
-                                                Row(lv_alt_prdcts, in.getAs[Seq[Row]](8).head.getAs[String](3), "", "")
+                                                Row(lv_alt_prdcts, in.getAs[Seq[Row]]("alt_constituent_prdcts").head.getAs[String]("udl_nm"), "", "")
                                             )
                                             shared_qual_alt_prdcts = _bv_difference(shared_qual_alt_prdcts, lv_alt_prdcts)
                                         } else {
@@ -86,28 +83,28 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
                     }
                     target_prdcts = Array.concat(target_prdcts, lv_target_prdcts_vec)
                 } else {
-                    in.getAs[Seq[Byte]](7).foreach { target_prds =>
+                    in.getSeq[Array[Byte]](7).foreach { target_prds =>
                         lv_target_prdcts = _bv_difference(target_prds, excl_target_prdcts)
-                        if(bv_count_one_bits(lv_target_prdcts)) {
+                        if ( bv_count_one_bits(lv_target_prdcts) ) {
                             target_prdcts = Array.concat(target_prdcts, lv_target_prdcts)
                         }
                     }
                     
-                    in.getAs[Seq[Row]](8).foreach { alt_constituent_prdct =>
-                        lv_alt_prdcts = _bv_difference(alt_constituent_prdct.getAs[Seq[Byte]](0).toArray, excl_alt_prdcts)
-                        if (_bv_count_one_bits(lv_alt_prdcts)) {
-                            if (!_isnull(alt_constituent_prdct.getAs[String](1)) 
-                                && !lv_constituent_grp_vec.contains((alt_constituent_prdct.getAs[String](1)))
-                                && alt_constituent_prdct.getAs[String](2) == "Y") {
+                    in.getAs[Seq[Row]]("alt_constituent_prdcts").foreach { alt_constituent_prdct =>
+                        lv_alt_prdcts = _bv_difference(alt_constituent_prdct.getAs[Array[Byte]]("alt_prdcts"), excl_alt_prdcts)
+                        if ( _bv_count_one_bits(lv_alt_prdcts) > 0 ) {
+                            if ( !_isnull(alt_constituent_prdct.getAs[String]("constituent_group") ) 
+                                && !lv_constituent_grp_vec.contains((alt_constituent_prdct.getAs[String]("constituent_group")))
+                                && alt_constituent_prdct.getAs[String]("constituent_reqd") == "Y") {
     
-                                lv_constituent_grp_vec = Array.concat(lv_constituent_grp_vec, alt_constituent_prdct.getAs[String](1))  
+                                lv_constituent_grp_vec = Array.concat(lv_constituent_grp_vec, alt_constituent_prdct.getAs[String]("constituent_group"))  
                             }
                             alt_constituent_prdcts_vec = Array.concat(alt_constituent_prdcts_vec,
                              Row(
                                 lv_alt_prdcts,
-                                alt_constituent_prdct.getAs[String](1),
-                                alt_constituent_prdct.getAs[String](2),
-                                alt_constituent_prdct.getAs[String](3)
+                                alt_constituent_prdct.getAs[String]("constituent_group"),
+                                alt_constituent_prdct.getAs[String]("constituent_reqd"),
+                                alt_constituent_prdct.getAs[String]("udl_nm")
                              )
                             )
                         }
@@ -121,7 +118,7 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
             }
             outputRows.append(
                 Row(
-                    in.getAs[BigDecimal](0),
+                    in.getAs[java.math.BigDecimal](0),
                     in.getAs[String](1),
                     in.getAs[String](2),
                     in.getAs[String](3),
@@ -141,7 +138,7 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
         outputRows.toArray
     },
     ArrayType(
-        StructType(
+        StructType(List(
       StructField("tal_id",            DecimalType(10, 0),          true),
       StructField("tal_name",          StringType,                  true),
       StructField("tal_assoc_name",    StringType,                  true),
@@ -153,12 +150,12 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
       StructField(
         "alt_constituent_prdcts",
         ArrayType(
-          StructType(
+          StructType(List(
             StructField("alt_prdcts",        BinaryType, true),
             StructField("constituent_group", StringType, true),
             StructField("constituent_reqd",  StringType, true),
             StructField("udl_nm",            StringType, true)
-          ),
+          )),
           true
         ),
         true
@@ -168,7 +165,7 @@ object Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_2 
       StructField("override_tar_name",   StringType,                  true),
       StructField("constituent_grp_vec", ArrayType(StringType, true), true),
       StructField("newline",             StringType,                  false)
-    )
+    ))
     ))
     
     val origColumns = in0.columns.map(col)
