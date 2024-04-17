@@ -23,12 +23,12 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
         .and(col("tac_name") === lit(Config.TAC_NM))
     )
     
-    def process_udf(row: Row) = {
-      val target_prdcts           = row.getAs[Seq[Row]]("target_prdcts")
+    val process_udf = udf({ (row: Row) => {
+      val target_prdcts = row.getAs[Seq[Row]]("target_prdcts")
       val st_therapy_dtl_data_lkp = row.getAs[Seq[Row]]("st_therapy_dtl_data_lkp")
-      val alternate_prdcts        = ArrayBuffer[Row]()
-      val final_target_prdcts     = ArrayBuffer[Array[Byte]]()
-      val final_alternate_prdcts  = ArrayBuffer[Row]()
+      val alternate_prdcts = ArrayBuffer[Row]()
+      val final_target_prdcts = ArrayBuffer[Array[Byte]]()
+      val final_alternate_prdcts = ArrayBuffer[Row]()
     
       val results = ArrayBuffer[Row]()
       if (target_prdcts.length > 0) {
@@ -63,7 +63,7 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
         val vec_index = alternate_prdcts.indexWhere(t ⇒ t.getAs[String](1) == tar_prd.getAs[String](1))
     
         if (vec_index == -1) {
-          final_target_prdcts.append(
+          final_alternate_prdcts.append(
             Row(
               _bv_all_zeros(),
               "",
@@ -72,9 +72,9 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
             )
           )
         } else {
-          final_target_prdcts.append(
+          final_alternate_prdcts.append(
             Row(
-              alternate_prdcts[vec_index].getAs[Array[Byte]](2),
+              alternate_prdcts(vec_index).getAs[Array[Byte]](2),
               "",
               "",
               "N/A"
@@ -86,23 +86,52 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
       final_target_prdcts.zipWithIndex.foreach {
         case (r, idx) ⇒
           results.append(
-            new java.math.BigDecimal(0),
-            "N/A - follows ST TAC",
-            "N/A - follows ST TAC",
-            null,
-            "N/A - follows ST TAC",
-            "0",
-            Array(final_target_prdcts(idx)),
-            Array(final_alternate_prdcts(idx)),
-            "N/A",
-            null,
-            null,
-            Array[String](),
-            row.getAs[String](13)
-          )
+            Row(
+              new java.math.BigDecimal(0),
+              "N/A - follows ST TAC",
+              "N/A - follows ST TAC",
+              null,
+              "N/A - follows ST TAC",
+              "0",
+              Array(final_target_prdcts(idx)),
+              Array(final_alternate_prdcts(idx)),
+              "N/A",
+              null,
+              null,
+              Array[String](),
+              row.getAs[String](13)
+            ))
       }
-      result.toArray
+      results.toArray
     }
+    }, ArrayType(StructType(List(
+      StructField("tal_id", DecimalType(10, 0), true),
+      StructField("tal_name", StringType, true),
+      StructField("tal_assoc_name", StringType, true),
+      StructField("tar_udl_nm", StringType, true),
+      StructField("tal_desc", StringType, true),
+      StructField("priority", StringType, true),
+      StructField("tal_assoc_type_cd", StringType, true),
+      StructField("target_prdcts", ArrayType(BinaryType), true),
+      StructField(
+        "alt_constituent_prdcts",
+        ArrayType(
+          StructType(List(
+            StructField("alt_prdcts", BinaryType, true),
+            StructField("constituent_group", StringType, true),
+            StructField("constituent_reqd", StringType, true),
+            StructField("udl_nm", StringType, true)
+          )),
+          true
+        ),
+        true
+      ),
+      StructField("shared_qual", StringType, true),
+      StructField("override_tac_name", StringType, true),
+      StructField("override_tar_name", StringType, true),
+      StructField("constituent_grp_vec", ArrayType(StringType, true), true),
+      StructField("newline", StringType, true)
+    ))))
     
     val df = inputFilter_in_DF
       .withColumn(
@@ -123,44 +152,18 @@ object Map_T_A_pairs_as_per_ST_Group_NM_ST {
           col("alt_rule_def"),
           alt_rules ⇒
             struct(
-              alt_rules
-                .getField("compare_value")
-                .as("compare_value")
-                .lookup_row(("Step_Therapy_DTL_File", alt_rules.getField("compare_value")).as("st_therapy_dtl_data"))
+              alt_rules.getField("compare_value").as("compare_value"),
+              lookup_row("Step_Therapy_DTL_File", alt_rules.getField("compare_value")).as("st_therapy_dtl_data")
             )
         )
       )
     
-    val schema = StructType(
-      StructField("tal_id",            DecimalType(10, 0), true),
-      StructField("tal_name",          StringType, true),
-      StructField("tal_assoc_name",    StringType, true),
-      StructField("tar_udl_nm",        StringType, true),
-      StructField("tal_desc",          StringType, true),
-      StructField("priority",          StringType, true),
-      StructField("tal_assoc_type_cd", StringType, true),
-      StructField("target_prdcts",     Array(BinaryType), true),
-      StructField(
-        "alt_constituent_prdcts",
-        ArrayType(
-          StructType(
-            StructField("alt_prdcts",        BinaryType, true),
-            StructField("constituent_group", StringType, true),
-            StructField("constituent_reqd",  StringType, true),
-            StructField("udl_nm",            StringType, true)
-          ),
-          true
-        ),
-        true
-      ),
-      StructField("shared_qual",         StringType,                  true),
-      StructField("override_tac_name",   StringType,                  true),
-      StructField("override_tar_name",   StringType,                  true),
-      StructField("constituent_grp_vec", ArrayType(StringType, true), true),
-      StructField("newline",             StringType,                  true)
-    )
-    
-    val out = df.rdd.flatMap(process_udf).toDF(schema)
+    val origColumns = in.columns.map(col)
+    val out = in
+      .select(struct(origColumns: _*).as("inputRows"))
+      .select(explode(process_udf(col("inputRows"))).alias("output"))
+      .select(col("output.*"))
+    out
     out
   }
 

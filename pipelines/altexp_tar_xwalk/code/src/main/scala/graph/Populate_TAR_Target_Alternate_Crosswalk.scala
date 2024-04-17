@@ -53,8 +53,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
         case (rec, i) ⇒
           var lv_prdcts = lv_prdcts_all(i)
           if (
-            !(rec.getAs[String](0) == "TSD" || rec.getAs[String](0) == "PA"
- rec.getAs[String](0) == "ST" || rec.getAs[String](0) == "SPECIALTY" || rec.getAs[String](0) == "ST_STEP_NUM")
+            !(rec.getAs[String](0) == "TSD" || rec.getAs[String](0) == "PA" || rec.getAs[String](0) == "ST" || rec.getAs[String](0) == "SPECIALTY" || rec.getAs[String](0) == "ST_STEP_NUM")
           ) {
     
             if (rec.getAs[String](2) == "N") {

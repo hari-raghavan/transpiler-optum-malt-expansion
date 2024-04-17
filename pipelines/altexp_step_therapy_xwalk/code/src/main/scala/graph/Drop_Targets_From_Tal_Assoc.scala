@@ -21,13 +21,13 @@ object Drop_Targets_From_Tal_Assoc {
     val process_udf = udf(
       { (input: Seq[Row]) ⇒
         var st_tar_prdcts = Array[Byte]()
-        var results       = ArrayBuffer[Row]()
+        var results = ArrayBuffer[Row]()
     
         input.foreach { row ⇒
           var target_prdcts = ArrayBuffer[Array[Byte]]()
-          var result        = row
+          var result = row
           if (row.getAs[String](1) == "N/A - follows ST TAC")
-            st_tar_prdcts = _bv_or(st_tar_prdcts, _bv_vector_or( 
+            st_tar_prdcts = _bv_or(st_tar_prdcts, _bv_vector_or(
               row.getSeq[Array[Byte]](7).toArray
             ))
           else {
@@ -36,53 +36,54 @@ object Drop_Targets_From_Tal_Assoc {
             }
           }
           result = updateIndexInRow(result,
-                                    7,
-                                    if (row.getAs[String](1) == "N/A - follows ST TAC") 
-                                      row.getSeq[Array[Byte]](7).toArray
-                                    else target_prdcts
+            7,
+            if (row.getAs[String](1) == "N/A - follows ST TAC")
+              row.getSeq[Array[Byte]](7).toArray
+            else target_prdcts
           )
           results.append(result)
         }
         results.toArray
       },
       ArrayType(
-        StructType(
-          StructField("tal_id",            DecimalType(10, 0),        true),
-          StructField("tal_name",          StringType,        true),
-          StructField("tal_assoc_name",    StringType,        true),
-          StructField("tar_udl_nm",        StringType,        true),
-          StructField("tal_desc",          StringType,        true),
-          StructField("priority",          StringType,        true),
-          StructField("tal_assoc_type_cd", StringType,        true),
-          StructField("target_prdcts",     Array(BinaryType), true),
+        StructType(List(
+          StructField("tal_id", DecimalType(10, 0), true),
+          StructField("tal_name", StringType, true),
+          StructField("tal_assoc_name", StringType, true),
+          StructField("tar_udl_nm", StringType, true),
+          StructField("tal_desc", StringType, true),
+          StructField("priority", StringType, true),
+          StructField("tal_assoc_type_cd", StringType, true),
+          StructField("target_prdcts", ArrayType(BinaryType), true),
           StructField(
             "alt_constituent_prdcts",
             ArrayType(
-              StructType(
-                StructField("alt_prdcts",        BinaryType, true),
+              StructType(List(
+                StructField("alt_prdcts", BinaryType, true),
                 StructField("constituent_group", StringType, true),
-                StructField("constituent_reqd",  StringType, true),
-                StructField("udl_nm",            StringType, true)
-              ),
+                StructField("constituent_reqd", StringType, true),
+                StructField("udl_nm", StringType, true)
+              )),
               true
             ),
             true
           ),
-          StructField("shared_qual",         StringType,                  true),
-          StructField("override_tac_name",   StringType,                  true),
-          StructField("override_tar_name",   StringType,                  true),
+          StructField("shared_qual", StringType, true),
+          StructField("override_tac_name", StringType, true),
+          StructField("override_tar_name", StringType, true),
           StructField("constituent_grp_vec", ArrayType(StringType, true), true),
-          StructField("newline",             StringType,                  true)
-        )
+          StructField("newline", StringType, true)
+        ))
       )
     )
     
-    val out0 = in
-      .select(struct(in.columns.map(col): _*).as("tmp"))
+    val out0 = in0
+      .select(struct(in0.columns.map(col): _*).as("tmp"))
       .groupBy(lit(1))
       .agg(collect_list(col("tmp")).as("input"))
       .select(explode(process_udf(col("input")).as("output")))
       .select(col("output.*"))
+    out0
     out0
   }
 
