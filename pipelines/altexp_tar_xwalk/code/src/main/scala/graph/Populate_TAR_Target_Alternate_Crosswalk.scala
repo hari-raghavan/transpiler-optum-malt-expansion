@@ -108,7 +108,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           var prdcts  = _bv_all_zeros()
     
           if (prd_idx > -1) {
-            prdcts = roa_df_prdts_vec(prd_idx).getAs[Array[Byte]]
+            prdcts = roa_df_prdts_vec(prd_idx).getAs[Array[Byte]](1)
          } else {
             prdcts =
               try {
@@ -321,7 +321,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 )
               )
             }
-            tar_content_vec = Array.concat(tar_content_vec, roa_df_tar_content)
+            tar_content_vec = Array.concat(tar_content_vec, Array.fill(1)(roa_df_tar_content))
           } else {
             if (row.getAs[Seq[Row]]("target_rule_def").head.getAs[String]("qualifier_cd") == "ALL") {
               _keep_all_targets = 1
@@ -358,7 +358,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
             if (row.getAs[String]("filter_ind") == 'Y')
               all_alt_prdcts = _bv_or(all_alt_prdcts, alt_prdcts)
     
-            if ( bv_count_one_bits(alt_prdcts) > 0) {
+            if ( _bv_count_one_bits(alt_prdcts) > 0) {
               if (!_isnull(row.getAs[String]("rebate_elig_cd"))) {
                 row.getSeq[Array[Byte]](17).toArray.foreach {
                   rebate_udl_prdcts ⇒
