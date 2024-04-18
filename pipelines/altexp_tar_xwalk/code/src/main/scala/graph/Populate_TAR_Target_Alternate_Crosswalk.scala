@@ -147,7 +147,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           var alt_prdcts_vec2     = Array[Array[Byte]]()
           var _processed_prio     = Array[Array[Array[Byte]]]()
           var lkp_tar_roa_df_vec  = Array[Row]()
-          var _processed_roa_df   = Array[String]()
+          var _processed_roa_df   = Array[Int]()
           var index               = -1
           var is_empty            = 1
           var reb_udl_cnt         = 0
@@ -281,7 +281,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 if (_bv_count_one_bits(alt_prdcts) > 0)
                   alt_prdcts_vec = Array.concat(alt_prdcts_vec, Array.fill(1)(alt_prdcts))
                 alt_prdcts_vec2 = Array.concat(alt_prdcts_vec2, Array.fill(1)(alt_prdcts))
-                prev_pri = roa_priority
+                prev_pri = roa_priorityroa_df
               }
             }
             if (_bv_count_one_bits(target_prdcts) > 0 && !_isnull(roa_df_tar_content)) {
