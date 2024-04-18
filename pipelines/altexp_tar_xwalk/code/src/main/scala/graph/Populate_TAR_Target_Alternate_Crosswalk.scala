@@ -307,18 +307,16 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 )
               )
             } else {
-              roa_df_tar_content = Array.fill(1)(
-                Row(
-                  Array.fill(1)(target_prdcts),
-                  Array.fill(1)(
-                    Row(
-                      alt_prdcts_vec1,
-                      _processed_prio,
-                      _bv_vector_or(alt_prdcts_vec2)
-                    )
-                  )
-                )
-              )
+              roa_df_tar_content =  Row(
+                                        Array.fill(1)(target_prdcts),
+                                        Array.fill(1)(
+                                          Row(
+                                            alt_prdcts_vec1,
+                                            _processed_prio,
+                                            _bv_vector_or(alt_prdcts_vec2)
+                                          )
+                                        )
+                                      )
             }
             tar_content_vec = Array.concat(tar_content_vec, Array.fill(1)(roa_df_tar_content))
           } else {
