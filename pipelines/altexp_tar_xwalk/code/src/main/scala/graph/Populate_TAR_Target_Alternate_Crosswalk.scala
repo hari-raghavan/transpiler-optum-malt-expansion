@@ -108,8 +108,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           var prdcts  = _bv_all_zeros()
     
           if (prd_idx > -1) {
-            prdcts = roa_df_prdts_vec[prd_idx].getAs[Array[Byte]]
-            prdcts = res(3)
+            prdcts = roa_df_prdts_vec(prd_idx).getAs[Array[Byte]]
          } else {
             prdcts =
               try {
@@ -117,7 +116,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 if (res == null || res.nonEmpty) {
                   _bv_all_zeros()
                 } else {
-                  res(3)
+                  res
                 }
               } catch {
                 case e ⇒ _bv_all_zeros()
@@ -309,7 +308,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 )
               )
             } else {
-              roa_df_tar_content = Array(
+              roa_df_tar_content = Array.fill(1)(
                 Row(
                   Array.fill(1)(target_prdcts),
                   Array.fill(1)(
@@ -359,9 +358,9 @@ object Populate_TAR_Target_Alternate_Crosswalk {
             if (row.getAs[String]("filter_ind") == 'Y')
               all_alt_prdcts = _bv_or(all_alt_prdcts, alt_prdcts)
     
-            if (bv_count_one_bits(_alt_prdcts) > 0) {
+            if ( bv_count_one_bits(alt_prdcts) > 0) {
               if (!_isnull(row.getAs[String]("rebate_elig_cd"))) {
-                row.getAs[Seq[Row]](17).toArray.foreach {
+                row.getSeq[Array[Byte]](17).toArray.foreach {
                   rebate_udl_prdcts ⇒
                     rebate_prdcts = _bv_or(rebate_prdcts, rebate_udl_prdcts)
                 }
@@ -442,7 +441,15 @@ object Populate_TAR_Target_Alternate_Crosswalk {
       transform(
         lookup_row("LKP_TAR_ROA_DF", col("tar_roa_df_set_id")),
         lv_tar_roa_df =>         
-          lookup("Rule_Prdcts", lit(qualifier_cd), lit("eq"), lv_tar_roa_df.getField(in_compare_value))
+          lookup("Rule_Prdcts", lit(qualifier_cd), lit("eq"), lv_tar_roa_df.getField(in_compare_value)).getField("products")
+      )
+    }
+    
+    def rebate_udl_vec() = {
+      transform(
+        lookup_row("Rebate_UDL", col("rebate_elig_cd")),
+        xx =>
+          lookup("Expanded_UDL", xx.getField("udl_name")).getField("products")
       )
     }
     
@@ -456,7 +463,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
             :+ lv_prdcts(col("target_rule_def")).alias("target_rule_def_val") // 14
             :+ lv_prdcts(col("alt_rule_def")).alias("alt_rule_def_val") // 15
             :+ lookup_row("LKP_TAR_ROA_DF", col("tar_roa_df_set_id")).alias("lkp_tar_roa_df_vec") // 16
-            :+ lookup_row("Rebate UDL", col("udl_name")).alias("rebate_udl_vec") // 17
+            :+ rebate_udl_vec().alias("rebate_udl_vec") // 17
             :+ rule_prdcts_lkp("target_roa_cd", "ROA") // 18
             :+ rule_prdcts_lkp("target_dosage_form_cd", "DOSAGE_FORM") // 19
             :+ rule_prdcts_lkp("alt_roa_cd", "ROA") // 20 
