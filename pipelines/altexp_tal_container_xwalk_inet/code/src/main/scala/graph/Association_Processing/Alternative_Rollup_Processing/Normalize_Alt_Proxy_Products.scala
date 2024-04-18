@@ -31,7 +31,7 @@ object Normalize_Alt_Proxy_Products {
             .cast(DecimalType(16, 0)))
             .as("alt_run_id"),
           (element_at(col("alt_run_alt_dtl_load_vec"), col("index") + lit(1))
-            .getField("*")
+            .getField("alt_run_target_dtl_id")
             .cast(DecimalType(16, 0)))
             .as("alt_run_target_dtl_id"),
           (element_at(col("alt_run_alt_dtl_load_vec"), col("index") + lit(1)).getField("formulary_name")).as("formulary_name"),

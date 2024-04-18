@@ -36,8 +36,7 @@ object Normalize_Clinical_Indication {
             )
               .getField("clinical_indn_desc")),
             lit(0)
-          )
-            .as("clinical_indn_desc")
+          ).as("clinical_indn_desc")
         ),
         lengthRelatedGlobalExpressions = Map(),
         tempWindowExpr = Map()

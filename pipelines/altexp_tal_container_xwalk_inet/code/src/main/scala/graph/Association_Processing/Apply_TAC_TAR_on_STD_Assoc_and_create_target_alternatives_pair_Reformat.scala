@@ -15,13 +15,13 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
   def apply(context: Context, in: DataFrame, prod_dtl_df: DataFrame, expanded_UDL_wt_rl_priority_df: DataFrame, rule_prod_dtl_df: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
-    import io.prophecy.abinitio.ScalaFunctions._
-    import java.math.BigDecimal
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
     import scala.util.control.Breaks
     
-    var prod_dtl_var = spark.sparkContext.broadcast(
+    val prod_dtl_var = spark.sparkContext.broadcast(
       prod_dtl_df.select(col("dl_bit"), col("gpi14")).collect().map(r ⇒ (r.getAs[String](0) → r.getAs[String](1))).toMap
     )
+    
     val expanded_UDL_wt_rl_priority_var = spark.sparkContext.broadcast(
       expanded_UDL_wt_rl_priority_df
         .select(col("udl_nm"), col("contents"))
@@ -91,9 +91,9 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
       var final_sorted_prdcts_step        = Array[Array[Byte]]()
       var final_sorted_prdcts_step1       = Array[Array[Byte]]()
       var final_sorted_prdcts_overlapping = Array[Array[Byte]]()
-      var number_of_alt_bucket            = 0;
-      var st_len                          = 0;
-      var length_overlapping              = 0;
+      var number_of_alt_bucket            = 0
+      var st_len                          = 0
+      var length_overlapping              = 0
       var step_join_alternate             = _bv_all_zeros()
       var step_alt_prdcts_tala            = Array[Array[Byte]]()
     
@@ -102,10 +102,10 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
     
       if (in.getAs[String]("tal_id").toInt == 0) {
         step_alt_prdcts = in.getAs[Seq[Row]]("alt_constituent_prdcts").head.getAs[Array[Byte]]("alt_prdcts")
-        length_of_contents = tar_prdcts.getAs[Seq[Row]]("contents").length
-        var contents = tar_prdcts.getAs[Seq[Row]]("contents").toArray
+        length_of_contents = tar_prdcts.getAs[Seq[Row]](4).length
+        var contents = tar_prdcts.getAs[Seq[Row]](4).toArray
         for (c ← 0 until length_of_contents) {
-          var alt_contents = contents(c).getAs[Seq[Row]]("alt_contents").toArray
+          var alt_contents = contents(c).getAs[Seq[Row]](1).toArray
           length_of_alt_contents = alt_contents.length
           for (a ← 0 until length_of_alt_contents) {
             alt_contents(a) = updateIndexInRow(alt_contents(a),
@@ -121,52 +121,6 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
           contents(c) = updateIndexInRow(contents(c), 1, alt_contents)
         }
         tar_prdcts = updateIndexInRow(tar_prdcts, 4, contents)
-        /*
-        type tar_xwalk_t =
-        record
-      0    decimal("\x01",0, maximum_length=10) tar_id /*NUMBER(9) NOT NULL*/;
-      1    decimal("\x01",0, maximum_length=10) tar_dtl_id /*NUMBER(9) NOT NULL*/;
-      2    string("\x01", maximum_length=20) tar_name /*VARCHAR2(20) NOT NULL*/;
-      3    decimal("\x01",0, maximum_length=39) tar_dtl_type_cd /*NUMBER(38) NOT NULL*/;
-          record
-           0 bit_vector_t[int] target_prdcts;
-            record
-            0   bit_vector_t[int] alt_prdcts;
-            1  bit_vector_t[int][int] alt_prdcts_all_prio;
-            2  bit_vector_t common_prdcts;
-           1 end[int] alt_contents;
-      4    end[int] contents;
-      5    bit_vector_t common_alt_prdcts;
-      6    bit_vector_t common_target_prdcts;
-      7    decimal(1) keep_all_targets = 0;
-      8    string(1) newline = '\n';
-        end;
-    
-        type tac_xwalk_t =
-        record
-        0  decimal("\x01",0, maximum_length=10) tac_id /*NUMBER(9) NOT NULL*/;
-        1 string("\x01", maximum_length=20) tac_name /*VARCHAR2(20) NOT NULL*/;
-        2  tac_contents_t[int] tac_contents;
-        3  date("YYYYMMDD")("\x01") eff_dt /*DATE NOT NULL*/;
-        4  date("YYYYMMDD")("\x01") term_dt /*DATE NOT NULL*/;
-        5  string(1) newline = '\n';
-        end;
-        type tac_contents_t =
-        record
-     0    bit_vector_t target_prdcts;
-     1    bit_vector_t alt_prdcts;
-     2    contents_t[int] contents;
-     3    decimal(1) xtra_proc_flg = 0;
-        end;
-    
-        type contents_t =
-        record
-      0    bit_vector_t target_prdcts;
-      1    bit_vector_t alt_prdcts;
-      2    decimal(1) ST_flag =0; //US1602056
-      3    decimal(1) priority; //US3680892
-        end;
-         */
       }
     
       if (in.getAs[String]("tal_assoc_type_cd").toInt == 1) {
@@ -176,12 +130,12 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
         for (i ← 0 until tac_contents.length) {
           lv_target_prdcts =
             if (tar_prdcts.getAs[String](7).toInt > 0) tac_contents(i).getAs[Array[Byte]]("target_prdcts")
-            else _bv_and(tac_contents(i).getAs[Array[Byte]]("target_prdcts"), tar_prdcts.getAs[Array[Byte]](6));
+            else _bv_and(tac_contents(i).getAs[Array[Byte]]("target_prdcts"), tar_prdcts.getAs[Array[Byte]](6))
     
-          lv_alt_prdcts = _bv_and(tac_contents(i).getAs[Array[Byte]]("alt_prdcts"), tar_prdcts.getAs[Array[Byte]](5));
+          lv_alt_prdcts = _bv_and(tac_contents(i).getAs[Array[Byte]]("alt_prdcts"), tar_prdcts.getAs[Array[Byte]](5))
     
           if (_bv_count_one_bits(lv_target_prdcts) > 0 && _bv_count_one_bits(lv_alt_prdcts) > 0) {
-            if (tac_contents(i).getAs[String](3).toInt > 0) {
+            if (tac_contents(i).getAs[String]("xtra_proc_flg").toInt > 0) {
               tac_contents(i).getAs[Seq[Row]]("contents").foreach { rec ⇒
                 _target_prdcts = _bv_and(lv_target_prdcts, rec.getAs[Array[Byte]]("target_prdcts"))
                 _alt_prdcts = _bv_and(lv_alt_prdcts,       rec.getAs[Array[Byte]]("alt_prdcts"))
@@ -228,7 +182,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
           _force_error("Applied TAR on TAC - No Products Left For Processing")
         }
         in.getSeq[Array[Byte]](7).foreach { target_prds ⇒
-          target_prdcts = Array.concat(target_prdcts, _bv_and(target_prds, _all_tac_target_prdcts))
+          target_prdcts = Array.concat(target_prdcts, Array.fill(1)(_bv_and(target_prds, _all_tac_target_prdcts)))
         }
         if (_bv_count_one_bits(_bv_vector_or(target_prdcts)) > 0)
           _force_error("TAC Applied - No Target Products Left For Processing")
@@ -293,7 +247,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     steptal_inp,
                     in.getAs[String]("tar_udl_nm"),
                     final_sorted_prdcts_step
-                  );
+                  )
     
                   target_dl_bits.foreach { p ⇒
                     val elem = unsorted_target_prdct_dtl.find(r ⇒ r.getAs[Int](0) == p).get
@@ -312,6 +266,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                                                                p,
                                                                "0",
                                                                "0",
+                                                               "",
                                                                "0",
                                                                Array[Row](),
                                                                "N",
@@ -342,17 +297,16 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                   target_dl_bits = Array.concat(target_dl_bits, _bv_indices(prds))
                   store_bucket_idx_t(y) = updateIndexInRow(
                     store_bucket_idx_t(y),
-                    0,
+                    1,
                     Array.concat(store_bucket_idx_t(y).getSeq[String](1).toArray, Array.fill(1)(pos.toString))
                   )
                 }
                 if (in.getAs[String]("shared_qual") != "GPI14") {
-                  val bucket = target_tar_prdcts_mapping(y).getAs[Seq[Row]](0).toArray
                   unsorted_target_prdct_dtl = apply_gpi14_sorting(
                     target_dl_bits,
                     pos + 1,
-                    bucket(pos).getAs[String](2).toInt,
-                    bucket(pos).getAs[Array[Byte]](3),
+                    buckets(pos).getAs[String](2).toInt,
+                    buckets(pos).getAs[Array[Byte]](3),
                     alt_bucket_vec,
                     lv_tac_contents,
                     tar_roa_df_alt,
@@ -377,18 +331,19 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                   val loop = new Breaks
                   loop.breakable {
                     lv_tac_contents.getAs[Seq[Row]](2).foreach { rec ⇒
-                      if (lv_tac_target_dl_bits.length > 0) {
+                      if (tac_target_dl_bits.length > 0) {
                         lv_tac_target_dl_bits =
-                          _bv_indices(_bv_and(buckets(pos).getAs[Array[Byte]](3), rec.getAs[Array[Byte]]("target_prdcts")));
+                          _bv_indices(_bv_and(buckets(pos).getAs[Array[Byte]](3), rec.getAs[Array[Byte]]("target_prdcts")))
                         if (lv_tac_target_dl_bits.length > 0) {
                           alt_bucket_vec.foreach { bucket1 ⇒
-                            if (_bv_count_one_bits(bucket1.getAs[Array[Byte]](4)) > 0) {
+                            if (_bv_count_one_bits(bucket1.getAs[Array[Byte]](4)) > 0 || _bv_count_one_bits(bucket1.getAs[Array[Byte]](5)) > 0) {
                               bucket1.getSeq[Array[Byte]](6).foreach { alt_prds ⇒
+                                val alt_prdcts_all_prio_seq = tar_roa_df_alt(bucket1.getAs[String](0).toInt).getSeq[Seq[Array[Byte]]](2)
                                 val alt_prdcts_all_prio =
-                                  tar_roa_df_alt(bucket1.getAs[String](0).toInt).getSeq[Array[Array[Byte]]](2).toArray
+                                    alt_prdcts_all_prio_seq.map(_.toArray).toArray
                                 var tar_roa_df_alt_cntnt = alt_prdcts_all_prio(bucket1.getAs[String](1).toInt)
                                 unmatching_udl_prd = _bv_and(alt_prds,           rec.getAs[Array[Byte]]("alt_prdcts"))
-                                alt_dl_bits = apply_udl_sort(unmatching_udl_prd, bucket1.getAs[String](11))
+                                alt_dl_bits = apply_udl_sort(unmatching_udl_prd, bucket1.getAs[String](11), tar_roa_df_alt_cntnt)
                                 if (alt_dl_bits.length > 0) {
                                   alt_rank_vec =
                                     Array.concat(alt_rank_vec,
@@ -402,7 +357,6 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                           }
                           if (alt_rank_vec.length > 0) {
                             tac_index = tac_index + 1
-                            val buckets = target_tar_prdcts_mapping(y).getAs[Seq[Row]](0).toArray
                             lv_tac_target_dl_bits.foreach { p ⇒
                               unsorted_target_prdct_dtl = Array.concat(unsorted_target_prdct_dtl,
                                                                        Array.fill(1)(
@@ -410,9 +364,9 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                                                                            p,
                                                                            (pos + 1).toString,
                                                                            buckets(pos).getAs[String](2),
+                                                                           "",
                                                                            tac_index.toString,
                                                                            alt_rank_vec,
-                                                                           Array(),
                                                                            "Y",
                                                                            "0"
                                                                          )
@@ -428,6 +382,18 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                         loop.break()
                     }
                   }
+                  tac_target_dl_bits.foreach { p =>
+                    target_wo_alt_prdct_dtl = Array.concat(target_wo_alt_prdct_dtl, Array.fill(1)(Row(
+                      p,
+                      (pos + 1).toString,
+                      buckets(pos).getAs[String](2),
+                      "0"
+                      Array[Row](),
+                      "N",
+                      "0"
+                    )))
+                  }
+    
                   target_dl_bits.foreach { p ⇒
                     target_prdct_dtl =
                       Array.concat(target_prdct_dtl, unsorted_target_prdct_dtl.filter(r ⇒ r.getAs[Int](0) == p))
@@ -448,6 +414,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                                                                  p,
                                                                  "0",
                                                                  "0",
+                                                                 "",
+                                                                 "0",
                                                                  Array[Row](),
                                                                  "N",
                                                                  "0"
@@ -460,17 +428,19 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
               } else {
                 for (j ← 0 until buckets.length) {
                   target_wo_alt_prdct_dtl = Array
-                    .concat(target_wo_alt_prdct_dtl, _bv_indices(_bv_vector_or(buckets(j).getSeq[Array[Byte]](6).toArray)))
+                    .concat(target_wo_alt_prdct_dtl, _bv_indices(_bv_vector_or(buckets(j).getSeq[Array[Byte]](6).toArray))
                     .map(p ⇒
                       Row(
                         p,
                         "0",
                         "0",
+                        "",
+                        "0",
                         Array[Row](),
                         "N",
                         "0"
                       )
-                    )
+                    ))
                 }
               }
             }
@@ -482,12 +452,14 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                                                      p,
                                                      "0",
                                                      "0",
+                                                     "",
+                                                     "0",
                                                      Array[Row](),
                                                      "N",
                                                      "0"
                                                    )
                                                  )
-          )
+                                                )
         }
       } else {
         var alt_rank = 1
@@ -497,8 +469,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                                               0,
                                               target_tar_prdcts_mapping,
                                               "",
-                                              0
-        )
+                                              0)
     
         alt_tar_prdcts_mapping = apply_tar(Array(),
                                            in.getAs[Seq[Row]]("alt_constituent_prdcts").toArray,
@@ -506,8 +477,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                                            1,
                                            target_tar_prdcts_mapping,
                                            in.getAs[String]("shared_qual"),
-                                           1
-        )
+                                           1)
     
         if (in.getAs[String]("shared_qual") != "N/A") {
           for (a ← 0 to alt_tar_prdcts_mapping.length) {
@@ -518,14 +488,14 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
               bucket.getSeq[Array[Byte]](6).foreach { prds ⇒
                 alt_prdcts_rank_vec =
                   Array.concat(alt_prdcts_rank_vec,
-                               Array.fill(1)(Row(alt_rank, apply_udl_sort(prds, bucket.getAs[String]("11")), "", ""))
+                               Array.fill(1)(Row(alt_rank, apply_udl_sort(prds, bucket.getAs[String]("11"), tar_roa_df_alt_cntnt), "", ""))
                   )
                 alt_rank = alt_rank + _bv_count_one_bits(prds)
               }
               val target_prdcts = in.getSeq[Array[Byte]](7).toArray
               target_prdct_dtl = Array.concat(target_prdct_dtl,
                                               _bv_indices(target_prdcts(a)).map { prd ⇒
-                                                Row(prd, "0", (a + 1).toString, alt_prdcts_rank_vec, "Y", "0")
+                                                Row(prd, "0", (a + 1).toString, "", "0", alt_prdcts_rank_vec, "Y", "0")
                                               }
               )
               alt_prdcts_rank_vec = Array[Row]()
@@ -538,7 +508,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
           while (b < target_prdcts.length) {
             target_prdct_dtl = Array.concat(target_prdct_dtl,
                                             _bv_indices(target_prdcts(b)).map { prd ⇒
-                                              Row(prd, "0", "0", Array(), "N", "0")
+                                              Row(prd, "0", "0", "", "0", Array(), "N", "0")
                                             }
             )
             b = b + 1
@@ -552,7 +522,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                 alt_prdcts_rank_vec = Array.concat(alt_prdcts_rank_vec,
                                                    Array.fill(1)(
                                                      Row(alt_rank,
-                                                         apply_udl_sort(prds, bucket.getAs[String]("11")),
+                                                         apply_udl_sort(prds, bucket.getAs[String]("11"), tar_roa_df_alt_cntnt),
                                                          bucket.getAs[String](9),
                                                          bucket.getAs[String](10)
                                                      )
@@ -569,7 +539,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
               udl_index = udl_index + 1
               target_prdct_dtl = Array.concat(target_prdct_dtl,
                                               _bv_indices(target_prd).map { prd ⇒
-                                                Row(prd, "0", udl_index.toString, alt_prdcts_rank_vec, "Y", "0")
+                                                Row(prd, "0", udl_index.toString, "", "0", alt_prdcts_rank_vec, "Y", "0")
                                               }
               )
             }
@@ -577,7 +547,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
             target_prdcts.foreach { target_prd ⇒
               target_wo_alt_prdct_dtl = Array.concat(target_wo_alt_prdct_dtl,
                                                      _bv_indices(target_prd).map { prd ⇒
-                                                       Row(prd, "0", "0", Array(), "N", "0")
+                                                       Row(prd, "0", "0", "", "0", Array[Row](), "N", "0")
                                                      }
               )
             }
@@ -631,7 +601,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
               true
             ),
             StructField("has_alt", StringType,        true),
-            StructField("ST_flag", DecimalType(1, 0), true)
+            StructField("ST_flag", StringType,        true)
           ),
           true
         ),
@@ -686,8 +656,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
       var lv_prdcts          = Array[Byte]()
       var left_over_prdcts   = Array[Byte]()
       var contents           = Array[Row]()
-      var len                = 0;
-      var udl_len            = 0;
+      var len                = 0
+      var udl_len            = 0
       if (is_alt > 0) {
         val tar_prdcts_contents = tar_prdcts.getAs[Seq[Row]](4).toArray
         len = tar_prdcts_contents(0).getAs[Seq[Row]](1).length
@@ -713,7 +683,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
               val alt_contents        = tar_prdcts_contents(0).getAs[Seq[Row]](1).toArray
               target_tar_prdcts_mapping(p).getAs[Seq[Int]](1).foreach { idx ⇒
                 if (is_override_incl > 0) {
-                  _prdcts = _bv_and(udl_prdts,          alt_contents(idx).getAs[Array[Byte]](2));
+                  _prdcts = _bv_and(udl_prdts,          alt_contents(idx).getAs[Array[Byte]](2))
                   udl_prdts = _bv_difference(udl_prdts, _prdcts)
                 } else {
                   _prdcts = _bv_and(alt_udl_prdcts(i).getAs[Array[Byte]](0), alt_contents(idx).getAs[Array[Byte]](2))
@@ -829,7 +799,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
               val tar_prdcts_contents = tar_prdcts.getAs[Seq[Row]](4).toArray
               val alt_contents        = tar_prdcts_contents(0).getAs[Seq[Row]](1).toArray
               if (is_override_incl > 0) {
-                _prdcts = _bv_and(udl_prdts,          alt_contents(idx).getAs[Array[Byte]](2));
+                _prdcts = _bv_and(udl_prdts,          alt_contents(idx).getAs[Array[Byte]](2))
                 udl_prdts = _bv_difference(udl_prdts, _prdcts)
               } else {
                 _prdcts = _bv_and(alt_udl_prdcts(i).getAs[Array[Byte]](0), alt_contents(idx).getAs[Array[Byte]](2))
@@ -1004,7 +974,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
             _prdcts =
               if (_bv_count_one_bits(contents(0).getSeq[Array[Byte]](0).head) > 0)
                 _bv_and(left_over_prdcts, contents(0).getSeq[Array[Byte]](0).head)
-              else left_over_prdcts;
+              else left_over_prdcts
     
             if (_bv_count_one_bits(left_over_prdcts) > 0) {
               tar_prdcts_mapping(i) = updateIndexInRow(
@@ -1190,7 +1160,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var sorted_prdcts = buckets(k).getAs[Row](7)
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      1,
-                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](1).toArray, _prdcts)
+                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](1).toArray,
+                                                                  Array.fill(1)(_prdcts))
                     )
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      0,
@@ -1207,7 +1178,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var sorted_prdcts = buckets(k).getAs[Row](7)
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      3,
-                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](3).toArray, _prdcts)
+                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](3).toArray, 
+                                                                  Array.fill(1)(_prdcts))
                     )
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      2,
@@ -1224,7 +1196,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var sorted_prdcts = buckets(k).getAs[Row](7)
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      5,
-                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](5).toArray, _prdcts)
+                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](5).toArray, 
+                                                                  Array.fill(1)(_prdcts))
                     )
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      4,
@@ -1241,7 +1214,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var sorted_prdcts = buckets(k).getAs[Row](7)
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      7,
-                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](7).toArray, _prdcts)
+                                                     Array.concat(sorted_prdcts.getSeq[Array[Byte]](7).toArray, 
+                                                     Array.fill(1)(_prdcts))
                     )
                     sorted_prdcts = updateIndexInRow(sorted_prdcts,
                                                      6,
@@ -1252,14 +1226,14 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                   }
                 }
     
-                ///
                 if (_bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](0)) > 0) {
                   _prdcts = _bv_and(buckets(k).getAs[Row](8).getAs[Array[Byte]](0), target_prdcts)
                   if (_bv_count_one_bits(_prdcts) > 0) {
                     var unsorted_prdcts = buckets(k).getAs[Row](8)
                     unsorted_prdcts = updateIndexInRow(unsorted_prdcts,
                                                        1,
-                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](1).toArray, _prdcts)
+                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](1).toArray, 
+                                                                    Array.fill(1)(_prdcts))
                     )
                     unsorted_prdcts = updateIndexInRow(
                       unsorted_prdcts,
@@ -1277,7 +1251,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var unsorted_prdcts = buckets(k).getAs[Row](8)
                     unsorted_prdcts = updateIndexInRow(unsorted_prdcts,
                                                        3,
-                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](3).toArray, _prdcts)
+                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](3).toArray, 
+                                                                   Array.fill(1)(_prdcts))
                     )
                     unsorted_prdcts = updateIndexInRow(
                       unsorted_prdcts,
@@ -1295,7 +1270,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var unsorted_prdcts = buckets(k).getAs[Row](8)
                     unsorted_prdcts = updateIndexInRow(unsorted_prdcts,
                                                        5,
-                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](5).toArray, _prdcts)
+                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](5).toArray, 
+                                                                    Array.fill(1)(_prdcts))
                     )
                     unsorted_prdcts = updateIndexInRow(
                       unsorted_prdcts,
@@ -1313,7 +1289,8 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                     var unsorted_prdcts = buckets(k).getAs[Row](8)
                     unsorted_prdcts = updateIndexInRow(unsorted_prdcts,
                                                        7,
-                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](7).toArray, _prdcts)
+                                                       Array.concat(unsorted_prdcts.getSeq[Array[Byte]](7).toArray, 
+                                                                    Array.fill(1)(_prdcts))
                     )
                     unsorted_prdcts = updateIndexInRow(
                       unsorted_prdcts,
@@ -1529,25 +1506,25 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
       var lv_tac_target_dl_bits     = Array[Int]()
     
       var tar_idx               = 0
-      var alt_idx               = 0;
+      var alt_idx               = 0
       var tar_roa_df_alt_cntnt  = Array[Array[Byte]]()
       var tar_roa_df_alt_cntnt1 = Array[Array[Byte]]()
       var tar_roa_df_alt_cntnt2 = Array[Array[Byte]]()
-      var lv_udl_index          = BigDecimal(0);
-      var udl_prdct_count       = BigDecimal(0);
-      var _gpi14                = "";
+      var lv_udl_index          = BigDecimal(0)
+      var udl_prdct_count       = 0
+      var _gpi14                = ""
       var unmatching_udl_prd    = _bv_all_zeros()
-      var tac_index             = 0;
+      var tac_index             = 0
       var target_tac_index      = Array[Int]()
       var in_tar_vec            = Array[Array[Byte]]()
       var tar_bits              = Array[Int]()
       var final_sorted_prdcts1  = Array[Array[Byte]]()
       var final_sorted_prdcts2  = Array[Array[Byte]]()
-      var st_len                = 0;
-      var len_now               = 0;
-      var len_alt               = 0;
-      var length_overlapping    = 0;
-      var alt_idx1              = 0;
+      var st_len                = 0
+      var len_now               = 0
+      var len_alt               = 0
+      var length_overlapping    = 0
+      var alt_idx1              = 0
       var alt_idx2              = Array[Int]()
       val prod_dtl              = prod_dtl_var.value
       val rule_prod_dtl         = rule_prod_dtl_var.value
@@ -1557,7 +1534,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
           var alt_rank           = 1
           var tac_idx            = -1
           var idx                = -1
-          var idx_ord            = -1;
+          var idx_ord            = -1
           var first_hit_priority = 0
           target_tac_index = Array[Int]()
           lv_target_prdcts_sec = _bv_all_zeros()
@@ -1651,9 +1628,10 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                       unsorted_target_prdct_dtl,
                       Array.fill(1)(
                         Row(p,
-                            BigDecimal(bucket_index),
-                            BigDecimal(udl_index),
-                            BigDecimal(tac_index),
+                            bucket_index,
+                            udl_index,
+                            "",
+                            tac_index,
                             alt_rank_vec,
                             "Y",
                             rec.getAs[String](3)
@@ -1675,7 +1653,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
           lv_target_dl_bits1.foreach { p ⇒
             unsorted_target_prdct_dtl = Array.concat(
               unsorted_target_prdct_dtl,
-              Array.fill(1)(Row(p, BigDecimal(0), BigDecimal(0), BigDecimal(0), Array[Row](), "N", BigDecimal(0)))
+              Array.fill(1)(Row(p, "0", "0", "", "0", Array[Row](), "N", "0"))
             )
           }
           lv_target_dl_bits = Array.concat(lv_target_dl_bits, lv_target_dl_bits1)
@@ -1685,21 +1663,21 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
       unsorted_target_prdct_dtl
     }
     
-    def apply_udl_sort(unmatching_udl_prd: Array[Byte], udl_nm: String) = {
+    def apply_udl_sort(unmatching_udl_prd: Array[Byte], udl_nm: String, tar_roa_df_alt_cntnt: Array[Array[Byte]]) = {
     
       var matching_udl_prd      = Array[Byte]()
       var lv_unmatching_udl_prd = Array[Byte]()
       var _roa_df_match         = Array[Byte]()
       var lv_alt_dl_bits        = Array[Int]()
       var alt_udl_content_lkp   = Array[Array[Byte]]()
-      var roa_df_alt_dtl        = Array[Array[Byte]]()
+      var roa_df_alt_dtl        = tar_roa_df_alt_cntnt
       var udl_rule_prd          = Array[Row]()
     
       var lv_udl_nm = _ltrim(udl_nm)
       val prod_dtl  = prod_dtl_var.value
     
       if ((lv_udl_nm == "N/A")) {
-        _roa_df_match = unmatching_udl_prd;
+        _roa_df_match = unmatching_udl_prd
         val loop = new Breaks
         loop.breakable {
           roa_df_alt_dtl.foreach { k ⇒
