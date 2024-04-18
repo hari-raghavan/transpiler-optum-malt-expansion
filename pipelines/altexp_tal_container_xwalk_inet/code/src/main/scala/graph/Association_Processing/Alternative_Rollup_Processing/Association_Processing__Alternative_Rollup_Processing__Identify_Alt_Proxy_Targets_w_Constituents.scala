@@ -15,9 +15,10 @@ object Association_Processing__Alternative_Rollup_Processing__Identify_Alt_Proxy
   def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
+    import _root_.io.prophecy.abinitio.ScalaFunctions._
+    
     val process_udf = udf(
       { (inputRows: Seq[Row]) =>
-        {
     
           var alt_run_alt_dtl_load_vec = Array[Row]()
           var alt_prod_short_desc_grp_vec = Array[String]()
@@ -73,7 +74,7 @@ object Association_Processing__Alternative_Rollup_Processing__Identify_Alt_Proxy
             }
           }
           if (
-            in.getAs[Seq[String]]("constituent_grp_vec")
+            inputRows.last.getAs[Seq[String]]("constituent_grp_vec")
               .diff(lv_constituent_grp_vec)
               .isEmpty
           ) {
@@ -82,8 +83,8 @@ object Association_Processing__Alternative_Rollup_Processing__Identify_Alt_Proxy
             alt_run_alt_dtl_load_vec =
               Array.concat(alt_run_alt_dtl_load_vec, _constituent_N_alt_dtl_vec)
           }
-        }
-        Row(alt_run_alt_dtl_load_vec)
+     
+          Row(alt_run_alt_dtl_load_vec)
       },
       StructType(
                   List(

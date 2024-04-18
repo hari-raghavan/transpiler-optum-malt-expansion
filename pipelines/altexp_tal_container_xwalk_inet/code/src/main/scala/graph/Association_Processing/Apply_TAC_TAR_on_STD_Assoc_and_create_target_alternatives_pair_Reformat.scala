@@ -31,7 +31,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
     )
     val rule_prod_dtl_var = spark.sparkContext.broadcast(
       rule_prod_dtl_df
-        .filter((col("qualifer_cd") == lit("GPI14")) && (col("operator") == lit("eq")))
+        .filter((col("qualifer_cd") === lit("GPI14")) && (col("operator") === lit("eq")))
         .select(col("udl_nm"), col("contents"))
         .collect()
         .map(r ⇒ (r._1, r._2))
@@ -1036,14 +1036,14 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                   _bv_difference(buckets(k).getAs[Array[Byte]](3), buckets(k).getAs[Array[Byte]](4))
                 )
               } else if (
-                !(_bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](0)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](4)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](0)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](4)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](2)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](6)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](2)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](6)) > 0)
+                !(_bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](0)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](4)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](0)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](4)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](2)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](6)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](2)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](6)) > 0)
               ) {
                 if (
                   _bv_count_one_bits(buckets(k).getAs[Array[Byte]](4)) > 0 && !(_bv_count_one_bits(
@@ -1093,20 +1093,18 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                   buckets(k) = updateIndexInRow(buckets(k), 8, unsorted_prdcts)
                 }
               } else if (
-                !(_bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](0)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](4)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](0)) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](4)) > 0)
+                !(_bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](0)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](4)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](0)) > 0 ||
+                  _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](4)) > 0)
               ) {
     
                 if (
                   (_bv_count_one_bits(
                     buckets(k).getAs[Row](7).getAs[Array[Byte]](2)
-                  ) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](6)) > 0) && !(_bv_count_one_bits(
+                  ) > 0 || _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](6)) > 0) && !(_bv_count_one_bits(
                     buckets(k).getAs[Row](7).getAs[Array[Byte]](0)
-                  ) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](4)) > 0)
+                  ) > 0 ||  _bv_count_one_bits(buckets(k).getAs[Row](7).getAs[Array[Byte]](4)) > 0)
                 ) {
                   var sorted_prdcts = buckets(k).getAs[Row](7)
                   sorted_prdcts =
@@ -1129,11 +1127,9 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                 if (
                   (_bv_count_one_bits(
                     buckets(k).getAs[Row](8).getAs[Array[Byte]](2)
-                  ) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](6)) > 0) && !(_bv_count_one_bits(
+                  ) > 0 || _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](6)) > 0) && !(_bv_count_one_bits(
                     buckets(k).getAs[Row](8).getAs[Array[Byte]](0)
-                  ) > 0
- _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](4)) > 0)
+                  ) > 0 || _bv_count_one_bits(buckets(k).getAs[Row](8).getAs[Array[Byte]](4)) > 0)
                 ) {
                   var unsorted_prdcts = buckets(k).getAs[Row](8)
                   unsorted_prdcts =

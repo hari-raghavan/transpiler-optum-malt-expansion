@@ -15,7 +15,7 @@ object flatten {
   def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
-    val out = in0.select("out.*")
+    val out0 = in0.select("out.*")
     out0
   }
 
