@@ -57,8 +57,8 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           ) {
     
             if (rec.getAs[String](2) == "N") {
-              exclusion_prdcts = _bv_or(exclusion_prdcts, lv_prdcts);
-              is_hrm = 1;
+              exclusion_prdcts = _bv_or(exclusion_prdcts, lv_prdcts)
+              is_hrm = 1
             }
           }
           if (is_hrm == 0) {
@@ -97,7 +97,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
         var roa_df_prdts_vec  = Array[Row]()
         var all_target_prdcts = _bv_all_zeros()
         var all_alt_prdcts    = _bv_all_zeros()
-        var _keep_all_targets = 0;
+        var _keep_all_targets = 0
         var rebate_prdcts_t   = _bv_all_zeros()
     
         def get_roa_df_products(
@@ -108,7 +108,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           var prdcts  = _bv_all_zeros()
     
           if (prd_idx > -1) {
-            prdcts = roa_df_prdts_vec[prd_idx].getAs[Seq[Byte]].toArray
+            prdcts = roa_df_prdts_vec[prd_idx].getAs[Array[Byte]]
             prdcts = res(3)
          } else {
             prdcts =
@@ -155,42 +155,41 @@ object Populate_TAR_Target_Alternate_Crosswalk {
           var rebate_udl          = ""
           var p_check             = -1
     
-          val _roa_prdcts1 = _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](18))
-          val _df_prdcts1 =  _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](19))
-          val _roa_prdcts2 =  _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](20))
-          val _df_prdcts2 = _to_array_of_arrays(row.getAs[Seq[Seq[Byte]]](21))
-          if (!_isnull(row.getAs[String](3))) {
-            var roa_df_tar_content = Row(Seq[Seq[Byte]](), Seq[Row]())
+          val _roa_prdcts1 = row.getSeq[Array[Byte]](18).toArray
+          val _df_prdcts1 =  row.getSeq[Array[Byte]](19).toArray
+          val _roa_prdcts2 = row.getSeq[Array[Byte]](20).toArray
+          val _df_prdcts2 =  row.getSeq[Array[Byte]](21).toArray
+          if (!_isnull(row.getAs[String]("tar_roa_df_set_id"))) {
+            var roa_df_tar_content = Row(Array[Array[Byte]](), Array[Row]())
             var prev_pri           = 0
     
             lkp_tar_roa_df_vec =
-              row.getAs[Seq[Row]](16).toArray
+              row.getAs[Seq[Row]]("lkp_tar_roa_df_vec").toArray
             lkp_tar_roa_df_vec.zipWithIndex.foreach { case (lv_tar_roa_df, idx) ⇒
-              var roa_df       = lv_tar_roa_df.getAs[String](2).toInt + lv_tar_roa_df.getAs[String](3).toInt
+              var roa_df       = lv_tar_roa_df.getAs[String]("target_roa_cd").toInt + lv_tar_roa_df.getAs[String]("target_dosage_form_cd").toInt
               var roa_priority = 0
               if (p_check == -1) {
-                prev_pri = lv_tar_roa_df.getAs[String](6).toInt
-                p_check = 0;
+                prev_pri = lv_tar_roa_df.getAs[String]("priority").toInt
+                p_check = 0
               }
-              roa_priority = lv_tar_roa_df.getAs[String](6).toInt
+              roa_priority = lv_tar_roa_df.getAs[String]("priority").toInt
     
               if (_processed_roa_df.indexOf(roa_df) == -1) {
                 if (!_isnull(_processed_roa_df)) {
                   if (alt_prdcts_vec.nonEmpty && _bv_count_one_bits(target_prdcts) > 0) {
-                    if (is_empty != 0) {
+                    if (is_empty == 0) {
                       alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
                       _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))
-                      alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
                       roa_df_tar_content = updateIndexInRow(
                         roa_df_tar_content,
                         0,
-                        Array.concat(_to_array_of_arrays(roa_df_tar_content.getAs[Seq[Seq[Byte]]](0)), Array.fill(1)(target_prdcts))
+                        Array.concat(roa_df_tar_content.getSeq[Array[Byte]](0).toArray, Array.fill(1)(target_prdcts))
                       )
                       roa_df_tar_content = updateIndexInRow(
                         roa_df_tar_content,
                         1,
                         Array.concat(
-                          roa_df_tar_content.getAs[Seq[Row]](1),
+                          roa_df_tar_content.getAs[Array[Row]](1),
                           Array.fill(1)(
                             Row(
                               alt_prdcts_vec1,
@@ -232,107 +231,105 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 }
                 _processed_roa_df = Array.concat(_processed_roa_df, Array.fill(1)(roa_df))
                 roa_prdcts =
-                  if (lv_tar_roa_df.getAs[String](2) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), _roa_prdcts1(idx))
+                  if (lv_tar_roa_df.getAs[String]("target_roa_cd") != '*')
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("target_roa_cd"), _roa_prdcts1(idx))
                   else _bv_all_zeros()
                 df_prdcts =
-                  if (lv_tar_roa_df.getAs[String](3) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), _df_prdcts(idx))
+                  if (lv_tar_roa_df.getAs[String]("target_dosage_form_cd") != '*')
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("target_dosage_form_cd"), _df_prdcts(idx))
                   else _bv_all_zeros()
                 target_prdcts =
-                  get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)
-                all_target_prdcts = _bv_or(all_target_prdcts,        target_prdcts);
+                  get_final_products(lv_tar_roa_df.getAs[String]("target_roa_cd"), lv_tar_roa_df.getAs[String]("target_dosage_form_cd"), roa_prdcts, df_prdcts)
+                all_target_prdcts = _bv_or(all_target_prdcts,        target_prdcts)
               }
     
-              if (_bv_count_one_bits(target_prdcts).and(roa_priority == prev_pri)) {
+              if (_bv_count_one_bits(target_prdcts) > 0 && (roa_priority == prev_pri)) {
                 roa_prdcts =
-                  if (lv_tar_roa_df.getAs[String](2) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), _roa_prdcts2(idx))
+                  if (lv_tar_roa_df.getAs[String]("alt_roa_cd") != '*')
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("alt_roa_cd"), _roa_prdcts2(idx))
                   else _bv_all_zeros()
                 df_prdcts =
-                  if (lv_tar_roa_df.getAs[String](3) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), _df_prdcts2(idx))
+                  if (lv_tar_roa_df.getAs[String]("alt_dosage_form_cd") != '*')
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), _df_prdcts2(idx))
                   else _bv_all_zeros()
                 alt_prdcts =
-                  get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)
+                  get_final_products(lv_tar_roa_df.getAs[String]("alt_roa_cd"), lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), roa_prdcts, df_prdcts)
                 alt_prdcts_p = _bv_or(alt_prdcts_p,                  alt_prdcts)
                 all_alt_prdcts = _bv_or(all_alt_prdcts,              alt_prdcts)
-                if (_bv_count_one_bits(alt_prdcts))
+                if (_bv_count_one_bits(alt_prdcts) > 0)
                   alt_prdcts_vec = Array.concat(alt_prdcts_vec, Array.fill(1)(alt_prdcts))
                 alt_prdcts_vec2 = Array.concat(alt_prdcts_vec2, Array.fill(1)(alt_prdcts))
                 prev_pri = roa_priority
               }
     
-              if (_bv_count_one_bits(target_prdcts) && roa_priority != prev_pri) {
+              if (_bv_count_one_bits(target_prdcts) > 0 && roa_priority != prev_pri) {
                 _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))
                 alt_prdcts_vec = Array[Array[Byte]]()
                 alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
                 prev_pri = prev_pri + 1
                 alt_prdcts_p = _bv_all_zeros()
                 roa_prdcts =
-                  if (lv_tar_roa_df.getAs[String](2) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](2), _roa_prdcts2(idx))
+                  if (lv_tar_roa_df.getAs[String]("alt_roa_cd") != '*')
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("alt_roa_cd"), _roa_prdcts2(idx))
                   else _bv_all_zeros()
                 df_prdcts =
-                  if (lv_tar_roa_df.getAs[String](3) != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String](3), "DOSAGE_FORM", _df_prdcts(idx))
+                  if (lv_tar_roa_df.getAs[String]("alt_dosage_form_cd") != '*')
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), _df_prdcts(idx))
                   else _bv_all_zeros()
                 alt_prdcts =
-                  get_final_products(lv_tar_roa_df.getAs[String](2), lv_tar_roa_df.getAs[String](3), roa_prdcts, df_prdcts)
+                  get_final_products(lv_tar_roa_df.getAs[String]("alt_roa_cd"), lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), roa_prdcts, df_prdcts)
                 alt_prdcts_p = _bv_or(alt_prdcts_p,                  alt_prdcts)
                 all_alt_prdcts = _bv_or(all_alt_prdcts,              alt_prdcts)
-                if (_bv_count_one_bits(alt_prdcts))
+                if (_bv_count_one_bits(alt_prdcts) > 0)
                   alt_prdcts_vec = Array.concat(alt_prdcts_vec, Array.fill(1)(alt_prdcts))
                 alt_prdcts_vec2 = Array.concat(alt_prdcts_vec2, Array.fill(1)(alt_prdcts))
                 prev_pri = roa_priority
               }
-    
-              if (_bv_count_one_bits(target_prdcts) && !_isnull(roa_df_tar_content)) {
-                _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))
-                alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
-                roa_df_tar_content = updateIndexInRow(
-                  roa_df_tar_content,
-                  0,
-                  Array.concat(_to_array_of_arrays(roa_df_tar_content.getAs[Seq[Seq[Byte]]](0)), Array.fill(1)(target_prdcts))
-                )
-                roa_df_tar_content = updateIndexInRow(
-                  roa_df_tar_content,
-                  1,
-                  Array.concat(
-                    roa_df_tar_content.getAs[Seq[Row]](1),
-                    Array.fill(1)(
-                      Row(
-                        alt_prdcts_vec1,
-                        _processed_prio,
-                        _bv_vector_or(alt_prdcts_vec2)
-                      )
-                    )
-                  )
-                )
-              } else {
-                roa_df_tar_content = Array(
-                  Row(
-                    Array.fill(1)(target_prdcts),
-                    Array.fill(1)(
-                      Row(
-                        alt_prdcts_vec1,
-                        _processed_prio,
-                        _bv_vector_or(alt_prdcts_vec2)
-                      )
-                    )
-                  )
-                )
-              }
-              tar_content_vec = Array.concat(tar_content_vec, roa_df_tar_content)
             }
+            if (_bv_count_one_bits(target_prdcts) > 0 && !_isnull(roa_df_tar_content)) {
+              _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))
+              alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
+              roa_df_tar_content = updateIndexInRow(
+                roa_df_tar_content,
+                0,
+                Array.concat(roa_df_tar_content.getSeq[Array[Byte]](0).toArray, Array.fill(1)(target_prdcts))
+              )
+              roa_df_tar_content = updateIndexInRow(
+                roa_df_tar_content,
+                1,
+                Array.concat(
+                  roa_df_tar_content.getAs[Array[Row]](1),
+                  Array.fill(1)(
+                    Row(
+                      alt_prdcts_vec1,
+                      _processed_prio,
+                      _bv_vector_or(alt_prdcts_vec2)
+                    )
+                  )
+                )
+              )
+            } else {
+              roa_df_tar_content = Array(
+                Row(
+                  Array.fill(1)(target_prdcts),
+                  Array.fill(1)(
+                    Row(
+                      alt_prdcts_vec1,
+                      _processed_prio,
+                      _bv_vector_or(alt_prdcts_vec2)
+                    )
+                  )
+                )
+              )
+            }
+            tar_content_vec = Array.concat(tar_content_vec, roa_df_tar_content)
           } else {
-            if (row.getAs[Seq[Row]](11).head.getAs[String](0) == "ALL") {
+            if (row.getAs[Seq[Row]]("target_rule_def").head.getAs[String]("qualifier_cd") == "ALL") {
               _keep_all_targets = 1
               all_target_prdcts = _bv_all_zeros()
             } else {
-              alt_prdcts =
-                try {
-                  val res = get_products(row.getAs[Seq[Row]](11), row.getSeq[Array[Byte]](15).toArray)
+              target_prdcts = try {
+                  val res = get_products(row.getAs[Seq[Row]]("target_rule_def"), row.getSeq[Array[Byte]](14).toArray)
                   if (res == null || res.nonEmpty) {
                     _bv_all_zeros()
                   } else {
@@ -344,15 +341,26 @@ object Populate_TAR_Target_Alternate_Crosswalk {
               all_target_prdcts = if (_keep_all_targets != 1) _bv_or(all_target_prdcts, target_prdcts) else _bv_all_zeros()
             }
     
-            if (_isnull(row.getAs[String](8))) {
+            alt_prdcts =
+                try {
+                  val res = get_products(row.getAs[Seq[Row]]("alt_rule_def"), row.getSeq[Array[Byte]](15).toArray)
+                  if (res == null || res.nonEmpty) {
+                    _bv_all_zeros()
+                  } else {
+                    res
+                  }
+                } catch {
+                  case e ⇒ _bv_all_zeros()
+                }
+            if (_isnull(row.getAs[String]("rebate_elig_cd"))) {
               alt_prdcts = _bv_difference(alt_prdcts, rebate_prdcts_t)
               rebate_prdcts_t = _bv_all_zeros()
             }
-            if (row.getAs[String](7) == 'Y')
+            if (row.getAs[String]("filter_ind") == 'Y')
               all_alt_prdcts = _bv_or(all_alt_prdcts, alt_prdcts)
     
-            if (bv_count_one_bits(_alt_prdcts)) {
-              if (!_isnull(row.getAs[String](8))) {
+            if (bv_count_one_bits(_alt_prdcts) > 0) {
+              if (!_isnull(row.getAs[String]("rebate_elig_cd"))) {
                 row.getAs[Seq[Row]](17).toArray.foreach {
                   rebate_udl_prdcts ⇒
                     rebate_prdcts = _bv_or(rebate_prdcts, rebate_udl_prdcts)
@@ -374,25 +382,25 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                                                    )
                                                  )
                                                )
-                )
+                                              )
               }
             }
           }
         }
-        var tar_id          = inputRows.toArray.last.getAs[String](0)
-        var tar_dtl_id      = inputRows.toArray.last.getAs[String](1)
+        var tar_id          = inputRows.toArray.last.getAs[java.math.BigDecimal](0)
+        var tar_dtl_id      = inputRows.toArray.last.getAs[java.math.BigDecimal](1)
         var tar_name        = inputRows.toArray.last.getAs[String](2)
         var tar_dtl_type_cd = inputRows.toArray.last.getAs[String](4)
         var newline         = inputRows.toArray.last.getAs[String](13)
         Row(
-          BigDecimal(tar_id),
-          BigDecimal(tar_dtl_id),
+          tar_id,
+          tar_dtl_id,
           tar_name,
           tar_dtl_type_cd,
           tar_content_vec,
           all_alt_prdcts,
           all_target_prdcts,
-          BigDecimal(_keep_all_targets),
+          new java.math.BigDecimal(_keep_all_targets),
           newline
         )
       },
@@ -438,8 +446,8 @@ object Populate_TAR_Target_Alternate_Crosswalk {
       )
     }
     
-    val origColumns = in0.columns.map(col)
-    val out0 = in0
+    val origColumns = in.columns.map(col)
+    val out = in
       .groupBy("tar_id")
       .agg(
         collect_list(
