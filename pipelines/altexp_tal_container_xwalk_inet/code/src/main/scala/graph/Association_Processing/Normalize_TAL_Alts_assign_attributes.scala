@@ -47,9 +47,9 @@ object Normalize_TAL_Alts_assign_attributes {
                 )
               ) > lit(0),
               xx
-            ),
-          xx => !isnull(xx)
-        )
+            )
+        ),
+        xx => !isnull(xx)
       )
     
       struct(
