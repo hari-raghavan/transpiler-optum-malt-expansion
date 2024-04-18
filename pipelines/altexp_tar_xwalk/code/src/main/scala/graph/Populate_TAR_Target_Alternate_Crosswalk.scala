@@ -202,18 +202,17 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                     } else {
                       alt_prdcts_vec1 = Array.concat(alt_prdcts_vec1, Array.fill(1)(alt_prdcts_p))
                       _processed_prio = Array.concat(_processed_prio, Array.fill(1)(alt_prdcts_vec))
-                      roa_df_tar_content = Array(
-                        Row(
-                          Array.fill(1)(target_prdcts),
-                          Array.fill(1)(
-                            Row(
-                              alt_prdcts_vec1,
-                              _processed_prio,
-                              _bv_vector_or(alt_prdcts_vec2)
-                            )
-                          )
-                        )
-                      )
+                      roa_df_tar_content = Row(
+                                                Array.fill(1)(target_prdcts),
+                                                Array.fill(1)(
+                                                  Row(
+                                                    alt_prdcts_vec1,
+                                                    _processed_prio,
+                                                    _bv_vector_or(alt_prdcts_vec2)
+                                                  )
+                                                )
+                                              )
+    
                       is_empty = 0
                       prev_pri = roa_priority
                     }
@@ -235,7 +234,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                   else _bv_all_zeros()
                 df_prdcts =
                   if (lv_tar_roa_df.getAs[String]("target_dosage_form_cd") != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String]("target_dosage_form_cd"), _df_prdcts(idx))
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("target_dosage_form_cd"), _df_prdcts1(idx))
                   else _bv_all_zeros()
                 target_prdcts =
                   get_final_products(lv_tar_roa_df.getAs[String]("target_roa_cd"), lv_tar_roa_df.getAs[String]("target_dosage_form_cd"), roa_prdcts, df_prdcts)
@@ -273,7 +272,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                   else _bv_all_zeros()
                 df_prdcts =
                   if (lv_tar_roa_df.getAs[String]("alt_dosage_form_cd") != '*')
-                    get_roa_df_products(lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), _df_prdcts(idx))
+                    get_roa_df_products(lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), _df_prdcts2(idx))
                   else _bv_all_zeros()
                 alt_prdcts =
                   get_final_products(lv_tar_roa_df.getAs[String]("alt_roa_cd"), lv_tar_roa_df.getAs[String]("alt_dosage_form_cd"), roa_prdcts, df_prdcts)
@@ -414,7 +413,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
             StructType(List(
               StructField("target_prdcts", ArrayType(BinaryType, true), true),
               StructField(
-                alt_contents,
+                "alt_contents",
                 ArrayType(
                   StructType(List(
                     StructField("alt_prdcts",          ArrayType(BinaryType, true),                  true),
