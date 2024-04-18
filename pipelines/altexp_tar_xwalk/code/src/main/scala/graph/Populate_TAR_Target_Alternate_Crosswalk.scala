@@ -281,7 +281,7 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                 if (_bv_count_one_bits(alt_prdcts) > 0)
                   alt_prdcts_vec = Array.concat(alt_prdcts_vec, Array.fill(1)(alt_prdcts))
                 alt_prdcts_vec2 = Array.concat(alt_prdcts_vec2, Array.fill(1)(alt_prdcts))
-                prev_pri = roa_priorityroa_df
+                prev_pri = roa_priority
               }
             }
             if (_bv_count_one_bits(target_prdcts) > 0 && !_isnull(roa_df_tar_content)) {
