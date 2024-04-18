@@ -33,7 +33,9 @@ case class Config(
   FORM_CAG_OVRRD_DATA_PATH: String = "",
   FORM_TARGET_REJECT_FILE:  String = "",
   Alternative_Rollup_Processing: Alternative_Rollup_Processing_Config =
-    Alternative_Rollup_Processing_Config()
+    Alternative_Rollup_Processing_Config(),
+  TAR_NM: String = "ORX_STANDARD_TAR1",
+  TAC_NM: String = "ORX_STANDARD_STTST1"
 ) extends ConfigBase
 
 case class Context(spark: SparkSession, config: Config)

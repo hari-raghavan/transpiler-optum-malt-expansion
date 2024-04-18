@@ -19,7 +19,7 @@ object Normalize_Clinical_Indication {
       val normalize_out_DF = in.normalize(
         lengthExpression = None,
         finishedExpression = None,
-        finishedCondition = lit(false),
+        finishedCondition = Some(lit(false)),
         alias = "index",
         colsToSelect = List(
           coalesce(
