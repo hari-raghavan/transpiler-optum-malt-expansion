@@ -521,6 +521,38 @@ pipelines:
       - datasets/TAL_DTL_Crosswalk__TAL_DTL_XWALK
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_tal_container_xwalk:
+    name: altexp_tal_container_xwalk
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-23 11:25:18'
+    datasets:
+      inputs:
+      - datasets/Expanded_UDL
+      - datasets/Expanded_UDL_wt_rl_priority
+      - datasets/Gpi_rank_ratio
+      - datasets/IFIL_CAG_TAL_Container
+      - datasets/LKP_Alias_Prod
+      - datasets/LKP_CLIN_INDCN
+      - datasets/LKP_Form_CAG_dataset
+      - datasets/LKP_Prod
+      - datasets/LKP_Rebate_eligible
+      - datasets/LKP_Rule_Products
+      - datasets/LKP_ST_GRP_NUM
+      - datasets/LKP_Step_Grp_NM
+      - datasets/LKP_TAC_Exp
+      - datasets/LKP_TAR_Exp
+      - datasets/TAD_Xwalk
+      outputs:
+      - datasets/Alt_Load_Ready
+      - datasets/Alt_Proxy_Load_Ready
+      - datasets/Clinical_indn_Load_Ready
+      - datasets/Target_Load_Ready
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
