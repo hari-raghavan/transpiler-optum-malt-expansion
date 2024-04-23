@@ -553,6 +553,20 @@ pipelines:
       - datasets/Target_Load_Ready
     subgraphs: []
     dependencies: {}
+  pipelines/put_sftp_file:
+    name: put_sftp_file
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-23 14:52:38'
+    datasets:
+      inputs:
+      - datasets/Input_File
+      outputs: []
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -1846,6 +1860,19 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-23 08:08:14'
+  datasets/Input_File:
+    name: Input_File
+    description: 'Dataset for Imported Pipeline:put_sftp_file componentName: Input_File'
+    author: hari@prophecy.io
+    createdAt: '2024-04-23 14:52:38'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-23 14:52:38'
 templates: {}
 jobs: {}
 gemContainer:
