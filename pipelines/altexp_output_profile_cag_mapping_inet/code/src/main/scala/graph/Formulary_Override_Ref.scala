@@ -23,20 +23,18 @@ object Formulary_Override_Ref {
       var reader = spark.read
         .option(
           "schema",
-          Some("""type form_ovrrd_ref_file_t =
-        record
-        string("\x01", maximum_length=20) formulary_name /*VARCHAR2(20) NOT NULL*/;
-        string("\x01", maximum_length=20)  carrier = NULL("") /*VARCHAR2(20)*/;
-        string("\x01", maximum_length=20)  account = NULL("") /*VARCHAR2(20)*/;
-        string("\x01", maximum_length=20)  group = NULL("") /*VARCHAR2(20)*/;
-        string("\x01", maximum_length=20) customer_name = NULL("")/*VARCHAR2(20)  NULL*/;
-        decimal("\x01",0, maximum_length=1) is_future_snap = 0;
-        string("\x01") data_path;
-        date("YYYYMMDD")("\x01") run_eff_dt = NULL("") /*DATE*/;
-        string(1) newline = "\n";
-        end;
-        metadata type = form_ovrrd_ref_file_t ;""")
-            .map(s => parse(s).asInstanceOf[FFSchemaRecord])
+          Some("""
+record
+string("\\\\x01", 20) formulary_name ;
+string("\\\\x01", 20) carrier = NULL ;
+string("\\\\x01", 20) account = NULL ;
+string("\\\\x01", 20) group = NULL ;
+string("\\\\x01", 20) customer_name = NULL ;
+decimal("\\\\x01", 0, maximum_length=1) is_future_snap = 0 ;
+string("\\\\x01") data_path ;
+date("YYYYMMDD")('\\\\x01') run_eff_dt = NULL ;
+string(1) newline = "\n" ;
+end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
             .map(s => Json.stringify(Json.toJson(s)))
             .getOrElse("")
         )

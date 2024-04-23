@@ -23,20 +23,18 @@ object TAC_Dtl {
       var reader = spark.read
         .option(
           "schema",
-          Some("""type tac_dtl_t =
-        record
-        decimal("\x01",0, maximum_length=10) tac_dtl_id /*NUMBER(9) NOT NULL*/;
-        decimal("\x01",0, maximum_length=10) tac_id /*NUMBER(9) NOT NULL*/;
-        string("\x01", maximum_length=20) tac_name /*VARCHAR2(20) NOT NULL*/;
-        decimal("\x01",0, maximum_length=39) priority /*NUMBER(38) NOT NULL*/;
-        string("\x01", maximum_length=4000) target_rule = NULL("") /*XMLTYPE*/;
-        string("\x01", maximum_length=4000) alt_rule = NULL("") /*XMLTYPE*/;
-        date("YYYYMMDD")("\x01") eff_dt /*DATE NOT NULL*/;
-        date("YYYYMMDD")("\x01") term_dt /*DATE NOT NULL*/;
-        string(1) newline = "\n";
-        end;
-        metadata type = tac_dtl_t ;""")
-            .map(s => parse(s).asInstanceOf[FFSchemaRecord])
+          Some("""
+record
+decimal("\\\\x01", 0, maximum_length=10) tac_dtl_id ;
+decimal("\\\\x01", 0, maximum_length=10) tac_id ;
+string("\\\\x01", 20) tac_name ;
+decimal("\\\\x01", 0, maximum_length=39) priority ;
+string("\\\\x01", 4000) target_rule = NULL ;
+string("\\\\x01", 4000) alt_rule = NULL ;
+date("YYYYMMDD")('\\\\x01') eff_dt ;
+date("YYYYMMDD")('\\\\x01') term_dt ;
+string(1) newline = "\n" ;
+end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
             .map(s => Json.stringify(Json.toJson(s)))
             .getOrElse("")
         )

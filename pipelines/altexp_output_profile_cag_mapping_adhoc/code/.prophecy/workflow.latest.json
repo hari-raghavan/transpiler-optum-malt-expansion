@@ -1,0 +1,3860 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "altexp_output_profile_cag_mapping",
+    "uri" : "pipelines/altexp_output_profile_cag_mapping_adhoc",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "TAR_DTL_LKP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_User",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RUN_TS",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ALT_RUN_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_ALTERNATE_USER",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Url",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "OUTPUT_PROFILE_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Password",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAC_DTL_LKP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "MASTER_REF_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "FORM_REF_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TAL_DTL_LKP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "BUSINESS_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Driver",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ALT_RUN_JOB_DETAILS_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "CAG_REF_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TSD_DTL_LKP_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e1",
+    "source" : "Output_Profile_Extract",
+    "sourcePort" : "Output_Profile_Extract__out",
+    "target" : "Map_Cag_and_Formulary_Override_URLs",
+    "targetPort" : "Map_Cag_and_Formulary_Override_URLs__in"
+  }, {
+    "id" : "e4",
+    "source" : "Map_Cag_and_Formulary_Override_URLs",
+    "sourcePort" : "Map_Cag_and_Formulary_Override_URLs__out",
+    "target" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll",
+    "targetPort" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll__in3"
+  }, {
+    "id" : "e2",
+    "source" : "Map_Cag_and_Formulary_Override_URLs",
+    "sourcePort" : "Map_Cag_and_Formulary_Override_URLs__out",
+    "target" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll",
+    "targetPort" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll__in2"
+  }, {
+    "id" : "e0",
+    "source" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll",
+    "sourcePort" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll__out",
+    "target" : "Map_Cag_and_Formulary_Override_URLs_Reformat",
+    "targetPort" : "Map_Cag_and_Formulary_Override_URLs_Reformat__in"
+  }, {
+    "id" : "e5",
+    "source" : "Map_Cag_and_Formulary_Override_URLs_Reformat",
+    "sourcePort" : "Map_Cag_and_Formulary_Override_URLs_Reformat__out",
+    "target" : "Master_Cag_Mapping_File",
+    "targetPort" : "Master_Cag_Mapping_File__in"
+  }, {
+    "id" : "e7",
+    "source" : "Get_ALT_RUN_ID_jdbc",
+    "sourcePort" : "Get_ALT_RUN_ID_jdbc__out",
+    "target" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown",
+    "targetPort" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown__right"
+  }, {
+    "id" : "e6",
+    "source" : "Generate_Records_For_Load_Ready_Files",
+    "sourcePort" : "Generate_Records_For_Load_Ready_Files__out",
+    "target" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown",
+    "targetPort" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown__left"
+  }, {
+    "id" : "e9",
+    "source" : "Create_ALT_RUN_Load_Ready_FileReformat_1",
+    "sourcePort" : "Create_ALT_RUN_Load_Ready_FileReformat_1__out",
+    "target" : "ALT_RUN_JOB_DETAILS_load_ready",
+    "targetPort" : "ALT_RUN_JOB_DETAILS_load_ready__in"
+  }, {
+    "id" : "e10",
+    "source" : "Get_ALT_RUN_ID",
+    "sourcePort" : "Get_ALT_RUN_ID__out",
+    "target" : "Create_ALT_RUN_Load_Ready_FileReformat_1",
+    "targetPort" : "Create_ALT_RUN_Load_Ready_FileReformat_1__in"
+  }, {
+    "id" : "e11",
+    "source" : "Create_ALT_RUN_Load_Ready_FileReformat_0",
+    "sourcePort" : "Create_ALT_RUN_Load_Ready_FileReformat_0__out",
+    "target" : "ALT_RUN_load_ready",
+    "targetPort" : "ALT_RUN_load_ready__in"
+  }, {
+    "id" : "e12",
+    "source" : "Get_ALT_RUN_ID",
+    "sourcePort" : "Get_ALT_RUN_ID__out",
+    "target" : "Create_ALT_RUN_Load_Ready_FileReformat_0",
+    "targetPort" : "Create_ALT_RUN_Load_Ready_FileReformat_0__in"
+  }, {
+    "id" : "e13",
+    "source" : "CAG_Override_Ref",
+    "sourcePort" : "CAG_Override_Ref__out",
+    "target" : "CAG_Override_Ref_lookup",
+    "targetPort" : "CAG_Override_Ref_lookup__in"
+  }, {
+    "id" : "e14",
+    "source" : "Formulary_Override_Ref",
+    "sourcePort" : "Formulary_Override_Ref__out",
+    "target" : "Formulary_Override_Ref_lookup",
+    "targetPort" : "Formulary_Override_Ref_lookup__in"
+  }, {
+    "id" : "e15",
+    "source" : "TAC_Dtl",
+    "sourcePort" : "TAC_Dtl__out",
+    "target" : "TAC_Dtl_lookup",
+    "targetPort" : "TAC_Dtl_lookup__in"
+  }, {
+    "id" : "e16",
+    "source" : "TAL_Dtl",
+    "sourcePort" : "TAL_Dtl__out",
+    "target" : "TAL_Dtl_lookup",
+    "targetPort" : "TAL_Dtl_lookup__in"
+  }, {
+    "id" : "e17",
+    "source" : "TAR_Dtl",
+    "sourcePort" : "TAR_Dtl__out",
+    "target" : "TAR_Dtl_lookup",
+    "targetPort" : "TAR_Dtl_lookup__in"
+  }, {
+    "id" : "e18",
+    "source" : "TSD_Dtl",
+    "sourcePort" : "TSD_Dtl__out",
+    "target" : "TSD_Dtl_lookup",
+    "targetPort" : "TSD_Dtl_lookup__in"
+  }, {
+    "id" : "e8",
+    "source" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown",
+    "sourcePort" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown__out",
+    "target" : "Get_ALT_RUN_ID_jdbc_drop_duplicate",
+    "targetPort" : "Get_ALT_RUN_ID_jdbc_drop_duplicate__in"
+  }, {
+    "id" : "e3",
+    "source" : "Map_Cag_and_Formulary_Override_URLs_Reformat",
+    "sourcePort" : "Map_Cag_and_Formulary_Override_URLs_Reformat__out",
+    "target" : "Generate_Records_For_Load_Ready_Files",
+    "targetPort" : "Generate_Records_For_Load_Ready_Files__in"
+  }, {
+    "id" : "e20",
+    "source" : "Generate_Records_For_Load_Ready_Files",
+    "sourcePort" : "Generate_Records_For_Load_Ready_Files__out",
+    "target" : "Get_ALT_RUN_ID",
+    "targetPort" : "Get_ALT_RUN_ID__left"
+  }, {
+    "id" : "e19",
+    "source" : "Get_ALT_RUN_ID_jdbc_drop_duplicate",
+    "sourcePort" : "Get_ALT_RUN_ID_jdbc_drop_duplicate__out",
+    "target" : "Get_ALT_RUN_ID",
+    "targetPort" : "Get_ALT_RUN_ID__right"
+  } ],
+  "processes" : {
+    "Map_Cag_and_Formulary_Override_URLs_Reformat" : {
+      "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Map_Cag_and_Formulary_Override_URLs_Reformat",
+        "slug" : "Map_Cag_and_Formulary_Override_URLs_Reformat",
+        "x" : 620,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_override_data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : {
+                "type" : "array",
+                "elementType" : "decimal(10,0)",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "op_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "output_profile_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alias_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "job_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "form_override_data_paths",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_pseudonyms",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tal_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tac_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tar_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tsd_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "st_tac_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msgs",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "carrier",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"carrier\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "account",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"account\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "group",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"group\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "cag_override_data_path",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"cag_override_data_path\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "output_profile_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"output_profile_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "op_dtls",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"op_dtls\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "err_msgs",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"err_msgs\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown" : {
+      "id" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown",
+        "slug" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown",
+        "x" : 1020,
+        "y" : 420,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown__right",
+          "slug" : "right",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "nextval",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown__left",
+          "slug" : "left",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Get_ALT_RUN_ID_jdbcdb_predicate_pushdown__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "nextval",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  lazy val out = right.collectDataFrameColumnsToApplyFilter(List(\"\"), left)\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, left: DataFrame, right: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Create_ALT_RUN_Load_Ready_FileReformat_0" : {
+      "id" : "Create_ALT_RUN_Load_Ready_FileReformat_0",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Create_ALT_RUN_Load_Ready_FileReformat_0",
+        "slug" : "Create_ALT_RUN_Load_Ready_FileReformat_0",
+        "x" : 1620,
+        "y" : 480,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_ALT_RUN_Load_Ready_FileReformat_0__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_ALT_RUN_Load_Ready_FileReformat_0__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "alt_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"alt_run_id\").cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "output_profile_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"output_profile_id\").cast(DecimalType(10, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_start_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "date_format(\n    to_timestamp(\n      substring(\n        datetime_add(\n          datetime_from_unixtime(file_information(lit(Config.OUTPUT_PROFILE_FILE)).getField(\"created\"))\n            .cast(StringType),\n          lit(0).cast(LongType),\n          lit(-6).cast(LongType),\n          lit(0).cast(LongType),\n          lit(0).cast(LongType)\n        ),\n        1,\n        14\n      ),\n      \"yyyyMMddHHmmss\"\n    ),\n    \"yyyy-MM-dd HH:mm:ss\"\n  )"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_complete_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.RUN_TS)"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_run_status_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(is_blank(col(\"err_msg\")), lit(1)).otherwise(lit(4)).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "published_ind",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(\"Y\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "date_format(\n    to_timestamp(\n      substring(\n        datetime_add(\n          datetime_from_unixtime(file_information(lit(Config.OUTPUT_PROFILE_FILE)).getField(\"created\"))\n            .cast(StringType),\n          lit(0).cast(LongType),\n          lit(-6).cast(LongType),\n          lit(0).cast(LongType),\n          lit(0).cast(LongType)\n        ),\n        1,\n        14\n      ),\n      \"yyyyMMddHHmmss\"\n    ),\n    \"yyyy-MM-dd HH:mm:ss\"\n  )"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_user_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.DB_ALTERNATE_USER)"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_last_upd_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.RUN_TS)"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_last_upd_user_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.DB_ALTERNATE_USER)"
+          },
+          "description" : ""
+        }, {
+          "target" : "run_eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.BUSINESS_DATE)"
+          },
+          "description" : ""
+        }, {
+          "target" : "as_of_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(Config.BUSINESS_DATE)"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(rpad(lit(\"\\n\"), 1, \" \"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "TSD_Dtl_lookup" : {
+      "id" : "TSD_Dtl_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "TSD_Dtl_lookup",
+        "slug" : "TSD_Dtl_lookup",
+        "x" : 220,
+        "y" : 1220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TSD_Dtl_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tsd_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_tier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_status",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tsd_name" ],
+        "valueColumns" : [ "tsd_dtl_id", "tsd_id", "tsd_name", "tsd_cd", "formulary_tier", "formulary_status", "priority", "eff_dt", "term_dt", "newline" ],
+        "processName" : "TSD_Dtl"
+      }
+    },
+    "Master_Cag_Mapping_File" : {
+      "id" : "Master_Cag_Mapping_File",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Master_Cag_Mapping_File",
+        "slug" : "Master_Cag_Mapping_File",
+        "x" : 820,
+        "y" : 720,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Master_Cag_Mapping_File__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_override_data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : {
+                "type" : "array",
+                "elementType" : "decimal(10,0)",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "op_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "output_profile_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alias_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "job_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "form_override_data_paths",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_pseudonyms",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tal_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tac_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tar_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tsd_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "st_tac_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msgs",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Master_Cag_Mapping_File"
+      }
+    },
+    "Create_ALT_RUN_Load_Ready_FileReformat_1" : {
+      "id" : "Create_ALT_RUN_Load_Ready_FileReformat_1",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Create_ALT_RUN_Load_Ready_FileReformat_1",
+        "slug" : "Create_ALT_RUN_Load_Ready_FileReformat_1",
+        "x" : 1620,
+        "y" : 280,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_ALT_RUN_Load_Ready_FileReformat_1__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_ALT_RUN_Load_Ready_FileReformat_1__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "alt_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_run_id\").cast(DecimalType(16, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "job_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(4000).cast(DecimalType(16, 0))"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "date_format(\n    to_timestamp(\n      substring(\n        datetime_add(\n          datetime_from_unixtime(file_information(lit(Config.OUTPUT_PROFILE_FILE)).getField(\"created\"))\n            .cast(StringType),\n          lit(0).cast(LongType),\n          lit(-6).cast(LongType),\n          lit(0).cast(LongType),\n          lit(0).cast(LongType)\n        ),\n        1,\n        14\n      ),\n      \"yyyyMMddHHmmss\"\n    ),\n    \"yyyy-MM-dd HH:mm:ss\"\n  )"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_user_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(\"aialtexp\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(rpad(lit(\"\\n\"), 1, \" \"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Get_ALT_RUN_ID_jdbc_drop_duplicate" : {
+      "id" : "Get_ALT_RUN_ID_jdbc_drop_duplicate",
+      "component" : "Deduplicate",
+      "metadata" : {
+        "label" : "Get_ALT_RUN_ID_jdbc_drop_duplicate",
+        "slug" : "Get_ALT_RUN_ID_jdbc_drop_duplicate",
+        "x" : 1220,
+        "y" : 420,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Get_ALT_RUN_ID_jdbc_drop_duplicate__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "nextval",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Get_ALT_RUN_ID_jdbc_drop_duplicate__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "dedupColumns" : [ {
+          "colName" : "nextval"
+        } ],
+        "dedupType" : "any",
+        "columnsSelector" : [ "Get_ALT_RUN_ID_jdbc_drop_duplicate__in##nextval" ],
+        "orders" : [ ],
+        "useOrderBy" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Deduplicate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Get_ALT_RUN_ID" : {
+      "id" : "Get_ALT_RUN_ID",
+      "component" : "Join",
+      "metadata" : {
+        "label" : "Get_ALT_RUN_ID",
+        "slug" : "Get_ALT_RUN_ID",
+        "x" : 1420,
+        "y" : 400,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Get_ALT_RUN_ID__left",
+          "slug" : "left",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Get_ALT_RUN_ID__right",
+          "slug" : "right",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "nextval",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Get_ALT_RUN_ID__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "conditions" : [ {
+          "alias" : "right",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(true)"
+          },
+          "joinType" : "left_outer"
+        } ],
+        "expressions" : [ {
+          "_row_id" : null,
+          "target" : "alt_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.nextval\").cast(DecimalType(16, 0))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "output_profile_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.output_profile_id\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "err_msg",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.err_msg\")"
+          },
+          "description" : ""
+        } ],
+        "hints" : [ {
+          "id" : "in0",
+          "alias" : "in0",
+          "hintType" : "none",
+          "propagateColumns" : false
+        }, {
+          "id" : "in1",
+          "alias" : "in1",
+          "hintType" : "none",
+          "propagateColumns" : false
+        } ],
+        "activeTab" : "conditions",
+        "columnsSelector" : [ ],
+        "whereClause" : null,
+        "headAlias" : "left"
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Join",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "TAR_Dtl" : {
+      "id" : "TAR_Dtl",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TAR_Dtl",
+        "slug" : "TAR_Dtl",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TAR_Dtl__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAR_Dtl"
+      }
+    },
+    "Output_Profile_Extract" : {
+      "id" : "Output_Profile_Extract",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Output_Profile_Extract",
+        "slug" : "Output_Profile_Extract",
+        "x" : 20,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Output_Profile_Extract__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Output_Profile_Extract"
+      }
+    },
+    "CAG_Override_Ref" : {
+      "id" : "CAG_Override_Ref",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "CAG_Override_Ref",
+        "slug" : "CAG_Override_Ref",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "CAG_Override_Ref__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/CAG_Override_Ref"
+      }
+    },
+    "Map_Cag_and_Formulary_Override_URLs" : {
+      "id" : "Map_Cag_and_Formulary_Override_URLs",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Map_Cag_and_Formulary_Override_URLs",
+        "slug" : "Map_Cag_and_Formulary_Override_URLs",
+        "x" : 220,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Map_Cag_and_Formulary_Override_URLs__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rxclaim_env_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_form_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_job_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alias_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alias_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tsd_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "job_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "job_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_day",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "lob_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_jan1_start_mmdd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_jan1_end_mmdd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "future_flg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_pseudonym",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "notes_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_option_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "layout_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "as_of_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "st_tac_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Map_Cag_and_Formulary_Override_URLs__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_override_data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : {
+                "type" : "array",
+                "elementType" : "decimal(10,0)",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "op_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "output_profile_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alias_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "job_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "form_override_data_paths",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_pseudonyms",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tal_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tac_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tar_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tsd_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "st_tac_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msgs",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "import _root_.io.prophecy.abinitio.ScalaFunctions._\nimport scala.util.control.Breaks\n\ndef frmlry_url() = {\n  coalesce(\n    lookup(\n      \"Formulary_Override_Ref\",\n      col(\"formulary_name\"),\n      col(\"carrier\"),\n      col(\"account\"),\n      col(\"group\"),\n      col(\"customer_name\"),\n      when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),\n                                                                                            lit(1),\n                                                                                            lit(6)\n           ),\n           lit(0)\n      ).otherwise(lit(1)).cast(StringType)\n    ).getField(\"data_path\"),\n    lookup(\n      \"Formulary_Override_Ref\",\n      col(\"formulary_name\"),\n      col(\"carrier\"),\n      col(\"account\"),\n      lit(\"*ALL\"),\n      col(\"customer_name\"),\n      when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),\n                                                                                            lit(1),\n                                                                                            lit(6)\n           ),\n           lit(0)\n      ).otherwise(lit(1)).cast(StringType)\n    ).getField(\"data_path\"),\n    lookup(\n      \"Formulary_Override_Ref\",\n      col(\"formulary_name\"),\n      col(\"carrier\"),\n      lit(\"*ALL\"),\n      lit(\"*ALL\"),\n      col(\"customer_name\"),\n      when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),\n                                                                                            lit(1),\n                                                                                            lit(6)\n           ),\n           lit(0)\n      ).otherwise(lit(1)).cast(StringType)\n    ).getField(\"data_path\"),\n    lookup(\n      \"Formulary_Override_Ref\",\n      col(\"formulary_name\"),\n      lit(\"*ALL\"),\n      lit(\"*ALL\"),\n      lit(\"*ALL\"),\n      col(\"customer_name\"),\n      when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),\n                                                                                            lit(1),\n                                                                                            lit(6)\n           ),\n           lit(0)\n      ).otherwise(lit(1)).cast(StringType)\n    ).getField(\"data_path\"),\n    lookup(\n      \"Formulary_Override_Ref\",\n      col(\"formulary_name\"),\n      lit(null),\n      lit(null),\n      lit(null),\n      col(\"customer_name\"),\n      when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),\n                                                                                            lit(1),\n                                                                                            lit(6)\n           ),\n           lit(0)\n      ).otherwise(lit(1)).cast(StringType)\n    ).getField(\"data_path\"),\n    lit(\"FORMULARY_NOT_FOUND\")\n  )\n}\n\ndef cag_url() = {\n  when(\n    col(\"future_flg\") === lit(2),\n    when(\n      isnull(col(\"carrier\")),\n      coalesce(\n        lookup(\"CAG_Override_Ref\", lit(null), lit(null), lit(null), col(\"future_flg\")).getField(\"data_path\"),\n        lookup(\"CAG_Override_Ref\", lit(null), lit(null), lit(null), lit(0)).getField(\"data_path\"),\n        lit(\"CAG_NOT_FOUND\")\n      )\n    ).otherwise(\n      coalesce(\n        lookup(\"CAG_Override_Ref\", col(\"carrier\"), col(\"account\"), col(\"group\"), col(\"future_flg\"))\n          .getField(\"data_path\"),\n        lookup(\"CAG_Override_Ref\", col(\"carrier\"), col(\"account\"), lit(\"*ALL\"), col(\"future_flg\"))\n          .getField(\"data_path\"),\n        lookup(\"CAG_Override_Ref\", col(\"carrier\"), lit(\"*ALL\"), lit(\"*ALL\"), col(\"future_flg\")).getField(\"data_path\"),\n        lookup(\"CAG_Override_Ref\", lit(\"*ALL\"),    lit(\"*ALL\"), lit(\"*ALL\"), col(\"future_flg\")).getField(\"data_path\"),\n        when(\n          month(date_format(to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\"), \"yyyy-MM-dd\")) === lit(12),\n          lookup(\"CAG_Override_Ref\", col(\"carrier\"), col(\"account\"), col(\"group\"), lit(1)).getField(\"data_path\")\n        ),\n        when(\n          month(date_format(to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\"), \"yyyy-MM-dd\")) === lit(12),\n          lookup(\"CAG_Override_Ref\", col(\"carrier\"), col(\"account\"), lit(\"*ALL\"), lit(1)).getField(\"data_path\")\n        ),\n        when(\n          month(date_format(to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\"), \"yyyy-MM-dd\")) === lit(12),\n          lookup(\"CAG_Override_Ref\", col(\"carrier\"), lit(\"*ALL\"), lit(\"*ALL\"), lit(1)).getField(\"data_path\")\n        ),\n        when(\n          month(date_format(to_date(lit(Config.BUSINESS_DATE), \"yyyyMMdd\"), \"yyyy-MM-dd\")) === lit(12),\n          lookup(\"CAG_Override_Ref\", lit(\"*ALL\"), lit(\"*ALL\"), lit(\"*ALL\"), lit(1)).getField(\"data_path\")\n        ),\n        lookup(\"CAG_Override_Ref\", col(\"carrier\"), col(\"account\"), col(\"group\"), lit(0)).getField(\"data_path\"),\n        lookup(\"CAG_Override_Ref\", lit(null),      lit(null),      lit(null),    col(\"future_flg\")).getField(\"data_path\"),\n        lookup(\"CAG_Override_Ref\", lit(null),      lit(null),      lit(null),    lit(0)).getField(\"data_path\"),\n        lit(\"CAG_NOT_FOUND\")\n      )\n    )\n  ).when(isnull(col(\"carrier\")),\n         lookup(\"CAG_Override_Ref\", lit(null), lit(null), lit(null), lit(0)).getField(\"data_path\")\n  ).otherwise(\n    coalesce(\n      lookup(\"CAG_Override_Ref\",\n             col(\"carrier\"),\n             col(\"account\"),\n             col(\"group\"),\n             when(col(\"future_flg\") === lit(0), lit(0)).otherwise(lit(1)).cast(IntegerType)\n      ).getField(\"data_path\"),\n      lookup(\"CAG_Override_Ref\",\n             col(\"carrier\"),\n             col(\"account\"),\n             lit(\"*ALL\"),\n             when(col(\"future_flg\") === lit(0), lit(0)).otherwise(lit(1)).cast(IntegerType)\n      ).getField(\"data_path\"),\n      lookup(\"CAG_Override_Ref\",\n             col(\"carrier\"),\n             lit(\"*ALL\"),\n             lit(\"*ALL\"),\n             when(col(\"future_flg\") === lit(0), lit(0)).otherwise(lit(1)).cast(IntegerType)\n      ).getField(\"data_path\"),\n      lookup(\"CAG_Override_Ref\",\n             lit(\"*ALL\"),\n             lit(\"*ALL\"),\n             lit(\"*ALL\"),\n             when(col(\"future_flg\") === lit(0), lit(0)).otherwise(lit(1)).cast(IntegerType)\n      ).getField(\"data_path\"),\n      lookup(\"CAG_Override_Ref\",\n             lit(null),\n             lit(null),\n             lit(null),\n             when(col(\"future_flg\") === lit(0), lit(0)).otherwise(lit(1)).cast(IntegerType)\n      ).getField(\"data_path\"),\n      lit(\"CAG_NOT_FOUND\")\n    )\n  )\n}\n\ndef filter_output_profile_record(\n  frmlry_url:          org.apache.spark.sql.Column,\n  cag_url:             org.apache.spark.sql.Column,\n  is_future_snap_form: org.apache.spark.sql.Column,\n  is_future_snap_cag:  org.apache.spark.sql.Column\n) = {\n  var error_message: org.apache.spark.sql.Column = lit(\"\")\n  var is_current_form: org.apache.spark.sql.Column =\n    when(is_future_snap_form.cast(BooleanType), lit(\"Future\"))\n      .otherwise(lit(\"Current\"))\n  var is_current_cag: org.apache.spark.sql.Column =\n    when(is_future_snap_cag.cast(BooleanType), lit(\"Future\"))\n      .otherwise(lit(\"Current\"))\n  error_message = array_join(\n    array(\n      lit(\"\"),\n      array_join(\n        array(\n          when(\n            !lookup_match(\"TAL_Dtl\", col(\"tal_name\")).cast(BooleanType),\n            array_join(\n              array(\n                lit(\"Invalid TAL=\"),\n                col(\"tal_name\"),\n                lit(\" used for Output Profile=\"),\n                col(\"output_profile_name\"),\n                lit(\".\")\n              ),\n              \"\"\n            )\n          ),\n          when(\n            !lookup_match(\"TAC_Dtl\", col(\"tac_name\")).cast(BooleanType),\n            array_join(\n              array(\n                lit(\"Invalid TAC=\"),\n                col(\"tac_name\"),\n                lit(\" used for Output Profile=\"),\n                col(\"output_profile_name\"),\n                lit(\".\")\n              ),\n              \"\"\n            )\n          ),\n          when(\n            !lookup_match(\"TAR_Dtl\", col(\"tar_name\")).cast(BooleanType),\n            array_join(\n              array(\n                lit(\"Invalid TAR=\"),\n                col(\"tar_name\"),\n                lit(\" used for Output Profile=\"),\n                col(\"output_profile_name\"),\n                lit(\".\")\n              ),\n              \"\"\n            )\n          ),\n          when(\n            !lookup_match(\"TSD_Dtl\", col(\"tsd_name\")).cast(BooleanType),\n            array_join(\n              array(\n                lit(\"Invalid TSD=\"),\n                col(\"tsd_name\"),\n                lit(\" used for Output Profile=\"),\n                col(\"output_profile_name\"),\n                lit(\".\")\n              ),\n              \"\"\n            )\n          ),\n          when(\n            cag_url === lit(\"CAG_NOT_FOUND\"),\n            array_join(\n              array(\n                is_current_cag,\n                lit(\n                  \" Dated Drug data snapshot is not available for Output Profile=\"\n                ),\n                col(\"output_profile_name\"),\n                lit(\".\")\n              ),\n              \"\"\n            )\n          ),\n          when(\n            frmlry_url === lit(\"FORMULARY_NOT_FOUND\"),\n            array_join(\n              array(\n                is_current_form,\n                lit(\n                  \" Dated Formulary data snapshot is not available for Output Profile=\"\n                ),\n                col(\"output_profile_name\"),\n                lit(\" and Formulary=\"),\n                col(\"formulary_name\"),\n                lit(\" and Customer=\"),\n                coalesce(col(\"customer_name\"), lit(\"NULL\"))\n              ),\n              \"\"\n            )\n          )\n        ),\n        \"\"\n      )\n    ),\n    \"\"\n  )\n  error_message\n}\n\ndef error_message() = {\n    filter_output_profile_record(\n    frmlry_url(),\n    cag_url(),\n    when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),\n      lit(1),\n      lit(6)\n    ),\n      lit(0)\n    ).otherwise(lit(1)).cast(StringType),\n    when(string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(4)) === string_substring(lit(Config.COMPARE_DATE),\n      lit(1),\n      lit(4)\n    ),\n      lit(0)\n    ).otherwise(lit(1)).cast(StringType)\n  )\n}\n\nval process_udf = udf(\n  (inputRows: Seq[Row], cag_url: String) ⇒ {\n    var op_dtls           = Array[Row]()\n    var index             = 0\n    var output_profile_id = Array[java.math.BigDecimal]()\n    var error_message_vec = Array[String]()\n    var err_vec_gv        = Array[String]()\n\n    inputRows.zipWithIndex.foreach {\n      case (in, jdx) ⇒\n        var error_msg           = in.getAs[String](\"error_message\")\n        var formulary_pseudonym = in.getAs[String](\"formulary_pseudonym\")\n        var frmlry_url          = in.getAs[String](\"frmlry_url\")\n\n        if (output_profile_id.contains(in.getAs[java.math.BigDecimal](\"output_profile_id\"))) {\n          if (!op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray.contains(in.getAs[String](\"formulary_name\")))\n            op_dtls(index) = Row(\n              op_dtls(convertToInt(index)).getAs[String](0),\n              op_dtls(convertToInt(index)).getAs[Seq[String]](1).toArray,\n              op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,\n              Array.concat(op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,\n                           Array.fill(1)(in.getAs[String](\"formulary_name\"))\n              ),\n              Array.concat(op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray, Array.fill(1)(frmlry_url)),\n              Array.concat(op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,\n                           Array.fill(1)(formulary_pseudonym)\n              ),\n              op_dtls(convertToInt(index)).getAs[String](6),\n              op_dtls(convertToInt(index)).getAs[String](7),\n              op_dtls(convertToInt(index)).getAs[String](8),\n              op_dtls(convertToInt(index)).getAs[String](9),\n              op_dtls(convertToInt(index)).getAs[String](10)\n            )\n          if (\n            (!_isnull(in.getAs[String](\"alias_name\"))) && (!op_dtls(convertToInt(index))\n              .getAs[Seq[String]](1)\n              .toArray\n              .contains(in.getAs[String](\"alias_name\")))\n          )\n            op_dtls(index) = Row(\n              op_dtls(convertToInt(index)).getAs[String](0),\n              Array.concat(op_dtls(convertToInt(index)).getAs[Seq[String]](1).toArray,\n                           Array.fill(1)(in.getAs[String](\"alias_name\"))\n              ),\n              op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,\n              op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,\n              op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray,\n              op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,\n              op_dtls(convertToInt(index)).getAs[String](6),\n              op_dtls(convertToInt(index)).getAs[String](7),\n              op_dtls(convertToInt(index)).getAs[String](8),\n              op_dtls(convertToInt(index)).getAs[String](9),\n              op_dtls(convertToInt(index)).getAs[String](10)\n            )\n          if (\n            (!_isnull(in.getAs[String](\"job_name\"))) && (!op_dtls(convertToInt(index))\n              .getAs[Seq[String]](2)\n              .toArray\n              .contains(in.getAs[String](\"job_name\")))\n          )\n            op_dtls(index) = Row(\n              op_dtls(convertToInt(index)).getAs[String](0),\n              op_dtls(convertToInt(index)).getAs[Seq[String]](1).toArray,\n              Array.concat(op_dtls(convertToInt(index)).getAs[Seq[String]](2).toArray,\n                           Array.fill(1)(in.getAs[String](\"job_name\"))\n              ),\n              op_dtls(convertToInt(index)).getAs[Seq[String]](3).toArray,\n              op_dtls(convertToInt(index)).getAs[Seq[String]](4).toArray,\n              op_dtls(convertToInt(index)).getAs[Seq[String]](5).toArray,\n              op_dtls(convertToInt(index)).getAs[String](6),\n              op_dtls(convertToInt(index)).getAs[String](7),\n              op_dtls(convertToInt(index)).getAs[String](8),\n              op_dtls(convertToInt(index)).getAs[String](9),\n              op_dtls(convertToInt(index)).getAs[String](10)\n            )\n        } else {\n          output_profile_id = Array.concat(output_profile_id, Array.fill(1)(in.getAs[java.math.BigDecimal](\"output_profile_id\")))\n          op_dtls = Array.concat(\n            op_dtls,\n            Array.fill(1)(\n              Row(\n                in.getAs[String](\"output_profile_name\"),\n                if (\n                  (try Array(in.getAs[String](\"alias_name\"))\n                  catch {\n                    case error: Throwable ⇒ null\n                  }) == null\n                )\n                  Array[Any]()\n                else\n                  in.getAs[String](\"alias_name\"),\n                Array(in.getAs[String](\"job_name\")),\n                Array(in.getAs[String](\"formulary_name\")),\n                Array(frmlry_url),\n                Array(formulary_pseudonym),\n                in.getAs[String](\"tal_name\"),\n                in.getAs[String](\"tac_name\"),\n                in.getAs[String](\"tar_name\"),\n                in.getAs[String](\"tsd_name\"),\n                in.getAs[String](\"st_tac_ind\")\n              )\n            )\n          )\n          index = convertToInt(op_dtls.length - 1)\n        }\n\n        if (!error_msg.isBlank) {\n          var err_vec = _string_split_no_empty(error_msg, \".\").diff(error_message_vec)\n          if (err_vec.nonEmpty) {\n            err_vec_gv = Array.concat(err_vec_gv,               err_vec)\n            error_message_vec = Array.concat(error_message_vec, err_vec)\n          }\n        }\n    }\n    var in = inputRows.last\n    Row(\n      in.getAs[String](\"carrier\"), \n      in.getAs[String](\"account\"), \n      in.getAs[String](\"group\"),\n      if (cag_url != \"CAG_NOT_FOUND\") cag_url else \"\",\n      output_profile_id,\n      op_dtls,\n      err_vec_gv,\n      in.getAs[String](\"newline\")\n    )\n  },\n  StructType(\n    List(\n      StructField(\"carrier\", StringType, true),\n      StructField(\"account\", StringType, true),\n      StructField(\"group\", StringType, true),\n      StructField(\"cag_override_data_path\", StringType, true),\n      StructField(\"output_profile_id\", ArrayType(DecimalType(10, 0), true), true),\n      StructField(\n        \"op_dtls\",\n        ArrayType(\n          StructType(\n            List(\n              StructField(\"output_profile_name\", StringType, true),\n              StructField(\"alias_names\", ArrayType(StringType, true), true),\n              StructField(\"job_names\", ArrayType(StringType, true), true),\n              StructField(\"formulary_names\", ArrayType(StringType, true), true),\n              StructField(\"form_override_data_paths\", ArrayType(StringType, true), true),\n              StructField(\"formulary_pseudonyms\", ArrayType(StringType, true), true),\n              StructField(\"tal_name\", StringType, true),\n              StructField(\"tac_name\", StringType, true),\n              StructField(\"tar_name\", StringType, true),\n              StructField(\"tsd_name\", StringType, true),\n              StructField(\"st_tac_ind\", StringType, true)\n            )\n          ),\n          true\n        ),\n        true\n      ),\n      StructField(\"err_msgs\", ArrayType(StringType, true), true),\n      StructField(\"newline\", StringType, true)\n    )\n  )\n)\n\nval origColumns = in.columns.map(col)\nval out = in\n  .groupBy(\"carrier\", \"account\", \"group\", \"future_flg\", \"as_of_dt\")\n  .agg(\n    collect_list(\n      struct(\n        (origColumns :+ frmlry_url().alias(\"frmlry_url\") :+ error_message()\n          .alias(\"error_message\")): _*\n      )\n    ).alias(\"inputRows\"),\n    first(cag_url()).alias(\"cag_url\")\n  )\n  .select(process_udf(col(\"inputRows\"), col(\"cag_url\")).alias(\"output\"))\n  .select(col(\"output.*\"))\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "ALT_RUN_load_ready" : {
+      "id" : "ALT_RUN_load_ready",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "ALT_RUN_load_ready",
+        "slug" : "ALT_RUN_load_ready",
+        "x" : 1820,
+        "y" : 480,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ALT_RUN_load_ready__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_start_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_complete_ts",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_status_cd",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "published_ind",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_ts",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_last_upd_user_id",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "as_of_dt",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/ALT_RUN_load_ready"
+      }
+    },
+    "TAR_Dtl_lookup" : {
+      "id" : "TAR_Dtl_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "TAR_Dtl_lookup",
+        "slug" : "TAR_Dtl_lookup",
+        "x" : 220,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TAR_Dtl_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tar_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sort_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "filter_ind",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_roa_df_set_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rebate_elig_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tar_name" ],
+        "valueColumns" : [ "tar_id", "tar_dtl_id", "tar_name", "sort_ind", "filter_ind", "priority", "tar_dtl_type_cd", "tar_roa_df_set_id", "target_rule", "alt_rule", "rebate_elig_cd", "eff_dt", "term_dt", "newline" ],
+        "processName" : "TAR_Dtl"
+      }
+    },
+    "TAL_Dtl" : {
+      "id" : "TAL_Dtl",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TAL_Dtl",
+        "slug" : "TAL_Dtl",
+        "x" : 20,
+        "y" : 1020,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TAL_Dtl__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAL_Dtl"
+      }
+    },
+    "TAC_Dtl_lookup" : {
+      "id" : "TAC_Dtl_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "TAC_Dtl_lookup",
+        "slug" : "TAC_Dtl_lookup",
+        "x" : 220,
+        "y" : 820,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TAC_Dtl_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tac_name" ],
+        "valueColumns" : [ "tac_dtl_id", "tac_id", "tac_name", "priority", "target_rule", "alt_rule", "eff_dt", "term_dt", "newline" ],
+        "processName" : "TAC_Dtl"
+      }
+    },
+    "Formulary_Override_Ref_lookup" : {
+      "id" : "Formulary_Override_Ref_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Formulary_Override_Ref_lookup",
+        "slug" : "Formulary_Override_Ref_lookup",
+        "x" : 220,
+        "y" : 420,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Formulary_Override_Ref_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "customer_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "is_future_snap",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "run_eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "formulary_name", "carrier", "account", "group", "customer_name", "is_future_snap" ],
+        "valueColumns" : [ "formulary_name", "carrier", "account", "group", "customer_name", "is_future_snap", "data_path", "run_eff_dt", "newline" ],
+        "processName" : "Formulary_Override_Ref"
+      }
+    },
+    "ALT_RUN_JOB_DETAILS_load_ready" : {
+      "id" : "ALT_RUN_JOB_DETAILS_load_ready",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "ALT_RUN_JOB_DETAILS_load_ready",
+        "slug" : "ALT_RUN_JOB_DETAILS_load_ready",
+        "x" : 1820,
+        "y" : 280,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "ALT_RUN_JOB_DETAILS_load_ready__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "job_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/ALT_RUN_JOB_DETAILS_load_ready"
+      }
+    },
+    "TAL_Dtl_lookup" : {
+      "id" : "TAL_Dtl_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "TAL_Dtl_lookup",
+        "slug" : "TAL_Dtl_lookup",
+        "x" : 220,
+        "y" : 1020,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "TAL_Dtl_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_dtl_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "nested_tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "tal_name" ],
+        "valueColumns" : [ "tal_dtl_id", "tal_id", "tal_name", "tal_desc", "tal_dtl_type_cd", "nested_tal_name", "tal_assoc_name", "priority", "eff_dt", "term_dt", "newline" ],
+        "processName" : "TAL_Dtl"
+      }
+    },
+    "TAC_Dtl" : {
+      "id" : "TAC_Dtl",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TAC_Dtl",
+        "slug" : "TAC_Dtl",
+        "x" : 20,
+        "y" : 820,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TAC_Dtl__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAC_Dtl"
+      }
+    },
+    "Formulary_Override_Ref" : {
+      "id" : "Formulary_Override_Ref",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Formulary_Override_Ref",
+        "slug" : "Formulary_Override_Ref",
+        "x" : 20,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Formulary_Override_Ref__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Formulary_Override_Ref"
+      }
+    },
+    "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll" : {
+      "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll",
+      "component" : "SetOperation",
+      "metadata" : {
+        "label" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll",
+        "slug" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll",
+        "x" : 420,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll__in3",
+          "slug" : "in3",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_override_data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : {
+                "type" : "array",
+                "elementType" : "decimal(10,0)",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "op_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "output_profile_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alias_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "job_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "form_override_data_paths",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_pseudonyms",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tal_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tac_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tar_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tsd_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "st_tac_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msgs",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll__in2",
+          "slug" : "in2",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_override_data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : {
+                "type" : "array",
+                "elementType" : "decimal(10,0)",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "op_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "output_profile_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alias_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "job_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "form_override_data_paths",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_pseudonyms",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tal_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tac_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tar_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tsd_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "st_tac_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msgs",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "operationType" : "unionAll",
+        "allowMissingColumns" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SetOperation",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Generate_Records_For_Load_Ready_Files" : {
+      "id" : "Generate_Records_For_Load_Ready_Files",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Generate_Records_For_Load_Ready_Files",
+        "slug" : "Generate_Records_For_Load_Ready_Files",
+        "x" : 820,
+        "y" : 520,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Generate_Records_For_Load_Ready_Files__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "cag_override_data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "output_profile_id",
+              "type" : {
+                "type" : "array",
+                "elementType" : "decimal(10,0)",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "op_dtls",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "output_profile_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "alias_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "job_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_names",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "form_override_data_paths",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "formulary_pseudonyms",
+                    "type" : {
+                      "type" : "array",
+                      "elementType" : "string",
+                      "containsNull" : true
+                    },
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tal_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tac_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tar_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "tsd_name",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "st_tac_ind",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msgs",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Generate_Records_For_Load_Ready_Files__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "output_profile_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "err_msg",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"output_profile_id\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (when(col(\"index\") < col(\"qual_len\"), element_at(col(\"output_profile_id\"), col(\"index\") + lit(1)))\n        .cast(StringType))\n        .as(\"output_profile_id\"),\n      (when(col(\"index\") >= col(\"qual_len\"),\n            element_at(col(\"err_msgs\"), (col(\"index\") - col(\"qual_len\")).cast(IntegerType) + lit(1))\n      ).otherwise(lit(\"\"))).as(\"err_msg\")\n    ),\n    lengthRelatedGlobalExpressions = Map(\"qual_len\" -> size(col(\"output_profile_id\"))),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF =\n    normalize_out_DF.select((col(\"output_profile_id\")).as(\"output_profile_id\"), (col(\"err_msg\")).as(\"err_msg\"))\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Get_ALT_RUN_ID_jdbc" : {
+      "id" : "Get_ALT_RUN_ID_jdbc",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Get_ALT_RUN_ID_jdbc",
+        "slug" : "Get_ALT_RUN_ID_jdbc",
+        "x" : 820,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Get_ALT_RUN_ID_jdbc__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Get_ALT_RUN_ID_jdbc"
+      }
+    },
+    "TSD_Dtl" : {
+      "id" : "TSD_Dtl",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TSD_Dtl",
+        "slug" : "TSD_Dtl",
+        "x" : 20,
+        "y" : 1220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TSD_Dtl__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TSD_Dtl"
+      }
+    },
+    "CAG_Override_Ref_lookup" : {
+      "id" : "CAG_Override_Ref_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "CAG_Override_Ref_lookup",
+        "slug" : "CAG_Override_Ref_lookup",
+        "x" : 220,
+        "y" : 20,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "CAG_Override_Ref_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "carrier",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "account",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "group",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "is_future_snap",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "data_path",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "carrier", "account", "group", "is_future_snap" ],
+        "valueColumns" : [ "carrier", "account", "group", "is_future_snap", "data_path", "newline" ],
+        "processName" : "CAG_Override_Ref"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

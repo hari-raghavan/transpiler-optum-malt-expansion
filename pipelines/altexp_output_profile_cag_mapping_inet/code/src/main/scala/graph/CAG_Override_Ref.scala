@@ -23,17 +23,15 @@ object CAG_Override_Ref {
       var reader = spark.read
         .option(
           "schema",
-          Some("""type cag_ovrrd_ref_file_t =
-        record
-        string("\x01", maximum_length=20)  carrier = NULL("") /*VARCHAR2(20)*/;
-        string("\x01", maximum_length=20)  account = NULL("") /*VARCHAR2(20)*/;
-        string("\x01", maximum_length=20)  group = NULL("") /*VARCHAR2(20)*/;
-        decimal("\x01",0, maximum_length=1) is_future_snap = 0;
-        string("\x01") data_path;
-        string(1) newline = "\n";
-        end;
-        metadata type = cag_ovrrd_ref_file_t ;""")
-            .map(s => parse(s).asInstanceOf[FFSchemaRecord])
+          Some("""
+record
+string("\\\\x01", 20) carrier = NULL ;
+string("\\\\x01", 20) account = NULL ;
+string("\\\\x01", 20) group = NULL ;
+decimal("\\\\x01", 0, maximum_length=1) is_future_snap = 0 ;
+string("\\\\x01") data_path ;
+string(1) newline = "\n" ;
+end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
             .map(s => Json.stringify(Json.toJson(s)))
             .getOrElse("")
         )

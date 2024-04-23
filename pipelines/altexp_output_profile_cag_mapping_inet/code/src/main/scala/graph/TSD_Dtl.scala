@@ -23,21 +23,19 @@ object TSD_Dtl {
       var reader = spark.read
         .option(
           "schema",
-          Some("""type tsd_dtl_t =
-        record
-        decimal("\x01",0, maximum_length=10) tsd_dtl_id /*NUMBER(9) NOT NULL*/;
-        decimal("\x01",0, maximum_length=10) tsd_id /*NUMBER(9) NOT NULL*/;
-        string("\x01", maximum_length=20) tsd_name /*VARCHAR2(20) NOT NULL*/;
-        string("\x01", maximum_length=30) tsd_cd /*VARCHAR2(30) NOT NULL*/;
-        string("\x01", maximum_length=2) formulary_tier /*VARCHAR2(2) NOT NULL*/;
-        string("\x01", maximum_length=2) formulary_status /*VARCHAR2(2) NOT NULL*/;
-        decimal("\x01",0, maximum_length=39) priority /*NUMBER(38) NOT NULL*/;
-        date("YYYYMMDD")("\x01") eff_dt /*DATE NOT NULL*/;
-        date("YYYYMMDD")("\x01") term_dt /*DATE NOT NULL*/;
-        string(1) newline = "\n";
-        end;
-        metadata type = tsd_dtl_t ;""")
-            .map(s => parse(s).asInstanceOf[FFSchemaRecord])
+          Some("""
+record
+decimal("\\\\x01", 0, maximum_length=10) tsd_dtl_id ;
+decimal("\\\\x01", 0, maximum_length=10) tsd_id ;
+string("\\\\x01", 20) tsd_name ;
+string("\\\\x01", 30) tsd_cd ;
+string("\\\\x01", 2) formulary_tier ;
+string("\\\\x01", 2) formulary_status ;
+decimal("\\\\x01", 0, maximum_length=39) priority ;
+date("YYYYMMDD")('\\\\x01') eff_dt ;
+date("YYYYMMDD")('\\\\x01') term_dt ;
+string(1) newline = "\n" ;
+end""").map(s => parse(s).asInstanceOf[FFSchemaRecord])
             .map(s => Json.stringify(Json.toJson(s)))
             .getOrElse("")
         )

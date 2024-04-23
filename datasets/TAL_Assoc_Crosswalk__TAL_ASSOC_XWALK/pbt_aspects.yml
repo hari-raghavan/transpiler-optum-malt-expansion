@@ -1,0 +1,161 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: tal_assoc_dtl_id
+    type: decimal(10,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: tal_assoc_id
+    type: decimal(10,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: tal_assoc_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: clinical_indn_desc
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: tal_assoc_desc
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: tal_assoc_type_cd
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: target_udl_info
+    type:
+      type: array
+      elementType:
+        type: struct
+        fields:
+        - name: udl_nm
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: udl_desc
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: products
+          type: binary
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+      containsNull: true
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: alt_udl_info
+    type:
+      type: array
+      elementType:
+        type: struct
+        fields:
+        - name: udl_nm
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: udl_desc
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: products
+          type: binary
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: constituent_group
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: constituent_reqd
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: constituent_rank
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+      containsNull: true
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: shared_qual
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: override_tac_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: override_tar_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: newline
+    type: string
+    nullable: false
+    metadata:
+      description: ''
+      mappings: []
+      tags: []

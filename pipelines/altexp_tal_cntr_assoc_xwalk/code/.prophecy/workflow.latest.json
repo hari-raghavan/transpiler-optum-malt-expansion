@@ -300,17 +300,23 @@
     "target" : "Process_TAL_Association_Rows_Reformat",
     "targetPort" : "Process_TAL_Association_Rows_Reformat__in"
   }, {
-    "id" : "Nqiu2iDo9kGp1I3Y4e6La$$tVf0DGyFM521Jce3cikYR",
-    "source" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
-    "sourcePort" : "M96S0uG8kOCk-YWig9jqA$$zS0-RdYJDWtMlg3hEWKQA",
-    "target" : "TAL_Container_w_Assoc_in_BV_Products",
-    "targetPort" : "TAL_Container_w_Assoc_in_BV_Products__in"
-  }, {
     "id" : "mteiaGZrnC_kZRJh2eK9Q",
     "source" : "CONC",
     "sourcePort" : "CONC__out",
     "target" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
     "targetPort" : "wOpRm6NvU65jVYwnMkt5T$$jKl852afWnT-F6Mobkg63"
+  }, {
+    "id" : "qdnQQ23Waka0mxbR4UiXH",
+    "source" : "AWrMejvEG0DDiklNr-gl2$$bkaP7VQ-qQ9vawiiuPYI1",
+    "sourcePort" : "M96S0uG8kOCk-YWig9jqA$$zS0-RdYJDWtMlg3hEWKQA",
+    "target" : "ZtfXvz8zw0eVeO5YOMKmV$$SClW3yzuvhF8OXNEKrqoV",
+    "targetPort" : "lDzN2yJ8P_deODOleiNcI$$OeQsx_OiuDFyuqGoKMU20"
+  }, {
+    "id" : "bifsUSiD_4x8DZ8MdfUQ9",
+    "source" : "ZtfXvz8zw0eVeO5YOMKmV$$SClW3yzuvhF8OXNEKrqoV",
+    "sourcePort" : "DSF9j2R_8gxH-kwv3JqZO$$fL3lXkLliio2vMJ90F55f",
+    "target" : "TAL_Container_w_Assoc_in_BV_Products",
+    "targetPort" : "TAL_Container_w_Assoc_in_BV_Products__in"
   } ],
   "processes" : {
     "TAL_Assoc_Dtl" : {
@@ -320,7 +326,7 @@
         "label" : "TAL_Assoc_Dtl",
         "slug" : "TAL_Assoc_Dtl",
         "x" : 1220,
-        "y" : 300,
+        "y" : 420,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -347,7 +353,7 @@
         "label" : "Process_TAL_Association_Rows",
         "slug" : "Process_TAL_Association_Rows",
         "x" : 1820,
-        "y" : 200,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1517,7 +1523,7 @@
         "label" : "LKP_Shared_Qualifier_Products",
         "slug" : "LKP_Shared_Qualifier_Products",
         "x" : 3280,
-        "y" : 340,
+        "y" : 540,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1571,7 +1577,7 @@
         "label" : "LKP_Rule_Products_lookup",
         "slug" : "LKP_Rule_Products_lookup",
         "x" : 220,
-        "y" : 500,
+        "y" : 420,
         "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
@@ -1642,7 +1648,7 @@
         "label" : "Select_TALs_w_o_Nested_TAL_Filter_select",
         "slug" : "Select_TALs_w_o_Nested_TAL_Filter_select",
         "x" : 220,
-        "y" : 100,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1784,7 +1790,7 @@
         "label" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
         "slug" : "Select_TALs_w_o_Nested_TAL_RowDistributor",
         "x" : 420,
-        "y" : 100,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1939,7 +1945,7 @@
         "label" : "Expanded_UDL_lookup",
         "slug" : "Expanded_UDL_lookup",
         "x" : 220,
-        "y" : 300,
+        "y" : 20,
         "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
@@ -2050,7 +2056,7 @@
         "label" : "LKP_Rule_Products",
         "slug" : "LKP_Rule_Products",
         "x" : 20,
-        "y" : 500,
+        "y" : 420,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2077,7 +2083,7 @@
         "label" : "SWG",
         "slug" : "SWG",
         "x" : 1620,
-        "y" : 200,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2300,7 +2306,7 @@
         "label" : "MERGE_UnionAll",
         "slug" : "MERGE_UnionAll",
         "x" : 1020,
-        "y" : 100,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2546,7 +2552,7 @@
         "label" : "Process_TAL_Association_Rows_output_select_filter",
         "slug" : "Process_TAL_Association_Rows_output_select_filter",
         "x" : 2220,
-        "y" : 200,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2766,7 +2772,7 @@
         "label" : "Select_TALs_w_o_Nested_TALReformat_0",
         "slug" : "Select_TALs_w_o_Nested_TALReformat_0",
         "x" : 820,
-        "y" : 20,
+        "y" : 120,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2982,7 +2988,7 @@
         "label" : "Expanded_UDL",
         "slug" : "Expanded_UDL",
         "x" : 20,
-        "y" : 300,
+        "y" : 20,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3008,7 +3014,7 @@
       "metadata" : {
         "label" : "TAL_Container_w_Assoc_in_BV_Products",
         "slug" : "TAL_Container_w_Assoc_in_BV_Products",
-        "x" : 3080,
+        "x" : 3280,
         "y" : 140,
         "phase" : 3,
         "cache" : false,
@@ -3218,7 +3224,7 @@
         "label" : "Filter_Exclusion_Association",
         "slug" : "Filter_Exclusion_Association",
         "x" : 2420,
-        "y" : 200,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3451,7 +3457,7 @@
         "label" : "Process_TAL_Association_Rows_Reformat",
         "slug" : "Process_TAL_Association_Rows_Reformat",
         "x" : 2020,
-        "y" : 200,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3766,7 +3772,7 @@
         "label" : "MERGE",
         "slug" : "MERGE",
         "x" : 1220,
-        "y" : 100,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3911,7 +3917,7 @@
         "label" : "TAL_Container_Dtls",
         "slug" : "TAL_Container_Dtls",
         "x" : 20,
-        "y" : 100,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3938,7 +3944,7 @@
         "label" : "Create_LKP_for_override_qualifiers_input_select_filter",
         "slug" : "Create_LKP_for_override_qualifiers_input_select_filter",
         "x" : 2680,
-        "y" : 340,
+        "y" : 440,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4158,7 +4164,7 @@
         "label" : "Select_TALs_w_o_Nested_TALReformat_1",
         "slug" : "Select_TALs_w_o_Nested_TALReformat_1",
         "x" : 620,
-        "y" : 220,
+        "y" : 320,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4367,6 +4373,226 @@
         "projectName" : "ProphecySparkBasicsScala"
       }
     },
+    "ZtfXvz8zw0eVeO5YOMKmV$$SClW3yzuvhF8OXNEKrqoV" : {
+      "id" : "ZtfXvz8zw0eVeO5YOMKmV$$SClW3yzuvhF8OXNEKrqoV",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_output_select",
+        "slug" : "Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association_output_select",
+        "x" : 3080,
+        "y" : 140,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "lDzN2yJ8P_deODOleiNcI$$OeQsx_OiuDFyuqGoKMU20",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tal_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tar_udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_type_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_constituent_prdcts",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "alt_prdcts",
+                    "type" : "binary",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_group",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "constituent_reqd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "udl_nm",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "shared_qual",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_tar_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "constituent_grp_vec",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "DSF9j2R_8gxH-kwv3JqZO$$fL3lXkLliio2vMJ90F55f",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "lDzN2yJ8P_deODOleiNcI$$OeQsx_OiuDFyuqGoKMU20##tal_assoc_type_cd", "lDzN2yJ8P_deODOleiNcI$$OeQsx_OiuDFyuqGoKMU20##target_prdcts", "lDzN2yJ8P_deODOleiNcI$$OeQsx_OiuDFyuqGoKMU20##tal_assoc_name" ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "when(col(\"tal_assoc_type_cd\").cast(StringType) === lit(3), lit(0))\n    .when(\n      !size(col(\"target_prdcts\")).cast(BooleanType),\n      force_error(\n        concat(\n          lit(\"TAL Assocation : \"),\n          col(\"tal_assoc_name\"),\n          lit(\" with type code \"),\n          col(\"tal_assoc_type_cd\").cast(StringType),\n          lit(\" do not have Target Products after applying Exlcusion Association\")\n        ).cast(StringType)\n      )\n    )\n    .otherwise(lit(1))\n    .cast(BooleanType)"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
     "khcTMge33bNyncVCAtajG$$dHU44_i1Y_6WdK1LTdBQW" : {
       "id" : "khcTMge33bNyncVCAtajG$$dHU44_i1Y_6WdK1LTdBQW",
       "component" : "Script",
@@ -4374,7 +4600,7 @@
         "label" : "Get_the_association_details_for_nested_TAL",
         "slug" : "Get_the_association_details_for_nested_TAL",
         "x" : 820,
-        "y" : 220,
+        "y" : 320,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4614,7 +4840,7 @@
         "label" : "Create_LKP_for_override_qualifiers",
         "slug" : "Create_LKP_for_override_qualifiers",
         "x" : 2880,
-        "y" : 340,
+        "y" : 440,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -4851,7 +5077,7 @@
         "label" : "LKP_Shared_Qualifier_Products_lookup",
         "slug" : "LKP_Shared_Qualifier_Products_lookup",
         "x" : 3280,
-        "y" : 540,
+        "y" : 340,
         "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
@@ -4908,7 +5134,7 @@
         "label" : "Select_Valid_Associations",
         "slug" : "Select_Valid_Associations",
         "x" : 1420,
-        "y" : 200,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -5348,7 +5574,7 @@
         "label" : "Create_LKP_for_override_qualifiers_Reformat",
         "slug" : "Create_LKP_for_override_qualifiers_Reformat",
         "x" : 3080,
-        "y" : 340,
+        "y" : 440,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
