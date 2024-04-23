@@ -179,6 +179,15 @@
           "optional" : false,
           "isWorkflowNodeConfiguration" : false,
           "isReferenced" : false
+        }, {
+          "name" : "COMPARE_DATE",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
         } ]
       },
       "oldCommon" : {

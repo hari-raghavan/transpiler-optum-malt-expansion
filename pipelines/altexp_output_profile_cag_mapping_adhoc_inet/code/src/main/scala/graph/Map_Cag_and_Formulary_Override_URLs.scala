@@ -70,23 +70,6 @@ object Map_Cag_and_Formulary_Override_URLs {
                 lit(0)
               ).otherwise(lit(1)).cast(StringType)
             ).getField("data_path"),
-            when(
-              lit(Config.ENV_NM) === lit("RXBK1-PRD"),
-              lookup(
-                formulary_id.toString,
-                lit(null),
-                lit(null),
-                lit(null),
-                lit(null),
-                when(
-                  string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),
-                                                                                                   lit(1),
-                                                                                                   lit(6)
-                  ),
-                  lit(0)
-                ).otherwise(lit(1)).cast(StringType)
-              ).getField("data_path")
-            ).otherwise(lit(null)),
             lit("FORMULARY_NOT_FOUND")
           )
         )
@@ -106,23 +89,6 @@ object Map_Cag_and_Formulary_Override_URLs {
                  lit(0)
             ).otherwise(lit(1)).cast(StringType)
           ).getField("data_path"),
-          when(
-            lit(Config.ENV_NM) === lit("RXBK1-PRD"),
-            lookup(
-              formulary_id.toString,
-              lit(null),
-              lit(null),
-              lit(null),
-              lit(null),
-              when(
-                string_substring(lit(Config.BUSINESS_DATE), lit(1), lit(6)) === string_substring(lit(Config.COMPARE_DATE),
-                                                                                                 lit(1),
-                                                                                                 lit(6)
-                ),
-                lit(0)
-              ).otherwise(lit(1)).cast(StringType)
-            ).getField("data_path")
-          ).otherwise(lit(null)),
           lit("FORMULARY_NOT_FOUND")
         )
       )

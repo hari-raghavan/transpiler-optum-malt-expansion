@@ -21,5 +21,6 @@ case class Config(
   DB_Driver:                String = "",
   ALT_RUN_JOB_DETAILS_FILE: String = "",
   CAG_REF_FILE:             String = "",
-  TSD_DTL_LKP_FILE:         String = ""
+  TSD_DTL_LKP_FILE:         String = "",
+  COMPARE_DATE:             String = " "
 ) extends ConfigBase
