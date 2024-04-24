@@ -89,48 +89,73 @@ object Normalize_TAL_Target_Drugs {
               when(
                 length(
                   concat(
-                    lookup(
-                      "LKP_Form_CAG_dataset",
-                      lookup(
+                    when(!isnull(lookup(
                         "LKP_Prod",
                         element_at(col("ta_prdct_dtls"), col("index") + lit(1))
                           .getField("target_dl_bit")
-                      ).getField("ndc11")
-                    ).getField("formulary_tier_desc"),
+                      )),
+                      lookup(
+                        "LKP_Form_CAG_dataset",
+                        lookup(
+                          "LKP_Prod",
+                          element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                            .getField("target_dl_bit")
+                        ).getField("ndc11")
+                      ).getField("formulary_tier_desc")).otherwise(lit(null)),
                     lit("\\|"),
-                    lookup(
-                      "LKP_Form_CAG_dataset",
-                      lookup(
+                    when(!isnull(lookup(
                         "LKP_Prod",
                         element_at(col("ta_prdct_dtls"), col("index") + lit(1))
                           .getField("target_dl_bit")
-                      ).getField("ndc11")
-                    ).getField("formulary_status_desc")
+                      )),
+                      lookup(
+                        "LKP_Form_CAG_dataset",
+                        lookup(
+                          "LKP_Prod",
+                          element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                            .getField("target_dl_bit")
+                        ).getField("ndc11")
+                      ).getField("formulary_tier_desc")).otherwise(lit(null))
                   )
                 ) <= lit(49),
                 concat(
-                  lookup(
-                    "LKP_Form_CAG_dataset",
-                    lookup(
-                      "LKP_Prod",
-                      element_at(col("ta_prdct_dtls"), col("index") + lit(1))
-                        .getField("target_dl_bit")
-                    ).getField("ndc11")
-                  ).getField("formulary_tier_desc"),
+                  when(!isnull(lookup(
+                        "LKP_Prod",
+                        element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                          .getField("target_dl_bit")
+                      )),
+                      lookup(
+                        "LKP_Form_CAG_dataset",
+                        lookup(
+                          "LKP_Prod",
+                          element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                            .getField("target_dl_bit")
+                        ).getField("ndc11")
+                      ).getField("formulary_tier_desc")).otherwise(lit(null)),
                   lit("\\|"),
-                  lookup(
-                    "LKP_Form_CAG_dataset",
-                    lookup(
-                      "LKP_Prod",
-                      element_at(col("ta_prdct_dtls"), col("index") + lit(1))
-                        .getField("target_dl_bit")
-                    ).getField("ndc11")
-                  ).getField("formulary_status_desc")
+                  when(!isnull(lookup(
+                        "LKP_Prod",
+                        element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                          .getField("target_dl_bit")
+                      )),
+                      lookup(
+                        "LKP_Form_CAG_dataset",
+                        lookup(
+                          "LKP_Prod",
+                          element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                            .getField("target_dl_bit")
+                        ).getField("ndc11")
+                      ).getField("formulary_tier_desc")).otherwise(lit(null))
                 )
               ).otherwise(
                 concat(
                   string_substring(
                     concat(
+                      when(!isnull(lookup(
+                        "LKP_Prod",
+                        element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                          .getField("target_dl_bit")
+                      )),
                       lookup(
                         "LKP_Form_CAG_dataset",
                         lookup(
@@ -138,16 +163,21 @@ object Normalize_TAL_Target_Drugs {
                           element_at(col("ta_prdct_dtls"), col("index") + lit(1))
                             .getField("target_dl_bit")
                         ).getField("ndc11")
-                      ).getField("formulary_tier_desc"),
+                      ).getField("formulary_tier_desc")).otherwise(lit(null)),
                       lit("\\|"),
-                      lookup(
-                        "LKP_Form_CAG_dataset",
+                      when(!isnull(lookup(
+                        "LKP_Prod",
+                        element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                          .getField("target_dl_bit")
+                        )),
                         lookup(
-                          "LKP_Prod",
-                          element_at(col("ta_prdct_dtls"), col("index") + lit(1))
-                            .getField("target_dl_bit")
-                        ).getField("ndc11")
-                      ).getField("formulary_status_desc")
+                          "LKP_Form_CAG_dataset",
+                          lookup(
+                            "LKP_Prod",
+                            element_at(col("ta_prdct_dtls"), col("index") + lit(1))
+                              .getField("target_dl_bit")
+                          ).getField("ndc11")
+                        ).getField("formulary_tier_desc")).otherwise(lit(null))
                     ),
                     lit(1),
                     lit(49)
