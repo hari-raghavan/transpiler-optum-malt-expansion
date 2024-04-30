@@ -7328,7 +7328,7 @@
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(Array(\"alt_run_target_dtl\",\"alt_run_alt_dtl\").contains(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(context.config.TABLE_NAME)))"
+        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(Array(\"alt_run_target_dtl\",\"alt_run_alt_dtl\").contains(context.config.TABLE_NAME))"
       },
       "ports" : {
         "inputs" : [ {
@@ -7628,7 +7628,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__in##alt_run_target_dtl_id", "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__in##tal_assoc_name", "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__in##formulary_name", "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__in##target_ndc" ],
         "expressions" : [ {
           "target" : "alt_run_target_dtl_id",
           "expression" : {
@@ -8149,7 +8149,7 @@
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(Array(\"alt_run_target_dtl\",\"alt_run_alt_dtl\").contains(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(context.config.TABLE_NAME)))"
+        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(Array(\"alt_run_target_dtl\",\"alt_run_alt_dtl\").contains(context.config.TABLE_NAME))"
       },
       "ports" : {
         "inputs" : [ {

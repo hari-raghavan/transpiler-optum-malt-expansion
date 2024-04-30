@@ -238,10 +238,8 @@ object Main {
           )
         )) && context.config.LOAD_MODE == "U" && _root_.io.prophecy.abinitio.ScalaFunctions
           .convertToBoolean(
-            Array("alt_run_target_dtl", "alt_run_alt_dtl").contains(
-              _root_.io.prophecy.abinitio.ScalaFunctions
-                .convertToBoolean(context.config.TABLE_NAME)
-            )
+            Array("alt_run_target_dtl", "alt_run_alt_dtl")
+              .contains(context.config.TABLE_NAME)
           )
       )
         Output_Surrogate_Key_File_Creation__Fetching_Required_Fields(
@@ -267,15 +265,11 @@ object Main {
         )
       )) && context.config.LOAD_MODE == "U" && _root_.io.prophecy.abinitio.ScalaFunctions
         .convertToBoolean(
-          Array("alt_run_target_dtl", "alt_run_alt_dtl").contains(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              .convertToBoolean(context.config.TABLE_NAME)
-          )
+          Array("alt_run_target_dtl", "alt_run_alt_dtl")
+            .contains(context.config.TABLE_NAME)
         ) && _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-        Array("alt_run_target_dtl", "alt_run_alt_dtl").contains(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            .convertToBoolean(context.config.TABLE_NAME)
-        )
+        Array("alt_run_target_dtl", "alt_run_alt_dtl")
+          .contains(context.config.TABLE_NAME)
       )
     )
       Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File0(
