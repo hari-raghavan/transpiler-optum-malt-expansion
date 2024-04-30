@@ -1,0 +1,3760 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "altexp_load_tbl",
+    "uri" : "pipelines/altexp_alt_run_alt_prxy_dtl_load",
+    "pipelineSettingsInfo" : {
+      "hasApplication" : false
+    },
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "JOIN_KEY",
+          "kind" : {
+            "type" : "string",
+            "value" : "{formulary_name; tal_assoc_name; target_ndc; alt_proxy_ndc}"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_User",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "SURR_KEY_INPUT_FILE_NM",
+          "kind" : {
+            "type" : "string",
+            "value" : "/altexp_alt_run_alt_dtl_surr_key.SXCDT-QA6.585.dat"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "LOG_FILE_NM",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Url",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Password",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "JOIN_DB_SQL",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "INPUT_FILE_PATH",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TABLE_NAME",
+          "kind" : {
+            "type" : "string",
+            "value" : "alt_run_alt_proxy_dtl"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "DB_Driver",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "SORT_KEY",
+          "kind" : {
+            "type" : "string",
+            "value" : "{formulary_name; tal_assoc_name; target_ndc; alt_proxy_ndc}"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "LOAD_MODE",
+          "kind" : {
+            "type" : "string",
+            "value" : "A"
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "Join_With_DB",
+          "kind" : {
+            "type" : "record",
+            "fields" : [ {
+              "name" : "LOG_FILE_NM_JWD",
+              "kind" : {
+                "type" : "string",
+                "value" : ""
+              },
+              "optional" : false,
+              "isWorkflowNodeConfiguration" : false,
+              "isReferenced" : false
+            }, {
+              "name" : "UNUSED_DATA_FILE_NM",
+              "kind" : {
+                "type" : "string",
+                "value" : ""
+              },
+              "optional" : false,
+              "isWorkflowNodeConfiguration" : false,
+              "isReferenced" : false
+            } ]
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : true,
+          "isReferenced" : false
+        }, {
+          "name" : "LIST_OF_ALT_FILES",
+          "kind" : {
+            "type" : "array",
+            "elementType" : {
+              "type" : "string",
+              "value" : null
+            },
+            "value" : [ " " ]
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "ALT_RUN_ID",
+          "kind" : {
+            "type" : "string",
+            "value" : " "
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "Append_Mode_DateTimeNormalize",
+    "sourcePort" : "Append_Mode_DateTimeNormalize__out",
+    "target" : "Append_Mode",
+    "targetPort" : "Append_Mode__in"
+  }, {
+    "id" : "e4",
+    "source" : "Handle_Serial_Logs",
+    "sourcePort" : "Handle_Serial_Logs__out",
+    "target" : "Load_Serial_log_file",
+    "targetPort" : "Load_Serial_log_file__in"
+  }, {
+    "id" : "e5",
+    "source" : "list_load_ready_files",
+    "sourcePort" : "list_load_ready_files__out",
+    "target" : "Read_load_ready_files",
+    "targetPort" : "Read_load_ready_files__in"
+  }, {
+    "id" : "e9",
+    "source" : "Update_Mode_Log",
+    "sourcePort" : "Update_Mode_Log__out",
+    "target" : "Handle_Serial_Logs",
+    "targetPort" : "Handle_Serial_Logs__in2"
+  }, {
+    "id" : "e7",
+    "source" : "Append_Mode_Log",
+    "sourcePort" : "Append_Mode_Log__out",
+    "target" : "Handle_Serial_Logs",
+    "targetPort" : "Handle_Serial_Logs__in4"
+  }, {
+    "id" : "e11",
+    "source" : "Update_Mode",
+    "sourcePort" : "Update_Mode__out",
+    "target" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields",
+    "targetPort" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__in"
+  }, {
+    "id" : "e1",
+    "source" : "Read_load_ready_files",
+    "sourcePort" : "Read_load_ready_files__out",
+    "target" : "SORT",
+    "targetPort" : "SORT__in"
+  }, {
+    "id" : "e12",
+    "source" : "SORT",
+    "sourcePort" : "SORT__out",
+    "target" : "Transform_Logic",
+    "targetPort" : "Transform_Logic__in"
+  }, {
+    "id" : "e14",
+    "source" : "s",
+    "sourcePort" : "s__out",
+    "target" : "Update_Mode",
+    "targetPort" : "Update_Mode__in"
+  }, {
+    "id" : "e15",
+    "source" : "s",
+    "sourcePort" : "s__out",
+    "target" : "Update_Mode_Log",
+    "targetPort" : "Update_Mode_Log__in"
+  }, {
+    "id" : "e16",
+    "source" : "s",
+    "sourcePort" : "s__out",
+    "target" : "Append_Mode_DateTimeNormalize",
+    "targetPort" : "Append_Mode_DateTimeNormalize__in"
+  }, {
+    "id" : "e17",
+    "source" : "s",
+    "sourcePort" : "s__out",
+    "target" : "Append_Mode_Log",
+    "targetPort" : "Append_Mode_Log__in"
+  }, {
+    "id" : "e19",
+    "source" : "Partition_Data",
+    "sourcePort" : "Partition_Data__out0",
+    "target" : "s",
+    "targetPort" : "s__in3"
+  }, {
+    "id" : "e20",
+    "source" : "Join_With_DB_1",
+    "sourcePort" : "altexp_load_tbl__Join_With_DB__out",
+    "target" : "s",
+    "targetPort" : "s__in2"
+  }, {
+    "id" : "e21",
+    "source" : "Partition_Data",
+    "sourcePort" : "Partition_Data__out1",
+    "target" : "Join_With_DB_1",
+    "targetPort" : "altexp_load_tbl__Join_With_DB__in"
+  }, {
+    "id" : "BP502QHkoWwdlxk742-BT",
+    "source" : "gJQ0YiCqjShv15GA8Ejz-$$HbOMS5OvUDWD7ePzbg9YF",
+    "sourcePort" : "1hbSRpXxSmTDZFXcat9k0$$k0G13GMMfO-WWM32xFNrA",
+    "target" : "Partition_Data",
+    "targetPort" : "Partition_Data__in"
+  }, {
+    "id" : "bKJx6IbVQxynIfSl0gGmp",
+    "source" : "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File",
+    "sourcePort" : "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File__out",
+    "target" : "gJQ0YiCqjShv15GA8Ejz-$$HbOMS5OvUDWD7ePzbg9YF",
+    "targetPort" : "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT"
+  }, {
+    "id" : "MFiC1shd9tw97WybVA2m6",
+    "source" : "Transform_Logic",
+    "sourcePort" : "Transform_Logic__out",
+    "target" : "gJQ0YiCqjShv15GA8Ejz-$$HbOMS5OvUDWD7ePzbg9YF",
+    "targetPort" : "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ"
+  } ],
+  "processes" : {
+    "s" : {
+      "id" : "s",
+      "component" : "SetOperation",
+      "metadata" : {
+        "label" : "s",
+        "slug" : "s",
+        "x" : 1480,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "s__in3",
+          "slug" : "in3",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "s__in2",
+          "slug" : "in2",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "s__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "operationType" : "unionAll",
+        "allowMissingColumns" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SetOperation",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "list_load_ready_files" : {
+      "id" : "list_load_ready_files",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "list_load_ready_files",
+        "slug" : "list_load_ready_files",
+        "x" : 20,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "list_load_ready_files__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  lazy val arrayDF = generateDataFrameWithSequenceColumn(1, Config.LIST_OF_ALT_FILES.length, \"index\", spark)\n  lazy val out     = arrayDF.select(element_at(typedLit(Config.LIST_OF_ALT_FILES), col(\"index\")).as(\"line\"))\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File" : {
+      "id" : "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File_7",
+        "slug" : "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File_7",
+        "x" : 620,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions._not(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(_root_.io.prophecy.abinitio.ScalaFunctions._is_blank(context.config.JOIN_KEY)))"
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File_7"
+      }
+    },
+    "SORT" : {
+      "id" : "SORT",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "SORT",
+        "slug" : "SORT",
+        "x" : 420,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "passThrough" : "_root_.io.prophecy.abinitio.ScalaFunctions._not(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(_root_.io.prophecy.abinitio.ScalaFunctions._is_blank(context.config.SORT_KEY)))"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "SORT__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "SORT__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"formulary_name\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_name\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"target_ndc\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_proxy_ndc\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Append_Mode_DateTimeNormalize" : {
+      "id" : "Append_Mode_DateTimeNormalize",
+      "component" : "SchemaTransform",
+      "metadata" : {
+        "label" : "Append_Mode_DateTimeNormalize",
+        "slug" : "Append_Mode_DateTimeNormalize",
+        "x" : 1680,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Append_Mode_DateTimeNormalize__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Append_Mode_DateTimeNormalize__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "transformations" : [ {
+          "kind" : "AddReplaceColumn",
+          "AddReplaceColumn" : {
+            "sourceColumn" : "rec_crt_ts",
+            "expression" : {
+              "format" : "scala",
+              "expression" : "to_timestamp(col(\"rec_crt_ts\"), \"yyyy-MM-dd HH:mm:ss\")"
+            }
+          },
+          "DropColumn" : {
+            "sourceColumn" : ""
+          },
+          "RenameColumn" : {
+            "sourceColumn" : "",
+            "targetColumn" : ""
+          }
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SchemaTransform",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Update_Mode_Log" : {
+      "id" : "Update_Mode_Log",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Update_Mode_Log",
+        "slug" : "Update_Mode_Log",
+        "x" : 1680,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "context.config.LOAD_MODE == \"U\""
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Update_Mode_Log__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Update_Mode_Log__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "node",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "timestamp",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "component",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "subcomponent",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_type",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_text",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val out = in.generateLogOutput(\n    componentName = \"Update_Mode\",\n    inputRowCount = in.count(),\n    sparkSession = spark\n  )\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Transform_Logic" : {
+      "id" : "Transform_Logic",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Transform_Logic",
+        "slug" : "Transform_Logic",
+        "x" : 620,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Transform_Logic__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Transform_Logic__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "alt_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"alt_run_id\").cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_run_alt_dtl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"alt_run_alt_dtl_id\").cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_run_target_dtl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"alt_run_target_dtl_id\").cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "formulary_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"formulary_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "target_ndc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"target_ndc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_assoc_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tal_assoc_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_proxy_ndc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"alt_proxy_ndc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rank",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rank\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rec_crt_ts\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_user_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rec_crt_user_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Update_Mode" : {
+      "id" : "Update_Mode",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Update_Mode",
+        "slug" : "Update_Mode",
+        "x" : 1680,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "context.config.LOAD_MODE == \"U\""
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Update_Mode__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Update_Mode__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val out = in",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Join_With_DB_1" : {
+      "id" : "Join_With_DB_1",
+      "component" : "Subgraph",
+      "metadata" : {
+        "label" : "Join_With_DB",
+        "slug" : "Join_With_DB",
+        "x" : 1280,
+        "y" : 360,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions._not(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(_root_.io.prophecy.abinitio.ScalaFunctions._is_blank(context.config.JOIN_DB_SQL)))"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "altexp_load_tbl__Join_With_DB__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "altexp_load_tbl__Join_With_DB__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : { },
+      "connections" : [ {
+        "id" : "24",
+        "source" : "Join_with_DB",
+        "sourcePort" : "Join_With_DB__Join_with_DB__out",
+        "target" : "Join_With_DB_1",
+        "targetPort" : "altexp_load_tbl__Join_With_DB__out"
+      }, {
+        "id" : "e22",
+        "source" : "Join_With_DB_1",
+        "sourcePort" : "altexp_load_tbl__Join_With_DB__in",
+        "target" : "Join_with_DB",
+        "targetPort" : "Join_With_DB__Join_with_DB__in1"
+      }, {
+        "id" : "e8",
+        "source" : "Join_with_DB",
+        "sourcePort" : "Join_With_DB__Join_with_DB__out",
+        "target" : "Load_MFS_log_file",
+        "targetPort" : "Join_With_DB__Load_MFS_log_file__in"
+      }, {
+        "id" : "e6",
+        "source" : "Join_with_DB",
+        "sourcePort" : "Join_With_DB__Join_with_DB__out",
+        "target" : "Unused_Data",
+        "targetPort" : "Join_With_DB__Unused_Data__in"
+      } ],
+      "processes" : {
+        "Join_with_DB" : {
+          "id" : "Join_with_DB",
+          "component" : "Script",
+          "metadata" : {
+            "label" : "Join_With_DB__Join_with_DB",
+            "slug" : "Join_with_DB",
+            "x" : 20,
+            "y" : 120,
+            "phase" : 3,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "Join_With_DB__Join_with_DB__in1",
+              "slug" : "in1",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "alt_run_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_alt_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_target_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "formulary_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "target_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "tal_assoc_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_proxy_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rank",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_ts",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_user_id",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "newline",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "outputs" : [ {
+              "id" : "Join_With_DB__Join_with_DB__out",
+              "slug" : "out",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "alt_run_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_alt_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_target_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "formulary_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "target_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "tal_assoc_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_proxy_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rank",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_ts",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_user_id",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "newline",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : true,
+            "autoUpdateOnRun" : false
+          },
+          "properties" : {
+            "script" : "val out = in",
+            "scriptMethodHeader" : "def apply(spark: SparkSession, in1: DataFrame): DataFrame = {",
+            "scriptMethodFooter" : "    out\n}"
+          }
+        },
+        "Load_MFS_log_file" : {
+          "id" : "Load_MFS_log_file",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "Join_With_DB__Load_MFS_log_file_7",
+            "slug" : "Load_MFS_log_file_7",
+            "x" : 220,
+            "y" : 220,
+            "phase" : 3,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "Join_With_DB__Load_MFS_log_file__in",
+              "slug" : "in",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "alt_run_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_alt_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_target_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "formulary_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "target_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "tal_assoc_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_proxy_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rank",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_ts",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_user_id",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "newline",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false,
+            "autoUpdateOnRun" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/Join_With_DB__Load_MFS_log_file_7"
+          }
+        },
+        "Unused_Data" : {
+          "id" : "Unused_Data",
+          "component" : "Target",
+          "metadata" : {
+            "label" : "Join_With_DB__Unused_Data_7",
+            "slug" : "Unused_Data_7",
+            "x" : 220,
+            "y" : 20,
+            "phase" : 3,
+            "cache" : false,
+            "detailedStats" : false,
+            "isImported" : false
+          },
+          "ports" : {
+            "inputs" : [ {
+              "id" : "Join_With_DB__Unused_Data__in",
+              "slug" : "in",
+              "schema" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "alt_run_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_alt_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_run_target_dtl_id",
+                  "type" : "decimal(16,0)",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "formulary_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "target_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "tal_assoc_name",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "alt_proxy_ndc",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rank",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_ts",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "rec_crt_user_id",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "newline",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "isStreaming" : false
+            } ],
+            "outputs" : [ ],
+            "selectedInputFields" : [ ],
+            "isCustomOutputSchema" : false,
+            "autoUpdateOnRun" : false
+          },
+          "properties" : {
+            "datasetId" : "datasets/Join_With_DB__Unused_Data_7"
+          }
+        }
+      }
+    },
+    "Read_load_ready_files" : {
+      "id" : "Read_load_ready_files",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Read_load_ready_files",
+        "slug" : "Read_load_ready_files",
+        "x" : 220,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Read_load_ready_files__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Read_load_ready_files__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  val windowSpec        = Window.partitionBy(lit(1)).rowsBetween(Window.unboundedPreceding, Window.currentRow)\n  val windowSpecPrevRow = Window.partitionBy(lit(1)).rowsBetween(Window.unboundedPreceding, -1)\n  val windowSpecL       = Window.partitionBy(lit(1)).orderBy(lit(1))\n\n  lazy val dfWithUniqueId = in.zipWithIndex(0, 1, \"tempId\", spark)\n\n  val fileDF = dfWithUniqueId.select(col(\"tempId\").as(\"tempId\"),\n                                     concat(lit(Config.INPUT_FILE_PATH), lit(\"/\"), col(\"line\")).as(\"fileName\")\n  )\n\n  val fileRecordDF = dfWithUniqueId.mergeMultipleFileContentInDataFrame(\n    fileDF,\n    spark,\n    delimiter = \",\",\n    abinitioSchema =\n      \"\"\"type qual_priority_t =\nrecord\n  string(int) qual;\n  decimal(\"\") priority;\nend;\nconstant string(int)[int] OVERRIDE_QUALIFIERS = [vector 'DESI_CD', 'DOSAGE_FORM', 'MSC', 'ROA', 'RXOTC' ];\nconstant qual_priority_t[int] QUAL_PRIORITY =[vector [record  qual \"NDC11\"        priority \"1\"],\n                                                      [record qual \"NDC9\"         priority \"2\"],\n                                                      [record qual \"NDC5\"         priority \"3\"],\n                                                      [record qual \"GPI14\"        priority \"4\"],\n                                                      [record qual \"GPI12\"        priority \"5\"],\n                                                      [record qual \"GPI10\"        priority \"6\"],\n                                                      [record qual \"DOSAGE_FORM\"  priority \"7\"],\n                                                      [record qual \"ROA\"          priority \"8\"],\n                                                      [record qual \"DRUG_NAME\"    priority \"9\"],\n                                                      [record qual \"GPI8\"         priority \"10\"],\n                                                      [record qual \"GPI6\"         priority \"11\"],\n                                                      [record qual \"GPI4\"         priority \"12\"],\n                                                      [record qual \"MSC\"          priority \"13\"],\n                                                      [record qual \"RXOTC\"        priority \"14\"],\n                                                      [record qual \"DAYS_UNTIL_DRUG_STATUS_INACTIVE\" priority \"15\"] ,\n                                                      [record qual \"STATUS_CD\"  priority   \"16\"],\n                                                      [record qual \"REPACKAGER\"   priority \"17\"],\n                                                      [record qual \"DESI_CD\"    priority   \"18\"]];\ntype drug_data_set_dtl_t =\nrecord\n  string(\"\\x01\", maximum_length=20) rxclaim_env_name ;\n  string(\"\\x01\", maximum_length=20) carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) group = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=10) drug_data_set_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) drug_data_set_id ;\n  string(\"\\x01\", maximum_length=11) ndc11 ;\n  string(\"\\x01\", maximum_length=14) gpi14 ;\n  string(\"\\x01\", maximum_length=1) status_cd ;\n  string(\"\\x01\", maximum_length=8) eff_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=8) term_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=8) inactive_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=1) msc ;\n  string(\"\\x01\", maximum_length=70) drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;   \n  string(\"\\x01\", maximum_length=3) rx_otc ;\n  string(\"\\x01\", maximum_length=1) rx_otc_cd ;\n  string(\"\\x01\", maximum_length=1) desi ;\n  string(\"\\x01\", maximum_length=2) roa_cd ;\n  string(\"\\x01\", maximum_length=4) dosage_form_cd ;\n  decimal(\"\\x01\".5, maximum_length=15) prod_strength ;\n  string(\"\\x01\", maximum_length=1) repack_cd ;   \n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=60) gpi8_desc ;\n  string(1) newline = \"\\n\";\nend;\ntype user_defined_list_rule_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) user_defined_list_id ;\n  string(\"\\x01\", maximum_length=20) user_defined_list_name ;\n  string(\"\\x01\", maximum_length=60) user_defined_list_desc ;\n  decimal(\"\\x01\",0, maximum_length=10) user_defined_list_rule_id ;\n  string(\"\\x01\", maximum_length=4000) rule = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=1) incl_cd ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype rule_xwalk_t=\nrecord\n  decimal(\"\\x01\") udl_id;\n  decimal(\"\\x01\") udl_rule_id;\n  string(\"\\x01\") udl_nm;\n  string(\"\\x01\") udl_desc;\n  decimal(\"\\x01\") rule_priority;\n  string(1) inclusion_cd;\n  string(int) qualifier_cd;\n  string(int) operator;\n  string(int) compare_value;\n  string(1) conjunction_cd;\n  decimal(\"\\x01\") rule_expression_id;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype udl_mstr_xwalk_t=\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) udl_id;\n  string(\"\\x01\", maximum_length=20) udl_nm;\n  string(\"\\x01\", maximum_length=60) user_defined_list_desc;\n  string(int)[int] qual_list;\n  decimal(1) override_flg;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype product_lkp_t =\nrecord\n  int dl_bit;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  desi ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  decimal(\"\\x01\".5, maximum_length=15) prod_strength ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=60) gpi8_desc ;\n  string(1) newline = \"\\n\";\nend;\ntype nrmlz_dataset_qual_t = \nrecord\n  int dl_bit;\n  string(int) qualifier_cd;\n  string(int) compare_value = NULL;\nend;\ntype rule_product_lkp_t =\nrecord\n  string(int) qualifier_cd;\n  string(int) operator;\n  string(int) compare_value;\n  bit_vector_t products;\nend;\ntype cag_ovrrd_xwalk_t =\nrecord\n  string(\"\\x01\", maximum_length=20)  carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) eff_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=8) term_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  desi ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  decimal(\"\\x01\".5, maximum_length=15) prod_strength ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=60) gpi8_desc ;\n  string(1) newline = \"\\n\";\nend;\ntype cag_ovrrd_ref_file_t =\nrecord\n  string(\"\\x01\", maximum_length=20)  carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  group = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=1) is_future_snap = 0;\n  string(\"\\x01\") data_path;\n  string(1) newline = \"\\n\";\nend;\ntype udl_exp_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) udl_id;\n  string(\"\\x01\", maximum_length=20) udl_nm; \n  string(\"\\x01\", maximum_length=60) udl_desc; \n  bit_vector_t products;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  bit_vector_t[int] contents;\n  string(1) newline = \"\\n\";\nend;\ntype tal_dtl_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tal_id ;\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  string(\"\\x01\", maximum_length=60) tal_desc ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_dtl_type_cd ;\n  string(\"\\x01\", maximum_length=20) nested_tal_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name = NULL(\"\") ;\n  decimal(\"\\x01\", 6, maximum_length=39) priority ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype tal_assoc_dtl_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=60) tal_assoc_desc ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  string(\"\\x01\", maximum_length=20) target_udl_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) alt_udl_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) alt_rank = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) constituent_rank = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=2) constituent_group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=1) constituent_reqd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype tac_dtl_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tac_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tac_id ;\n  string(\"\\x01\", maximum_length=20) tac_name ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  string(\"\\x01\", maximum_length=4000) target_rule = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4000) alt_rule = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype tac_rule_xwalk_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tac_id ;\n  string(\"\\x01\", maximum_length=20) tac_name ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  record\n   string(int) qualifier_cd;\n   string(int) operator;\n   string(int) compare_value;\n   string(1) conjunction_cd;\n  end[int] target_rule_def;\n  record\n   string(int) qualifier_cd;\n   string(int) operator;\n   string(int) compare_value;\n   string(1) conjunction_cd;\n  end[int] alt_rule_def;\n  string(1) newline = \"\\n\";\nend;\ntype contents_alt_st =\nrecord\n bit_vector_t target_prdcts;\n bit_vector_t alternate_prdcts;\n string(\"\\x01\", maximum_length=40) tal_assoc_name;\nend;\ntype tac_st_contents =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_id;\n  contents_alt_st[int] step_contents;\n  string(1) newline = '\\n';\nend;\ntype contents_t =\nrecord\n  bit_vector_t target_prdcts;\n  bit_vector_t alt_prdcts;\n  decimal(1) ST_flag =0;\n  decimal(1) priority;\nend;\ntype tac_contents_t =\nrecord\n bit_vector_t target_prdcts;\n bit_vector_t alt_prdcts;\n contents_t[int] contents;\n decimal(1) xtra_proc_flg = 0;\nend;\ntype tac_xwalk_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tac_id ;\n  string(\"\\x01\", maximum_length=20) tac_name ;\n  tac_contents_t[int] tac_contents;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = '\\n';\nend;\ntype tal_container_xwalk_t =\nrecord\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  int target_dl_bit;\n  record\n   int alt_prd;\n   int alt_rank;\n  end[int] alt_prdcts;\n  string(1) newline = \"\\n\";\nend;\ntype target_udl_products_t =\nrecord\n  string(\"\\x01\", maximum_length=20) target_udl_name = NULL(\"\") ;\n  bit_vector_t target_products;\nend;\ntype alt_udl_products_t =\nrecord\n  string(\"\\x01\", maximum_length=20) alt_udl_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) alt_rank = NULL(\"\") ;\n  bit_vector_t alt_products;\nend;\ntype alt_exclusion_products_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  bit_vector_t target_product_dtl;\n  bit_vector_t alt_product_dtl;\n  string(1) newline = \"\\n\";\nend;\ntype tal_assoc_xwalk_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=10) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=10) override_tar_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  target_udl_products_t[int] target_udl_products;\n  alt_udl_products_t[int] alt_udl_products;\n  string(1) newline = \"\\n\";\nend;\ntype form_data_set_dtl_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) formulary_data_set_id ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=20) formulary_id = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=10) formulary_cd = \"\" ;\n  string(\"\\x01\", maximum_length=20) carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) rxclaim_env_name ;\n  string(\"\\x01\", maximum_length=20) customer_name = NULL(\"\");\n  date(\"YYYYMMDD\")(\"\\x01\") last_exp_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=10) formulary_data_set_dtl_id ;\n  string(\"\\x01\", maximum_length=11) ndc11 ;\n  string(\"\\x01\", maximum_length=2) formulary_tier ;\n  string(\"\\x01\", maximum_length=2) formulary_status ;\n  string(\"\\x01\", maximum_length=1) pa_reqd_ind ;\n  string(\"\\x01\", maximum_length=1) specialty_ind ;\n  string(\"\\x01\", maximum_length=1) step_therapy_ind ;\n  string(\"\\x01\", maximum_length=50) formulary_tier_desc ;\n  string(\"\\x01\", maximum_length=50) formulary_status_desc ;\n  string(\"\\x01\", maximum_length=1) pa_type_cd ;\n  string(\"\\x01\", maximum_length=1) step_therapy_type_cd ;\n  string(\"\\x01\", maximum_length=100) step_therapy_group_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) step_therapy_step_number = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype form_ovrrd_xwalk_t =\nrecord\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=10) formulary_cd = \"\" ;\n  string(\"\\x01\", maximum_length=20)  carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  group = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") last_exp_dt ;\n  string(\"\\x01\", maximum_length=11) ndc11 ;\n  string(\"\\x01\", maximum_length=2) formulary_tier ;\n  string(\"\\x01\", maximum_length=2) formulary_status ;\n  string(\"\\x01\", maximum_length=1) pa_reqd_ind ;\n  string(\"\\x01\", maximum_length=1) specialty_ind ;\n  string(\"\\x01\", maximum_length=1) step_therapy_ind ;\n  string(\"\\x01\", maximum_length=50) formulary_tier_desc ;\n  string(\"\\x01\", maximum_length=50) formulary_status_desc ;\n  string(\"\\x01\", maximum_length=1) pa_type_cd ;\n  string(\"\\x01\", maximum_length=1) step_therapy_type_cd ;\n  string(\"\\x01\", maximum_length=100) step_therapy_group_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) step_therapy_step_number = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype form_ovrrd_ref_file_t =\nrecord\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=20)  carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20)  group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) customer_name = NULL(\"\");\n  decimal(\"\\x01\",0, maximum_length=1) is_future_snap = 0;\n  string(\"\\x01\") data_path;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype output_profile_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_id ;\n  string(\"\\x01\", maximum_length=20) rxclaim_env_name ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=20) formulary_id = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_form_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_job_dtl_id ;\n  string(\"\\x01\", maximum_length=20) output_profile_name ;\n  string(\"\\x01\", maximum_length=20) alias_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) alias_priority = NULL ;\n  string(\"\\x01\", maximum_length=20) carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  string(\"\\x01\", maximum_length=20) tac_name ;\n  string(\"\\x01\", maximum_length=20) tar_name ;\n  string(\"\\x01\", maximum_length=20) tsd_name ;\n  decimal(\"\\x01\",0, maximum_length=10) job_id ;\n  string(\"\\x01\", maximum_length=20) job_name ;\n  string(\"\\x01\", maximum_length=20) customer_name = NULL(\"\");\n  decimal(\"\\x01\",0, maximum_length=39) run_day = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) lob_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4) run_jan1_start_mmdd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4) run_jan1_end_mmdd = NULL(\"\") ;\n  decimal(\"\\x01\") future_flg = 0;\n  string(\"\\x01\", maximum_length=30) formulary_pseudonym = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=10) notes_id = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=60) output_profile_desc ;\n  decimal(\"\\x01\",0, maximum_length=39 ) formulary_option_cd ;\n  string(\"\\x01\", maximum_length=20) layout_name ;  \n  date(\"YYYYMMDD\")(\"\\x01\") as_of_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=1) st_tac_ind ;\n  string(1) newline = \"\\n\";\nend;\ntype form_product_t =\nrecord\n  string(\"\\x01\", maximum_length=10) formulary_cd = \"\" ;\n  string(\"\\x01\", maximum_length=11) ndc11 ;\n  string(\"\\x01\", maximum_length=2) formulary_tier ;\n  string(\"\\x01\", maximum_length=2) formulary_status ;\n  string(\"\\x01\", maximum_length=1) pa_reqd_ind ;\n  string(\"\\x01\", maximum_length=1) specialty_ind ;\n  string(\"\\x01\", maximum_length=1) step_therapy_ind ;\n  string(\"\\x01\", maximum_length=50) formulary_tier_desc ;\n  string(\"\\x01\", maximum_length=50) formulary_status_desc ;\n  string(\"\\x01\", maximum_length=1) pa_type_cd ;\n  string(\"\\x01\", maximum_length=1) step_therapy_type_cd ;\n  string(\"\\x01\", maximum_length=100) step_therapy_group_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) step_therapy_step_number = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") last_exp_dt ;\nend;\ntype cag_product_t =\nrecord\n  string(\"\\x01\", maximum_length=11) ndc11 ;\n  string(\"\\x01\", maximum_length=14) gpi14 ;\n  string(\"\\x01\", maximum_length=1) status_cd ;\n  string(\"\\x01\", maximum_length=8) eff_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=8) term_dt = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(\"\\x01\", maximum_length=1) msc ;\n  string(\"\\x01\", maximum_length=70) drug_name ;\n  string(\"\\x01\", maximum_length=3) rx_otc ;\n  string(\"\\x01\", maximum_length=1) desi ;\n  string(\"\\x01\", maximum_length=2) roa_cd ;\n  string(\"\\x01\", maximum_length=4) dosage_form_cd ;\n  decimal(\"\\x01\".5, maximum_length=15) prod_strength ;\n  string(\"\\x01\", maximum_length=1) repack_cd ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=60) gpi8_desc ;\nend;\ntype cag_rlp_t =\nrecord\n  string(\"\\x01\", maximum_length=20) carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) group = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt = NULL(\"\") ;\n  decimal(1) cag_priority = 0;\n  cag_product_t[int] prdcts;\nend;\ntype form_rlp_t =\nrecord\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=20) carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) customer_name = NULL(\"\");\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt = NULL(\"\") ;\n  decimal(1) cag_priority = 0;\n  form_product_t[int] prdcts; \nend;\ntype tsd_dtl_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tsd_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tsd_id ;\n  string(\"\\x01\", maximum_length=20) tsd_name ;\n  string(\"\\x01\", maximum_length=30) tsd_cd ;\n  string(\"\\x01\", maximum_length=2) formulary_tier ;\n  string(\"\\x01\", maximum_length=2) formulary_status ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype tsd_xwalk_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tsd_id ;\n  string(\"\\x01\", maximum_length=30) tsd_cd ;\n  bit_vector_t products;\n  string(1) newline = \"\\n\";\nend;\ntype alt_constituent_prdct_t = \nrecord\n  bit_vector_t alt_prdcts;\n  string(2) constituent_group = NULL(\"\");\n  string(1) constituent_reqd = NULL(\"\"); \n  string(20) udl_nm = NULL(\"\"); \nend;\ntype tal_container_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_id ;\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) tar_udl_nm = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=60) tal_desc ;\n  decimal(\"\\x01\", 6, maximum_length=39) priority ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  bit_vector_t[int] target_prdcts;\n  alt_constituent_prdct_t[int] alt_constituent_prdcts;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(2)[int] constituent_grp_vec;\n  string(1) newline = \"\\n\";\nend;\ntype master_cag_mapping_t =\nrecord\n  string(\"\\x01\") carrier = NULL(\"\") ;\n  string(\"\\x01\") account = NULL(\"\") ;\n  string(\"\\x01\") group = NULL(\"\") ;\n  string(\"\\x01\") future_flg = 'C';\n  string(\"\\x01\") cag_override_data_path= NULL(\"\");\n  decimal(\"\\x01\")[int] qual_output_profile_ids ;\n  record\n    string(\"\\x01\") qual_output_profile_name ;\n    string(\"\\x01\") rxclaim_env_name;\n    decimal(\"\\x01\") [int] job_ids;\n    string(\"\\x01\") [int] alias_names;\n    string(\"\\x01\") [int] job_names;\n    string(\"\\x01\") [int] formulary_names ;\n    string(\"\\x01\") [int] form_override_data_paths;\n    string(\"\\x01\", maximum_length=30)[int] formulary_pseudonyms;\n    string(\"\\x01\", maximum_length=20) tal_name ;\n    string(\"\\x01\") tac_name ;\n    string(\"\\x01\") tar_name ;\n    string(\"\\x01\") tsd_name ;\n    string(\"\\x01\", maximum_length=1) st_tac_ind ;\n  end[int] op_dtls;\n  record\n    decimal(\"\\x01\") non_qual_op_id;\n    string(\"\\x01\") rxclaim_env_name;\n    decimal(\"\\x01\") [int] job_ids;\n    string(\"\\x01\")[int] formulary_names;\n    string(\"\\x01\", maximum_length=30)[int] formulary_pseudonyms;\n    string(\"\\x01\") [int] alias_names;\n    string(\"\\x01\") [int] job_names;\n  end[int] non_qual_output_profile_ids ;\n  string(\"\\x01\") [int] err_msgs;\n  date(\"YYYYMMDD\")(\"\\x01\") as_of_dt = NULL(\"\");\n  string(1) newline = \"\\n\";\nend;\ntype tar_dtl_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tar_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tar_dtl_id ;\n  string(\"\\x01\", maximum_length=20) tar_name ;\n  string(\"\\x01\", maximum_length=1) sort_ind ;\n  string(\"\\x01\", maximum_length=1) filter_ind ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  decimal(\"\\x01\",0, maximum_length=39) tar_dtl_type_cd ;\n  decimal(\"\\x01\",0, maximum_length=10) tar_roa_df_set_id = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4000) target_rule = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4000) alt_rule = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=15) rebate_elig_cd = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype tar_roa_df_set_dtl_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tar_roa_df_set_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tar_roa_df_set_id ;\n  string(\"\\x01\", maximum_length=2) target_roa_cd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4) target_dosage_form_cd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=2) alt_roa_cd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=4) alt_dosage_form_cd = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  string(1) newline = \"\\n\";\nend;\ntype tar_rule_xwalk_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tar_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tar_dtl_id ;\n  string(\"\\x01\", maximum_length=20) tar_name ;\n  decimal(\"\\x01\",0, maximum_length=10) tar_roa_df_set_id = NULL(\"\");\n  decimal(\"\\x01\",0, maximum_length=39) tar_dtl_type_cd ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  string(\"\\x01\", maximum_length=1) sort_ind ;\n  string(\"\\x01\", maximum_length=1) filter_ind ;\n  string(\"\\x01\", maximum_length=15) rebate_elig_cd = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  record\n   string(int) qualifier_cd;\n   string(int) operator;\n   string(int) compare_value;\n   string(1) conjunction_cd;\n  end[int] target_rule_def;\n  record\n    string(int) qualifier_cd;\n    string(int) operator;\n    string(int) compare_value;\n    string(1) conjunction_cd;\n  end[int] alt_rule_def;\n  string(1) newline = \"\\n\";\nend;\ntype tar_xwalk_t =\nrecord  \n  decimal(\"\\x01\",0, maximum_length=10) tar_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tar_dtl_id ;\n  string(\"\\x01\", maximum_length=20) tar_name ;\n  decimal(\"\\x01\",0, maximum_length=39) tar_dtl_type_cd ;\n  record\n    bit_vector_t[int] target_prdcts;\n    record\n      bit_vector_t[int] alt_prdcts;\n      bit_vector_t[int][int] alt_prdcts_all_prio;\n      bit_vector_t common_prdcts;\n    end[int] alt_contents;\n  end[int] contents;\n  bit_vector_t common_alt_prdcts;\n  bit_vector_t common_target_prdcts;\n  decimal(1) keep_all_targets = 0;\n  string(1) newline = '\\n';\nend;\ntype alt_run_alt_dtl_load_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_alt_dtl_id = -1 ;\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_id = -1;\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_target_dtl_id = -1 ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=11) target_ndc ;\n  string(\"\\x01\", maximum_length=11) alt_ndc ;\n  string(\"\\x01\", maximum_length=2) alt_formulary_tier ;\n  string(\"\\x01\", maximum_length=1) alt_multi_src_cd ;\n  string(\"\\x01\", maximum_length=2) alt_roa_cd ;\n  string(\"\\x01\", maximum_length=4) alt_dosage_form_cd ;\n  decimal(\"\\x01\",0, maximum_length=39 ) rank ;\n  string(\"\\x01\", maximum_length=1) alt_step_therapy_ind ;\n  string(\"\\x01\", maximum_length=1) alt_pa_reqd_ind ;\n  string(\"\\x01\", maximum_length=2) alt_formulary_status ;\n  string(\"\\x01\", maximum_length=1) alt_specialty_ind ;\n  string(\"\\x01\", maximum_length=14) alt_gpi14 ;\n  string(\"\\x01\", maximum_length=70) alt_prod_name_ext ;\n  string(\"\\x01\", maximum_length=30) alt_prod_short_desc ;\n  string(\"\\x01\", maximum_length=30) alt_prod_short_desc_grp;\n  string(\"\\x01\", maximum_length=60) alt_gpi14_desc ;\n  string(\"\\x01\", maximum_length=60) alt_gpi8_desc ;\n  string(\"\\x01\", maximum_length=50) alt_formulary_tier_desc ;\n  string(\"\\x01\", maximum_length=50) alt_formulary_status_desc ;\n  string(\"\\x01\", maximum_length=1) alt_pa_type_cd ;\n  string(\"\\x01\", maximum_length=1) alt_step_therapy_type_cd ;\n  string(\"\\x01\", maximum_length=1000) alt_step_therapy_group_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=100) alt_step_therapy_step_number = NULL(\"\") ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  string(\"\\x01\", maximum_length=15) rebate_elig_cd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=15) tad_eligible_cd= NULL(\"\");\n  decimal(\"\\x01\".3, maximum_length=7) alt_qty_adj = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=40) tal_assoc_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=40) tala = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) alt_udl = NULL(\"\") ;\n  decimal(\"\\x01\".6, maximum_length=39) tal_assoc_rank ;\n  string(\"\\x01\", maximum_length=2) constituent_group = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=1) constituent_reqd = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype alt_run_target_dtl_load_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_target_dtl_id = -1 ;\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_id  = -1 ;\n  string(\"\\x01\", maximum_length=40) tal_assoc_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=40) tala = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) tar_udl = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=11) target_ndc ;\n  string(\"\\x01\", maximum_length=2) target_formulary_tier ;\n  string(\"\\x01\", maximum_length=2) target_formulary_status ;\n  string(\"\\x01\", maximum_length=1) target_pa_reqd_ind ;\n  string(\"\\x01\", maximum_length=1) target_step_therapy_ind ;\n  string(\"\\x01\", maximum_length=1) target_specialty_ind ;\n  string(\"\\x01\", maximum_length=1) target_multi_src_cd ;\n  string(\"\\x01\", maximum_length=2) target_roa_cd ;\n  string(\"\\x01\", maximum_length=4) target_dosage_form_cd ;\n  string(\"\\x01\", maximum_length=14) target_gpi14 ;\n  string(\"\\x01\", maximum_length=70) target_prod_name_ext ;\n  string(\"\\x01\", maximum_length=30) target_prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) target_gpi14_desc ;\n  string(\"\\x01\", maximum_length=60) target_gpi8_desc ;\n  string(\"\\x01\", maximum_length=50) target_formulary_tier_desc ;\n  string(\"\\x01\", maximum_length=50) target_formulary_status_desc ;\n  string(\"\\x01\", maximum_length=1) target_pa_type_cd ;\n  string(\"\\x01\", maximum_length=1) target_step_therapy_type_cd ;\n  string(\"\\x01\", maximum_length=1000) target_step_therapy_group_name = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) target_step_therapy_step_num = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=10) formulary_cd = NULL(\"\") ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  date(\"YYYYMMDD\")(\"\\x01\") last_exp_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype alt_run_load_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_id = -1 ;\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") run_start_ts = NULL(\"\") ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") run_complete_ts = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) alt_run_status_cd ;\n  string(\"\\x01\", maximum_length=1) published_ind ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_last_upd_ts ;\n  string(\"\\x01\", maximum_length=30) rec_last_upd_user_id ;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") as_of_dt = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype alt_run_load_adhoc_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_id = -1 ;\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") run_start_ts = NULL(\"\") ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") run_complete_ts = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) alt_run_status_cd ;\n  string(\"\\x01\", maximum_length=1) published_ind ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_last_upd_ts ;\n  string(\"\\x01\", maximum_length=30) rec_last_upd_user_id ;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype alt_run_t =\nrecord\n  decimal(\"|\") alt_run_id ;\n  decimal(\"|\") output_profile_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"|\") run_start_ts = NULL(\"\") ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"|\") run_complete_ts = NULL(\"\") ;\n  decimal(\"|\") alt_run_status_cd ;\n  string(\"|\") published_ind ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"|\") rec_crt_ts ;\n  string(\"|\") rec_crt_user_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"|\") rec_last_upd_ts ;\n  string(\"|\") rec_last_upd_user_id ;\n  date(\"YYYYMMDD\")(\"\\n\") run_eff_dt ;\nend;\ntype alt_run_alt_proxy_dtl_load_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_id = -1;\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_alt_dtl_id = -1 ;\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_target_dtl_id = -1 ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=11) target_ndc ;\n  string(\"\\x01\", maximum_length=40) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=11) alt_proxy_ndc ;\n  decimal(\"\\x01\",0, maximum_length=39 ) rank ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  string(1) newline = \"\\n\";\nend;\ntype file_load_cntl_load_t =\nrecord\n  string(\"\\x01\", maximum_length=50) user_id ;\n  string(\"\\x01\", maximum_length=1) file_load_type_cd ;\n  decimal(\"\\x01\",0, maximum_length=39) component_type_cd = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) file_load_status_cd ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") file_load_start_ts = NULL(\"\") ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  string(\"\\x01\", maximum_length=1) published_ind ;\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_id = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype file_load_ctl_dtl_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16) file_load_cntl_id ;\n  string(\"\\x01\", maximum_length=4000) component_ids = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") as_of_date ;\n  string(\"\\x01\", maximum_length=20) rxclaim_env_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) carrier = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) account = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) group = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) component_type_cd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=512) file_name_w = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=1) published_ind ;\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_id = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=512) report_file_name = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype file_load_err_dtl_load_t =\nrecord\n  decimal(\",\",0, maximum_length=16) file_load_cntl_id ;\n  string(\",\", maximum_length=1024) err_desc ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\",\") rec_crt_ts ;\n  string(\",\", maximum_length=30) rec_crt_user_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\",\") rec_last_upd_ts ;\n  string(\"\\n\", maximum_length=30) rec_last_upd_user_id ;\nend;\ntype tal_assoc_prdcts_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  bit_vector_t[int] target_prdcts;\n  bit_vector_t[int] alt_prdcts;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype part_exp_master_file_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16) file_load_cntl_id ;\n  string(\"\\x01\", maximum_length=1024) component_ids ;\n  date(\"YYYYMMDD\")(\"\\x01\") as_of_date ;\n  string(\"\\x01\", maximum_length=20) rxclaim_env_name = \"\" ;\n  string(\"\\x01\", maximum_length=50) cag_in = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=50) cag_out = NULL(\"\") ;  \n  decimal(\"\\x01\",0, maximum_length=39, sign_reserved) component_type_cd = NULL(\"\") ;\n  utf8 string(\"\\x01\", maximum_length=512) file_name_w = NULL(\"\") ;\n  utf8 string(\"\\x01\", maximum_length=1) published_ind ;\n  string(1) newline = \"\\n\";\nend;\ntype alt_rank_t =\nrecord\n  int alt_rank; \n  int[int] alt_prdcts;\n  string(2) constituent_group = NULL(\"\");\n  string(1) constituent_reqd = NULL(\"\");\n  string(20) udl_nm = NULL(\"\");\nend;\ntype rebate_elig_contents_t =\nrecord\n  string(\"\\x01\") rebate_elig_cd;\n  int[int] rebate_elig_prdcts;\nend;\ntype target_prdct_t =\nrecord\n  int target_dl_bit;\n  decimal('\\x01') bucket_index = 0;\n  decimal('\\x01') udl_index = 0;\n  decimal('\\x01') tac_index = 0;\n  alt_rank_t[int] alt_prdcts_rank;\n  string(\"\\x01\")has_alt;\n  decimal(1) ST_flag = 0;\nend;\ntype tal_assoc_adhoc_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=2000) clinical_indn_desc = NULL(\"\");\n  string(\"\\x01\", maximum_length=60) tal_assoc_desc ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  record\n    string(\"\\x01\", maximum_length=20) udl_nm;\n    string(\"\\x01\", maximum_length=60) udl_desc; \n    bit_vector_t products;\n  end[int] target_udl_info ;\n  record\n     string(\"\\x01\", maximum_length=20) udl_nm;\n     string(\"\\x01\", maximum_length=60) udl_desc; \n     bit_vector_t products;\n     string(2) constituent_group = NULL(\"\");\n     string(1) constituent_reqd = NULL(\"\");\n     decimal(\"\\x01\",0, maximum_length=39) constituent_rank = NULL(\"\");\n  end[int] alt_udl_info;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype tal_container_adhoc_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_id ;\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=2000) clinical_indn_desc = NULL(\"\");\n  string(\"\\x01\", maximum_length=60) tal_desc ;\n  string(\"\\x01\", maximum_length=60) tal_assoc_desc ;\n  decimal(\"\\x01\", 6, maximum_length=39) priority ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  record\n      string(\"\\x01\", maximum_length=20) udl_nm;\n      string(\"\\x01\", maximum_length=60) udl_desc;\n      bit_vector_t products;\n  end[int] target_prdcts;\n  record\n      string(\"\\x01\", maximum_length=20) udl_nm;\n      string(\"\\x01\", maximum_length=60) udl_desc;\n      bit_vector_t products;\n      string(2) constituent_group = NULL(\"\");\n      string(1) constituent_reqd = NULL(\"\");\n      decimal(\"\\x01\",0, maximum_length=39) constituent_rank = NULL(\"\");\n  end[int] alt_prdcts;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype tal_assoc_adhoc_enrich_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=2000) clinical_indn_desc = NULL(\"\");\n  string(\"\\x01\", maximum_length=60) tal_assoc_desc ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  string(\"\\x01\", maximum_length=20) udl_id = NULL(\"\") ;  \n  string(\"\\x01\", maximum_length=60) udl_desc; \n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  bit_vector_t products;\n  decimal(\"\\x01\",0, maximum_length=39) alt_rank = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(2) constituent_group = NULL(\"\");\n  string(1) constituent_reqd = NULL(\"\");\n  decimal(\"\\x01\",0, maximum_length=39) constituent_rank = NULL(\"\");\n  string(1) newline = \"\\n\";\nend;\ntype tal_container_adhoc_enrich_t =\nrecord\n  string(\"\\x01\", maximum_length=20) tal_id ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_id = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=2000) clinical_indn_desc = NULL(\"\");\n  string(\"\\x01\", maximum_length=60) tal_desc ;\n  string(\"\\x01\", maximum_length=60) tal_assoc_desc ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  decimal(\"\\x01\", 6, maximum_length=39) tal_assoc_rank = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) udl_id = NULL(\"\") ;  \n  string(\"\\x01\", maximum_length=60) udl_desc; \n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  bit_vector_t products;\n  decimal(\"\\x01\",0, maximum_length=39) alt_rank = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(2) constituent_group = NULL(\"\");\n  string(1) constituent_reqd = NULL(\"\");\n  decimal(\"\\x01\",0, maximum_length=39) constituent_rank = NULL(\"\");\n  string(1) newline = \"\\n\";\nend;\ntype error_info_V2_16 = record \n  utf8 string(big endian integer(4)) component;\n  big endian integer(4) port_index;\n  utf8 string(big endian integer(4)) parameter;\n  utf8 string(big endian integer(4)) message;\n  record\n    utf8 string(big endian integer(4)) code;\n    big endian integer(4) parent_index;\n    record\n      utf8 string(big endian integer(4)) name;\n      utf8 string(big endian integer(4)) value;\n    end [big endian integer(4)] attributes;\n  end [big endian integer(4)] details;\nend;\ntype error_info_t = error_info_V2_16;\ntype alt_run_target_dtl_ref_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_target_dtl_id ;\n  string(\"\\x01\", maximum_length=40) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=11) target_ndc ;\nend;\ntype alt_run_alt_dtl_ref_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_alt_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=16 ) alt_run_target_dtl_id ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=40) tal_assoc_name ;\n  string(\"\\x01\", maximum_length=11) target_ndc ;\n  string(\"\\x01\", maximum_length=11) alt_ndc ;\nend;\ntype master_cag_mapping_adhoc_t =\nrecord\n  string(\"\\x01\") carrier = NULL(\"\") ;\n  string(\"\\x01\") account = NULL(\"\") ;\n  string(\"\\x01\") group = NULL(\"\") ;\n  string(\"\\x01\") cag_override_data_path= NULL(\"\");\n  decimal(\"\\x01\")[int] output_profile_id ;\n  record\n    string(\"\\x01\") output_profile_name ;\n    string(\"\\x01\") [int] alias_names;\n    string(\"\\x01\") [int] job_names;\n    string(\"\\x01\")[int] formulary_names ;\n    string(\"\\x01\") [int] form_override_data_paths;\n    string(\"\\x01\")[int] formulary_pseudonyms ;\n    string(\"\\x01\") tal_name ;\n    string(\"\\x01\") tac_name ;\n    string(\"\\x01\") tar_name ;\n    string(\"\\x01\") tsd_name ;\n    string(\"\\x01\", maximum_length=1) st_tac_ind ;\n  end[int] op_dtls;\n  string(\"\\x01\")[int] err_msgs ;\n  string(1) newline = \"\\n\";\nend;\ntype tal_expansion_test_harness =\nrecord\n  string('\\x01') tal_id;\n  string('\\x01') tal_assoc_id;\n  string('\\x01') tal_assoc_desc;\n  string('\\x01') tal_assoc_type_cd;\n  string('\\x01') override_tac_name;\n  string('\\x01') override_tar_name;\n  string('\\x01') shared_qual;\n  string('\\x01') tal_assoc_rank;\n  string('\\x01') udl_id;\n  string('\\x01') udl_desc;\n  string('\\x01') alt_rank;\n  string('\\x01') target_alternative;\n  string('\\x01') ndc11;\n  string('\\x01') gpi14;\n  string('\\x01') msc;\n  string('\\x01') drug_name;\n  string('\\x01') prod_short_desc;\n  string('\\x01') gpi14_desc;\n  string('\\x01') prod_strength;\n  string('\\x01') roa_cd;\n  string('\\x01') dosage_form_cd;\n  string('\\x01') rx_otc;\n  string('\\x01') repack_cd;\n  string('\\x01') status_cd;\n  string('\\x01') inactive_dt;\n  string(1) newline = '\\n';\nend;\ntype udl_expansion_test_harness =\nrecord  \n  string('\\x01')udl_nm ;   \n  string('\\x01')ndc11 ;\n  string('\\x01')gpi14 ;\n  string('\\x01')msc ;\n  string('\\x01')drug_name ;\n  string('\\x01')prod_short_desc ;\n  string('\\x01')gpi14_desc ;\n  string('\\x01')prod_strength;  \n  string('\\x01')roa_cd ;\n  string('\\x01')dosage_form_cd ;\n  string('\\x01')rx_otc ;\n  string('\\x01')repack_cd;  \n  string('\\x01')status_cd ; \n  string('\\x01')inactive_dt ; \n  string(1)newline = '\\n';\nend;\ntype alt_run_job_details_load_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_id ;\n  decimal(\"\\x01\",0, maximum_length=16) job_run_id ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  string(1) newline = \"\\n\";\nend;\ntype alias_dtl_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=10) alias_dtl_id ;\n  decimal(\"\\x01\",0, maximum_length=10) alias_id ;\n  string(\"\\x01\", maximum_length=20) alias_name ;\n  decimal(\"\\x01\",0, maximum_length=39) qual_priority = 99;\n  string(\"\\x01\", maximum_length=10) qual_id_type_cd = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=14) qual_id_value = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=70) search_txt ;\n  string(\"\\x01\", maximum_length=70) replace_txt = NULL(\"\") ;\n  decimal(\"\\x01\",0, maximum_length=39) rank ;\n  date(\"YYYYMMDD\")(\"\\x01\") eff_dt ;\n  date(\"YYYYMMDD\")(\"\\x01\") term_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype alias_info_t =  record\n        decimal(\"\\x01\",0, maximum_length=39) qual_priority = 99;\n        string(\"\\x01\", maximum_length=14) qual_id_value = NULL(\"\") ;\n        string(\"\\x01\", maximum_length=70) search_txt ;\n        string(\"\\x01\", maximum_length=70) replace_txt  ;\n        date(\"YYYYMMDD\")(\"\\x01\") eff_dt;\n        date(\"YYYYMMDD\")(\"\\x01\") term_dt;\nend;\ntype alias_xwalk_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=10) alias_id ;\n  string(\"\\x01\", maximum_length=20) alias_name ;\n  alias_info_t[int] alias_info; \nend;\ntype target_alt_rank_t =\nrecord\n    int target_dl_bit;\n    decimal('\\x01') bucket_index = 0;\n    decimal('\\x01') udl_index = 0;\n    string(20) tar_udl_nm =NULL(\"\");\n    decimal('\\x01') tac_index = 0;\n    record\n      int alt_rank;\n      int[int] alt_prdcts;\n      string(2) constituent_group = NULL(\"\");\n      string(1) constituent_reqd = NULL(\"\");\n      string(20) udl_nm =NULL(\"\");\n    end[int] alt_prdcts_rank;   \n    string(\"\\x01\")has_alt;\n    decimal(1) ST_flag =0;\nend;\ntype alias_content_xwalk_t =\nrecord\n  string(\"\\x01\", maximum_length=13) alias_set_name;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\") alias_label_nm ;\n  string(1) newline = \"\\n\";\nend;\ntype gpi_rank_ratio_t =\nrecord\n  string(\"\\x01\", maximum_length=14) gpi14 ;\n  decimal(\"\\x01\",0, maximum_length=39) rank ;\n  decimal(\"\\x01\".3, maximum_length=6) ratio = NULL(\"\") ;\n  date(\"YYYYMMDD\")(\"\\x01\") run_eff_dt = NULL(\"\") ;\n end;\ntype tad_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tad_id ;\n  string(\"\\x01\", maximum_length=14) target_gpi14 ;\n  string(\"\\x01\", maximum_length=12) alt_grouping_gpi12 ;\n  string(\"\\x01\", maximum_length=14) alt_selection_id ;\n  decimal(\"\\x01\",0, maximum_length=39) rank ;\n  decimal(\"\\x01\".3, maximum_length=7) qty_adjust_factor = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype tad_xwalk_t =\nrecord\n  string(\"\\x01\", maximum_length=14) target_gpi14 ;\n  string(\"\\x01\", maximum_length=6) alt_selection_cd;\n  string(\"\\x01\", maximum_length=14)[int] alt_selection_ids ;\n  record\n    decimal(\"\\x01\",0, maximum_length=39) rank ;\n    decimal(\"\\x01\".3, maximum_length=7) qty_adjust_factor = NULL(\"\") ;\n  end[int] tad_alt_dtls ;\n  string(1) newline = \"\\n\";\nend;\ntype step_grp_xwalk_t =\nrecord\n  string(\"\\x01\", maximum_length=11) ndc11 ;\n  decimal(\"\\x01\",0, maximum_length=39) step_therapy_step_number = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=100)[int] step_therapy_group_names  ;\nend;\ntype step_grp_num_xwalk_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tac_id ;\n  string(\"\\x01\", maximum_length=20) tac_name ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  decimal(\"\\x01\") _target_st_grp_num = allocate();\n  decimal(\"\\x01\")[int] _alt_st_grp_nums = allocate();\nend;\ntype tal_assoc_clinical_indn_t =\nrecord\n decimal(\"\\x01\",0, maximum_length=10) tal_assoc_id ;\n string(\"\\x01\", maximum_length=40) tal_assoc_name ;\n decimal(\"\\x01\",0, maximum_length=10) clinical_indn_id = NULL(\"\");\n string(\"\\x01\", maximum_length=20) clinical_indn_name ;\n string(\"\\x01\", maximum_length=200) clinical_indn_desc = NULL(\"\");\n decimal(\"\\x01\",0, maximum_length=39) rank = NULL(\"\");\nend;\ntype alt_run_clinical_indn_dtl_load_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_id = -1 ;\n  decimal(\"\\x01\",0, maximum_length=16) alt_run_target_dtl_id = -1 ;\n  string(\"\\x01\", maximum_length=20) formulary_name ;\n  string(\"\\x01\", maximum_length=11) target_ndc ;\n  string(\"\\x01\", maximum_length=40) tal_assoc_name ;\n  decimal(\"\\x01\",0, maximum_length=39) rank ;\n  datetime(\"YYYY-MM-DD HH24:MI:SS\")(\"\\x01\") rec_crt_ts ;\n  string(\"\\x01\", maximum_length=30) rec_crt_user_id ;\n  string(\"\\x01\", maximum_length=200) clinical_indn_desc = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype form_target_reject_t = \nrecord\nstring(\",\") error_msg;\ndecimal(\",\") tal_id ;\nstring(\",\") tal_name ;\nstring(\",\") tal_assoc_name = NULL(\"\") ;\nstring(\",\") ndc11 = NULL(\"\");\nstring(\",\") gpi14 = NULL(\"\");\nstring(\"\\n\") prod_short_desc = NULL(\"\");\nend;\ntype form_alt_reject_t = \nrecord\nstring(\",\") error_msg;\ndecimal(\",\") tal_id ;\nstring(\",\") tal_name ;\nstring(\",\") tal_assoc_name = NULL(\"\") ;\nstring(\",\") target_ndc11 = NULL(\"\");\nstring(\",\") alt_ndc11 = NULL(\"\");\nstring(\",\") gpi14 = NULL(\"\");\nstring(\"\\n\") prod_short_desc = NULL(\"\");\nend;\ntype tal_assoc_enriched_data_t = \nrecord\n  string(\"\\x01\", maximum_length=20) tal_assoc_name ;\n  decimal(\"\\x01\",0, maximum_length=39) tal_assoc_type_cd ;\n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  decimal(\"\\x01\",0, maximum_length=39) alt_rank = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(2) constituent_group = NULL(\"\");\n  string(1) constituent_reqd = NULL(\"\");\n  decimal(\"\\x01\",0, maximum_length=39) constituent_rank = NULL(\"\");\n  string(1) newline = \"\\n\";\nend;\ntype tsd_enriched_data_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tsd_id ;\n  string(\"\\x01\", maximum_length=30) tsd_cd ;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype tac_enriched_data_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tac_id ;\n  string(\"\\x01\", maximum_length=20) tac_name ;\n  decimal(\"\\x01\",0, maximum_length=39) priority ;\n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype tar_enriched_data_t = \nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tar_id  ;\n  string(\"\\x01\", maximum_length=20) tar_name ;\n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype asso_enriched_tac_data_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_id ;\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(\"\\x01\", maximum_length=30) shared_qual ;\n  string(\"\\x01\", maximum_length=20) override_tac_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=20) override_tar_name = NULL(\"\") ;\n  string(1) newline = \"\\n\";\nend;\ntype asso_enriched_sorted_data_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) tal_id ;\n  string(\"\\x01\", maximum_length=20) tal_name ;\n  string(\"\\x01\", maximum_length=20) tal_assoc_name = NULL(\"\") ;\n  string(\"\\x01\", maximum_length=11)  Target_ndc11 ='N/A';\n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=15) tad_eli_code= NULL(\"\") ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  string(1) newline = \"\\n\";\nend;\ntype asso_enriched_diff_data_t =\nrecord\n  string(\"\\x01\", maximum_length=20) Target_Alternative;\n  string(\"\\x01\", maximum_length=11)  ndc11 ;\n  string(\"\\x01\", maximum_length=14)  gpi14 ;\n  string(\"\\x01\", maximum_length=1)  msc ;\n  string(\"\\x01\", maximum_length=70)  drug_name ;\n  string(\"\\x01\", maximum_length=30) prod_short_desc ;\n  string(\"\\x01\", maximum_length=60) gpi14_desc ;\n  string(\"\\x01\", maximum_length=2)  roa_cd ;\n  string(\"\\x01\", maximum_length=4)  dosage_form_cd ;\n  string(\"\\x01\", maximum_length=3)  rx_otc ;\n  string(\"\\x01\", maximum_length=1)  repack_cd ; \n  string(\"\\x01\", maximum_length=1)  status_cd ;\n  string(\"\\x01\", maximum_length=8) inactive_dt ;\n  end;\ntype udl_ref_t =\nrecord\n  date(\"YYYYMMDD\")(\"\\x01\") as_of_dt ;\nend;\ntype output_profile_rebate_dtl_t =\nrecord\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_rebate_dtl_id ;\n  string(\"\\x01\", maximum_length=20) udl_name ;\n  decimal(\"\\x01\",0, maximum_length=10) output_profile_id ;\n  string(\"\\x01\", maximum_length=15) rebate_elig_cd ;\n  string(1) newline = \"\\n\";\nend;\nmetadata type = alt_run_alt_proxy_dtl_load_t ;\"\"\",\n    readFormat = \"fixedFormat\",\n    joinWithInputDataframe = false\n  )\n\n  val out = fileRecordDF\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Load_Serial_log_file" : {
+      "id" : "Load_Serial_log_file",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Load_Serial_log_file_7",
+        "slug" : "Load_Serial_log_file_7",
+        "x" : 2080,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Load_Serial_log_file__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "node",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "timestamp",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "component",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "subcomponent",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_type",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_text",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Load_Serial_log_file_7"
+      }
+    },
+    "gJQ0YiCqjShv15GA8Ejz-$$HbOMS5OvUDWD7ePzbg9YF" : {
+      "id" : "gJQ0YiCqjShv15GA8Ejz-$$HbOMS5OvUDWD7ePzbg9YF",
+      "component" : "Join",
+      "metadata" : {
+        "label" : "Join_With_Input_Surrogate_Key_File__Join",
+        "slug" : "Join_With_Input_Surrogate_Key_File__Join",
+        "x" : 820,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions._not(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(_root_.io.prophecy.abinitio.ScalaFunctions._is_blank(context.config.JOIN_KEY)))"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT",
+          "slug" : "left",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ",
+          "slug" : "right",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "1hbSRpXxSmTDZFXcat9k0$$k0G13GMMfO-WWM32xFNrA",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "conditions" : [ {
+          "alias" : "right",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "(col(\"left.formulary_name\") === col(\"right.formulary_name\")) && (col(\"left.tal_assoc_name\") === col(\n    \"right.tal_assoc_name\"\n  )) && (col(\"left.target_ndc\") === col(\"right.target_ndc\")) && (col(\"left.alt_ndc\") === col(\"right.alt_proxy_ndc\"))"
+          },
+          "joinType" : "inner"
+        } ],
+        "expressions" : [ {
+          "target" : "alt_run_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(lit(Config.ALT_RUN_ID).cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_run_alt_dtl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"left.alt_run_alt_dtl_id\").cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_run_target_dtl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"left.alt_run_target_dtl_id\").cast(DecimalType(16, 0)), lit(-1))"
+          },
+          "description" : ""
+        }, {
+          "target" : "formulary_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.formulary_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "target_ndc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.target_ndc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tal_assoc_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.tal_assoc_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_proxy_ndc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.alt_proxy_ndc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rank",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.rank\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_ts",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.rec_crt_ts\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rec_crt_user_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.rec_crt_user_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"right.newline\").cast(StringType), lit(\"\\n\"))"
+          },
+          "description" : ""
+        } ],
+        "hints" : [ {
+          "id" : "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT",
+          "alias" : "left",
+          "hintType" : "none",
+          "propagateColumns" : false
+        }, {
+          "id" : "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ",
+          "alias" : "right",
+          "hintType" : "none",
+          "propagateColumns" : false
+        } ],
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT##formulary_name", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##formulary_name", "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT##tal_assoc_name", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##tal_assoc_name", "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT##target_ndc", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##target_ndc", "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT##alt_ndc", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##alt_proxy_ndc", "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT##alt_run_alt_dtl_id", "sazPErHd5o6Gt0XbB3FyS$$pzqKOfIMyVwGb6bxJGZZT##alt_run_target_dtl_id", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##formulary_name", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##target_ndc", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##tal_assoc_name", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##alt_proxy_ndc", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##rank", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##rec_crt_ts", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##rec_crt_user_id", "-xAMWM1aH24whGpbaBbMN$$mqaAzqifKWhKuGFe_VxoJ##newline" ],
+        "headAlias" : "left"
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Join",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Partition_Data" : {
+      "id" : "Partition_Data",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Partition_Data",
+        "slug" : "Partition_Data",
+        "x" : 1020,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Partition_Data__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Partition_Data__out1",
+          "slug" : "out1",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Partition_Data__out0",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "  val tempDF_in      = in.zipWithIndex(0,         1, \"tempId\", spark)\n  lazy val groupedDF = tempDF_in.select(col(\"*\"), pmod(floor(col(\"tempId\") / lit(1)), lit(2)).as(\"group_id\"))\n  lazy val out0_tmp  = groupedDF.filter(col(\"group_id\") === lit(0))\n  lazy val out0      = out0_tmp.drop(\"group_id\")\n  lazy val out1_tmp  = groupedDF.filter(col(\"group_id\") === lit(1))\n  lazy val out1      = out1_tmp.drop(\"group_id\")\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "(out0, out1)\n}"
+      }
+    },
+    "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields" : {
+      "id" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields",
+        "slug" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields",
+        "x" : 1880,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(Array(\"alt_run_target_dtl\",\"alt_run_alt_dtl\").contains(context.config.TABLE_NAME))"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Output_Surrogate_Key_File_Creation__Fetching_Required_Fields__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Append_Mode_Log" : {
+      "id" : "Append_Mode_Log",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Append_Mode_Log",
+        "slug" : "Append_Mode_Log",
+        "x" : 1680,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "context.config.LOAD_MODE == \"A\""
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Append_Mode_Log__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Append_Mode_Log__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val out = in.generateLogOutput(\n    componentName = \"Append_Mode\",\n    inputRowCount = in.count(),\n    sparkSession = spark\n  )\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Handle_Serial_Logs" : {
+      "id" : "Handle_Serial_Logs",
+      "component" : "SetOperation",
+      "metadata" : {
+        "label" : "Handle_Serial_Logs",
+        "slug" : "Handle_Serial_Logs",
+        "x" : 1880,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Handle_Serial_Logs__in2",
+          "slug" : "in2",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "node",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "timestamp",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "component",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "subcomponent",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_type",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_text",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Handle_Serial_Logs__in4",
+          "slug" : "in4",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "node",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "timestamp",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "component",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "subcomponent",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_type",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "event_text",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Handle_Serial_Logs__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "operationType" : "unionAll",
+        "allowMissingColumns" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SetOperation",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Append_Mode" : {
+      "id" : "Append_Mode",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Append_Mode_7",
+        "slug" : "Append_Mode_7",
+        "x" : 1880,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "removalCondition" : "context.config.LOAD_MODE == \"A\""
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Append_Mode__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "alt_run_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_alt_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_run_target_dtl_id",
+              "type" : "decimal(16,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "formulary_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tal_assoc_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_proxy_ndc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rank",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_ts",
+              "type" : "timestamp",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rec_crt_user_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Append_Mode_7"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.processes.Append_Mode_Log.ports.outputs",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 3,
+    "message" : "Please infer output schema from the cluster as described [here](https://docs.prophecy.io/low-code-spark/gems/custom/script/)",
+    "tags" : [ ],
+    "relatedInformation" : [ ],
+    "diagnosticType" : 2
+  } ]
+}

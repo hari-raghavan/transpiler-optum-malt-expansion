@@ -1,0 +1,74 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: alt_run_id
+    type: decimal(16,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: alt_run_target_dtl_id
+    type: decimal(16,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: formulary_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: target_ndc
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: tal_assoc_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: rank
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: rec_crt_ts
+    type: timestamp
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: rec_crt_user_id
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: clinical_indn_desc
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: newline
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
