@@ -567,6 +567,44 @@ pipelines:
       outputs: []
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_alt_run_alt_dtl_load:
+    name: altexp_alt_run_alt_dtl_load
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 08:42:40'
+    datasets:
+      inputs:
+      - datasets/Join_With_DB__Join_with_DB_jdbc0
+      - datasets/Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File0
+      outputs:
+      - datasets/Append_Mode0
+      - datasets/Join_With_DB__Load_MFS_log_file0
+      - datasets/Load_Serial_log_file0
+      - datasets/Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File0
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_alt_run_target_dtl_load:
+    name: altexp_alt_run_target_dtl_load
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 08:42:42'
+    datasets:
+      inputs:
+      - datasets/Join_With_DB__Join_with_DB_jdbc1
+      - datasets/Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File1
+      outputs:
+      - datasets/Append_Mode1
+      - datasets/Join_With_DB__Load_MFS_log_file1
+      - datasets/Load_Serial_log_file1
+      - datasets/Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File1
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -1873,6 +1911,174 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-23 14:52:38'
+  datasets/Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File0:
+    name: Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File0
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_alt_dtl_load componentName:
+      Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:40'
+  datasets/Join_With_DB__Load_MFS_log_file0:
+    name: Join_With_DB__Load_MFS_log_file0
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_alt_dtl_load componentName:
+      Join_With_DB__Load_MFS_log_file0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:40'
+  datasets/Join_With_DB__Join_with_DB_jdbc0:
+    name: Join_With_DB__Join_with_DB_jdbc0
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_alt_dtl_load componentName:
+      Join_With_DB__Join_with_DB_jdbc0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:40'
+  datasets/Load_Serial_log_file0:
+    name: Load_Serial_log_file0
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_alt_dtl_load componentName:
+      Load_Serial_log_file0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:40'
+  datasets/Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File0:
+    name: Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File0
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_alt_dtl_load componentName:
+      Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:40'
+  datasets/Append_Mode0:
+    name: Append_Mode0
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_alt_dtl_load componentName:
+      Append_Mode0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:40'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:40'
+  datasets/Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File1:
+    name: Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File1
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_target_dtl_load componentName:
+      Join_With_Input_Surrogate_Key_File__Input_Surrogate_Key_File1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:41'
+  datasets/Join_With_DB__Load_MFS_log_file1:
+    name: Join_With_DB__Load_MFS_log_file1
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_target_dtl_load componentName:
+      Join_With_DB__Load_MFS_log_file1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:41'
+  datasets/Join_With_DB__Join_with_DB_jdbc1:
+    name: Join_With_DB__Join_with_DB_jdbc1
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_target_dtl_load componentName:
+      Join_With_DB__Join_with_DB_jdbc1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:41'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:41'
+  datasets/Load_Serial_log_file1:
+    name: Load_Serial_log_file1
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_target_dtl_load componentName:
+      Load_Serial_log_file1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:42'
+  datasets/Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File1:
+    name: Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File1
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_target_dtl_load componentName:
+      Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:42'
+  datasets/Append_Mode1:
+    name: Append_Mode1
+    description: 'Dataset for Imported Pipeline:altexp_alt_run_target_dtl_load componentName:
+      Append_Mode1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 08:42:42'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 08:42:42'
 templates: {}
 jobs: {}
 gemContainer:

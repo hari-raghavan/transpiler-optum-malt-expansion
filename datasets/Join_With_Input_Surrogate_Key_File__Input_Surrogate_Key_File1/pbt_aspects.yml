@@ -1,0 +1,39 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: output_profile_rebate_dtl_id
+    type: decimal(10,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: udl_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: output_profile_id
+    type: decimal(10,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: rebate_elig_cd
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: newline
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
