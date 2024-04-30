@@ -1,0 +1,95 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: file_load_cntl_id
+    type: decimal(16,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: component_ids
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: as_of_date
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: rxclaim_env_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: carrier
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: account
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: group
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: component_type_cd
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: file_name_w
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: published_ind
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: alt_run_id
+    type: decimal(16,0)
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: report_file_name
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: newline
+    type: string
+    nullable: false
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
