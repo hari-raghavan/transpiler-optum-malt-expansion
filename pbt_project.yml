@@ -605,6 +605,238 @@ pipelines:
       - datasets/Output_Surrogate_Key_File_Creation__Output_Surrogate_Key_File1
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_drug_data_set_dtl:
+    name: altexp_drug_data_set_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:18:47'
+    datasets:
+      inputs:
+      - datasets/Source_Table0
+      outputs:
+      - datasets/OFILE0
+      - datasets/REJECT_FILE0
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_form_data_set_dtl:
+    name: altexp_form_data_set_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:26'
+    datasets:
+      inputs:
+      - datasets/Source_Table1
+      outputs:
+      - datasets/OFILE1
+      - datasets/REJECT_FILE1
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_output_profile:
+    name: altexp_output_profile
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:27'
+    datasets:
+      inputs:
+      - datasets/Source_Table2
+      outputs:
+      - datasets/OFILE2
+      - datasets/REJECT_FILE2
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_output_profile_rebate_dtl:
+    name: altexp_output_profile_rebate_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:28'
+    datasets:
+      inputs:
+      - datasets/LKP_Lookup3
+      - datasets/Source_Table3
+      outputs:
+      - datasets/OFILE3
+      - datasets/REJECT_FILE3
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tac_dtl:
+    name: altexp_tac_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:29'
+    datasets:
+      inputs:
+      - datasets/LKP_Lookup14
+      - datasets/LKP_Lookup4
+      - datasets/Source_Table4
+      outputs:
+      - datasets/OFILE4
+      - datasets/REJECT_FILE4
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tad_dtl:
+    name: altexp_tad_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:29'
+    datasets:
+      inputs:
+      - datasets/Source_Table5
+      outputs:
+      - datasets/OFILE5
+      - datasets/REJECT_FILE5
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tal_assoc_clinical_indn:
+    name: altexp_tal_assoc_clinical_indn
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:30'
+    datasets:
+      inputs:
+      - datasets/Source_Table6
+      outputs:
+      - datasets/OFILE6
+      - datasets/REJECT_FILE6
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tal_assoc_dtl:
+    name: altexp_tal_assoc_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:31'
+    datasets:
+      inputs:
+      - datasets/Source_Table7
+      outputs:
+      - datasets/OFILE7
+      - datasets/REJECT_FILE7
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tal_dtl:
+    name: altexp_tal_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:31'
+    datasets:
+      inputs:
+      - datasets/Source_Table8
+      outputs:
+      - datasets/OFILE8
+      - datasets/REJECT_FILE8
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tar_dtl:
+    name: altexp_tar_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:32'
+    datasets:
+      inputs:
+      - datasets/LKP_Lookup19
+      - datasets/LKP_Lookup9
+      - datasets/Source_Table9
+      outputs:
+      - datasets/OFILE9
+      - datasets/REJECT_FILE9
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tar_roa_df_set_dtl:
+    name: altexp_tar_roa_df_set_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:33'
+    datasets:
+      inputs:
+      - datasets/LKP_Lookup10
+      - datasets/Source_Table10
+      outputs:
+      - datasets/OFILE10
+      - datasets/REJECT_FILE10
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tsd_dtl:
+    name: altexp_tsd_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:34'
+    datasets:
+      inputs:
+      - datasets/LKP_Lookup11
+      - datasets/Source_Table11
+      outputs:
+      - datasets/OFILE11
+      - datasets/REJECT_FILE11
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_user_defined_list_rule:
+    name: altexp_user_defined_list_rule
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:35'
+    datasets:
+      inputs:
+      - datasets/Source_Table12
+      outputs:
+      - datasets/OFILE12
+      - datasets/REJECT_FILE12
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_alias_dtl:
+    name: altexp_alias_dtl
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-30 10:20:36'
+    datasets:
+      inputs:
+      - datasets/LKP_Lookup13
+      - datasets/Source_Table13
+      outputs:
+      - datasets/OFILE13
+      - datasets/REJECT_FILE13
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -2079,6 +2311,682 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-30 08:42:42'
+  datasets/OFILE0:
+    name: OFILE0
+    description: 'Dataset for Imported Pipeline:altexp_drug_data_set_dtl componentName:
+      OFILE0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:18:47'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:18:47'
+  datasets/REJECT_FILE0:
+    name: REJECT_FILE0
+    description: 'Dataset for Imported Pipeline:altexp_drug_data_set_dtl componentName:
+      REJECT_FILE0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:18:47'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:18:47'
+  datasets/Source_Table0:
+    name: Source_Table0
+    description: 'Dataset for Imported Pipeline:altexp_drug_data_set_dtl componentName:
+      Source_Table0'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:18:47'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:18:47'
+  datasets/OFILE1:
+    name: OFILE1
+    description: 'Dataset for Imported Pipeline:altexp_form_data_set_dtl componentName:
+      OFILE1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:25'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:25'
+  datasets/REJECT_FILE1:
+    name: REJECT_FILE1
+    description: 'Dataset for Imported Pipeline:altexp_form_data_set_dtl componentName:
+      REJECT_FILE1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:26'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:26'
+  datasets/Source_Table1:
+    name: Source_Table1
+    description: 'Dataset for Imported Pipeline:altexp_form_data_set_dtl componentName:
+      Source_Table1'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:26'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:26'
+  datasets/OFILE2:
+    name: OFILE2
+    description: 'Dataset for Imported Pipeline:altexp_output_profile componentName:
+      OFILE2'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:26'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:26'
+  datasets/REJECT_FILE2:
+    name: REJECT_FILE2
+    description: 'Dataset for Imported Pipeline:altexp_output_profile componentName:
+      REJECT_FILE2'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:27'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:27'
+  datasets/Source_Table2:
+    name: Source_Table2
+    description: 'Dataset for Imported Pipeline:altexp_output_profile componentName:
+      Source_Table2'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:27'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:27'
+  datasets/LKP_Lookup3:
+    name: LKP_Lookup3
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_rebate_dtl componentName:
+      LKP_Lookup3'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:27'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:27'
+  datasets/OFILE3:
+    name: OFILE3
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_rebate_dtl componentName:
+      OFILE3'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:27'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:27'
+  datasets/REJECT_FILE3:
+    name: REJECT_FILE3
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_rebate_dtl componentName:
+      REJECT_FILE3'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:27'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:27'
+  datasets/Source_Table3:
+    name: Source_Table3
+    description: 'Dataset for Imported Pipeline:altexp_output_profile_rebate_dtl componentName:
+      Source_Table3'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:27'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:27'
+  datasets/LKP_Lookup4:
+    name: LKP_Lookup4
+    description: 'Dataset for Imported Pipeline:altexp_tac_dtl componentName: LKP_Lookup4'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:28'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:28'
+  datasets/OFILE4:
+    name: OFILE4
+    description: 'Dataset for Imported Pipeline:altexp_tac_dtl componentName: OFILE4'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:28'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:28'
+  datasets/LKP_Lookup14:
+    name: LKP_Lookup14
+    description: 'Dataset for Imported Pipeline:altexp_tac_dtl componentName: LKP_Lookup14'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:28'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:28'
+  datasets/REJECT_FILE4:
+    name: REJECT_FILE4
+    description: 'Dataset for Imported Pipeline:altexp_tac_dtl componentName: REJECT_FILE4'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:28'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:28'
+  datasets/Source_Table4:
+    name: Source_Table4
+    description: 'Dataset for Imported Pipeline:altexp_tac_dtl componentName: Source_Table4'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:28'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:28'
+  datasets/OFILE5:
+    name: OFILE5
+    description: 'Dataset for Imported Pipeline:altexp_tad_dtl componentName: OFILE5'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:29'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:29'
+  datasets/REJECT_FILE5:
+    name: REJECT_FILE5
+    description: 'Dataset for Imported Pipeline:altexp_tad_dtl componentName: REJECT_FILE5'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:29'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:29'
+  datasets/Source_Table5:
+    name: Source_Table5
+    description: 'Dataset for Imported Pipeline:altexp_tad_dtl componentName: Source_Table5'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:29'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:29'
+  datasets/OFILE6:
+    name: OFILE6
+    description: 'Dataset for Imported Pipeline:altexp_tal_assoc_clinical_indn componentName:
+      OFILE6'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:30'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:30'
+  datasets/REJECT_FILE6:
+    name: REJECT_FILE6
+    description: 'Dataset for Imported Pipeline:altexp_tal_assoc_clinical_indn componentName:
+      REJECT_FILE6'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:30'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:30'
+  datasets/Source_Table6:
+    name: Source_Table6
+    description: 'Dataset for Imported Pipeline:altexp_tal_assoc_clinical_indn componentName:
+      Source_Table6'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:30'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:30'
+  datasets/OFILE7:
+    name: OFILE7
+    description: 'Dataset for Imported Pipeline:altexp_tal_assoc_dtl componentName:
+      OFILE7'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:30'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:30'
+  datasets/REJECT_FILE7:
+    name: REJECT_FILE7
+    description: 'Dataset for Imported Pipeline:altexp_tal_assoc_dtl componentName:
+      REJECT_FILE7'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:31'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:31'
+  datasets/Source_Table7:
+    name: Source_Table7
+    description: 'Dataset for Imported Pipeline:altexp_tal_assoc_dtl componentName:
+      Source_Table7'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:31'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:31'
+  datasets/OFILE8:
+    name: OFILE8
+    description: 'Dataset for Imported Pipeline:altexp_tal_dtl componentName: OFILE8'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:31'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:31'
+  datasets/REJECT_FILE8:
+    name: REJECT_FILE8
+    description: 'Dataset for Imported Pipeline:altexp_tal_dtl componentName: REJECT_FILE8'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:31'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:31'
+  datasets/Source_Table8:
+    name: Source_Table8
+    description: 'Dataset for Imported Pipeline:altexp_tal_dtl componentName: Source_Table8'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:31'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:31'
+  datasets/LKP_Lookup9:
+    name: LKP_Lookup9
+    description: 'Dataset for Imported Pipeline:altexp_tar_dtl componentName: LKP_Lookup9'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:32'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:32'
+  datasets/OFILE9:
+    name: OFILE9
+    description: 'Dataset for Imported Pipeline:altexp_tar_dtl componentName: OFILE9'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:32'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:32'
+  datasets/LKP_Lookup19:
+    name: LKP_Lookup19
+    description: 'Dataset for Imported Pipeline:altexp_tar_dtl componentName: LKP_Lookup19'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:32'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:32'
+  datasets/REJECT_FILE9:
+    name: REJECT_FILE9
+    description: 'Dataset for Imported Pipeline:altexp_tar_dtl componentName: REJECT_FILE9'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:32'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:32'
+  datasets/Source_Table9:
+    name: Source_Table9
+    description: 'Dataset for Imported Pipeline:altexp_tar_dtl componentName: Source_Table9'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:32'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:32'
+  datasets/LKP_Lookup10:
+    name: LKP_Lookup10
+    description: 'Dataset for Imported Pipeline:altexp_tar_roa_df_set_dtl componentName:
+      LKP_Lookup10'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:33'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:33'
+  datasets/OFILE10:
+    name: OFILE10
+    description: 'Dataset for Imported Pipeline:altexp_tar_roa_df_set_dtl componentName:
+      OFILE10'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:33'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:33'
+  datasets/REJECT_FILE10:
+    name: REJECT_FILE10
+    description: 'Dataset for Imported Pipeline:altexp_tar_roa_df_set_dtl componentName:
+      REJECT_FILE10'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:33'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:33'
+  datasets/Source_Table10:
+    name: Source_Table10
+    description: 'Dataset for Imported Pipeline:altexp_tar_roa_df_set_dtl componentName:
+      Source_Table10'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:33'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:33'
+  datasets/LKP_Lookup11:
+    name: LKP_Lookup11
+    description: 'Dataset for Imported Pipeline:altexp_tsd_dtl componentName: LKP_Lookup11'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:34'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:34'
+  datasets/OFILE11:
+    name: OFILE11
+    description: 'Dataset for Imported Pipeline:altexp_tsd_dtl componentName: OFILE11'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:34'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:34'
+  datasets/REJECT_FILE11:
+    name: REJECT_FILE11
+    description: 'Dataset for Imported Pipeline:altexp_tsd_dtl componentName: REJECT_FILE11'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:34'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:34'
+  datasets/Source_Table11:
+    name: Source_Table11
+    description: 'Dataset for Imported Pipeline:altexp_tsd_dtl componentName: Source_Table11'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:34'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:34'
+  datasets/OFILE12:
+    name: OFILE12
+    description: 'Dataset for Imported Pipeline:altexp_user_defined_list_rule componentName:
+      OFILE12'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:35'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:35'
+  datasets/REJECT_FILE12:
+    name: REJECT_FILE12
+    description: 'Dataset for Imported Pipeline:altexp_user_defined_list_rule componentName:
+      REJECT_FILE12'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:35'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:35'
+  datasets/Source_Table12:
+    name: Source_Table12
+    description: 'Dataset for Imported Pipeline:altexp_user_defined_list_rule componentName:
+      Source_Table12'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:35'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:35'
+  datasets/LKP_Lookup13:
+    name: LKP_Lookup13
+    description: 'Dataset for Imported Pipeline:altexp_alias_dtl componentName: LKP_Lookup13'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:35'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:35'
+  datasets/OFILE13:
+    name: OFILE13
+    description: 'Dataset for Imported Pipeline:altexp_alias_dtl componentName: OFILE13'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:35'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:35'
+  datasets/REJECT_FILE13:
+    name: REJECT_FILE13
+    description: 'Dataset for Imported Pipeline:altexp_alias_dtl componentName: REJECT_FILE13'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:35'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:36'
+  datasets/Source_Table13:
+    name: Source_Table13
+    description: 'Dataset for Imported Pipeline:altexp_alias_dtl componentName: Source_Table13'
+    author: hari@prophecy.io
+    createdAt: '2024-04-30 10:20:36'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: Warehouse
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-04-30 10:20:36'
 templates: {}
 jobs: {}
 gemContainer:
@@ -2095,6 +3003,7 @@ functions:
   airflowFunctions: {}
 subgraphs: {}
 sqlModels: {}
+sqlSnapshots: {}
 sqlMacros: {}
 sqlSeeds: {}
 sqlSources: {}
