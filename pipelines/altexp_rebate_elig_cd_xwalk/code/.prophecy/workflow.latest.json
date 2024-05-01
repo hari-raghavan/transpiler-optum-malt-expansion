@@ -487,7 +487,7 @@
         "slug" : "Expanded_UDL",
         "x" : 20,
         "y" : 220,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -689,7 +689,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : false
+        "autoUpdateOnRun" : true
       },
       "properties" : {
         "allIns" : false,

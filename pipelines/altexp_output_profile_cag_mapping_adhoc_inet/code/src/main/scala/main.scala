@@ -15,17 +15,17 @@ object Main {
   def apply(context: Context): Unit = {
     val df_TSD_Dtl = TSD_Dtl(context)
     TSD_Dtl_lookup(context, df_TSD_Dtl)
-    val df_TAR_Dtl = TAR_Dtl(context)
+    val df_TAR_Dtl                = TAR_Dtl(context)
+    val df_Output_Profile_Extract = Output_Profile_Extract(context)
+    val df_CAG_Override_Ref       = CAG_Override_Ref(context)
     TAR_Dtl_lookup(context, df_TAR_Dtl)
+    val df_TAL_Dtl = TAL_Dtl(context)
     val df_TAC_Dtl = TAC_Dtl(context)
     TAC_Dtl_lookup(context, df_TAC_Dtl)
     val df_Formulary_Override_Ref = Formulary_Override_Ref(context)
     Formulary_Override_Ref_lookup(context, df_Formulary_Override_Ref)
-    val df_TAL_Dtl = TAL_Dtl(context)
-    TAL_Dtl_lookup(context, df_TAL_Dtl)
-    val df_CAG_Override_Ref = CAG_Override_Ref(context)
-    CAG_Override_Ref_lookup(context, df_CAG_Override_Ref)
-    val df_Output_Profile_Extract = Output_Profile_Extract(context)
+    TAL_Dtl_lookup(context,                df_TAL_Dtl)
+    CAG_Override_Ref_lookup(context,       df_CAG_Override_Ref)
     val df_Map_Cag_and_Formulary_Override_URLs =
       Map_Cag_and_Formulary_Override_URLs(context, df_Output_Profile_Extract)
     val df_Map_Cag_and_Formulary_Override_URLs_Reformat_UnionAll =

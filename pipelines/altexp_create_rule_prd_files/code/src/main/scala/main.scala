@@ -81,8 +81,10 @@ object Main {
     val df_Agg_same_group_products_Reformat =
       Agg_same_group_products_Reformat(context, df_Agg_same_group_products)
     val df_Create_Product_Lookup = Create_Product_Lookup(context, df_Sort_NDC)
+    val df_Create_Product_Lookup_1 =
+      Create_Product_Lookup_1(context, df_Create_Product_Lookup)
     val df_Create_All_Dataset_Rule =
-      Create_All_Dataset_Rule(context, df_Create_Product_Lookup)
+      Create_All_Dataset_Rule(context, df_Create_Product_Lookup_1)
     val df_Create_All_Dataset_Rule_Reformat =
       Create_All_Dataset_Rule_Reformat(context, df_Create_All_Dataset_Rule)
     val df_Separate_data_for_Different_OperatorsReformat_0 =
@@ -102,7 +104,7 @@ object Main {
                            df_Create_Rule_Dataset_for_NE_Operator
     )
     Rule_Products(context, df_Gather)
-    Products(context,      df_Create_Product_Lookup)
+    Products(context,      df_Create_Product_Lookup_1)
   }
 
   def main(args: Array[String]): Unit = {

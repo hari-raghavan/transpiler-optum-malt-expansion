@@ -15,7 +15,6 @@ object Create_Product_Lookup {
 
   def apply(context: Context, in: DataFrame): DataFrame =
     in.select(
-      (monotonically_increasing_id() + lit(1)).cast(IntegerType).as("dl_bit"),
       col("ndc11"),
       col("gpi14"),
       col("status_cd"),

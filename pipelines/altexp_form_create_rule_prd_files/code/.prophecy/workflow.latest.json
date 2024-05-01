@@ -165,7 +165,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "operator",
+              "name" : "compare_value",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -174,7 +174,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "compare_value",
+              "name" : "operator",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -248,7 +248,7 @@
         "slug" : "LKP_Product_Lookup",
         "x" : 20,
         "y" : 220,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -678,7 +678,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "operator",
+              "name" : "compare_value",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -687,7 +687,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "compare_value",
+              "name" : "operator",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -710,7 +710,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : false
+        "autoUpdateOnRun" : true
       },
       "properties" : {
         "allIns" : false,

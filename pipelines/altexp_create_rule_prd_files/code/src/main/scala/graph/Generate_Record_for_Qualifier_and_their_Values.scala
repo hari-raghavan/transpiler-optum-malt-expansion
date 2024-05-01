@@ -71,18 +71,19 @@ object Generate_Record_for_Qualifier_and_their_Values {
           )).as("compare_value")
         ),
         lengthRelatedGlobalExpressions =
-          Map("dl_bit" -> (monotonically_increasing_id() + lit(1)),
+          Map(
               "days_until_inactive" -> datediff(to_date(col("inactive_dt"),"yyyyMMdd"), to_date(lit(Config.BUSINESS_DATE),"yyyyMMdd"))
           ),
         tempWindowExpr = Map()
       )
     
-      val simpleSelect_in_DF = normalizeDF.select((col("dl_bit").cast(IntegerType)).as("dl_bit"),
-                                                  (col("qualifier_cd")).as("qualifier_cd"),
+      val simpleSelect_in_DF = normalizeDF.select((col("qualifier_cd")).as("qualifier_cd"),
                                                   (col("compare_value")).as("compare_value")
       )
     
-      val normalize_out_DF = simpleSelect_in_DF.filter(isNotNullAndNotBlank(col("compare_value")))
+      val simpleSelect_in_DF_1 = simpleSelect_in_DF.zipWithIndex(0, 1, "dl_bit", spark)
+    
+      val normalize_out_DF = simpleSelect_in_DF_1.filter(isNotNullAndNotBlank(col("compare_value")))
     
       val out = normalize_out_DF
     out

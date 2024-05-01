@@ -656,7 +656,7 @@
         "slug" : "Form_Rule_Products",
         "x" : 20,
         "y" : 220,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false

@@ -270,18 +270,6 @@
     "target" : "Create_Rule_Dataset_for_NE_Operator",
     "targetPort" : "Create_Rule_Dataset_for_NE_Operator__right"
   }, {
-    "id" : "e28",
-    "source" : "Create_Product_Lookup",
-    "sourcePort" : "Create_Product_Lookup__out",
-    "target" : "Products",
-    "targetPort" : "Products__in"
-  }, {
-    "id" : "e29",
-    "source" : "Create_Product_Lookup",
-    "sourcePort" : "Create_Product_Lookup__out",
-    "target" : "Create_All_Dataset_Rule",
-    "targetPort" : "Create_All_Dataset_Rule__in"
-  }, {
     "id" : "e2",
     "source" : "Select_valid_drugs",
     "sourcePort" : "Select_valid_drugs__out",
@@ -293,6 +281,24 @@
     "sourcePort" : "Sort_NDC__out",
     "target" : "Create_Product_Lookup",
     "targetPort" : "Create_Product_Lookup__in"
+  }, {
+    "id" : "knGrpsJK-tHiYmIrVEENJ",
+    "source" : "Create_Product_Lookup",
+    "sourcePort" : "Create_Product_Lookup__out",
+    "target" : "fxAUehwrtRpAt3Y5VaODg$$gFRLExk1BBnCKaSund20D",
+    "targetPort" : "lj207ne7e-eQnqnv5o_8s$$j1tcb-C3nViH2ERidnzWw"
+  }, {
+    "id" : "4PNto80ug7jWqry-KZozN",
+    "source" : "fxAUehwrtRpAt3Y5VaODg$$gFRLExk1BBnCKaSund20D",
+    "sourcePort" : "E5MmX34WZnqdzC-yChLRM$$wEQJcjGTTlV4romTjxa4Q",
+    "target" : "Products",
+    "targetPort" : "Products__in"
+  }, {
+    "id" : "1U8QucV7h5TtK2gZq4r7A",
+    "source" : "fxAUehwrtRpAt3Y5VaODg$$gFRLExk1BBnCKaSund20D",
+    "sourcePort" : "E5MmX34WZnqdzC-yChLRM$$wEQJcjGTTlV4romTjxa4Q",
+    "target" : "Create_All_Dataset_Rule",
+    "targetPort" : "Create_All_Dataset_Rule__in"
   } ],
   "processes" : {
     "CAG_dataset" : {
@@ -302,7 +308,7 @@
         "label" : "CAG_dataset",
         "slug" : "CAG_dataset",
         "x" : 20,
-        "y" : 320,
+        "y" : 260,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -329,7 +335,7 @@
         "label" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
         "slug" : "Create_Rule_Dataset_For_EQ_Operator_Reformat",
         "x" : 1220,
-        "y" : 640,
+        "y" : 540,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -351,7 +357,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "operator",
+              "name" : "compare_value",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -360,7 +366,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "compare_value",
+              "name" : "operator",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -432,8 +438,8 @@
       "metadata" : {
         "label" : "Rule_Products",
         "slug" : "Rule_Products",
-        "x" : 2960,
-        "y" : 360,
+        "x" : 3020,
+        "y" : 300,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -501,7 +507,7 @@
         "label" : "Separate_data_for_Different_OperatorsReformat_0",
         "slug" : "Separate_data_for_Different_OperatorsReformat_0",
         "x" : 1820,
-        "y" : 220,
+        "y" : 120,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -605,7 +611,7 @@
         "label" : "Separate_data_for_Different_OperatorsReformat_6",
         "slug" : "Separate_data_for_Different_OperatorsReformat_6",
         "x" : 1820,
-        "y" : 1240,
+        "y" : 1140,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -708,8 +714,8 @@
       "metadata" : {
         "label" : "Agg_same_group_products_Reformat",
         "slug" : "Agg_same_group_products_Reformat",
-        "x" : 2500,
-        "y" : 840,
+        "x" : 2560,
+        "y" : 780,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -813,7 +819,7 @@
         "label" : "Sort_QualVal",
         "slug" : "Sort_QualVal",
         "x" : 820,
-        "y" : 640,
+        "y" : 540,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -892,7 +898,7 @@
         "label" : "Generate_Record_for_Qualifier_and_their_Values",
         "slug" : "Generate_Record_for_Qualifier_and_their_Values",
         "x" : 620,
-        "y" : 640,
+        "y" : 540,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1138,7 +1144,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "\n  val normalizeDF = in.normalize(\n    lengthExpression = Some(lit(17)),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (when(col(\"index\") === lit(0),              lit(\"NDC11\"))\n        .when(col(\"index\") === lit(1),            lit(\"NDC9\"))\n        .when(col(\"index\") === lit(2),            lit(\"GPI14\"))\n        .when(col(\"index\") === lit(3),            lit(\"GPI12\"))\n        .when(col(\"index\") === lit(4),            lit(\"GPI10\"))\n        .when(col(\"index\") === lit(5),            lit(\"DOSAGE_FORM\"))\n        .when(col(\"index\") === lit(6),            lit(\"ROA\"))\n        .when(col(\"index\") === lit(7),            lit(\"DRUG_NAME\"))\n        .when(col(\"index\") === lit(8),            lit(\"GPI8\"))\n        .when(col(\"index\") === lit(9),            lit(\"GPI6\"))\n        .when(col(\"index\") === lit(10),           lit(\"GPI4\"))\n        .when(col(\"index\") === lit(11),           lit(\"MSC\"))\n        .when(col(\"index\") === lit(12),           lit(\"RXOTC\"))\n        .when(col(\"index\") === lit(13),           lit(\"DAYS_UNTIL_DRUG_STATUS_INACTIVE\"))\n        .when(col(\"index\") === lit(14),           lit(\"STATUS_CD\"))\n        .when(col(\"index\") === lit(15),           lit(\"REPACKAGER\"))\n        .otherwise(when(col(\"index\") === lit(16), lit(\"DESI_CD\"))))\n        .as(\"qualifier_cd\"),\n      (rtrim(\n        when(col(\"index\") === lit(0),    col(\"ndc11\"))\n          .when(col(\"index\") === lit(1), string_substring(col(\"ndc11\"), lit(1), lit(9)))\n          .when(col(\"index\") === lit(2), col(\"gpi14\"))\n          .when(col(\"index\") === lit(3), string_substring(col(\"gpi14\"), lit(1), lit(12)))\n          .when(col(\"index\") === lit(4), string_substring(col(\"gpi14\"), lit(1), lit(10)))\n          .when(col(\"index\") === lit(5), col(\"dosage_form_cd\"))\n          .when(col(\"index\") === lit(6), col(\"roa_cd\"))\n          .when(col(\"index\") === lit(7),\n                regexp_replace(col(\"drug_name\"), lit(\"\\\\Q[[[^0-9]s[^0-9][^0-9]ce[^0-9]]]+\\\\E\"), lit(\"\"))\n          )\n          .when(col(\"index\") === lit(8),  string_substring(col(\"gpi14\"), lit(1), lit(8)))\n          .when(col(\"index\") === lit(9),  string_substring(col(\"gpi14\"), lit(1), lit(6)))\n          .when(col(\"index\") === lit(10), string_substring(col(\"gpi14\"), lit(1), lit(4)))\n          .when(col(\"index\") === lit(11), col(\"msc\"))\n          .when(col(\"index\") === lit(12), col(\"rx_otc\"))\n          .when(\n            col(\"index\") === lit(13),\n            when(col(\"days_until_inactive\") > lit(180),    lit(\"180\"))\n              .when(col(\"days_until_inactive\") > lit(120), lit(\"120\"))\n              .when(col(\"days_until_inactive\") > lit(90),  lit(\"90\"))\n              .when(col(\"days_until_inactive\") > lit(60),  lit(\"60\"))\n              .when(col(\"days_until_inactive\") > lit(30),  lit(\"30\"))\n              .otherwise(lit(\"\"))\n          )\n          .when(col(\"index\") === lit(14),           col(\"status_cd\"))\n          .when(col(\"index\") === lit(15),           col(\"repack_cd\"))\n          .otherwise(when(col(\"index\") === lit(16), col(\"desi\")))\n      )).as(\"compare_value\")\n    ),\n    lengthRelatedGlobalExpressions =\n      Map(\"dl_bit\" -> (monotonically_increasing_id() + lit(1)),\n          \"days_until_inactive\" -> datediff(to_date(col(\"inactive_dt\"),\"yyyyMMdd\"), to_date(lit(Config.BUSINESS_DATE),\"yyyyMMdd\"))\n      ),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalizeDF.select((col(\"dl_bit\").cast(IntegerType)).as(\"dl_bit\"),\n                                              (col(\"qualifier_cd\")).as(\"qualifier_cd\"),\n                                              (col(\"compare_value\")).as(\"compare_value\")\n  )\n\n  val normalize_out_DF = simpleSelect_in_DF.filter(isNotNullAndNotBlank(col(\"compare_value\")))\n\n  val out = normalize_out_DF\n",
+        "script" : "\n  val normalizeDF = in.normalize(\n    lengthExpression = Some(lit(17)),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (when(col(\"index\") === lit(0),              lit(\"NDC11\"))\n        .when(col(\"index\") === lit(1),            lit(\"NDC9\"))\n        .when(col(\"index\") === lit(2),            lit(\"GPI14\"))\n        .when(col(\"index\") === lit(3),            lit(\"GPI12\"))\n        .when(col(\"index\") === lit(4),            lit(\"GPI10\"))\n        .when(col(\"index\") === lit(5),            lit(\"DOSAGE_FORM\"))\n        .when(col(\"index\") === lit(6),            lit(\"ROA\"))\n        .when(col(\"index\") === lit(7),            lit(\"DRUG_NAME\"))\n        .when(col(\"index\") === lit(8),            lit(\"GPI8\"))\n        .when(col(\"index\") === lit(9),            lit(\"GPI6\"))\n        .when(col(\"index\") === lit(10),           lit(\"GPI4\"))\n        .when(col(\"index\") === lit(11),           lit(\"MSC\"))\n        .when(col(\"index\") === lit(12),           lit(\"RXOTC\"))\n        .when(col(\"index\") === lit(13),           lit(\"DAYS_UNTIL_DRUG_STATUS_INACTIVE\"))\n        .when(col(\"index\") === lit(14),           lit(\"STATUS_CD\"))\n        .when(col(\"index\") === lit(15),           lit(\"REPACKAGER\"))\n        .otherwise(when(col(\"index\") === lit(16), lit(\"DESI_CD\"))))\n        .as(\"qualifier_cd\"),\n      (rtrim(\n        when(col(\"index\") === lit(0),    col(\"ndc11\"))\n          .when(col(\"index\") === lit(1), string_substring(col(\"ndc11\"), lit(1), lit(9)))\n          .when(col(\"index\") === lit(2), col(\"gpi14\"))\n          .when(col(\"index\") === lit(3), string_substring(col(\"gpi14\"), lit(1), lit(12)))\n          .when(col(\"index\") === lit(4), string_substring(col(\"gpi14\"), lit(1), lit(10)))\n          .when(col(\"index\") === lit(5), col(\"dosage_form_cd\"))\n          .when(col(\"index\") === lit(6), col(\"roa_cd\"))\n          .when(col(\"index\") === lit(7),\n                regexp_replace(col(\"drug_name\"), lit(\"\\\\Q[[[^0-9]s[^0-9][^0-9]ce[^0-9]]]+\\\\E\"), lit(\"\"))\n          )\n          .when(col(\"index\") === lit(8),  string_substring(col(\"gpi14\"), lit(1), lit(8)))\n          .when(col(\"index\") === lit(9),  string_substring(col(\"gpi14\"), lit(1), lit(6)))\n          .when(col(\"index\") === lit(10), string_substring(col(\"gpi14\"), lit(1), lit(4)))\n          .when(col(\"index\") === lit(11), col(\"msc\"))\n          .when(col(\"index\") === lit(12), col(\"rx_otc\"))\n          .when(\n            col(\"index\") === lit(13),\n            when(col(\"days_until_inactive\") > lit(180),    lit(\"180\"))\n              .when(col(\"days_until_inactive\") > lit(120), lit(\"120\"))\n              .when(col(\"days_until_inactive\") > lit(90),  lit(\"90\"))\n              .when(col(\"days_until_inactive\") > lit(60),  lit(\"60\"))\n              .when(col(\"days_until_inactive\") > lit(30),  lit(\"30\"))\n              .otherwise(lit(\"\"))\n          )\n          .when(col(\"index\") === lit(14),           col(\"status_cd\"))\n          .when(col(\"index\") === lit(15),           col(\"repack_cd\"))\n          .otherwise(when(col(\"index\") === lit(16), col(\"desi\")))\n      )).as(\"compare_value\")\n    ),\n    lengthRelatedGlobalExpressions =\n      Map(\n          \"days_until_inactive\" -> datediff(to_date(col(\"inactive_dt\"),\"yyyyMMdd\"), to_date(lit(Config.BUSINESS_DATE),\"yyyyMMdd\"))\n      ),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalizeDF.select((col(\"qualifier_cd\")).as(\"qualifier_cd\"),\n                                              (col(\"compare_value\")).as(\"compare_value\")\n  )\n\n  val simpleSelect_in_DF_1 = simpleSelect_in_DF.zipWithIndex(0, 1, \"dl_bit\", spark)\n\n  val normalize_out_DF = simpleSelect_in_DF_1.filter(isNotNullAndNotBlank(col(\"compare_value\")))\n\n  val out = normalize_out_DF\n",
         "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
         "scriptMethodFooter" : "    out\n}"
       }
@@ -1149,8 +1155,8 @@
       "metadata" : {
         "label" : "Agg_same_group_products_UnionAll",
         "slug" : "Agg_same_group_products_UnionAll",
-        "x" : 2080,
-        "y" : 820,
+        "x" : 2140,
+        "y" : 760,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1395,14 +1401,353 @@
         "projectName" : "ProphecySparkBasicsScala"
       }
     },
+    "fxAUehwrtRpAt3Y5VaODg$$gFRLExk1BBnCKaSund20D" : {
+      "id" : "fxAUehwrtRpAt3Y5VaODg$$gFRLExk1BBnCKaSund20D",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Create_Product_Lookup_1",
+        "slug" : "Create_Product_Lookup_1",
+        "x" : 820,
+        "y" : 160,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "lj207ne7e-eQnqnv5o_8s$$j1tcb-C3nViH2ERidnzWw",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "decimal(14,5)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "E5MmX34WZnqdzC-yChLRM$$wEQJcjGTTlV4romTjxa4Q",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "decimal(14,5)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "lazy val out0 = in0.zipWithIndex(0, 1, \"dl_bit\", spark)",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in0: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out0\n}"
+      }
+    },
     "Separate_data_for_Different_OperatorsReformat_1" : {
       "id" : "Separate_data_for_Different_OperatorsReformat_1",
       "component" : "Reformat",
       "metadata" : {
         "label" : "Separate_data_for_Different_OperatorsReformat_1",
         "slug" : "Separate_data_for_Different_OperatorsReformat_1",
-        "x" : 2300,
-        "y" : 320,
+        "x" : 2360,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1506,7 +1851,7 @@
         "label" : "Separate_data_for_Different_OperatorsReformat_5",
         "slug" : "Separate_data_for_Different_OperatorsReformat_5",
         "x" : 1820,
-        "y" : 1040,
+        "y" : 940,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1610,7 +1955,7 @@
         "label" : "Separate_data_for_Different_OperatorsReformat_4",
         "slug" : "Separate_data_for_Different_OperatorsReformat_4",
         "x" : 1820,
-        "y" : 840,
+        "y" : 740,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1713,8 +2058,8 @@
       "metadata" : {
         "label" : "Create_All_Dataset_Rule",
         "slug" : "Create_All_Dataset_Rule",
-        "x" : 1020,
-        "y" : 120,
+        "x" : 1220,
+        "y" : 20,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -1889,6 +2234,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "1",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "carrier",
               "type" : "string",
               "nullable" : true,
@@ -1930,7 +2284,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : false
+        "autoUpdateOnRun" : true
       },
       "properties" : {
         "allIns" : false,
@@ -1989,7 +2343,7 @@
         "label" : "Create_Rule_Dataset_For_EQ_Operator",
         "slug" : "Create_Rule_Dataset_For_EQ_Operator",
         "x" : 1020,
-        "y" : 640,
+        "y" : 540,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2047,7 +2401,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "operator",
+              "name" : "compare_value",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -2056,7 +2410,7 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "compare_value",
+              "name" : "operator",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
@@ -2079,7 +2433,7 @@
         } ],
         "selectedInputFields" : [ ],
         "isCustomOutputSchema" : true,
-        "autoUpdateOnRun" : false
+        "autoUpdateOnRun" : true
       },
       "properties" : {
         "allIns" : false,
@@ -2131,7 +2485,7 @@
         "label" : "Separate_data_for_Different_OperatorsReformat_2",
         "slug" : "Separate_data_for_Different_OperatorsReformat_2",
         "x" : 1820,
-        "y" : 440,
+        "y" : 340,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2235,7 +2589,7 @@
         "label" : "Separate_data_for_Different_Operators_RowDistributor",
         "slug" : "Separate_data_for_Different_Operators_RowDistributor",
         "x" : 1420,
-        "y" : 600,
+        "y" : 500,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2376,8 +2730,8 @@
       "metadata" : {
         "label" : "Create_Rule_Dataset_for_NE_Operator",
         "slug" : "Create_Rule_Dataset_for_NE_Operator",
-        "x" : 2080,
-        "y" : 160,
+        "x" : 2140,
+        "y" : 60,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2586,8 +2940,8 @@
       "metadata" : {
         "label" : "Create_All_Dataset_Rule_Reformat",
         "slug" : "Create_All_Dataset_Rule_Reformat",
-        "x" : 1220,
-        "y" : 120,
+        "x" : 1460,
+        "y" : 20,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2600,6 +2954,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "1",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "carrier",
               "type" : "string",
               "nullable" : true,
@@ -2691,7 +3054,7 @@
         "label" : "Sort_NDC",
         "slug" : "Sort_NDC",
         "x" : 420,
-        "y" : 320,
+        "y" : 260,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -2905,7 +3268,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Sort_NDC__in##ndc11" ],
         "orders" : [ {
           "expression" : {
             "format" : "scala",
@@ -2925,8 +3288,8 @@
       "metadata" : {
         "label" : "Agg_same_group_products",
         "slug" : "Agg_same_group_products",
-        "x" : 2300,
-        "y" : 840,
+        "x" : 2360,
+        "y" : 780,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3077,7 +3440,7 @@
         "label" : "Create_Product_Lookup",
         "slug" : "Create_Product_Lookup",
         "x" : 620,
-        "y" : 60,
+        "y" : 160,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3291,15 +3654,8 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Create_Product_Lookup__in##ndc11", "Create_Product_Lookup__in##gpi14", "Create_Product_Lookup__in##status_cd", "Create_Product_Lookup__in##inactive_dt", "Create_Product_Lookup__in##msc", "Create_Product_Lookup__in##drug_name", "Create_Product_Lookup__in##rx_otc", "Create_Product_Lookup__in##desi", "Create_Product_Lookup__in##roa_cd", "Create_Product_Lookup__in##dosage_form_cd", "Create_Product_Lookup__in##prod_strength", "Create_Product_Lookup__in##repack_cd", "Create_Product_Lookup__in##prod_short_desc", "Create_Product_Lookup__in##gpi14_desc", "Create_Product_Lookup__in##gpi8_desc", "Create_Product_Lookup__in##newline" ],
         "expressions" : [ {
-          "target" : "dl_bit",
-          "expression" : {
-            "format" : "scala",
-            "expression" : "(monotonically_increasing_id() + lit(1)).cast(IntegerType)"
-          },
-          "description" : ""
-        }, {
           "target" : "ndc11",
           "expression" : {
             "format" : "scala",
@@ -3425,7 +3781,7 @@
         "label" : "Select_valid_drugs",
         "slug" : "Select_valid_drugs",
         "x" : 220,
-        "y" : 320,
+        "y" : 260,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3657,7 +4013,7 @@
         "label" : "Separate_data_for_Different_OperatorsReformat_3",
         "slug" : "Separate_data_for_Different_OperatorsReformat_3",
         "x" : 1820,
-        "y" : 640,
+        "y" : 540,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3760,8 +4116,8 @@
       "metadata" : {
         "label" : "Gather",
         "slug" : "Gather",
-        "x" : 2760,
-        "y" : 360,
+        "x" : 2820,
+        "y" : 300,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
@@ -3924,8 +4280,8 @@
       "metadata" : {
         "label" : "Products",
         "slug" : "Products",
-        "x" : 820,
-        "y" : 20,
+        "x" : 1020,
+        "y" : 220,
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,

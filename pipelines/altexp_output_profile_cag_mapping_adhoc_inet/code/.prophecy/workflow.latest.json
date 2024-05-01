@@ -744,9 +744,9 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "script" : "  lazy val out = right.collectDataFrameColumnsToApplyFilter(List(\"\"), left)\n\n",
-        "scriptMethodHeader" : "def apply(spark: SparkSession, left: DataFrame, right: DataFrame) : Script = {",
-        "scriptMethodFooter" : "out"
+        "script" : "  lazy val out = right\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, right: DataFrame, left: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
       }
     },
     "Create_ALT_RUN_Load_Ready_FileReformat_0" : {
@@ -1555,7 +1555,7 @@
         "slug" : "TAR_Dtl",
         "x" : 20,
         "y" : 220,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -1582,7 +1582,7 @@
         "slug" : "Output_Profile_Extract",
         "x" : 20,
         "y" : 620,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -1609,7 +1609,7 @@
         "slug" : "CAG_Override_Ref",
         "x" : 20,
         "y" : 20,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -2482,7 +2482,7 @@
         "slug" : "TAL_Dtl",
         "x" : 20,
         "y" : 1020,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -2952,7 +2952,7 @@
         "slug" : "TAC_Dtl",
         "x" : 20,
         "y" : 820,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -2979,7 +2979,7 @@
         "slug" : "Formulary_Override_Ref",
         "x" : 20,
         "y" : 420,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -3759,7 +3759,7 @@
         "slug" : "TSD_Dtl",
         "x" : 20,
         "y" : 1220,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false

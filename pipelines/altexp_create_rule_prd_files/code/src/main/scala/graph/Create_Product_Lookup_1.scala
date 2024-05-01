@@ -11,12 +11,12 @@ import org.apache.spark.sql.types._
 import org.apache.spark.sql.expressions._
 import java.time._
 
-object Get_ALT_RUN_ID_jdbcdb_predicate_pushdown {
-  def apply(context: Context, right: DataFrame, left: DataFrame): DataFrame = {
+object Create_Product_Lookup_1 {
+  def apply(context: Context, in0: DataFrame): DataFrame = {
     val spark = context.spark
     val Config = context.config
-    lazy val out = right
-    out
+    lazy val out0 = in0.zipWithIndex(0, 1, "dl_bit", spark)
+    out0
   }
 
 }
