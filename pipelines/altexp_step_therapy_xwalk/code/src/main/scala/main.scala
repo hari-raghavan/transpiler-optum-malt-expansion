@@ -13,8 +13,6 @@ import java.time._
 object Main {
 
   def apply(context: Context): Unit = {
-    val df_Products = Products(context)
-    Products_lookup(context, df_Products)
     val df_IFIL_Formulary_Dataset = IFIL_Formulary_Dataset(context)
     val df_Sort_ST_Group_ST_Numbers =
       Sort_ST_Group_ST_Numbers(context, df_IFIL_Formulary_Dataset)
@@ -26,7 +24,10 @@ object Main {
       Rollup_Group_Numbers(context, df_Rollup_Group_Numbers_input_select_filter)
     val df_Rollup_Group_Numbers_Reformat =
       Rollup_Group_Numbers_Reformat(context, df_Rollup_Group_Numbers)
-    Step_Therapy_DTL_File_lookup(context,    df_Rollup_Group_Numbers_Reformat)
+    Step_Therapy_DTL_File(context,           df_Rollup_Group_Numbers_Reformat)
+    val df_Products = Products(context)
+    Products_lookup(context,              df_Products)
+    Step_Therapy_DTL_File_lookup(context, df_Rollup_Group_Numbers_Reformat)
     val df_OFIL_TAC_Rule_Xwalk = OFIL_TAC_Rule_Xwalk(context)
     val df_Reformat_To_separate_NFST_and_ST_Filter_select =
       Reformat_To_separate_NFST_and_ST_Filter_select(context,
@@ -43,7 +44,6 @@ object Main {
         context,
         df_Reformat_To_separate_NFST_and_ST_RowDistributor_out1
       )
-    Step_Therapy_DTL_File(context, df_Rollup_Group_Numbers_Reformat)
     val df_Map_T_A_pairs_as_per_ST_Group_NM_ST =
       Map_T_A_pairs_as_per_ST_Group_NM_ST(
         context,

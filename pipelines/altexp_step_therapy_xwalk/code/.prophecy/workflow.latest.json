@@ -530,7 +530,7 @@
         "slug" : "Step_Therapy_DTL_File",
         "x" : 1020,
         "y" : 20,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -1784,7 +1784,7 @@
         "slug" : "Rollup_Group_Numbers_Reformat",
         "x" : 820,
         "y" : 120,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -1835,7 +1835,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Rollup_Group_Numbers_Reformat__in##step_therapy_group_name", "Rollup_Group_Numbers_Reformat__in##step_therapy_step_number", "Rollup_Group_Numbers_Reformat__in##products" ],
         "expressions" : [ {
           "target" : "step_therapy_group_name",
           "expression" : {
@@ -2234,7 +2234,7 @@
         "slug" : "Sort_ST_Group_ST_Numbers",
         "x" : 220,
         "y" : 120,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -2429,7 +2429,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Sort_ST_Group_ST_Numbers__in##step_therapy_group_name", "Sort_ST_Group_ST_Numbers__in##step_therapy_step_number" ],
         "orders" : [ {
           "expression" : {
             "format" : "scala",
@@ -2852,7 +2852,7 @@
         "slug" : "IFIL_Formulary_Dataset",
         "x" : 20,
         "y" : 120,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -2879,7 +2879,7 @@
         "slug" : "Rollup_Group_Numbers_input_select_filter",
         "x" : 420,
         "y" : 120,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -3074,7 +3074,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "Rollup_Group_Numbers_input_select_filter__in##step_therapy_step_number" ],
         "condition" : {
           "format" : "scala",
           "expression" : "!isnull(col(\"step_therapy_step_number\"))"
@@ -3093,7 +3093,7 @@
         "slug" : "Rollup_Group_Numbers",
         "x" : 620,
         "y" : 120,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false
@@ -4638,7 +4638,7 @@
         "slug" : "Products",
         "x" : 20,
         "y" : 400,
-        "phase" : 3,
+        "phase" : -3,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false

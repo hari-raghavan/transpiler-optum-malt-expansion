@@ -87,12 +87,12 @@ object Main {
       context,
       df_Create_LKP_for_override_qualifiers_Reformat
     )
+    LKP_Shared_Qualifier_Products(context,
+                                  df_Create_LKP_for_override_qualifiers_Reformat
+    )
     val df_CONC = CONC(context,
                        df_Filter_Exclusion_Association_out1,
                        df_Filter_Exclusion_Association_out0
-    )
-    LKP_Shared_Qualifier_Products(context,
-                                  df_Create_LKP_for_override_qualifiers_Reformat
     )
     val df_Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association =
       Scan_Remove_Exclusion_Products_from_Inclusion_and_Standard_Association(

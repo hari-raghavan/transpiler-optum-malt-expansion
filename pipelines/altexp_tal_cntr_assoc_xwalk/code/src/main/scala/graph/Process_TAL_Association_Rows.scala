@@ -159,7 +159,7 @@ object Process_TAL_Association_Rows {
         collect_list(
           struct(
             (origColumns :+ lookup("Expanded_UDL", col("target_udl_name"))
-              .getField("products") :+ lookup("Expanded_UDL", col("alt_udl_name")).getField("products")): _*
+              .getField("products").alias("target_udl_name_products") :+ lookup("Expanded_UDL", col("alt_udl_name")).getField("products").alias("alt_udl_name_products")): _*
           )
         ).alias("inputRows")
       )
