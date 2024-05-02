@@ -1480,6 +1480,7 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
                       (pos + 1).toString,
                       buckets(pos).getAs[String](2),
                       "0",
+                      "",
                       Array[Row](),
                       "N",
                       "0"

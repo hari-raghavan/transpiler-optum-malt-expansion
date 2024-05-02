@@ -63,18 +63,22 @@ object Main {
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
-          )
         )
       )
-        Join_With_DB.apply(
-          Join_With_DB.config
-            .Context(context.spark, context.config.Join_With_DB),
-          df_Partition_Data_out1
+        if (
+          _root_.io.prophecy.abinitio.ScalaFunctions._not(
+            _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
+              _root_.io.prophecy.abinitio.ScalaFunctions
+                ._is_blank(context.config.JOIN_DB_SQL)
+            )
+          )
         )
+          Join_With_DB.apply(
+            Join_With_DB.config
+              .Context(context.spark, context.config.Join_With_DB),
+            df_Partition_Data_out1
+          )
+        else df_Partition_Data_out1
       else null
     val df_s =
       if (
@@ -82,16 +86,6 @@ object Main {
           _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
-          )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_KEY)
-          )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
           )
         )
       )
@@ -104,116 +98,56 @@ object Main {
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_KEY)
-          )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
-          )
         )
       )
         Append_Mode_DateTimeNormalize(context, df_s)
       else null
     val df_Update_Mode_Log =
       if (
-        (_root_.io.prophecy.abinitio.ScalaFunctions._not(
+        _root_.io.prophecy.abinitio.ScalaFunctions._not(
           _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_KEY)
-          )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
-          )
-        )) && context.config.LOAD_MODE == "U"
+        ) && context.config.LOAD_MODE == "U"
       )
         Update_Mode_Log(context, df_s)
       else null
     val df_Update_Mode =
       if (
-        (_root_.io.prophecy.abinitio.ScalaFunctions._not(
+        _root_.io.prophecy.abinitio.ScalaFunctions._not(
           _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_KEY)
-          )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
-          )
-        )) && context.config.LOAD_MODE == "U"
+        ) && context.config.LOAD_MODE == "U"
       )
         Update_Mode(context, df_s)
       else null
     val df_Append_Mode_Log =
       if (
-        (_root_.io.prophecy.abinitio.ScalaFunctions._not(
+        _root_.io.prophecy.abinitio.ScalaFunctions._not(
           _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_KEY)
-          )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
-          )
-        )) && context.config.LOAD_MODE == "A"
+        ) && context.config.LOAD_MODE == "A"
       )
         Append_Mode_Log(context, df_s)
       else null
     if (
-      (_root_.io.prophecy.abinitio.ScalaFunctions._not(
+      _root_.io.prophecy.abinitio.ScalaFunctions._not(
         _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
           _root_.io.prophecy.abinitio.ScalaFunctions
             ._is_blank(context.config.JOIN_KEY)
         )
-      ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-        _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            ._is_blank(context.config.JOIN_KEY)
-        )
-      ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-        _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            ._is_blank(context.config.JOIN_DB_SQL)
-        )
-      )) && context.config.LOAD_MODE == "U" || (_root_.io.prophecy.abinitio.ScalaFunctions
+      ) && context.config.LOAD_MODE == "U" || _root_.io.prophecy.abinitio.ScalaFunctions
         ._not(
           _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-        _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            ._is_blank(context.config.JOIN_KEY)
-        )
-      ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-        _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            ._is_blank(context.config.JOIN_DB_SQL)
-        )
-      )) && context.config.LOAD_MODE == "A"
+        ) && context.config.LOAD_MODE == "A"
     ) {
       val df_Handle_Serial_Logs =
         Handle_Serial_Logs(context,   df_Update_Mode_Log, df_Append_Mode_Log)
@@ -221,22 +155,12 @@ object Main {
     }
     val df_Output_Surrogate_Key_File_Creation__Fetching_Required_Fields =
       if (
-        (_root_.io.prophecy.abinitio.ScalaFunctions._not(
+        _root_.io.prophecy.abinitio.ScalaFunctions._not(
           _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
             _root_.io.prophecy.abinitio.ScalaFunctions
               ._is_blank(context.config.JOIN_KEY)
           )
-        ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_KEY)
-          )
-        ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-          _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-            _root_.io.prophecy.abinitio.ScalaFunctions
-              ._is_blank(context.config.JOIN_DB_SQL)
-          )
-        )) && context.config.LOAD_MODE == "U" && _root_.io.prophecy.abinitio.ScalaFunctions
+        ) && context.config.LOAD_MODE == "U" && _root_.io.prophecy.abinitio.ScalaFunctions
           .convertToBoolean(
             Array("alt_run_target_dtl", "alt_run_alt_dtl")
               .contains(context.config.TABLE_NAME)
@@ -248,22 +172,12 @@ object Main {
         )
       else null
     if (
-      (_root_.io.prophecy.abinitio.ScalaFunctions._not(
+      _root_.io.prophecy.abinitio.ScalaFunctions._not(
         _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
           _root_.io.prophecy.abinitio.ScalaFunctions
             ._is_blank(context.config.JOIN_KEY)
         )
-      ) || _root_.io.prophecy.abinitio.ScalaFunctions._not(
-        _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            ._is_blank(context.config.JOIN_KEY)
-        )
-      ) && _root_.io.prophecy.abinitio.ScalaFunctions._not(
-        _root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(
-          _root_.io.prophecy.abinitio.ScalaFunctions
-            ._is_blank(context.config.JOIN_DB_SQL)
-        )
-      )) && context.config.LOAD_MODE == "A"
+      ) && context.config.LOAD_MODE == "A"
     )
       Append_Mode_6(context, df_Append_Mode_DateTimeNormalize)
   }

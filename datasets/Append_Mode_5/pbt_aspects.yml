@@ -17,7 +17,7 @@ schema:
       mappings: []
       tags: []
   - name: as_of_date
-    type: string
+    type: date
     nullable: true
     metadata:
       description: ''

@@ -3882,7 +3882,7 @@
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "removalCondition" : "_root_.io.prophecy.abinitio.ScalaFunctions._not(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(_root_.io.prophecy.abinitio.ScalaFunctions._is_blank(context.config.JOIN_DB_SQL)))"
+        "passThrough" : "_root_.io.prophecy.abinitio.ScalaFunctions._not(_root_.io.prophecy.abinitio.ScalaFunctions.convertToBoolean(_root_.io.prophecy.abinitio.ScalaFunctions._is_blank(context.config.JOIN_DB_SQL)))"
       },
       "ports" : {
         "inputs" : [ {
