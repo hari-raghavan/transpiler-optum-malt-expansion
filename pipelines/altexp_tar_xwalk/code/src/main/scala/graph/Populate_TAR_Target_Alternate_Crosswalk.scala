@@ -371,8 +371,8 @@ object Populate_TAR_Target_Alternate_Crosswalk {
                                                    Array.fill(1)(target_prdcts),
                                                    Array.fill(1)(
                                                      Row(
-                                                       alt_prdcts,
-                                                       Array.fill(0)(Row()),
+                                                       Array.fill(1)(alt_prdcts),
+                                                       Array[Array[Array[Byte]]](),
                                                        _bv_all_zeros()
                                                      )
                                                    )
