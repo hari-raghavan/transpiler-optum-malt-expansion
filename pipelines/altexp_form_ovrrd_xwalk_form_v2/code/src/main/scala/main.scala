@@ -28,9 +28,9 @@ object Main {
       context,
       df_Accumulate_Products_for_each_CAG_and_Prioritize_Reformat_1
     )
-    val df_Reformat_1           = Reformat_1(context,           df_aggregate_by_group)
-    val df_flatten_primary_data = flatten_primary_data(context, df_Reformat_1)
-    val df_reformatted_data     = reformatted_data(context,     df_aggregate_by_group)
+    val df_flatten_primary_data =
+      flatten_primary_data(context, df_aggregate_by_group)
+    val df_reformatted_data = reformatted_data(context, df_aggregate_by_group)
     val df_reformat_primary_data =
       reformat_primary_data(context, df_flatten_primary_data)
     val df_Create_Product_Crosswalk_For_Different_Levels_2 =
