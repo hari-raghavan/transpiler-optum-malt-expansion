@@ -16,10 +16,10 @@ object Create_Product_Crosswalk_For_Different_Levels_2 {
     val spark = context.spark
     val Config = context.config
     val out0 = in0.withColumn("data_path", 
-                                op_fl_nn_condition(Config.AI_SERIAL_HOME, 
-                                                   Config.OUTPUT_FILE_PREFIX,
-                                                   Config.ENV_NM,
-                                                   Config.BUSINESS_DATE))
+                                op_fl_nn_condition(lit(Config.AI_SERIAL_HOME), 
+                                                    lit(Config.OUTPUT_FILE_PREFIX),
+                                                    lit(Config.ENV_NM),
+                                                    lit(Config.BUSINESS_DATE)))
     out0
   }
 
