@@ -1,0 +1,18 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: sheet
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: line
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []

@@ -1044,6 +1044,23 @@ pipelines:
       - datasets/Reference_File
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_enrich_partial_exp_output_excel:
+    name: altexp_enrich_partial_exp_output_excel
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-06-18 21:25:54'
+    datasets:
+      inputs:
+      - datasets/TAL_Output_File
+      outputs:
+      - datasets/Flag
+      - datasets/PartialTAL_TALA_Output
+      - datasets/Write_Excel_Enrich_Product_Data
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -3880,6 +3897,58 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-04-30 17:13:52'
+  datasets/TAL_Output_File:
+    name: TAL_Output_File
+    description: 'Dataset for componentName: TAL_Output_File'
+    author: hari@prophecy.io
+    createdAt: '2024-06-18 21:25:53'
+    mode: batch
+    physicalDatasets:
+      prophecy_db:
+        fabricId: 3806
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-18 21:25:53'
+  datasets/PartialTAL_TALA_Output:
+    name: PartialTAL_TALA_Output
+    description: 'Dataset for componentName: PartialTAL_TALA_Output'
+    author: hari@prophecy.io
+    createdAt: '2024-06-18 21:25:54'
+    mode: batch
+    physicalDatasets:
+      prophecy_db:
+        fabricId: 3806
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-18 21:25:54'
+  datasets/Flag:
+    name: Flag
+    description: 'Dataset for componentName: Flag'
+    author: hari@prophecy.io
+    createdAt: '2024-06-18 21:25:54'
+    mode: batch
+    physicalDatasets:
+      prophecy_db:
+        fabricId: 3806
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-18 21:25:54'
+  datasets/Write_Excel_Enrich_Product_Data:
+    name: Write_Excel_Enrich_Product_Data
+    description: 'Dataset for componentName: Write_Excel_Enrich_Product_Data'
+    author: hari@prophecy.io
+    createdAt: '2024-06-18 21:25:54'
+    mode: batch
+    physicalDatasets:
+      prophecy_db:
+        fabricId: 3806
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-18 21:25:54'
 templates: {}
 jobs: {}
 gemContainer:

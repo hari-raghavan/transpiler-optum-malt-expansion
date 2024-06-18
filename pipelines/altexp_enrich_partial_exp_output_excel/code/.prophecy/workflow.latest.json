@@ -1,0 +1,741 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "altexp_enrich _udl_exp",
+    "uri" : "pipelines/altexp_enrich_partial_exp_output_excel",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "FLAG",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "OUTPUT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "TEMP",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "JAVA_HOME",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e1",
+    "source" : "Count_of_records_Reformat",
+    "sourcePort" : "Count_of_records_Reformat__out",
+    "target" : "Flag_lookup",
+    "targetPort" : "Flag_lookup__in"
+  }, {
+    "id" : "e0",
+    "source" : "Count_of_records",
+    "sourcePort" : "Count_of_records__out",
+    "target" : "Count_of_records_Reformat",
+    "targetPort" : "Count_of_records_Reformat__in"
+  }, {
+    "id" : "e2",
+    "source" : "Count_of_records_Reformat",
+    "sourcePort" : "Count_of_records_Reformat__out",
+    "target" : "Flag",
+    "targetPort" : "Flag__in"
+  }, {
+    "id" : "e3",
+    "source" : "TAL_Output_File",
+    "sourcePort" : "TAL_Output_File__out",
+    "target" : "Count_of_records",
+    "targetPort" : "Count_of_records__in"
+  }, {
+    "id" : "e5",
+    "source" : "check_records_limitReformat_1",
+    "sourcePort" : "check_records_limitReformat_1__out",
+    "target" : "PartialTAL_TALA_Output",
+    "targetPort" : "PartialTAL_TALA_Output__in"
+  }, {
+    "id" : "e6",
+    "source" : "check_records_limit_RowDistributor",
+    "sourcePort" : "check_records_limit_RowDistributor__out1",
+    "target" : "check_records_limitReformat_1",
+    "targetPort" : "check_records_limitReformat_1__in"
+  }, {
+    "id" : "e7",
+    "source" : "check_records_limitReformat_0",
+    "sourcePort" : "check_records_limitReformat_0__out",
+    "target" : "Write_Excel_Enrich_Product_Data",
+    "targetPort" : "Write_Excel_Enrich_Product_Data__in"
+  }, {
+    "id" : "e4",
+    "source" : "TAL_Output_File",
+    "sourcePort" : "TAL_Output_File__out",
+    "target" : "check_records_limit_RowDistributor",
+    "targetPort" : "check_records_limit_RowDistributor__in"
+  }, {
+    "id" : "e8",
+    "source" : "check_records_limit_RowDistributor",
+    "sourcePort" : "check_records_limit_RowDistributor__out0",
+    "target" : "check_records_limitReformat_0",
+    "targetPort" : "check_records_limitReformat_0__in"
+  } ],
+  "processes" : {
+    "TAL_Output_File" : {
+      "id" : "TAL_Output_File",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "TAL_Output_File",
+        "slug" : "TAL_Output_File",
+        "x" : 20,
+        "y" : 300,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "TAL_Output_File__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/TAL_Output_File"
+      }
+    },
+    "Flag_lookup" : {
+      "id" : "Flag_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Flag_lookup",
+        "slug" : "Flag_lookup",
+        "x" : 620,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Flag_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "flag",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "flag" ],
+        "valueColumns" : [ "flag" ],
+        "processName" : "Flag"
+      }
+    },
+    "Count_of_records_Reformat" : {
+      "id" : "Count_of_records_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Count_of_records_Reformat",
+        "slug" : "Count_of_records_Reformat",
+        "x" : 420,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Count_of_records_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "1",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "flag",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Count_of_records_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "flag",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"flag\").cast(DecimalType(1, 0))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "PartialTAL_TALA_Output" : {
+      "id" : "PartialTAL_TALA_Output",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "PartialTAL_TALA_Output",
+        "slug" : "PartialTAL_TALA_Output",
+        "x" : 620,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "PartialTAL_TALA_Output__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/PartialTAL_TALA_Output"
+      }
+    },
+    "Flag" : {
+      "id" : "Flag",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Flag",
+        "slug" : "Flag",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Flag__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "flag",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Flag"
+      }
+    },
+    "Count_of_records" : {
+      "id" : "Count_of_records",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Count_of_records",
+        "slug" : "Count_of_records",
+        "x" : 220,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Count_of_records__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Count_of_records__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "_row_id" : "1944660912",
+          "target" : "flag",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(count(struct(col(\"sheet\").as(\"sheet\"), col(\"line\").as(\"line\"))) >= lit(1048575), lit(1))\n    .otherwise(lit(0))\n    .cast(DecimalType(1, 0))"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "_row_id" : "1144339334",
+          "target" : "1",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(1)"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "check_records_limitReformat_1" : {
+      "id" : "check_records_limitReformat_1",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "check_records_limitReformat_1",
+        "slug" : "check_records_limitReformat_1",
+        "x" : 420,
+        "y" : 620,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "check_records_limitReformat_1__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "check_records_limitReformat_1__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "sheet",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"sheet\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "line",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"line\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "check_records_limit_RowDistributor" : {
+      "id" : "check_records_limit_RowDistributor",
+      "component" : "RowDistributor",
+      "metadata" : {
+        "label" : "check_records_limit_RowDistributor",
+        "slug" : "check_records_limit_RowDistributor",
+        "x" : 220,
+        "y" : 520,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "check_records_limit_RowDistributor__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "check_records_limit_RowDistributor__out0",
+          "slug" : "out0"
+        }, {
+          "id" : "check_records_limit_RowDistributor__out1",
+          "slug" : "out1"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "outports" : [ {
+          "path" : "out0",
+          "id" : "check_records_limit_RowDistributor__out0",
+          "model" : {
+            "format" : "scala",
+            "expression" : "lookup_match(\"Flag\", lit(0)).cast(BooleanType)"
+          }
+        }, {
+          "path" : "out1",
+          "id" : "check_records_limit_RowDistributor__out1",
+          "model" : {
+            "format" : "scala",
+            "expression" : "!lookup_match(\"Flag\", lit(0)).cast(BooleanType)"
+          }
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/RowDistributor",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Write_Excel_Enrich_Product_Data" : {
+      "id" : "Write_Excel_Enrich_Product_Data",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Write_Excel_Enrich_Product_Data",
+        "slug" : "Write_Excel_Enrich_Product_Data",
+        "x" : 620,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Write_Excel_Enrich_Product_Data__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Write_Excel_Enrich_Product_Data"
+      }
+    },
+    "check_records_limitReformat_0" : {
+      "id" : "check_records_limitReformat_0",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "check_records_limitReformat_0",
+        "slug" : "check_records_limitReformat_0",
+        "x" : 420,
+        "y" : 420,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "check_records_limitReformat_0__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "check_records_limitReformat_0__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "sheet",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"sheet\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "line",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"line\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}
