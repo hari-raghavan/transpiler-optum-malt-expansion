@@ -770,7 +770,9 @@
         "phase" : 3,
         "cache" : false,
         "detailedStats" : false,
-        "isImported" : false
+        "isImported" : false,
+        "comment" : "Loads and processes a fixed-format input file containing detailed product and transaction information.",
+        "autoUpdateComment" : true
       },
       "ports" : {
         "inputs" : [ ],
@@ -1088,7 +1090,11 @@
               }
             }, {
               "name" : "contents",
-              "type" : "binary",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1270,7 +1276,11 @@
               }
             }, {
               "name" : "contents",
-              "type" : "binary",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
               "nullable" : true,
               "metadata" : {
                 "description" : "",
@@ -1457,7 +1467,11 @@
               }
             }, {
               "name" : "contents",
-              "type" : "binary",
+              "type" : {
+                "type" : "array",
+                "elementType" : "binary",
+                "containsNull" : true
+              },
               "nullable" : true,
               "metadata" : {
                 "description" : "",

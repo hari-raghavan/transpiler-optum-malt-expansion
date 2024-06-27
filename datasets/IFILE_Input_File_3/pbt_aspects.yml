@@ -45,7 +45,10 @@ schema:
       mappings: []
       tags: []
   - name: contents
-    type: binary
+    type:
+      type: array
+      elementType: binary
+      containsNull: true
     nullable: true
     metadata:
       description: ''

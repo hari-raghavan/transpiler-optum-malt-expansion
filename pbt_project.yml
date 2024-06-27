@@ -1070,8 +1070,13 @@ pipelines:
     language: scala
     createdAt: '2024-06-27 14:15:44'
     datasets:
-      inputs: []
-      outputs: []
+      inputs:
+      - datasets/IFILE_Input_File_1
+      - datasets/Products_1
+      outputs:
+      - datasets/Flag_1
+      - datasets/Partial_UDL_TALA_TAL_Output_1
+      - datasets/Write_Excel_Enrich_Product_Data_1
     subgraphs: []
     dependencies: {}
   pipelines/altexp_enrich_tal_exp:
