@@ -1061,6 +1061,55 @@ pipelines:
       - datasets/Write_Excel_Enrich_Product_Data
     subgraphs: []
     dependencies: {}
+  pipelines/altexp_enrich_tal_assoc_exp:
+    name: altexp_enrich_tal_assoc_exp
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-06-27 14:15:44'
+    datasets:
+      inputs: []
+      outputs: []
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_enrich_tal_exp:
+    name: altexp_enrich_tal_exp
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-06-27 14:15:46'
+    datasets:
+      inputs:
+      - datasets/IFILE_Input_File_2
+      - datasets/Products_2
+      outputs:
+      - datasets/Flag_2
+      - datasets/Partial_UDL_TALA_TAL_Output_2
+      - datasets/Write_Excel_Enrich_Product_Data_2
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_enrich_udl_exp:
+    name: altexp_enrich_udl_exp
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-06-27 14:15:47'
+    datasets:
+      inputs:
+      - datasets/IFILE_Input_File_3
+      - datasets/Products_3
+      outputs:
+      - datasets/Flag_3
+      - datasets/Partial_UDL_TALA_TAL_Output_3
+      - datasets/Write_Excel_Enrich_Product_Data_3
+    subgraphs: []
+    dependencies: {}
 datasets:
   datasets/GPI_RANK_RATIO_Load:
     name: GPI_RANK_RATIO_Load
@@ -3949,6 +3998,216 @@ datasets:
         description: ''
         author: hari@prophecy.io
         createdAt: '2024-06-18 21:25:54'
+  datasets/Partial_UDL_TALA_TAL_Output_1:
+    name: Partial_UDL_TALA_TAL_Output_1
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_assoc_exp componentName:
+      Partial_UDL_TALA_TAL_Output_1'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:43'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:43'
+  datasets/Flag_1:
+    name: Flag_1
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_assoc_exp componentName:
+      Flag_1'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:43'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:43'
+  datasets/IFILE_Input_File_1:
+    name: IFILE_Input_File_1
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_assoc_exp componentName:
+      IFILE_Input_File_1'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:43'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:43'
+  datasets/Write_Excel_Enrich_Product_Data_1:
+    name: Write_Excel_Enrich_Product_Data_1
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_assoc_exp componentName:
+      Write_Excel_Enrich_Product_Data_1'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:43'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:43'
+  datasets/Products_1:
+    name: Products_1
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_assoc_exp componentName:
+      Products_1'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:43'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:44'
+  datasets/Partial_UDL_TALA_TAL_Output_2:
+    name: Partial_UDL_TALA_TAL_Output_2
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_exp componentName:
+      Partial_UDL_TALA_TAL_Output_2'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:45'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:45'
+  datasets/Flag_2:
+    name: Flag_2
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_exp componentName:
+      Flag_2'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:45'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:45'
+  datasets/IFILE_Input_File_2:
+    name: IFILE_Input_File_2
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_exp componentName:
+      IFILE_Input_File_2'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:45'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:45'
+  datasets/Write_Excel_Enrich_Product_Data_2:
+    name: Write_Excel_Enrich_Product_Data_2
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_exp componentName:
+      Write_Excel_Enrich_Product_Data_2'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:45'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:45'
+  datasets/Products_2:
+    name: Products_2
+    description: 'Dataset for Imported Pipeline:altexp_enrich_tal_exp componentName:
+      Products_2'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:45'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:45'
+  datasets/Partial_UDL_TALA_TAL_Output_3:
+    name: Partial_UDL_TALA_TAL_Output_3
+    description: 'Dataset for Imported Pipeline:altexp_enrich_udl_exp componentName:
+      Partial_UDL_TALA_TAL_Output_3'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:46'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:46'
+  datasets/Flag_3:
+    name: Flag_3
+    description: 'Dataset for Imported Pipeline:altexp_enrich_udl_exp componentName:
+      Flag_3'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:46'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:46'
+  datasets/IFILE_Input_File_3:
+    name: IFILE_Input_File_3
+    description: 'Dataset for Imported Pipeline:altexp_enrich_udl_exp componentName:
+      IFILE_Input_File_3'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:47'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:47'
+  datasets/Write_Excel_Enrich_Product_Data_3:
+    name: Write_Excel_Enrich_Product_Data_3
+    description: 'Dataset for Imported Pipeline:altexp_enrich_udl_exp componentName:
+      Write_Excel_Enrich_Product_Data_3'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:47'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:47'
+  datasets/Products_3:
+    name: Products_3
+    description: 'Dataset for Imported Pipeline:altexp_enrich_udl_exp componentName:
+      Products_3'
+    author: hari@prophecy.io
+    createdAt: '2024-06-27 14:15:47'
+    mode: batch
+    physicalDatasets:
+      db_2:
+        fabricId: 4113
+        datasetType: File
+        description: ''
+        author: hari@prophecy.io
+        createdAt: '2024-06-27 14:15:47'
 templates: {}
 jobs: {}
 gemContainer:

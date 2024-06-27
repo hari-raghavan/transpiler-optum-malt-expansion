@@ -1,0 +1,1563 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "functions" : { },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "altexp_enrich _udl_exp",
+    "uri" : "pipelines/altexp_enrich_udl_exp",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "TAL_OUTPUT",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "PRODUCTS_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "JAVA_HOME",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "FLAG",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "INPUT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e2",
+    "source" : "Count_of_records_Reformat",
+    "sourcePort" : "Count_of_records_Reformat__out",
+    "target" : "Flag_lookup",
+    "targetPort" : "Flag_lookup__in"
+  }, {
+    "id" : "e1",
+    "source" : "Count_of_records",
+    "sourcePort" : "Count_of_records__out",
+    "target" : "Count_of_records_Reformat",
+    "targetPort" : "Count_of_records_Reformat__in"
+  }, {
+    "id" : "e3",
+    "source" : "Count_of_records_Reformat",
+    "sourcePort" : "Count_of_records_Reformat__out",
+    "target" : "Flag",
+    "targetPort" : "Flag__in"
+  }, {
+    "id" : "e5",
+    "source" : "CONC",
+    "sourcePort" : "CONC__out",
+    "target" : "Count_of_records",
+    "targetPort" : "Count_of_records__in"
+  }, {
+    "id" : "e6",
+    "source" : "IFILE_Input_File",
+    "sourcePort" : "IFILE_Input_File__out",
+    "target" : "Create_Criteria_Tab_input_select_filter",
+    "targetPort" : "Create_Criteria_Tab_input_select_filter__in"
+  }, {
+    "id" : "e7",
+    "source" : "Create_Criteria_Tab_input_select_filter",
+    "sourcePort" : "Create_Criteria_Tab_input_select_filter__out",
+    "target" : "Create_Criteria_Tab",
+    "targetPort" : "Create_Criteria_Tab__in"
+  }, {
+    "id" : "e9",
+    "source" : "check_records_limitReformat_1",
+    "sourcePort" : "check_records_limitReformat_1__out",
+    "target" : "Partial_UDL_TALA_TAL_Output",
+    "targetPort" : "Partial_UDL_TALA_TAL_Output__in"
+  }, {
+    "id" : "e10",
+    "source" : "check_records_limit_RowDistributor",
+    "sourcePort" : "check_records_limit_RowDistributor__out1",
+    "target" : "check_records_limitReformat_1",
+    "targetPort" : "check_records_limitReformat_1__in"
+  }, {
+    "id" : "e11",
+    "source" : "check_records_limitReformat_0",
+    "sourcePort" : "check_records_limitReformat_0__out",
+    "target" : "Write_Excel_Enrich_Product_Data",
+    "targetPort" : "Write_Excel_Enrich_Product_Data__in"
+  }, {
+    "id" : "e8",
+    "source" : "CONC",
+    "sourcePort" : "CONC__out",
+    "target" : "check_records_limit_RowDistributor",
+    "targetPort" : "check_records_limit_RowDistributor__in"
+  }, {
+    "id" : "e12",
+    "source" : "check_records_limit_RowDistributor",
+    "sourcePort" : "check_records_limit_RowDistributor__out0",
+    "target" : "check_records_limitReformat_0",
+    "targetPort" : "check_records_limitReformat_0__in"
+  }, {
+    "id" : "e0",
+    "source" : "Create_Criteria_Tab",
+    "sourcePort" : "Create_Criteria_Tab__out",
+    "target" : "Create_Criteria_Tab_Reformat",
+    "targetPort" : "Create_Criteria_Tab_Reformat__in"
+  }, {
+    "id" : "e4",
+    "source" : "IFILE_Input_File",
+    "sourcePort" : "IFILE_Input_File__out",
+    "target" : "Create_Exp_Tab",
+    "targetPort" : "Create_Exp_Tab__in"
+  }, {
+    "id" : "e14",
+    "source" : "Create_Exp_Tab",
+    "sourcePort" : "Create_Exp_Tab__out",
+    "target" : "CONC",
+    "targetPort" : "CONC__in3"
+  }, {
+    "id" : "e13",
+    "source" : "Create_Criteria_Tab_Reformat",
+    "sourcePort" : "Create_Criteria_Tab_Reformat__out",
+    "target" : "CONC",
+    "targetPort" : "CONC__in4"
+  }, {
+    "id" : "e15",
+    "source" : "Products",
+    "sourcePort" : "Products__out",
+    "target" : "Products_lookup",
+    "targetPort" : "Products_lookup__in"
+  } ],
+  "processes" : {
+    "Create_Criteria_Tab_Reformat" : {
+      "id" : "Create_Criteria_Tab_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Create_Criteria_Tab_Reformat",
+        "slug" : "Create_Criteria_Tab_Reformat",
+        "x" : 620,
+        "y" : 400,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_Criteria_Tab_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_Criteria_Tab_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "sheet",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"sheet\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "line",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"line\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Flag_lookup" : {
+      "id" : "Flag_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Flag_lookup",
+        "slug" : "Flag_lookup",
+        "x" : 1420,
+        "y" : 220,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Flag_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "flag",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "flag" ],
+        "valueColumns" : [ "flag" ],
+        "processName" : "Flag"
+      }
+    },
+    "Count_of_records_Reformat" : {
+      "id" : "Count_of_records_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Count_of_records_Reformat",
+        "slug" : "Count_of_records_Reformat",
+        "x" : 1220,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Count_of_records_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "1",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "flag",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Count_of_records_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "flag",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"flag\").cast(DecimalType(1, 0))"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "CONC" : {
+      "id" : "CONC",
+      "component" : "SetOperation",
+      "metadata" : {
+        "label" : "CONC",
+        "slug" : "CONC",
+        "x" : 820,
+        "y" : 300,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "CONC__in3",
+          "slug" : "in3",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "CONC__in4",
+          "slug" : "in4",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "CONC__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "operationType" : "unionAll",
+        "allowMissingColumns" : false
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/SetOperation",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Products_lookup" : {
+      "id" : "Products_lookup",
+      "component" : "Lookup",
+      "metadata" : {
+        "label" : "Products_lookup",
+        "slug" : "Products_lookup",
+        "x" : 220,
+        "y" : 600,
+        "phase" : -3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Products_lookup__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "dl_bit",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "ndc11",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "status_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inactive_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "msc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "drug_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rx_otc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "desi",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "roa_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "dosage_form_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_strength",
+              "type" : "decimal(14,5)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "repack_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "prod_short_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi14_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "gpi8_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "isRange" : false,
+        "keyColumns" : [ "dl_bit" ],
+        "valueColumns" : [ "dl_bit", "ndc11", "gpi14", "status_cd", "inactive_dt", "msc", "drug_name", "rx_otc", "desi", "roa_cd", "dosage_form_cd", "prod_strength", "repack_cd", "prod_short_desc", "gpi14_desc", "gpi8_desc", "newline" ],
+        "processName" : "Products"
+      }
+    },
+    "Partial_UDL_TALA_TAL_Output" : {
+      "id" : "Partial_UDL_TALA_TAL_Output",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Partial_UDL_TALA_TAL_Output_3",
+        "slug" : "Partial_UDL_TALA_TAL_Output_3",
+        "x" : 1420,
+        "y" : 620,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Partial_UDL_TALA_TAL_Output__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Partial_UDL_TALA_TAL_Output_3"
+      }
+    },
+    "Flag" : {
+      "id" : "Flag",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Flag_3",
+        "slug" : "Flag_3",
+        "x" : 1420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Flag__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "flag",
+              "type" : "decimal(1,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Flag_3"
+      }
+    },
+    "IFILE_Input_File" : {
+      "id" : "IFILE_Input_File",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFILE_Input_File_3",
+        "slug" : "IFILE_Input_File_3",
+        "x" : 20,
+        "y" : 300,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFILE_Input_File__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFILE_Input_File_3"
+      }
+    },
+    "Count_of_records" : {
+      "id" : "Count_of_records",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Count_of_records",
+        "slug" : "Count_of_records",
+        "x" : 1020,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Count_of_records__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Count_of_records__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "_row_id" : null,
+          "target" : "flag",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(count(struct(col(\"sheet\").as(\"sheet\"), col(\"line\").as(\"line\"))) >= lit(1048575), lit(1))\n    .otherwise(lit(0))\n    .cast(DecimalType(1, 0))"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "_row_id" : null,
+          "target" : "1",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "lit(1)"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "check_records_limitReformat_1" : {
+      "id" : "check_records_limitReformat_1",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "check_records_limitReformat_1",
+        "slug" : "check_records_limitReformat_1",
+        "x" : 1220,
+        "y" : 620,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "check_records_limitReformat_1__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "check_records_limitReformat_1__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "sheet",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"sheet\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "line",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"line\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "check_records_limit_RowDistributor" : {
+      "id" : "check_records_limit_RowDistributor",
+      "component" : "RowDistributor",
+      "metadata" : {
+        "label" : "check_records_limit_RowDistributor",
+        "slug" : "check_records_limit_RowDistributor",
+        "x" : 1020,
+        "y" : 520,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "check_records_limit_RowDistributor__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "check_records_limit_RowDistributor__out0",
+          "slug" : "out0"
+        }, {
+          "id" : "check_records_limit_RowDistributor__out1",
+          "slug" : "out1"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "outports" : [ {
+          "path" : "out0",
+          "id" : "check_records_limit_RowDistributor__out0",
+          "model" : {
+            "format" : "scala",
+            "expression" : "lookup_match(\"Flag\", lit(0)).cast(BooleanType)"
+          }
+        }, {
+          "path" : "out1",
+          "id" : "check_records_limit_RowDistributor__out1",
+          "model" : {
+            "format" : "scala",
+            "expression" : "not(lookup_match(\"Flag\", lit(0)).cast(BooleanType))"
+          }
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/RowDistributor",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Create_Exp_Tab" : {
+      "id" : "Create_Exp_Tab",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Create_Exp_Tab",
+        "slug" : "Create_Exp_Tab",
+        "x" : 420,
+        "y" : 200,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_Exp_Tab__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_Exp_Tab__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(bv_indices(col(\"products\")))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (\n        concat(\n          col(\"udl_nm\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1)))\n            .getField(\"ndc11\")\n            .cast(StringType),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1)))\n            .getField(\"gpi14\")\n            .cast(StringType),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"msc\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"drug_name\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1)))\n            .getField(\"prod_short_desc\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"gpi14_desc\"),\n          lit(\"\\t\"),\n          when(\n            array_contains(\n              array(lit(1.0e-5),\n                    lit(2.0e-5),\n                    lit(3.0e-5),\n                    lit(4.0e-5),\n                    lit(5.0e-5),\n                    lit(6.0e-5),\n                    lit(7.0e-5),\n                    lit(8.0e-5),\n                    lit(9.0e-5)\n              ),\n              lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1)))\n                .getField(\"prod_strength\")\n            ),\n            concat(lit(\"\"),\n                   lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1)))\n                     .getField(\"prod_strength\")\n                     .cast(DecimalType(37, 5)),\n                   lit(\"\")\n            )\n          ).otherwise(warning(\"%.15g not supported\")),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"roa_cd\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"dosage_form_cd\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"rx_otc\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"repack_cd\"),\n          lit(\"\\t\"),\n          lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1))).getField(\"status_cd\"),\n          lit(\"\\t\"),\n          date_format(to_date(lookup(\"Products\", element_at(bv_indices(col(\"products\")), col(\"index\") + lit(1)))\n                                .getField(\"inactive_dt\"),\n                              \"yyyyMMdd\"\n                      ),\n                      \"MM/dd/yyyy\"\n          ).cast(StringType)\n        )\n      ).as(\"line\")\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    normalizeRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select((lit(\"UDL_EXPANSION\")).as(\"sheet\"), (col(\"line\")).as(\"line\"))\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame) : Script = {",
+        "scriptMethodFooter" : "out"
+      }
+    },
+    "Write_Excel_Enrich_Product_Data" : {
+      "id" : "Write_Excel_Enrich_Product_Data",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "Write_Excel_Enrich_Product_Data_3",
+        "slug" : "Write_Excel_Enrich_Product_Data_3",
+        "x" : 1420,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Write_Excel_Enrich_Product_Data__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Write_Excel_Enrich_Product_Data_3"
+      }
+    },
+    "Create_Criteria_Tab_input_select_filter" : {
+      "id" : "Create_Criteria_Tab_input_select_filter",
+      "component" : "Filter",
+      "metadata" : {
+        "label" : "Create_Criteria_Tab_input_select_filter",
+        "slug" : "Create_Criteria_Tab_input_select_filter",
+        "x" : 220,
+        "y" : 400,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_Criteria_Tab_input_select_filter__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_Criteria_Tab_input_select_filter__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "condition" : {
+          "format" : "scala",
+          "expression" : "bv_count_one_bits(col(\"products\")) =!= lit(0)"
+        }
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Filter",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "check_records_limitReformat_0" : {
+      "id" : "check_records_limitReformat_0",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "check_records_limitReformat_0",
+        "slug" : "check_records_limitReformat_0",
+        "x" : 1220,
+        "y" : 420,
+        "phase" : 4,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "check_records_limitReformat_0__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "sheet",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "line",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "check_records_limitReformat_0__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "sheet",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"sheet\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "line",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"line\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Create_Criteria_Tab" : {
+      "id" : "Create_Criteria_Tab",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "Create_Criteria_Tab",
+        "slug" : "Create_Criteria_Tab",
+        "x" : 420,
+        "y" : 400,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Create_Criteria_Tab__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "products",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "contents",
+              "type" : "binary",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Create_Criteria_Tab__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "_row_id" : null,
+          "target" : "sheet",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(lit(\"UDL_EXPANSION_CRITERIA\"))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : null,
+          "target" : "line",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(\n    concat(\n      col(\"udl_nm\"),\n      lit(\"\\t\"),\n      col(\"udl_desc\"),\n      lit(\"\\t\"),\n      lit(\"PUB\"),\n      lit(\"\\t\"),\n      date_format(to_date(lit(\"20240627\"), \"yyyyMMdd\"), \"MM/dd/yyyy\").cast(StringType),\n      lit(\"\\t\"),\n      lit(\"RXCL3-CTR\"),\n      lit(\"\\t\"),\n      lit(\"NULL\"),\n      lit(\"\\t\"),\n      lit(\"NULL\"),\n      lit(\"\\t\"),\n      lit(\"NULL\")\n    )\n  )"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotColumn" : null,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "_row_id" : null,
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Products" : {
+      "id" : "Products",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "Products_3",
+        "slug" : "Products_3",
+        "x" : 20,
+        "y" : 600,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "Products__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/Products_3"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}
