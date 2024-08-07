@@ -359,8 +359,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -420,8 +420,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -1973,8 +1973,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2034,8 +2034,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2558,8 +2558,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -2619,8 +2619,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3464,8 +3464,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3525,8 +3525,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3696,8 +3696,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3757,8 +3757,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3915,8 +3915,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3976,8 +3976,8 @@
                     }
                   }, {
                     "name" : "rule_expression_id",
-                    "type" : "long",
-                    "nullable" : true,
+                    "type" : "integer",
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],

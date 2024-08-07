@@ -72,8 +72,8 @@ schema:
             mappings: []
             tags: []
         - name: rule_expression_id
-          type: long
-          nullable: true
+          type: integer
+          nullable: false
           metadata:
             description: ''
             mappings: []
@@ -119,8 +119,8 @@ schema:
             mappings: []
             tags: []
         - name: rule_expression_id
-          type: long
-          nullable: true
+          type: integer
+          nullable: false
           metadata:
             description: ''
             mappings: []

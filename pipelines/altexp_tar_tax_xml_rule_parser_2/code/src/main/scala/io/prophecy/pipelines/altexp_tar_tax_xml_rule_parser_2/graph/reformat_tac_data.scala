@@ -21,13 +21,13 @@ object reformat_tac_data {
       col("eff_dt"),
       col("term_dt"),
       when(!col("left_target_xml.Rule").isNull,
-           get_rule_def(col("left_target_xml"), col("offset"))
+           get_rule_def(col("left_target_xml"), coalesce(col("offset"), lit(0)))
       ).otherwise(array()).as("target_rule_def"),
       when(
         !col("right_alt_xml.Rule").isNull,
         get_rule_def(
           col("right_alt_xml"),
-          col("offset") + size(
+          coalesce(col("offset"), lit(0)) + size(
             col("left_target_xml").getField("Rule").getField("Rule")
           ) + size(col("left_target_xml").getField("Rule").getField("Qual"))
         )

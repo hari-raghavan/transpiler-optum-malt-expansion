@@ -1037,14 +1037,14 @@
           "target" : "target_rule_def",
           "expression" : {
             "format" : "scala",
-            "expression" : "when(!isnull(col(\"left_target_xml.Rule\")), get_rule_def(col(\"left_target_xml\"), col(\"offset\"))).otherwise(array())"
+            "expression" : "when(!isnull(col(\"left_target_xml.Rule\")), get_rule_def(col(\"left_target_xml\"), coalesce(col(\"offset\"), lit(0)))).otherwise(array())"
           },
           "description" : ""
         }, {
           "target" : "alt_rule_def",
           "expression" : {
             "format" : "scala",
-            "expression" : "when(\n    !isnull(col(\"right_alt_xml.Rule\")),\n    get_rule_def(\n      col(\"right_alt_xml\"),\n      col(\"offset\") + size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Rule\")) +\n        size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Qual\"))\n    )\n  ).otherwise(array())"
+            "expression" : "when(\n    !isnull(col(\"right_alt_xml.Rule\")),\n    get_rule_def(\n      col(\"right_alt_xml\"),\n      coalesce(col(\"offset\"), lit(0)) + size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Rule\")) +\n        size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Qual\"))\n    )\n  ).otherwise(array())"
           },
           "description" : ""
         }, {
@@ -3116,7 +3116,7 @@
                   }, {
                     "name" : "rule_expression_id",
                     "type" : "long",
-                    "nullable" : true,
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3177,7 +3177,7 @@
                   }, {
                     "name" : "rule_expression_id",
                     "type" : "long",
-                    "nullable" : true,
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],

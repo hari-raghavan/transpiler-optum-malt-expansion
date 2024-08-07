@@ -2070,8 +2070,8 @@
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "comment" : "",
-        "autoUpdateComment" : false
+        "comment" : "Reformats TAC data by selecting specific columns and applying transformations to extract target and alternative rule definitions.",
+        "autoUpdateComment" : true
       },
       "ports" : {
         "inputs" : [ {
@@ -2477,7 +2477,7 @@
         "autoUpdateOnRun" : false
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##tac_id", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##tac_name", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##priority", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##eff_dt", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##term_dt", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##left_target_xml", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##left_target_xml.Rule", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##offset", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##right_alt_xml", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##right_alt_xml.Rule", "6lLDxR4ZNeUi9uB9-ONOx$$hWQHwrQ432DjGt4ueQ3Ge##newline" ],
         "expressions" : [ {
           "target" : "tac_id",
           "expression" : {
@@ -2517,14 +2517,14 @@
           "target" : "target_rule_def",
           "expression" : {
             "format" : "scala",
-            "expression" : "when(!isnull(col(\"left_target_xml.Rule\")), get_rule_def(col(\"left_target_xml\"), col(\"offset\"))).otherwise(array())"
+            "expression" : "when(!isnull(col(\"left_target_xml.Rule\")), get_rule_def(col(\"left_target_xml\"), coalesce(col(\"offset\"), lit(0)))).otherwise(array())"
           },
           "description" : ""
         }, {
           "target" : "alt_rule_def",
           "expression" : {
             "format" : "scala",
-            "expression" : "when(\n    !isnull(col(\"right_alt_xml.Rule\")),\n    get_rule_def(\n      col(\"right_alt_xml\"),\n      col(\"offset\") + size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Rule\")) +\n        size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Qual\"))\n    )\n  ).otherwise(array())"
+            "expression" : "when(\n    !isnull(col(\"right_alt_xml.Rule\")),\n    get_rule_def(\n      col(\"right_alt_xml\"),\n      coalesce(col(\"offset\"), lit(0)) + size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Rule\")) +\n        size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Qual\"))\n    )\n  ).otherwise(array())"
           },
           "description" : ""
         }, {
@@ -3087,7 +3087,7 @@
                   }, {
                     "name" : "rule_expression_id",
                     "type" : "long",
-                    "nullable" : true,
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
@@ -3148,7 +3148,7 @@
                   }, {
                     "name" : "rule_expression_id",
                     "type" : "long",
-                    "nullable" : true,
+                    "nullable" : false,
                     "metadata" : {
                       "description" : "",
                       "mappings" : [ ],
