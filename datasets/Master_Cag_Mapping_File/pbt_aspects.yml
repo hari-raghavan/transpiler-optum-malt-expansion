@@ -23,17 +23,24 @@ schema:
       description: ''
       mappings: []
       tags: []
-  - name: cag_override_data_path
+  - name: future_flg
     type: string
-    nullable: true
+    nullable: false
     metadata:
       description: ''
       mappings: []
       tags: []
-  - name: output_profile_id
+  - name: cag_override_data_path
+    type: string
+    nullable: false
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: qual_output_profile_ids
     type:
       type: array
-      elementType: decimal(10,0)
+      elementType: string
       containsNull: true
     nullable: true
     metadata:
@@ -46,8 +53,25 @@ schema:
       elementType:
         type: struct
         fields:
-        - name: output_profile_name
+        - name: qual_output_profile_name
           type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: rxclaim_env_name
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: job_ids
+          type:
+            type: array
+            elementType: string
+            containsNull: true
           nullable: true
           metadata:
             description: ''
@@ -144,11 +168,94 @@ schema:
       description: ''
       mappings: []
       tags: []
+  - name: non_qual_output_profile_ids
+    type:
+      type: array
+      elementType:
+        type: struct
+        fields:
+        - name: non_qual_op_id
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: rxclaim_env_name
+          type: string
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: job_ids
+          type:
+            type: array
+            elementType: string
+            containsNull: true
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: formulary_names
+          type:
+            type: array
+            elementType: string
+            containsNull: true
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: formulary_pseudonyms
+          type:
+            type: array
+            elementType: string
+            containsNull: true
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: alias_names
+          type:
+            type: array
+            elementType: string
+            containsNull: true
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+        - name: job_names
+          type:
+            type: array
+            elementType: string
+            containsNull: true
+          nullable: true
+          metadata:
+            description: ''
+            mappings: []
+            tags: []
+      containsNull: true
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
   - name: err_msgs
     type:
       type: array
       elementType: string
       containsNull: true
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
+  - name: as_of_dt
+    type: string
     nullable: true
     metadata:
       description: ''

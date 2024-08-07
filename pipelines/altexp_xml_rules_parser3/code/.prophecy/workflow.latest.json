@@ -1,0 +1,2777 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "functions" : { },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "xml_rules_parser",
+    "uri" : "pipelines/altexp_xml_rules_parser3",
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "  def get_rule_def(xml: org.apache.spark.sql.Column, offset: org.apache.spark.sql.Column) = {\n    concat(\n      flatten(\n        transform(\n          xml.getField(\"Rule\").getField(\"Rule\"),\n          (rule, i) ⇒\n            transform(\n              rule.getField(\"Qual\"),\n              (qual, j) ⇒\n                struct(\n                  qual.getField(\"type0\").as(\"qualifier_cd\"),\n                  qual.getField(\"op\").as(\"operator\"),\n                  qual.getField(\"Qual\").as(\"compare_value\"),\n                  when(lit(j) < size(rule.getField(\"OR\")), lit(\"O\"))\n                    .otherwise(lit(\"\"))\n                    .as(\"conjunction_cd\"),\n                  (offset + lit(1) + lit(i) + lit(50)).as(\n                    \"rule_expression_id\"\n                  )\n                )\n            )\n        )\n      ),\n      transform(\n        xml.getField(\"Rule\").getField(\"Qual\"),\n        (qual, i) ⇒\n          struct(\n            qual.getField(\"type0\").as(\"qualifier_cd\"),\n            qual.getField(\"op\").as(\"operator\"),\n            qual.getField(\"Qual\").as(\"compare_value\"),\n            lit(\"\").as(\"conjunction_cd\"),\n            (offset + lit(1) + size(xml.getField(\"Rule\").getField(\"Rule\")) + lit(i) + lit(50))\n              .cast(IntegerType)\n              .as(\"rule_expression_id\")\n          )\n      )\n    )\n  }\n\n\n  def rule_rank(list: org.apache.spark.sql.Column) = {\n    array_min(transform(\n      list,\n      qual_cd =>\n        coalesce(element_at(\n          filter(\n            array(\n              struct(lit(\"NDC11\").as(\"qual\"), lit(1).as(\"priority\")),\n              struct(lit(\"NDC9\").as(\"qual\"), lit(2).as(\"priority\")),\n              struct(lit(\"NDC5\").as(\"qual\"), lit(3).as(\"priority\")),\n              struct(lit(\"GPI14\").as(\"qual\"), lit(4).as(\"priority\")),\n              struct(lit(\"GPI12\").as(\"qual\"), lit(5).as(\"priority\")),\n              struct(lit(\"GPI10\").as(\"qual\"), lit(6).as(\"priority\")),\n              struct(lit(\"DOSAGE_FORM\").as(\"qual\"), lit(7).as(\"priority\")),\n              struct(lit(\"ROA\").as(\"qual\"), lit(8).as(\"priority\")),\n              struct(lit(\"DRUG_NAME\").as(\"qual\"), lit(9).as(\"priority\")),\n              struct(lit(\"GPI8\").as(\"qual\"), lit(10).as(\"priority\")),\n              struct(lit(\"GPI6\").as(\"qual\"), lit(11).as(\"priority\")),\n              struct(lit(\"GPI4\").as(\"qual\"), lit(12).as(\"priority\")),\n              struct(lit(\"MSC\").as(\"qual\"), lit(13).as(\"priority\")),\n              struct(lit(\"RXOTC\").as(\"qual\"), lit(14).as(\"priority\")),\n              struct(\n                lit(\"DAYS_UNTIL_DRUG_STATUS_INACTIVE\").as(\"qual\"),\n                lit(15).as(\"priority\")\n              ),\n              struct(lit(\"STATUS_CD\").as(\"qual\"), lit(16).as(\"priority\")),\n              struct(lit(\"REPACKAGER\").as(\"qual\"), lit(17).as(\"priority\")),\n              struct(lit(\"DESI_CD\").as(\"qual\"), lit(18).as(\"priority\"))\n            ),\n            xx =>\n              xx.getField(\"qual\") === qual_cd\n        ), 1).getField(\"priority\"),\n        lit(0)\n      )\n    ))\n  }\n\n  def qual_list(rule: org.apache.spark.sql.Column) = {\n    transform(\n      rule,\n      r => r.getField(\"qualifier_cd\")\n    )\n  }\n\n  def rule_qual_priority(rule: org.apache.spark.sql.Column) = {\n     rule_rank(\n      array_distinct(\n          array_sort( \n              qual_list(rule)\n          )\n      )\n    )\n  }",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "EXTRACT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_XWALK_WT_RL_PRIORITY",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "UDL_MSTR_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "io.prophecy.pipelines.altexp_xml_rules_parser3",
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "Normalize_grouped_rules",
+    "sourcePort" : "Normalize_grouped_rules__out",
+    "target" : "Sort_Rules_Per_UDL",
+    "targetPort" : "Sort_Rules_Per_UDL__in"
+  }, {
+    "id" : "e3",
+    "source" : "Sort_Rules_Per_UDL",
+    "sourcePort" : "Sort_Rules_Per_UDL__out",
+    "target" : "OFILE_Rule_CrossWalk",
+    "targetPort" : "OFILE_Rule_CrossWalk__in"
+  }, {
+    "id" : "e1",
+    "source" : "Normalize_grouped_rules",
+    "sourcePort" : "Normalize_grouped_rules__out",
+    "target" : "Ignore_rule_priority",
+    "targetPort" : "Ignore_rule_priority__in"
+  }, {
+    "id" : "e4",
+    "source" : "Ignore_rule_priority",
+    "sourcePort" : "Ignore_rule_priority__out",
+    "target" : "OFILE_Rule_CrossWalk_Without_Rule_Priority",
+    "targetPort" : "OFILE_Rule_CrossWalk_Without_Rule_Priority__in"
+  }, {
+    "id" : "e5",
+    "source" : "RLP_List_qualifiers_per_UDL_and_set_override_flag",
+    "sourcePort" : "RLP_List_qualifiers_per_UDL_and_set_override_flag__out",
+    "target" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat",
+    "targetPort" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat__in"
+  }, {
+    "id" : "e6",
+    "source" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat",
+    "sourcePort" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat__out",
+    "target" : "OFILE_UDL_Master_CrossWalk",
+    "targetPort" : "OFILE_UDL_Master_CrossWalk__in"
+  }, {
+    "id" : "e7",
+    "source" : "Group_the_Rules_and_assign_priority",
+    "sourcePort" : "Group_the_Rules_and_assign_priority__out",
+    "target" : "Normalize_grouped_rules",
+    "targetPort" : "Normalize_grouped_rules__in"
+  }, {
+    "id" : "e8",
+    "source" : "Group_the_Rules_and_assign_priority",
+    "sourcePort" : "Group_the_Rules_and_assign_priority__out",
+    "target" : "RLP_List_qualifiers_per_UDL_and_set_override_flag",
+    "targetPort" : "RLP_List_qualifiers_per_UDL_and_set_override_flag__in"
+  }, {
+    "id" : "e2",
+    "source" : "IFILE_UDL_rules",
+    "sourcePort" : "IFILE_UDL_rules__out",
+    "target" : "Convert_XMLTYPE_into_DML_described_format",
+    "targetPort" : "Convert_XMLTYPE_into_DML_described_format__in"
+  }, {
+    "id" : "ZE2dHWvXO8LZmdYcHs6Uq",
+    "source" : "Convert_XMLTYPE_into_DML_described_format",
+    "sourcePort" : "Convert_XMLTYPE_into_DML_described_format__out",
+    "target" : "qPl4ONDLCpiDOp_OD3T6I$$t4u6KqP_hVI-E2qPmPZv7",
+    "targetPort" : "qApZp_84QIA_FomOLQqRT$$xZPGh55AP1LS3kCWNTWEL"
+  }, {
+    "id" : "io4lQQ8iOHZRq88UmAdB3",
+    "source" : "qPl4ONDLCpiDOp_OD3T6I$$t4u6KqP_hVI-E2qPmPZv7",
+    "sourcePort" : "svCFWFjrE9y2pybqG0Eu3$$Hitr6ehqMeATs4GiS1JSV",
+    "target" : "Group_the_Rules_and_assign_priority",
+    "targetPort" : "Group_the_Rules_and_assign_priority__in"
+  } ],
+  "processes" : {
+    "OFILE_UDL_Master_CrossWalk" : {
+      "id" : "OFILE_UDL_Master_CrossWalk",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_UDL_Master_CrossWalk",
+        "slug" : "OFILE_UDL_Master_CrossWalk",
+        "x" : 1020,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFILE_UDL_Master_CrossWalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qual_list",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_flg",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_UDL_Master_CrossWalk"
+      }
+    },
+    "OFILE_Rule_CrossWalk" : {
+      "id" : "OFILE_Rule_CrossWalk",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_Rule_CrossWalk",
+        "slug" : "OFILE_Rule_CrossWalk",
+        "x" : 1020,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFILE_Rule_CrossWalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_Rule_CrossWalk"
+      }
+    },
+    "RLP_List_qualifiers_per_UDL_and_set_override_flag" : {
+      "id" : "RLP_List_qualifiers_per_UDL_and_set_override_flag",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "RLP_List_qualifiers_per_UDL_and_set_override_flag",
+        "slug" : "RLP_List_qualifiers_per_UDL_and_set_override_flag",
+        "x" : 620,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RLP_List_qualifiers_per_UDL_and_set_override_flag__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "long",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "RLP_List_qualifiers_per_UDL_and_set_override_flag__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "allIns" : false,
+        "doPivot" : false,
+        "aggregate" : [ {
+          "target" : "user_defined_list_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"udl_desc\"))"
+          },
+          "description" : ""
+        }, {
+          "target" : "qual_list",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "array_distinct(\n    array_sort(\n      flatten(\n        collect_list(\n          transform(\n            col(\"rule_def\"),\n            rule => rule.getField(\"qualifier_cd\")\n          )\n        )\n      )\n    )\n  )"
+          },
+          "description" : ""
+        }, {
+          "target" : "override_flg",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(\n    size(\n      array_intersect(\n        array_distinct(\n          array_sort(\n            flatten(\n              collect_list(\n                transform(\n                  col(\"rule_def\"),\n                  rule => rule.getField(\"qualifier_cd\")\n                )\n              )\n            )\n          )\n        ),\n        array(lit(\"DESI_CD\"), lit(\"DOSAGE_FORM\"), lit(\"MSC\"), lit(\"ROA\"), lit(\"RXOTC\"))\n      )\n    ) > lit(0),\n    lit(1)\n  ).otherwise(lit(0))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : "c_329",
+          "target" : "udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"udl_nm\"))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : "c_330",
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"eff_dt\"))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : "c_333",
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"term_dt\"))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : "c_336",
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "last(col(\"newline\"))"
+          },
+          "description" : ""
+        } ],
+        "allowSelection" : true,
+        "pivotValues" : [ ],
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##udl_id", "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##udl_desc", "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##rule_def", "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##udl_nm", "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##eff_dt", "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##term_dt", "RLP_List_qualifiers_per_UDL_and_set_override_flag__in##newline" ],
+        "groupBy" : [ {
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Aggregate",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "IFILE_UDL_rules" : {
+      "id" : "IFILE_UDL_rules",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFILE_UDL_rules",
+        "slug" : "IFILE_UDL_rules",
+        "x" : -180,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFILE_UDL_rules__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFILE_UDL_rules"
+      }
+    },
+    "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat" : {
+      "id" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat",
+        "slug" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat",
+        "x" : 820,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qual_list",
+              "type" : {
+                "type" : "array",
+                "elementType" : "string",
+                "containsNull" : true
+              },
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "override_flg",
+              "type" : "integer",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "RLP_List_qualifiers_per_UDL_and_set_override_flag_Reformat__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ {
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_nm\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "user_defined_list_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"user_defined_list_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "qual_list",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"qual_list\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "override_flg",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"override_flg\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"newline\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Ignore_rule_priority" : {
+      "id" : "Ignore_rule_priority",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "Ignore_rule_priority",
+        "slug" : "Ignore_rule_priority",
+        "x" : 820,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Ignore_rule_priority__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Ignore_rule_priority__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"inclusion_cd\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_expression_id\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"conjunction_cd\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Normalize_grouped_rules" : {
+      "id" : "Normalize_grouped_rules",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Normalize_grouped_rules",
+        "slug" : "Normalize_grouped_rules",
+        "x" : 620,
+        "y" : 320,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Normalize_grouped_rules__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "long",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Normalize_grouped_rules__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  val normalize_out_DF = in.normalize(\n    lengthExpression = Some(size(col(\"rule_def\"))),\n    finishedExpression = None,\n    finishedCondition = None,\n    alias = \"index\",\n    colsToSelect = List(\n      (element_at(col(\"rule_def\"), col(\"index\") + lit(1)).getField(\"qualifier_cd\")).as(\"qualifier_cd\"),\n      (element_at(col(\"rule_def\"), col(\"index\") + lit(1)).getField(\"operator\")).as(\"operator\"),\n      (element_at(col(\"rule_def\"), col(\"index\") + lit(1)).getField(\"conjunction_cd\")).as(\"conjunction_cd\"),\n      (element_at(col(\"rule_def\"), col(\"index\") + lit(1)).getField(\"rule_expression_id\")).as(\"rule_expression_id\"),\n      (when(\n        element_at(col(\"rule_def\"),                col(\"index\") + lit(1)).getField(\"qualifier_cd\") === lit(\"DRUG_NAME\"),\n        regexp_replace(element_at(col(\"rule_def\"), col(\"index\") + lit(1)).getField(\"compare_value\"),\n                       lit(\"\\\\Q[[[^0-9]s[^0-9][^0-9]ce[^0-9]]]+\\\\E\"),\n                       lit(\"\")\n        )\n      ).otherwise(element_at(col(\"rule_def\"), col(\"index\") + lit(1)).getField(\"compare_value\"))).as(\"compare_value\"),\n      col(\"udl_id\"),\n      col(\"udl_rule_id\"),\n      col(\"udl_nm\"),\n      col(\"udl_desc\"),\n      col(\"rule_priority\"),\n      col(\"inclusion_cd\"),\n      col(\"eff_dt\"),\n      col(\"term_dt\"),\n      col(\"newline\"),\n    ),\n    lengthRelatedGlobalExpressions = Map(),\n    tempWindowExpr = Map()\n  )\n\n  val simpleSelect_in_DF = normalize_out_DF.select(\n      col(\"udl_id\"),\n      col(\"udl_rule_id\"),\n      col(\"udl_nm\"),\n      col(\"udl_desc\"),\n      col(\"rule_priority\"),\n      col(\"inclusion_cd\"),\n      col(\"qualifier_cd\"),\n      col(\"operator\"),\n      col(\"compare_value\"),\n      col(\"conjunction_cd\"),\n      col(\"rule_expression_id\"),\n      col(\"eff_dt\"),\n      col(\"term_dt\"),\n      col(\"newline\")\n  )\n\n  val out = simpleSelect_in_DF\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "OFILE_Rule_CrossWalk_Without_Rule_Priority" : {
+      "id" : "OFILE_Rule_CrossWalk_Without_Rule_Priority",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_Rule_CrossWalk_Without_Rule_Priority",
+        "slug" : "OFILE_Rule_CrossWalk_Without_Rule_Priority",
+        "x" : 1020,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFILE_Rule_CrossWalk_Without_Rule_Priority__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_Rule_CrossWalk_Without_Rule_Priority"
+      }
+    },
+    "Convert_XMLTYPE_into_DML_described_format" : {
+      "id" : "Convert_XMLTYPE_into_DML_described_format",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Convert_XMLTYPE_into_DML_described_format",
+        "slug" : "Convert_XMLTYPE_into_DML_described_format",
+        "x" : 20,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Convert_XMLTYPE_into_DML_described_format__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "user_defined_list_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "incl_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Convert_XMLTYPE_into_DML_described_format__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "user_defined_list_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "incl_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val out = in.withColumn(\n  \"xml\",\n  xml_split(col(\"rule\"),\n        \"\"\"\n         |type Qual_t = utf8 record\n         |  string('\\0') type0;\n         |  string('\\0') op;\n         |  string('\\0') Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'type0=@type,op=@op,Qual=text()';\n         |end;\n         |\n         |type Rule_t0 = utf8 record\n         |  Qual_t[big endian integer(4)] Qual;\n         |  string('\\0')[big endian integer(4)] OR;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'Qual=%e/Qual{1-n},OR=%e/OR{1-n}/text()';\n         |end;\n         |\n         |type Qual_t0 = utf8 record\n         |  string('\\0') type0;\n         |  string('\\0') op;\n         |  string('\\0') Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'type0=@type,op=@op,Qual=text()';\n         |end;\n         |\n         |type Rule_t = utf8 record\n         |  Rule_t0[big endian integer(4)] Rule;\n         |  string('\\0')[big endian integer(4)] AND;\n         |  Qual_t0[big endian integer(4)] Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'Rule=%e/Rule{1-n},AND=%e/AND{1-n}/text(),Qual=%e/Qual';\n         |end;\n         |\n         |type xml_doc_t = utf8 record\n         |  decimal('\\0') seq_num;\n         |  Rule_t Rule = NULL;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'seq_num=seqnum(),Rule=Rule';\n         |  string('\\0',charset='x-ab-internal') XML_generated_by_version() = '3.2.6.4';\n         |  string('\\0',charset='x-ab-internal') XML_generated_at_compatibility() = '';\n         |end;\n         |\"\"\".stripMargin\n  )\n)\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Sort_Rules_Per_UDL" : {
+      "id" : "Sort_Rules_Per_UDL",
+      "component" : "OrderBy",
+      "metadata" : {
+        "label" : "Sort_Rules_Per_UDL",
+        "slug" : "Sort_Rules_Per_UDL",
+        "x" : 820,
+        "y" : 420,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Sort_Rules_Per_UDL__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "udl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_nm",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "udl_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "inclusion_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "qualifier_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "operator",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "compare_value",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "conjunction_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule_expression_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Sort_Rules_Per_UDL__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "orders" : [ {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"udl_id\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_priority\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"inclusion_cd\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"rule_expression_id\")"
+          },
+          "sortType" : "asc"
+        }, {
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"conjunction_cd\")"
+          },
+          "sortType" : "asc"
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/OrderBy",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "qPl4ONDLCpiDOp_OD3T6I$$t4u6KqP_hVI-E2qPmPZv7" : {
+      "id" : "qPl4ONDLCpiDOp_OD3T6I$$t4u6KqP_hVI-E2qPmPZv7",
+      "component" : "WindowFunction",
+      "metadata" : {
+        "label" : "calculate_offset",
+        "slug" : "calculate_offset",
+        "x" : 220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "",
+        "autoUpdateComment" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "qApZp_84QIA_FomOLQqRT$$xZPGh55AP1LS3kCWNTWEL",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "user_defined_list_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "incl_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "svCFWFjrE9y2pybqG0Eu3$$Hitr6ehqMeATs4GiS1JSV",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "userSpecifiedEnd" : "-1",
+        "expressionColumns" : [ {
+          "_row_id" : "c_922",
+          "target" : "offset",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "sum(size(col(\"xml\").getField(\"Rule\").getField(\"Rule\")) +\n                    size(col(\"xml\").getField(\"Rule\").getField(\"Qual\")))"
+          },
+          "description" : ""
+        } ],
+        "frameType" : "row",
+        "partitionColumns" : [ {
+          "format" : "scala",
+          "expression" : "lit(1)"
+        } ],
+        "activeTab" : "windowUse",
+        "columnsSelector" : [ "qApZp_84QIA_FomOLQqRT$$xZPGh55AP1LS3kCWNTWEL##xml" ],
+        "specifyFrame" : true,
+        "frameStart" : "unboundedPreceding",
+        "orderColumns" : [ ],
+        "frameEnd" : "userFollowing"
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/WindowFunction",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Group_the_Rules_and_assign_priority" : {
+      "id" : "Group_the_Rules_and_assign_priority",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Group_the_Rules_and_assign_priority",
+        "slug" : "Group_the_Rules_and_assign_priority",
+        "x" : 420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "",
+        "autoUpdateComment" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Group_the_Rules_and_assign_priority__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "user_defined_list_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_desc",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "user_defined_list_rule_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "incl_cd",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "offset",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Group_the_Rules_and_assign_priority__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "Group_the_Rules_and_assign_priority__in##user_defined_list_id", "Group_the_Rules_and_assign_priority__in##user_defined_list_rule_id", "Group_the_Rules_and_assign_priority__in##user_defined_list_name", "Group_the_Rules_and_assign_priority__in##user_defined_list_desc", "Group_the_Rules_and_assign_priority__in##xml", "Group_the_Rules_and_assign_priority__in##offset", "Group_the_Rules_and_assign_priority__in##incl_cd", "Group_the_Rules_and_assign_priority__in##eff_dt", "Group_the_Rules_and_assign_priority__in##term_dt", "Group_the_Rules_and_assign_priority__in##newline" ],
+        "expressions" : [ {
+          "target" : "udl_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"user_defined_list_id\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_rule_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"user_defined_list_rule_id\").cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_nm",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"user_defined_list_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "udl_desc",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"user_defined_list_desc\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rule_priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "rule_qual_priority(get_rule_def(col(\"xml\"), coalesce(col(\"offset\"), lit(0)))).cast(StringType)"
+          },
+          "description" : ""
+        }, {
+          "target" : "inclusion_cd",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "rpad(col(\"incl_cd\"), 1, \" \")"
+          },
+          "description" : ""
+        }, {
+          "target" : "rule_def",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "get_rule_def(col(\"xml\"), coalesce(col(\"offset\"), lit(0)))"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"newline\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

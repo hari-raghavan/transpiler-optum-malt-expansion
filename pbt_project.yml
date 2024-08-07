@@ -363,21 +363,6 @@ pipelines:
       - datasets/OFILE_UDL_Master_CrossWalk
     subgraphs: []
     dependencies: {}
-  pipelines/altexp_tac_rules_parser:
-    name: altexp_tac_rules_parser
-    description: null
-    author: hari@prophecy.io
-    mode: batch
-    artefactID: ''
-    language: scala
-    createdAt: '2024-04-08 15:13:17'
-    datasets:
-      inputs:
-      - datasets/IFIL_TAC_rules
-      outputs:
-      - datasets/OFIL_TAC_Rule_Xwalk
-    subgraphs: []
-    dependencies: {}
   pipelines/altexp_tac_tar_xml_rule_parser:
     name: altexp_tac_tar_xml_rule_parser
     description: null
@@ -1113,6 +1098,85 @@ pipelines:
       - datasets/Flag_3
       - datasets/Partial_UDL_TALA_TAL_Output_3
       - datasets/Write_Excel_Enrich_Product_Data_3
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_xml_rules_parser_2:
+    name: altexp_xml_rules_parser_2
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-08-06 16:04:38'
+    datasets:
+      inputs:
+      - datasets/IFILE_UDL_rules
+      outputs:
+      - datasets/OFILE_Rule_CrossWalk
+      - datasets/OFILE_Rule_CrossWalk_Without_Rule_Priority
+      - datasets/OFILE_UDL_Master_CrossWalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_xml_rules_parser3:
+    name: altexp_xml_rules_parser3
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-08-07 04:40:10'
+    datasets:
+      inputs:
+      - datasets/IFILE_UDL_rules
+      outputs:
+      - datasets/OFILE_Rule_CrossWalk
+      - datasets/OFILE_Rule_CrossWalk_Without_Rule_Priority
+      - datasets/OFILE_UDL_Master_CrossWalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tar_tax_xml_rule_parser_2:
+    name: altexp_tar_tax_xml_rule_parser_2
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-08-07 05:10:27'
+    datasets:
+      inputs:
+      - datasets/IFILE
+      outputs:
+      - datasets/OFILE_Rule_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tac_rules_parser:
+    name: altexp_tac_rules_parser
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-04-08 15:13:17'
+    datasets:
+      inputs:
+      - datasets/IFIL_TAC_rules
+      outputs:
+      - datasets/OFIL_TAC_Rule_Xwalk
+    subgraphs: []
+    dependencies: {}
+  pipelines/altexp_tac_rules_parser_2:
+    name: altexp_tac_rules_parser_2
+    description: null
+    author: hari@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: scala
+    createdAt: '2024-08-07 05:26:54'
+    datasets:
+      inputs:
+      - datasets/IFIL_TAC_rules
+      outputs:
+      - datasets/OFIL_TAC_Rule_Xwalk
     subgraphs: []
     dependencies: {}
 datasets:

@@ -81,7 +81,7 @@ schema:
       tags: []
   - name: as_of_dt
     type: string
-    nullable: false
+    nullable: true
     metadata:
       description: ''
       mappings: []

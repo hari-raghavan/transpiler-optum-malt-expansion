@@ -3,6 +3,7 @@
     "migrationVersions" : {
       "gemBuilderVersion" : "v1"
     },
+    "functions" : { },
     "codeGenConfiguration" : {
       "editableConfig" : false,
       "plibVersion" : {
@@ -15,7 +16,7 @@
       "hasApplication" : false
     },
     "language" : "scala",
-    "fabricId" : "1593",
+    "fabricId" : "10269",
     "frontEndLanguage" : "scala",
     "mode" : "batch",
     "udfs" : {

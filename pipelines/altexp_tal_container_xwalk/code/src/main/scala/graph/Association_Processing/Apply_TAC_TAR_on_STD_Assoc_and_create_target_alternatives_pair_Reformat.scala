@@ -826,11 +826,12 @@ object Apply_TAC_TAR_on_STD_Assoc_and_create_target_alternatives_pair_Reformat {
           if (
             _bv_count_one_bits(buckets(k).getAs[Array[Byte]](4)) == 0 && _bv_count_one_bits(
               buckets(k).getAs[Array[Byte]](5)
-            ) == 0
+            ) == 0 && _bv_count_one_bits(buckets(k).getAs[Array[Byte]](3)) > 0
           ) {
-            buckets(k) = updateIndexInRow(buckets(k), 6, buckets(k).getAs[Array[Byte]](3))
+            buckets(k) = updateIndexInRow(buckets(k), 6, 
+              Array.concat(buckets(k).getSeq[Array[Byte]](6).toArray, Array.fill(1)(buckets(k).getAs[Array[Byte]](3)))
+            )
           }
-    
         }
         tar_prdcts_mapping(i) = updateIndexInRow(tar_prdcts_mapping(i), 0, buckets)
       }

@@ -1,0 +1,3261 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "functions" : { },
+    "codeGenConfiguration" : {
+      "editableConfig" : false,
+      "plibVersion" : {
+        "mavenVersion" : "7.1.83"
+      }
+    },
+    "id" : "xml_rules_parser",
+    "uri" : "pipelines/altexp_tar_tax_xml_rule_parser_2",
+    "pipelineSettingsInfo" : {
+      "hasApplication" : false
+    },
+    "language" : "scala",
+    "fabricId" : "1593",
+    "frontEndLanguage" : "scala",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "scala",
+      "udfs" : [ ],
+      "functionPackageName" : "hariprophecyioteam.transpilermaltexpansion.functions",
+      "sharedFunctionPackageNames" : [ "io.prophecy.scalagems.functions", "io.prophecy.warehousegems.functions" ],
+      "initialCode" : "def get_rule_def(xml: org.apache.spark.sql.Column, offset: org.apache.spark.sql.Column) = {\n    concat(\n      flatten(\n        transform(\n          xml.getField(\"Rule\").getField(\"Rule\"),\n          (rule, i) ⇒\n            transform(\n              rule.getField(\"Qual\"),\n              (qual, j) ⇒\n                struct(\n                  qual.getField(\"type0\").as(\"qualifier_cd\"),\n                  qual.getField(\"op\").as(\"operator\"),\n                  qual.getField(\"Qual\").as(\"compare_value\"),\n                  when(lit(j) < size(rule.getField(\"OR\")), lit(\"O\"))\n                    .otherwise(lit(\"\"))\n                    .as(\"conjunction_cd\"),\n                  (offset + lit(1) + lit(i) + lit(50)).as(\n                    \"rule_expression_id\"\n                  )\n                )\n            )\n        )\n      ),\n      transform(\n        xml.getField(\"Rule\").getField(\"Qual\"),\n        (qual, i) ⇒\n          struct(\n            qual.getField(\"type0\").as(\"qualifier_cd\"),\n            qual.getField(\"op\").as(\"operator\"),\n            qual.getField(\"Qual\").as(\"compare_value\"),\n            lit(\"\").as(\"conjunction_cd\"),\n            (offset + lit(1) + size(xml.getField(\"Rule\").getField(\"Rule\")) + lit(i) + lit(50))\n              .cast(IntegerType)\n              .as(\"rule_expression_id\")\n          )\n      )\n    )\n  }",
+      "isAbInitioTranspilerImport" : true
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ {
+          "name" : "EXTRACT_FILE",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        }, {
+          "name" : "RULE_XWALK",
+          "kind" : {
+            "type" : "string",
+            "value" : ""
+          },
+          "optional" : false,
+          "isWorkflowNodeConfiguration" : false,
+          "isReferenced" : false
+        } ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12651",
+      "projectName" : "ProphecySparkBasicsScala",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12652",
+      "projectName" : "ProphecyWarehouseScala",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "io.prophecy.pipelines.altexp_tar_tax_xml_rule_parser_2",
+    "configurationVersion" : "v2"
+  },
+  "connections" : [ {
+    "id" : "e0",
+    "source" : "IFILE",
+    "sourcePort" : "IFILE__out",
+    "target" : "Convert_Target_XMLTYPE_into_DML_described_format",
+    "targetPort" : "Convert_Target_XMLTYPE_into_DML_described_format__in"
+  }, {
+    "id" : "e1",
+    "source" : "IFILE",
+    "sourcePort" : "IFILE__out",
+    "target" : "Convert_Alternative_XMLTYPE_into_DML_described_format",
+    "targetPort" : "Convert_Alternative_XMLTYPE_into_DML_described_format__in"
+  }, {
+    "id" : "e4",
+    "source" : "Convert_Alternative_XMLTYPE_into_DML_described_format",
+    "sourcePort" : "Convert_Alternative_XMLTYPE_into_DML_described_format__out",
+    "target" : "Group_Rules_for_Target_Alternative_sequence1",
+    "targetPort" : "Group_Rules_for_Target_Alternative_sequence1__in"
+  }, {
+    "id" : "e3",
+    "source" : "Convert_Target_XMLTYPE_into_DML_described_format",
+    "sourcePort" : "Convert_Target_XMLTYPE_into_DML_described_format__out",
+    "target" : "Group_Rules_for_Target_Alternative_sequence0",
+    "targetPort" : "Group_Rules_for_Target_Alternative_sequence0__in"
+  }, {
+    "id" : "e6",
+    "source" : "Group_Rules_for_Target_Alternative_sequence0",
+    "sourcePort" : "Group_Rules_for_Target_Alternative_sequence0__out",
+    "target" : "Group_Rules_for_Target_Alternative",
+    "targetPort" : "Group_Rules_for_Target_Alternative__left"
+  }, {
+    "id" : "e5",
+    "source" : "Group_Rules_for_Target_Alternative_sequence1",
+    "sourcePort" : "Group_Rules_for_Target_Alternative_sequence1__out",
+    "target" : "Group_Rules_for_Target_Alternative",
+    "targetPort" : "Group_Rules_for_Target_Alternative__right"
+  }, {
+    "id" : "RO2mJWnZQd5ndUb__4OZe",
+    "source" : "Group_Rules_for_Target_Alternative",
+    "sourcePort" : "Group_Rules_for_Target_Alternative__out",
+    "target" : "ulHLGhvAvdyV6zDc7Dw-c$$SidnDVp1W-0e9Sylb-4tR",
+    "targetPort" : "qvPiSxDS8bL8bz_Ytj1Su$$n02xtxTS1G8BuC2t8pAqJ"
+  }, {
+    "id" : "pxCjpIIV-REuKuHj2owAl$$R49ReDMOL8LsVch8piYPH",
+    "source" : "ulHLGhvAvdyV6zDc7Dw-c$$SidnDVp1W-0e9Sylb-4tR",
+    "sourcePort" : "Sc0K76E3TgT-ud8f5xVrS$$Up3lhtH4QreW40ilb8hr_",
+    "target" : "92QC7rEjLq9DQmElNiizi$$j4B2wmF524qj_z03qaWsi",
+    "targetPort" : "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd"
+  }, {
+    "id" : "kZeKz0B9r6QK0LZ-wXY5_",
+    "source" : "92QC7rEjLq9DQmElNiizi$$j4B2wmF524qj_z03qaWsi",
+    "sourcePort" : "UYmDWHoKp-9QRhCh--JSb$$Kuhz2heRkwo0RqCOqIODW",
+    "target" : "OFILE_Rule_Xwalk",
+    "targetPort" : "OFILE_Rule_Xwalk__in"
+  } ],
+  "processes" : {
+    "ulHLGhvAvdyV6zDc7Dw-c$$SidnDVp1W-0e9Sylb-4tR" : {
+      "id" : "ulHLGhvAvdyV6zDc7Dw-c$$SidnDVp1W-0e9Sylb-4tR",
+      "component" : "WindowFunction",
+      "metadata" : {
+        "label" : "calculate_offset",
+        "slug" : "calculate_offset",
+        "x" : 820,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "",
+        "autoUpdateComment" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "qvPiSxDS8bL8bz_Ytj1Su$$n02xtxTS1G8BuC2t8pAqJ",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "left_target_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "right_alt_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Sc0K76E3TgT-ud8f5xVrS$$Up3lhtH4QreW40ilb8hr_",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "userSpecifiedEnd" : "-1",
+        "expressionColumns" : [ {
+          "_row_id" : "c_922",
+          "target" : "offset",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "sum(size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Rule\")) +\n                    size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Qual\")) + \n         size(col(\"right_alt_xml\").getField(\"Rule\").getField(\"Rule\")) +\n                    size(col(\"right_alt_xml\").getField(\"Rule\").getField(\"Qual\")))"
+          },
+          "description" : ""
+        } ],
+        "frameType" : "row",
+        "partitionColumns" : [ {
+          "format" : "scala",
+          "expression" : "lit(1)"
+        } ],
+        "activeTab" : "windowUse",
+        "columnsSelector" : [ "qvPiSxDS8bL8bz_Ytj1Su$$n02xtxTS1G8BuC2t8pAqJ##left_target_xml", "qvPiSxDS8bL8bz_Ytj1Su$$n02xtxTS1G8BuC2t8pAqJ##right_alt_xml" ],
+        "specifyFrame" : true,
+        "frameStart" : "unboundedPreceding",
+        "orderColumns" : [ ],
+        "frameEnd" : "userFollowing"
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/WindowFunction",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "92QC7rEjLq9DQmElNiizi$$j4B2wmF524qj_z03qaWsi" : {
+      "id" : "92QC7rEjLq9DQmElNiizi$$j4B2wmF524qj_z03qaWsi",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "reformat_tac_data",
+        "slug" : "reformat_tac_data",
+        "x" : 1020,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "",
+        "autoUpdateComment" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "left_target_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "right_alt_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "offset",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "UYmDWHoKp-9QRhCh--JSb$$Kuhz2heRkwo0RqCOqIODW",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "columnsSelector" : [ "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##tac_id", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##tac_name", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##priority", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##eff_dt", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##term_dt", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##left_target_xml", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##left_target_xml.Rule", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##offset", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##right_alt_xml", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##right_alt_xml.Rule", "xMRbkZrYdnNa4hPX9NrGz$$C421uFVfkw9jKEo3nF8wd##newline" ],
+        "expressions" : [ {
+          "target" : "tac_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tac_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tac_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"tac_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"priority\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "target_rule_def",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(!isnull(col(\"left_target_xml.Rule\")), get_rule_def(col(\"left_target_xml\"), col(\"offset\"))).otherwise(array())"
+          },
+          "description" : ""
+        }, {
+          "target" : "alt_rule_def",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "when(\n    !isnull(col(\"right_alt_xml.Rule\")),\n    get_rule_def(\n      col(\"right_alt_xml\"),\n      col(\"offset\") + size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Rule\")) +\n        size(col(\"left_target_xml\").getField(\"Rule\").getField(\"Qual\"))\n    )\n  ).otherwise(array())"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"newline\")"
+          },
+          "description" : ""
+        } ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Group_Rules_for_Target_Alternative" : {
+      "id" : "Group_Rules_for_Target_Alternative",
+      "component" : "Join",
+      "metadata" : {
+        "label" : "Group_Rules_for_Target_Alternative",
+        "slug" : "Group_Rules_for_Target_Alternative",
+        "x" : 620,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "",
+        "autoUpdateComment" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Group_Rules_for_Target_Alternative__left",
+          "slug" : "left",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "id",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        }, {
+          "id" : "Group_Rules_for_Target_Alternative__right",
+          "slug" : "right",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "id",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Group_Rules_for_Target_Alternative__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "conditions" : [ {
+          "alias" : "right",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "(col(\"left.id\") === col(\"right.id\"))"
+          },
+          "joinType" : "outer"
+        } ],
+        "expressions" : [ {
+          "target" : "tac_id",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.tac_id\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "tac_name",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.tac_name\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "priority",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.priority\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "eff_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.eff_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "term_dt",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.term_dt\")"
+          },
+          "description" : ""
+        }, {
+          "target" : "newline",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "coalesce(col(\"left.newline\"), lit(\"\\n\"))"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : "c_1607",
+          "target" : "left_target_xml",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"left.target_xml\")"
+          },
+          "description" : ""
+        }, {
+          "_row_id" : "c_1636",
+          "target" : "right_alt_xml",
+          "expression" : {
+            "format" : "scala",
+            "expression" : "col(\"right.alt_xml\")"
+          },
+          "description" : ""
+        } ],
+        "hints" : [ {
+          "id" : "Group_Rules_for_Target_Alternative__left",
+          "alias" : "left",
+          "hintType" : "none",
+          "propagateColumns" : false
+        }, {
+          "id" : "Group_Rules_for_Target_Alternative__right",
+          "alias" : "right",
+          "hintType" : "none",
+          "propagateColumns" : false
+        } ],
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "Group_Rules_for_Target_Alternative__left##id", "Group_Rules_for_Target_Alternative__right##id", "Group_Rules_for_Target_Alternative__left##tac_id", "Group_Rules_for_Target_Alternative__left##tac_name", "Group_Rules_for_Target_Alternative__left##priority", "Group_Rules_for_Target_Alternative__left##eff_dt", "Group_Rules_for_Target_Alternative__left##term_dt", "Group_Rules_for_Target_Alternative__left##newline", "Group_Rules_for_Target_Alternative__left##target_xml", "Group_Rules_for_Target_Alternative__right##alt_xml" ],
+        "headAlias" : "left"
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12651.git&subPath=&tag=0.1.2&projectSubscriptionProjectId=12651&path=gems/Join",
+        "projectName" : "ProphecySparkBasicsScala"
+      }
+    },
+    "Convert_Target_XMLTYPE_into_DML_described_format" : {
+      "id" : "Convert_Target_XMLTYPE_into_DML_described_format",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Convert_Target_XMLTYPE_into_DML_described_format",
+        "slug" : "Convert_Target_XMLTYPE_into_DML_described_format",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Convert_Target_XMLTYPE_into_DML_described_format__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Convert_Target_XMLTYPE_into_DML_described_format__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val out = in.withColumn(\n  \"target_xml\",\n  xml_split(col(\"target_rule\"),\n        \"\"\"\n         |type Qual_t = utf8 record\n         |  string('\\0') type0;\n         |  string('\\0') op;\n         |  string('\\0') Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'type0=@type,op=@op,Qual=text()';\n         |end;\n         |\n         |type Rule_t0 = utf8 record\n         |  Qual_t[big endian integer(4)] Qual;\n         |  string('\\0')[big endian integer(4)] OR;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'Qual=%e/Qual{1-n},OR=%e/OR{1-n}/text()';\n         |end;\n         |\n         |type Qual_t0 = utf8 record\n         |  string('\\0') type0;\n         |  string('\\0') op;\n         |  string('\\0') Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'type0=@type,op=@op,Qual=text()';\n         |end;\n         |\n         |type Rule_t = utf8 record\n         |  Rule_t0[big endian integer(4)] Rule;\n         |  string('\\0')[big endian integer(4)] AND;\n         |  Qual_t0[big endian integer(4)] Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'Rule=%e/Rule{1-n},AND=%e/AND{1-n}/text(),Qual=%e/Qual';\n         |end;\n         |\n         |type xml_doc_t = utf8 record\n         |  decimal('\\0') seq_num;\n         |  Rule_t Rule = NULL;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'seq_num=seqnum(),Rule=Rule';\n         |  string('\\0',charset='x-ab-internal') XML_generated_by_version() = '3.2.6.4';\n         |  string('\\0',charset='x-ab-internal') XML_generated_at_compatibility() = '';\n         |end;\n         |\"\"\".stripMargin\n  )\n)",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Group_Rules_for_Target_Alternative_sequence1" : {
+      "id" : "Group_Rules_for_Target_Alternative_sequence1",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Group_Rules_for_Target_Alternative_sequence1",
+        "slug" : "Group_Rules_for_Target_Alternative_sequence1",
+        "x" : 420,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Group_Rules_for_Target_Alternative_sequence1__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Group_Rules_for_Target_Alternative_sequence1__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  lazy val out = in.zipWithIndex(0, 1, \"id\", spark)\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Convert_Alternative_XMLTYPE_into_DML_described_format" : {
+      "id" : "Convert_Alternative_XMLTYPE_into_DML_described_format",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Convert_Alternative_XMLTYPE_into_DML_described_format",
+        "slug" : "Convert_Alternative_XMLTYPE_into_DML_described_format",
+        "x" : 220,
+        "y" : 220,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Convert_Alternative_XMLTYPE_into_DML_described_format__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "decimal(10,0)",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Convert_Alternative_XMLTYPE_into_DML_described_format__out",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "val out = in.withColumn(\n  \"alt_xml\",\n  xml_split(col(\"alt_rule\"),\n        \"\"\"\n         |type Qual_t = utf8 record\n         |  string('\\0') type0;\n         |  string('\\0') op;\n         |  string('\\0') Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'type0=@type,op=@op,Qual=text()';\n         |end;\n         |\n         |type Rule_t0 = utf8 record\n         |  Qual_t[big endian integer(4)] Qual;\n         |  string('\\0')[big endian integer(4)] OR;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'Qual=%e/Qual{1-n},OR=%e/OR{1-n}/text()';\n         |end;\n         |\n         |type Qual_t0 = utf8 record\n         |  string('\\0') type0;\n         |  string('\\0') op;\n         |  string('\\0') Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'type0=@type,op=@op,Qual=text()';\n         |end;\n         |\n         |type Rule_t = utf8 record\n         |  Rule_t0[big endian integer(4)] Rule;\n         |  string('\\0')[big endian integer(4)] AND;\n         |  Qual_t0[big endian integer(4)] Qual;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'Rule=%e/Rule{1-n},AND=%e/AND{1-n}/text(),Qual=%e/Qual';\n         |end;\n         |\n         |type xml_doc_t = utf8 record\n         |  decimal('\\0') seq_num;\n         |  Rule_t Rule = NULL;\n         |  string('\\0',charset='x-ab-internal') XML_fields() = 'seq_num=seqnum(),Rule=Rule';\n         |  string('\\0',charset='x-ab-internal') XML_generated_by_version() = '3.2.6.4';\n         |  string('\\0',charset='x-ab-internal') XML_generated_at_compatibility() = '';\n         |end;\n         |\"\"\".stripMargin\n  )\n)",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "Group_Rules_for_Target_Alternative_sequence0" : {
+      "id" : "Group_Rules_for_Target_Alternative_sequence0",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "Group_Rules_for_Target_Alternative_sequence0",
+        "slug" : "Group_Rules_for_Target_Alternative_sequence0",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Group_Rules_for_Target_Alternative_sequence0__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_dtl_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_xml",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "seq_num",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "Rule",
+                  "type" : {
+                    "type" : "struct",
+                    "fields" : [ {
+                      "name" : "Rule",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "Qual",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : {
+                                "type" : "struct",
+                                "fields" : [ {
+                                  "name" : "type0",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "op",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                }, {
+                                  "name" : "Qual",
+                                  "type" : "string",
+                                  "nullable" : true,
+                                  "metadata" : {
+                                    "description" : "",
+                                    "mappings" : [ ],
+                                    "tags" : [ ]
+                                  }
+                                } ]
+                              },
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "OR",
+                            "type" : {
+                              "type" : "array",
+                              "elementType" : "string",
+                              "containsNull" : true
+                            },
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "AND",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : "string",
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    }, {
+                      "name" : "Qual",
+                      "type" : {
+                        "type" : "array",
+                        "elementType" : {
+                          "type" : "struct",
+                          "fields" : [ {
+                            "name" : "type0",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "op",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          }, {
+                            "name" : "Qual",
+                            "type" : "string",
+                            "nullable" : true,
+                            "metadata" : {
+                              "description" : "",
+                              "mappings" : [ ],
+                              "tags" : [ ]
+                            }
+                          } ]
+                        },
+                        "containsNull" : true
+                      },
+                      "nullable" : true,
+                      "metadata" : {
+                        "description" : "",
+                        "mappings" : [ ],
+                        "tags" : [ ]
+                      }
+                    } ]
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "Group_Rules_for_Target_Alternative_sequence0__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "script" : "\n  lazy val out = in.zipWithIndex(0, 1, \"id\", spark)\n\n",
+        "scriptMethodHeader" : "def apply(spark: SparkSession, in: DataFrame): DataFrame = {",
+        "scriptMethodFooter" : "    out\n}"
+      }
+    },
+    "IFILE" : {
+      "id" : "IFILE",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "IFILE",
+        "slug" : "IFILE",
+        "x" : 20,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IFILE__out",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/IFILE"
+      }
+    },
+    "OFILE_Rule_Xwalk" : {
+      "id" : "OFILE_Rule_Xwalk",
+      "component" : "Target",
+      "metadata" : {
+        "label" : "OFILE_Rule_Xwalk",
+        "slug" : "OFILE_Rule_Xwalk",
+        "x" : 1220,
+        "y" : 120,
+        "phase" : 3,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OFILE_Rule_Xwalk__in",
+          "slug" : "in",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "tac_id",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "tac_name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "priority",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "eff_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "term_dt",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "target_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "long",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "alt_rule_def",
+              "type" : {
+                "type" : "array",
+                "elementType" : {
+                  "type" : "struct",
+                  "fields" : [ {
+                    "name" : "qualifier_cd",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "operator",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "compare_value",
+                    "type" : "string",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "conjunction_cd",
+                    "type" : "string",
+                    "nullable" : false,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  }, {
+                    "name" : "rule_expression_id",
+                    "type" : "long",
+                    "nullable" : true,
+                    "metadata" : {
+                      "description" : "",
+                      "mappings" : [ ],
+                      "tags" : [ ]
+                    }
+                  } ]
+                },
+                "containsNull" : false
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "newline",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "datasetId" : "datasets/OFILE_Rule_Xwalk"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  },
+  "diagnostics" : [ {
+    "property" : "$.workflow.processes.Group_Rules_for_Target_Alternative_sequence0.ports.outputs",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 3,
+    "message" : "Please infer output schema from the cluster as described [here](https://docs.prophecy.io/low-code-spark/gems/custom/script/)",
+    "tags" : [ ],
+    "relatedInformation" : [ ],
+    "diagnosticType" : 2
+  }, {
+    "property" : "$.workflow.processes.Group_Rules_for_Target_Alternative_sequence1.ports.outputs",
+    "range" : {
+      "start" : {
+        "line" : 0,
+        "character" : 0
+      },
+      "end" : {
+        "line" : 0,
+        "character" : 0
+      }
+    },
+    "severity" : 3,
+    "message" : "Please infer output schema from the cluster as described [here](https://docs.prophecy.io/low-code-spark/gems/custom/script/)",
+    "tags" : [ ],
+    "relatedInformation" : [ ],
+    "diagnosticType" : 2
+  } ]
+}
